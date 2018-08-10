@@ -1,29 +1,39 @@
+/*
+ * @Author: wupeiwen javapeiwen2010@gmail.com
+ * @Date: 2018-08-10 11:54:23
+ * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
+ * @Last Modified time: 2018-08-10 11:55:04
+ */
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+  <div id="app" v-loading="$store.state.isShowLoading">
+    <container></container>
   </div>
 </template>
 
-<style lang="less">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+<script>
+import container from '@/views/container'
+export default {
+  name: 'app',
+  components: {
+    container
+  },
+  data () {
+    return {}
   }
 }
+</script>
+
+<style lang="less">
+  html,body{
+    height: 100%;
+    width: 100%;
+    margin: 0;
+  }
+  #app {
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    height: 100%;
+    width: 100%;
+  }
 </style>
