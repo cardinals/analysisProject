@@ -1,7 +1,7 @@
 import axios from 'axios'
 import QS from 'qs'
-// import {Message} from 'element-ui'
-import store from '@/store'
+import {Message} from 'element-ui'
+import store from '@/store/index'
 
 // 设置请求头
 axios.defaults.headers.get['Content-Type'] = 'application/json'
@@ -15,7 +15,11 @@ axios.defaults.timeout = 10000
 // 请求拦截器
 axios.interceptors.request.use(
   config => {
-    store.commit({ type: 'isShowLoading', amount: true })
+    // 打开加载遮罩
+    store.dispatch({ type: 'app/changeAsideCollapseStatus', amount: true })
+    // 在http请求的header都加上token
+    // const token = store.state.app.token
+    // config.headers.Authorization = token
     return config
   },
   error => {
@@ -26,7 +30,8 @@ axios.interceptors.request.use(
 // 响应拦截器
 axios.interceptors.response.use(
   response => {
-    store.commit({ type: 'isShowLoading', amount: false })
+    // 关闭加载遮罩
+    store.dispatch({ type: 'app/changeAsideCollapseStatus', amount: false })
     if (response.status === 200) {
       return Promise.resolve(response)
     } else {
@@ -34,6 +39,11 @@ axios.interceptors.response.use(
     }
   },
   error => {
+    // 关闭加载遮罩
+    store.dispatch({ type: 'app/changeAsideCollapseStatus', amount: false })
+    if (error.status === 500) {
+      Message.error('500 内部服务器错误！')
+    }
     return Promise.reject(error.response)
   }
 )

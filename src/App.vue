@@ -2,10 +2,10 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-10 11:54:23
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-10 11:55:04
+ * @Last Modified time: 2018-08-13 10:21:52
  */
 <template>
-  <div id="app" v-loading="$store.state.isShowLoading">
+  <div id="app" v-loading="$store.state.app.isShowLoading">
     <container></container>
   </div>
 </template>

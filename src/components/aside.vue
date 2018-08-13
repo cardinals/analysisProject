@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-10 16:25:55
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-10 17:31:06
+ * @Last Modified time: 2018-08-13 09:05:59
  */
 <template>
   <el-menu default-active="2" class="asideMenu" @open="handleOpen" @close="handleClose"  :collapse="isCollapse"
@@ -30,7 +30,7 @@ export default {
   },
   computed: {
     isCollapse: function () {
-      return this.$store.state.isCollapseAside
+      return this.$store.state.aside.isCollapseAside
     }
   },
   methods: {

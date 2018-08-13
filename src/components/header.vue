@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-10 16:26:00
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-10 16:36:00
+ * @Last Modified time: 2018-08-13 09:59:28
  */
 <template>
   <div class="header">
@@ -17,7 +17,7 @@ export default {
   },
   methods: {
     handleCollapseChange () {
-      this.$store.commit({ type: 'isCollapseAside', amount: !this.$store.state.isCollapseAside })
+      this.$store.dispatch({ type: 'aside/changeAsideCollapseStatus', amount: !this.$store.state.aside.isCollapseAside })
     }
   }
 }
