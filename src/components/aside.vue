@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-10 16:25:55
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-13 09:05:59
+ * @Last Modified time: 2018-08-13 16:47:36
  */
 <template>
   <el-menu default-active="2" class="asideMenu" @open="handleOpen" @close="handleClose"  :collapse="isCollapse"
@@ -31,6 +31,11 @@ export default {
   computed: {
     isCollapse: function () {
       return this.$store.state.aside.isCollapseAside
+    }
+  },
+  watch: {
+    '$route' (to, from) {
+      // 对路由变化作出响应
     }
   },
   methods: {

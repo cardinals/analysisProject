@@ -2,6 +2,7 @@ import axios from 'axios'
 import QS from 'qs'
 import {Message} from 'element-ui'
 import store from '@/store/index'
+import router from '@/router'
 
 // 设置请求头
 axios.defaults.headers.get['Content-Type'] = 'application/json'
@@ -16,7 +17,7 @@ axios.defaults.timeout = 10000
 axios.interceptors.request.use(
   config => {
     // 打开加载遮罩
-    store.dispatch({ type: 'app/changeAsideCollapseStatus', amount: true })
+    store.dispatch({ type: 'app/changeLoadingStatus', amount: true })
     // 在http请求的header都加上token
     // const token = store.state.app.token
     // config.headers.Authorization = token
@@ -31,8 +32,15 @@ axios.interceptors.request.use(
 axios.interceptors.response.use(
   response => {
     // 关闭加载遮罩
-    store.dispatch({ type: 'app/changeAsideCollapseStatus', amount: false })
+    store.dispatch({ type: 'app/changeLoadingStatus', amount: false })
     if (response.status === 200) {
+      // 未登录/登陆失效, 重定向到登陆模块
+      if (response.data.code === 10) {
+        Message.warning('未登录/登陆已失效, 请重新登录!')
+        router.replace({
+          path: '/login'
+        })
+      }
       return Promise.resolve(response)
     } else {
       return Promise.reject(response)
@@ -40,7 +48,7 @@ axios.interceptors.response.use(
   },
   error => {
     // 关闭加载遮罩
-    store.dispatch({ type: 'app/changeAsideCollapseStatus', amount: false })
+    store.dispatch({ type: 'app/changeLoadingStatus', amount: false })
     if (error.status === 500) {
       Message.error('500 内部服务器错误！')
     }
