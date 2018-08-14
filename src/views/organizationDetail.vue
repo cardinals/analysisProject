@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-13 11:33:54
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-13 20:02:14
+ * @Last Modified time: 2018-08-14 09:47:31
  */
 
 <template>
@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { organizationDetails } from '@/common/api'
+import { organizationDetails } from '@/api/api'
 export default {
   name: 'organizationDetails',
   created () {

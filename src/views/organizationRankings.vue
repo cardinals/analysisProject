@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-13 11:34:18
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-13 19:43:18
+ * @Last Modified time: 2018-08-14 09:48:02
  */
 
 <template>
@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { organizationRankings } from '@/common/api'
+import { organizationRankings } from '@/api/api'
 export default {
   name: 'organizationRankings',
   created () {

@@ -1,8 +1,14 @@
+/*
+ * @Author: wupeiwen javapeiwen2010@gmail.com
+ * @Date: 2018-08-14 09:28:41
+ * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
+ * @Last Modified time: 2018-08-14 15:02:04
+ */
+
 import axios from 'axios'
 import QS from 'qs'
 import {Message} from 'element-ui'
 import store from '@/store/index'
-import router from '@/router'
 
 // 设置请求头
 axios.defaults.headers.get['Content-Type'] = 'application/json'
@@ -35,10 +41,17 @@ axios.interceptors.response.use(
     store.dispatch({ type: 'app/changeLoadingStatus', amount: false })
     if (response.status === 200) {
       // 未登录/登陆失效, 重定向到登陆模块
+      // if (response.data.code === 10) {
+      //   store.dispatch({ type: 'app/changeLoginStatus', amount: false })
+      //   Message.warning('未登录/登陆已失效, 请重新登录!')
+      //   router.replace({
+      //     path: '/login'
+      //   })
+      // }
+      // 未登录/登陆失效, 自动重新登陆
       if (response.data.code === 10) {
-        Message.warning('未登录/登陆已失效, 请重新登录!')
-        router.replace({
-          path: '/login'
+        store.dispatch({ type: 'app/userLogin' }).then(() => {
+          // location.reload()
         })
       }
       return Promise.resolve(response)

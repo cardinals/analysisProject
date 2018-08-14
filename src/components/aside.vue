@@ -2,24 +2,27 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-10 16:25:55
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-13 16:47:36
+ * @Last Modified time: 2018-08-14 17:21:46
  */
 <template>
-  <el-menu default-active="2" class="asideMenu" @open="handleOpen" @close="handleClose"  :collapse="isCollapse"
-    background-color="#545c64" text-color="#fff" active-text-color="#ffd04b" :style="{'min-width':isCollapse?'60px':'200px'}">
-    <el-submenu index="1">
-      <template slot="title">
-        <i class="el-icon-location"></i>
-        <span>导航一</span>
-      </template>
-        <el-menu-item index="1-1">选项1</el-menu-item>
-        <el-menu-item index="1-2">选项2</el-menu-item>
-        <el-menu-item index="1-3">选项3</el-menu-item>
-      <el-submenu index="1-4">
-        <template slot="title">选项4</template>
-        <el-menu-item index="1-4-1">选项1</el-menu-item>
+  <el-menu :default-active="$store.state.aside.activeItem" class="asideMenu" @select="handleSelect" :collapse="isCollapse"
+    background-color="#001529" text-color="#FFFFFF" active-text-color="#409EFF" :style="{'min-width':isCollapse?'60px':'200px'}">
+    <!-- 构建侧边栏菜单内容 -->
+    <div v-for="item in menuData" :key="item.index">
+      <el-submenu v-if="item.children&&item.children.length>0" :disabled="item.disable" :index="item.index">
+        <template slot="title">
+          <i class="el-icon-menu"></i>
+          <span v-if="!isCollapse">{{item.label}}</span>
+        </template>
+        <el-menu-item v-for="subItem in item.children" :disabled="subItem.disable" :index="subItem.index" :key="subItem.index">
+          <span>{{subItem.label}}</span>
+        </el-menu-item>
       </el-submenu>
-    </el-submenu>
+      <el-menu-item v-else :disabled="item.disable" :index="item.index">
+        <i class="el-icon-menu"></i>
+        <span slot="title">{{item.label}}</span>
+      </el-menu-item>
+    </div>
   </el-menu>
 </template>
 
@@ -31,19 +34,17 @@ export default {
   computed: {
     isCollapse: function () {
       return this.$store.state.aside.isCollapseAside
+    },
+    menuData: function () {
+      return this.$store.state.aside.asideMenuData
     }
   },
   watch: {
-    '$route' (to, from) {
-      // 对路由变化作出响应
-    }
   },
   methods: {
-    handleOpen (key, keyPath) {
-      console.log(key, keyPath)
-    },
-    handleClose (key, keyPath) {
-      console.log(key, keyPath)
+    handleSelect (index, indexPath) {
+      console.log(index, indexPath)
+      this.$router.push({path: `/${index}`})
     }
   }
 }

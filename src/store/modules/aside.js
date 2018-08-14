@@ -2,28 +2,43 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-13 08:52:29
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-13 10:41:14
+ * @Last Modified time: 2018-08-14 16:24:04
  */
 
 const state = {
   // 侧边栏收起状态
   isCollapseAside: false,
+  activeItem: 'organizationRankings',
+  // 侧边栏菜单数据
   asideMenuData: [
     {
-      index: '1',
-      label: '机构排名',
-      status: true,
-      children: {
-        index: '1-1',
-        label: '选项1-1',
-        status: false,
-        children: {}
-      }
+      index: 'home',
+      label: '首页',
+      disable: false
     },
     {
-      index: '2',
-      label: '人员排名',
-      status: true
+      index: 'businessNum',
+      label: '业务数量',
+      disable: true
+    },
+    {
+      index: 'none',
+      label: '调解队伍分析',
+      disable: false,
+      children: [{
+        index: 'organizationRankings',
+        label: '调解机构排名',
+        disable: false
+      }, {
+        index: 'peopleRankings',
+        label: '调解人员排名',
+        disable: false
+      }]
+    },
+    {
+      index: 'workquality',
+      label: '工作质量分析',
+      disable: false
     }
   ]
 }
@@ -54,7 +69,7 @@ const mutations = {
     state.isCollapseAside = status
   },
   setAsideMenuData (state, data) {
-    state.isCollapseAside = status
+    state.asideMenuData = data
   }
 }
 

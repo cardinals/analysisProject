@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-10 11:54:18
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-13 17:27:36
+ * @Last Modified time: 2018-08-14 16:13:24
  */
 <template>
   <!-- 外层容器，当子元素中包含 <el-header> 或 <el-footer> 时，全部子元素会垂直上下排列，否则会水平左右排列。 -->
@@ -32,7 +32,7 @@ export default {
 }
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
   .container {
     width: 100%;
     height: 100%;
@@ -50,6 +50,14 @@ export default {
       .aside {
         flex-grow: 0;
         height: 100%;
+        .is-opened .el-menu-item {
+          background: #000C17 !important;
+        }
+        .is-opened .is-active,
+        .is-active {
+          color: #FFFFFF !important;
+          background: #1890FF !important;
+        }
       }
       .main {
         flex-grow: 1;
