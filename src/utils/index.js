@@ -1,7 +1,7 @@
-import json from './dictionaryMapping'
+import { area } from './dictionaryMapping'
 
 // 时间格式化
-let dateFormat = (dateTime, valueFormat) => {
+export let dateFormat = (dateTime, valueFormat) => {
   let newDate = new Date(dateTime)
   valueFormat = valueFormat || 'yyyy-MM-dd'
   let date = {
@@ -33,9 +33,8 @@ let dateFormat = (dateTime, valueFormat) => {
   })
   return valueFormat
 }
-
 // 时间选择器配置--包含禁用日期、快捷选项和周起始日
-let pickerOptions = {
+export const pickerOptions = {
   disabledDate (time) {
     return time.getTime() > Date.now()
   },
@@ -84,7 +83,7 @@ let pickerOptions = {
 }
 
 // 时间选择器配置--包含禁用日期和周起始日
-let pickerDisabledDate = {
+export const pickerDisabledDate = {
   disabledDate (time) {
     return time.getTime() > Date.now()
   },
@@ -92,14 +91,15 @@ let pickerDisabledDate = {
 }
 
 // 时间范围选择器默认时间范围(本年)
-let defaultDataRage = () => {
-  let newDate = new Date()
-  return [`${dateFormat(newDate, 'yyyy')}-01-01`, dateFormat(newDate)]
+export let defaultDataRage = () => {
+  const enddate = dateFormat(new Date())
+  const startDate = dateFormat(new Date(new Date().setDate(1)).setMonth(0))
+  return [startDate, enddate]
 }
 
 // 通过地区名称查找地区编码
-let findAreaNameByValue = (value) => {
-  let result = json.area.filter(item => {
+export const findAreaNameByValue = (value) => {
+  let result = area.filter(item => {
     if (item.value === value) {
       return true
     }
@@ -108,8 +108,6 @@ let findAreaNameByValue = (value) => {
 }
 
 // 找到指定日期所在周星期几的日期
-let findWeekRangeByToday = (date, weekday) => {
+export const findWeekRangeByToday = (date, weekday) => {
   return new Date(1000 * 60 * 60 * 24 * (weekday - new Date(date).getDay()) + new Date(date).getTime())
 }
-
-export default { dateFormat, pickerOptions, pickerDisabledDate, defaultDataRage, findAreaNameByValue, findWeekRangeByToday }

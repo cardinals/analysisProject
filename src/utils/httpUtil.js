@@ -2,11 +2,11 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-14 09:28:41
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-14 15:02:04
+ * @Last Modified time: 2018-08-17 16:54:26
  */
 
 import axios from 'axios'
-import QS from 'qs'
+// import QS from 'qs'
 import {Message} from 'element-ui'
 import store from '@/store/index'
 
@@ -39,25 +39,7 @@ axios.interceptors.response.use(
   response => {
     // 关闭加载遮罩
     store.dispatch({ type: 'app/changeLoadingStatus', amount: false })
-    if (response.status === 200) {
-      // 未登录/登陆失效, 重定向到登陆模块
-      // if (response.data.code === 10) {
-      //   store.dispatch({ type: 'app/changeLoginStatus', amount: false })
-      //   Message.warning('未登录/登陆已失效, 请重新登录!')
-      //   router.replace({
-      //     path: '/login'
-      //   })
-      // }
-      // 未登录/登陆失效, 自动重新登陆
-      if (response.data.code === 10) {
-        store.dispatch({ type: 'app/userLogin' }).then(() => {
-          // location.reload()
-        })
-      }
-      return Promise.resolve(response)
-    } else {
-      return Promise.reject(response)
-    }
+    return Promise.resolve(response)
   },
   error => {
     // 关闭加载遮罩
@@ -93,7 +75,7 @@ export let get = (url, params) => {
  */
 export let post = (url, params) => {
   return new Promise((resolve, reject) => {
-    axios.post(url, QS.stringify(params))
+    axios.post(url, params)
       .then(res => {
         resolve(res.data)
       })
