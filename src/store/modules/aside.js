@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-13 08:52:29
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-14 16:24:04
+ * @Last Modified time: 2018-08-16 10:33:38
  */
 
 const state = {
@@ -11,16 +11,16 @@ const state = {
   activeItem: 'organizationRankings',
   // 侧边栏菜单数据
   asideMenuData: [
-    {
-      index: 'home',
-      label: '首页',
-      disable: false
-    },
-    {
-      index: 'businessNum',
-      label: '业务数量',
-      disable: true
-    },
+    // {
+    //   index: 'home',
+    //   label: '首页',
+    //   disable: false
+    // },
+    // {
+    //   index: 'businessNum',
+    //   label: '业务数量',
+    //   disable: false
+    // },
     {
       index: 'none',
       label: '调解队伍分析',
@@ -34,12 +34,12 @@ const state = {
         label: '调解人员排名',
         disable: false
       }]
-    },
-    {
-      index: 'workquality',
-      label: '工作质量分析',
-      disable: false
     }
+    // {
+    //   index: 'workquality',
+    //   label: '工作质量分析',
+    //   disable: false
+    // }
   ]
 }
 

@@ -2,49 +2,41 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-10 16:26:00
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-14 18:13:25
+ * @Last Modified time: 2018-08-16 13:47:40
  */
 <template>
   <div class="header">
-    <div class="left" :style="{'width': leftWidth}"></div>
-    <el-menu class="right" mode="horizontal">
-      <hamburger class="hamburger-container" :toggleClick="handleCollapseChange" :isActive="$store.state.aside.isCollapseAside"></hamburger>
-      <el-breadcrumb class="breadcrumb-container" separator=">">
-        <el-breadcrumb-item>{{$route.name}}</el-breadcrumb-item>
-      </el-breadcrumb>
-      <!-- <el-dropdown class="avatar-container" trigger="click">
+    <div class="left" :style="{'width': $store.state.aside.isCollapseAside?'62px':'200px'}">
+      <i class="icon" :class="{ 'narrowlogo': $store.state.aside.isCollapseAside, 'widelogo': !$store.state.aside.isCollapseAside }"></i>
+    </div>
+    <div class="right">
+      <i class="icon hamburger" :class="{ 'collapselogo': !$store.state.aside.isCollapseAside, 'spreadlogo': $store.state.aside.isCollapseAside }" @click="handleCollapseChange()"></i>
+      <el-dropdown class="avatar-container" trigger="click">
         <div class="avatar-wrapper">
-          <img class="user-avatar" src="favicon.ico">
+          <i class="icon user-logo"></i>
+          <span class="user-name">用户名</span>
           <i class="el-icon-caret-bottom"></i>
         </div>
         <el-dropdown-menu class="user-dropdown" slot="dropdown">
-          <el-dropdown-item divided>
-            <span @click="logout" style="display:block;">LogOut</span>
+          <el-dropdown-item>
+            <span style="display:block;">退出</span>
           </el-dropdown-item>
         </el-dropdown-menu>
-      </el-dropdown> -->
-    </el-menu>
+      </el-dropdown>
+    </div>
   </div>
 </template>
 
 <script>
-import hamburger from '@/components/hamburger'
 export default {
   components: {
-    hamburger
   },
   data () {
     return {
-      leftWidth: '200px'
     }
   },
   methods: {
     handleCollapseChange () {
-      if (this.$store.state.aside.isCollapseAside === true) {
-        this.leftWidth = '200px'
-      } else {
-        this.leftWidth = '64px'
-      }
       this.$store.dispatch({ type: 'aside/changeAsideCollapseStatus', amount: !this.$store.state.aside.isCollapseAside })
     }
   }
@@ -59,9 +51,15 @@ export default {
     .left {
       flex-grow: 0;
       height: 100%;
-      min-width: 64px;
+      min-width: 62px;
       box-sizing: border-box;
       background: #002140;
+      .widelogo {
+        background: url(../assets/images/icon-system-logo-wide.png) no-repeat center;
+      }
+      .narrowlogo {
+        background: url(../assets/images/icon-system-logo-narrow.png) no-repeat center;
+      }
     }
     .right {
       flex-grow: 1;
@@ -69,20 +67,27 @@ export default {
       box-sizing: border-box;
       line-height: 100%;
       border-radius: 0px !important;
-      .hamburger-container {
-        height: 20px;
+      .hamburger{
         float: left;
-        margin: 20px 10px;
+        display: block;
+        width: 22px;
+        height: 18.5px;
+        background: url(../assets/images/icon-hamburger.png);
+        margin: 20px 15px;
       }
-      .breadcrumb-container {
-        line-height: 60px;
-        float: left;
+      .collapselogo{
+        background-position: 0 0;
       }
-      .screenfull {
-        position: absolute;
-        right: 90px;
-        top: 16px;
-        color: red;
+      .collapselogo:hover{
+        cursor: pointer;
+        background-position: 22px 0;
+      }
+      .spreadlogo{
+        background-position: 0 18.5px;
+      }
+      .spreadlogo:hover{
+        cursor: pointer;
+        background-position: 22px 18.5px;
       }
       .avatar-container {
         height: 50px;
@@ -91,12 +96,19 @@ export default {
         right: 35px;
         .avatar-wrapper {
           cursor: pointer;
-          margin-top: 5px;
           position: relative;
-          .user-avatar {
+          .user-logo {
+            float: left;
+            margin-top: 10px;
             width: 40px;
             height: 40px;
             border-radius: 10px;
+            background: url(../assets/images/icon-user.png) no-repeat center;
+          }
+          .user-name {
+            float: left;
+            display: block;
+            line-height: 61px;
           }
           .el-icon-caret-bottom {
             position: absolute;

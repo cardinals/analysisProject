@@ -2,11 +2,23 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-13 11:34:18
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-14 09:48:02
+ * @Last Modified time: 2018-08-16 16:07:37
  */
 
 <template>
-  <div>
+  <div class="view">
+    <div class="info">
+      <el-breadcrumb separator=">">
+        <el-breadcrumb-item>{{$route.name}}</el-breadcrumb-item>
+      </el-breadcrumb>
+    </div>
+    <div class="selector">
+      <el-radio-group v-model="area">
+        <el-radio v-for="(item,index) in areaList" :key="index" :label="item">{{item}}</el-radio>
+      </el-radio-group>
+    </div>
+    <div class="content">
+    </div>
   </div>
 </template>
 
@@ -14,8 +26,16 @@
 import { organizationRankings } from '@/api/api'
 export default {
   name: 'organizationRankings',
+  data () {
+    return {
+      area: '上海',
+      type: '',
+      number: '',
+      areaList: ['北京', '上海']
+    }
+  },
   created () {
-    this.onLoad()
+    // this.onLoad()
   },
   methods: {
     // 获取数据
@@ -39,5 +59,23 @@ export default {
 </script>
 
 <style lang="less" scoped>
-
+ .view {
+   width: 100%;
+   background: #F0F2F5;
+   .info {
+    width: 100%;
+   }
+   .selector {
+     width: 100%;
+     margin-top: 15px;
+     height: 100px;
+     background: #FFFFFF;
+   }
+   .content {
+     width: 100%;
+     margin-top: 15px;
+     height: 100px;
+     background: #FFFFFF;
+   }
+ }
 </style>

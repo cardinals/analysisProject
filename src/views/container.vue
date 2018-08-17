@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-10 11:54:18
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-14 16:13:24
+ * @Last Modified time: 2018-08-16 16:10:03
  */
 <template>
   <!-- 外层容器，当子元素中包含 <el-header> 或 <el-footer> 时，全部子元素会垂直上下排列，否则会水平左右排列。 -->
@@ -47,6 +47,7 @@ export default {
       display: flex;
       width: 100%;
       height: calc(100% - 60px);
+      overflow: hidden;
       .aside {
         flex-grow: 0;
         height: 100%;
@@ -58,12 +59,20 @@ export default {
           color: #FFFFFF !important;
           background: #1890FF !important;
         }
+        .el-menu-item:hover {
+          color: #1890FF !important;
+          background: #001529 !important;
+          i {
+            color: #1890FF !important;
+          }
+        }
       }
       .main {
         flex-grow: 1;
         height: 100%;
         box-sizing: border-box;
         padding: 15px;
+        overflow: auto;
       }
     }
   }
@@ -76,5 +85,19 @@ export default {
   .fade-enter,
   .fade-leave-to {
     opacity: 0;
+  }
+
+  .icon{
+    display: block;
+    height: 100%;
+    line-height: 100%;
+  }
+
+  // 修改 el-radio 单选框样式
+  .el-radio+.el-radio {
+    margin-left: 0px !important;
+  }
+  .el-radio__inner {
+    display: none !important;
   }
 </style>

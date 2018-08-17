@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-10 11:54:33
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-14 14:57:21
+ * @Last Modified time: 2018-08-16 08:54:31
  */
 import Vue from 'vue'
 import Router from 'vue-router'
@@ -18,7 +18,7 @@ export default new Router({
     },
     {
       path: '/organizationRankings',
-      name: 'organizationRankings',
+      name: '调解机构排名',
       // 机构排名模块
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
@@ -28,25 +28,25 @@ export default new Router({
     },
     {
       path: '/organizationDetail/:id',
-      name: 'organizationDetail',
+      name: '机构详情',
       // 机构详情模块
       component: () => import('./views/organizationDetail.vue')
     },
     {
       path: '/peopleRankings',
-      name: 'peopleRankings',
+      name: '调解人员排名',
       // 人员排名模块
       component: () => import('./views/peopleRankings.vue')
     },
     {
       path: '/peopleDetail/:id',
-      name: 'peopleDetail',
+      name: '人员详情',
       // 人员详情模块
       component: () => import('./views/peopleDetail.vue')
     },
     {
       path: '/login',
-      name: 'login',
+      name: '登录',
       // 登录模块
       component: () => import('./views/login.vue')
     }

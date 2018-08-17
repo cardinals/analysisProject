@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-13 08:53:14
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-14 10:27:11
+ * @Last Modified time: 2018-08-16 10:35:46
  */
 
 import {login} from '@/api/api'
@@ -10,7 +10,6 @@ import {login} from '@/api/api'
 const state = {
   // 遮罩加载状态
   isShowLoading: false,
-  // tocken
   token: '',
   isLogin: false
 }
