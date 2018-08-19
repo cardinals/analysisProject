@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-10 11:54:33
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-16 08:54:31
+ * @Last Modified time: 2018-08-19 22:21:54
  */
 import Vue from 'vue'
 import Router from 'vue-router'
@@ -49,6 +49,12 @@ export default new Router({
       name: '登录',
       // 登录模块
       component: () => import('./views/login.vue')
+    },
+    {
+      path: '/g2Demo',
+      name: '测试模块',
+      // 登录模块
+      component: () => import('./views/g2Demo.vue')
     }
   ]
 })
