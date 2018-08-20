@@ -201,29 +201,9 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@black:rgba(0,0,0,0.85);
-@gray:rgba(0,0,0,0.65);
-@graymore:rgba(0,0,0,0.45);
-@block:#ffffff;
-@titleHeight:52px;
-@fontSmall:12px;
-@fontMiddle:14px;
-@fontBig:16px;
+@import '~@/assets/css/common.less';
 .peopleDetail_container{
   background: #EDEDED;
-  .nav{
-    position: relative;
-    padding-bottom: 15px;
-    span{
-      font-size:@fontSmall;
-    }
-    .span1{
-      color:@black;
-    }
-    .span2{
-      color:@gray;
-    }
-  }
   .top{
     height: 271px;
     display: flex;
@@ -491,78 +471,6 @@ export default {
         }
       }
     }
-  }
-  .footer{
-    height: 120px;
-    width: 100%;
-    position: relative;
-    .center{
-      position: absolute;
-      left: 50%;
-      top: 70%;
-      transform: translate(-50%,-50%);
-      .span{
-        font-size: @fontSmall;
-        color:#6E6E6E;
-        display: inline-block;
-        padding:0 26px;
-        cursor: pointer;
-        &:nth-child(2){
-          border-left:1px solid #6E6E6E;
-          border-right:1px solid #6E6E6E;
-        }
-      }
-      .span2{
-        font-size: @fontSmall;
-        color:#6E6E6E;
-        text-align: center;
-        margin-top: 8px;
-      }
-    }
-  }
-  .vertical_middle{
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-  .title{
-    padding:15px 12px;
-    font-size: @fontBig;
-    color:@black;
-    border-bottom: 1px solid #EDEDED;
-  }
-  .sTitle{
-    display: block;
-    height: 22px;
-    line-height: 22px;
-    .border{
-      width:2px;
-      height:14px;
-      margin:4px 0;
-      background: #1890FF;
-      border-radius: 1px;
-      float: left;
-    }
-    .dis{
-      font-size: @fontMiddle;
-      float: left;
-      padding-left: 8px;
-    }
-  }
-  .contents{
-    padding:0px 12px;
-    position: relative;
-    box-sizing: border-box;
-    height: calc(100% - @titleHeight);
-    width: 100%;
-  }
-  .flexRow{
-    display: flex;
-    flex-direction: row;
-  }
-  .flexColumn{
-    display: flex;
-    flex-direction: column;
   }
 }
 </style>

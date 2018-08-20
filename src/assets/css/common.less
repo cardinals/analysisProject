@@ -1,0 +1,135 @@
+@black:rgba(0,0,0,0.85);
+@gray:rgba(0,0,0,0.65);
+@graymore:rgba(0,0,0,0.45);
+@block:#ffffff;
+@titleHeight:52px;
+@fontSmall:12px;
+@fontMiddle:14px;
+@fontBig:16px;
+
+// 顶部导航栏
+.nav{
+  position: relative;
+  padding-bottom: 15px;
+  span{
+    font-size:@fontSmall;
+  }
+  .span1{
+    color:@black;
+  }
+  .span2{
+    color:@gray;
+  }
+}
+// 底部公司信息
+.footer{
+  height: 120px;
+  width: 100%;
+  position: relative;
+  .center{
+    position: absolute;
+    left: 50%;
+    top: 70%;
+    transform: translate(-50%,-50%);
+    .span{
+      font-size: @fontSmall;
+      color:#6E6E6E;
+      display: inline-block;
+      padding:0 26px;
+      cursor: pointer;
+      &:nth-child(2){
+        border-left:1px solid #6E6E6E;
+        border-right:1px solid #6E6E6E;
+      }
+    }
+    .span2{
+      font-size: @fontSmall;
+      color:#6E6E6E;
+      text-align: center;
+      margin-top: 8px;
+    }
+  }
+}
+// 元素垂直居中
+.vertical_middle{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+// 普通标题
+.title{
+  padding:15px 12px;
+  font-size: @fontBig;
+  color:@black;
+  border-bottom: 1px solid #EDEDED;
+}
+// 带竖线的小标题
+.sTitle{
+  display: block;
+  height: 22px;
+  line-height: 22px;
+  .border{
+    width:2px;
+    height:14px;
+    margin:4px 0;
+    background: #1890FF;
+    border-radius: 1px;
+    float: left;
+  }
+  .dis{
+    font-size: @fontMiddle;
+    float: left;
+    padding-left: 8px;
+  }
+}
+// 配合普通标题使用的内容区域
+.contents{
+  padding:0px 12px;
+  position: relative;
+  box-sizing: border-box;
+  height: calc(100% - @titleHeight);
+  width: 100%;
+}
+// 配合小标题使用的内容区
+.sContents{
+  position: relative;
+  box-sizing: border-box;
+  height: calc(100% - 22px);
+  width: 100%;
+}
+// 横向flex
+.flexRow{
+  display: flex;
+  flex-direction: row;
+}
+// 纵向flex
+.flexColumn{
+  display: flex;
+  flex-direction: column;
+}
+// 清浮动
+.clearfix{
+  &::after{
+    content: '';
+    width: 0;
+    height: 0;
+    display: block;
+    clear: both;
+  }
+}
+/*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
+::-webkit-scrollbar {
+  width: 4px;
+  background-color: rgba(0, 0, 0, 0);
+}
+/*定义滚动条轨道 内阴影+圆角*/
+::-webkit-scrollbar-track {
+  border-radius: 2px;
+  background-color: transparent;
+}
+/*定义滑块 内阴影+圆角*/
+::-webkit-scrollbar-thumb {
+  height: 4px;
+  border-radius: 2px;
+  background-color: #ccc;
+}
