@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-10 11:54:23
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-17 11:25:10
+ * @Last Modified time: 2018-08-21 08:19:26
  */
 <template>
   <div id="app" v-loading="$store.state.app.isShowLoading">
@@ -17,12 +17,7 @@ export default {
   name: 'app',
   components: {
     container
-  },
-  data () {
-    return {}
-  },
-  created () {},
-  methods: {}
+  }
 }
 </script>
 

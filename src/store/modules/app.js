@@ -2,41 +2,27 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-13 08:53:14
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-16 10:35:46
+ * @Last Modified time: 2018-08-21 08:46:15
  */
-
-import {login} from '@/api/api'
 
 const state = {
   // 遮罩加载状态
   isShowLoading: false,
-  token: '',
-  isLogin: false
+  // 登录后的tocken
+  token: ''
 }
-
-// getters
-const getters = {}
 
 // actions
 const actions = {
   // 切换遮罩加载状态
-  changeLoadingStatus ({ state, commit }, obj) {
+  changeLoadingStatus ({ commit }, obj) {
     commit('changeLoadingStatus', obj.amount)
   },
-  // 切换登录状态状态
-  changeLoginStatus ({ state, commit }, obj) {
-    commit('changeLoginStatus', obj.amount)
-  },
-  userLogin ({ commit }) {
-    return new Promise((resolve, reject) => {
-      const params = {username: 's1', password: '102102102'}
-      login(params).then(res => {
-        commit('changeLoginStatus', true)
-        resolve()
-      }).catch(error => {
-        reject(error)
-      })
-    })
+  // 设置token
+  setToken ({ commit }, obj) {
+    commit('setToken', obj.amount)
+    // 将token写入本地存储
+    window.localStorage.setItem('token', obj.amount)
   }
 }
 
@@ -45,15 +31,14 @@ const mutations = {
   changeLoadingStatus (state, status) {
     state.isShowLoading = status
   },
-  changeLoginStatus (state, status) {
-    state.isLogin = status
+  setToken (state, status) {
+    state.setToken = status
   }
 }
 
 export default {
   namespaced: true,
   state,
-  getters,
   actions,
   mutations
 }

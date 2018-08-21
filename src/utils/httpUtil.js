@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-14 09:28:41
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-17 16:54:26
+ * @Last Modified time: 2018-08-21 09:34:58
  */
 
 import axios from 'axios'
@@ -25,8 +25,8 @@ axios.interceptors.request.use(
     // 打开加载遮罩
     store.dispatch({ type: 'app/changeLoadingStatus', amount: true })
     // 在http请求的header都加上token
-    // const token = store.state.app.token
-    // config.headers.Authorization = token
+    const token = store.state.app.token || window.localStorage.getItem('token')
+    config.headers.token = token
     return config
   },
   error => {
@@ -45,7 +45,7 @@ axios.interceptors.response.use(
     // 关闭加载遮罩
     store.dispatch({ type: 'app/changeLoadingStatus', amount: false })
     if (error.status === 500) {
-      Message.error('500 内部服务器错误！')
+      Message({ type: 'error', message: '500 内部服务器错误！', duration: 5000 })
     }
     return Promise.reject(error.response)
   }

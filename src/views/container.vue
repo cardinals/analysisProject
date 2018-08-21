@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-10 11:54:18
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-17 17:04:50
+ * @Last Modified time: 2018-08-21 11:03:38
  */
 <template>
   <!-- 外层容器，当子元素中包含 <el-header> 或 <el-footer> 时，全部子元素会垂直上下排列，否则会水平左右排列。 -->
@@ -13,7 +13,7 @@
       <!-- 侧边栏容器 -->
       <aside-com class="aside"></aside-com>
       <!-- 路由区域 -->
-      <transition name="fade">
+      <transition name="fade"  mode="out-in">
         <router-view  class="main"></router-view>
       </transition>
     </div>
@@ -21,13 +21,10 @@
 </template>
 
 <script>
-import headerCom from '@/components/header'
-import asideCom from '@/components/aside'
 export default {
   name: 'container',
-  components: {
-    headerCom,
-    asideCom
+  created () {
+    this.$store.dispatch({ type: 'app/setToken', amount: 123 })
   }
 }
 </script>
@@ -103,6 +100,10 @@ export default {
   .el-radio__input.is-checked+.el-radio__label {
     color: #ffffff !important;
     background: #409EFF !important;
+  }
+  .el-radio__input+.el-radio__label:hover {
+    color: #409EFF !important;
+    background: #ffffff !important;
   }
   .el-radio__label {
     padding: 5px 9px !important;

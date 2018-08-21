@@ -1,8 +1,8 @@
 /*
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-13 11:34:01
- * @Last Modified by:   wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-13 11:34:01
+ * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
+ * @Last Modified time: 2018-08-21 11:09:28
  */
 
 <template>
@@ -183,14 +183,7 @@
         </div>
       </div>
     </div>
-    <div class="footer">
-      <div class="center">
-        <div class="span">帮助</div>
-        <div class="span">隐私</div>
-        <div class="span">条款</div>
-        <div class="span2">copyright©2018 银江股份</div>
-      </div>
-    </div>
+    <footer-com></footer-com>
   </div>
 </template>
 

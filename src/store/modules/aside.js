@@ -2,25 +2,26 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-13 08:52:29
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-16 10:33:38
+ * @Last Modified time: 2018-08-21 08:38:50
  */
 
 const state = {
   // 侧边栏收起状态
   isCollapseAside: false,
-  activeItem: 'organizationRankings',
+  // 侧边栏当前选中项
+  activeItem: '',
   // 侧边栏菜单数据
   asideMenuData: [
-    // {
-    //   index: 'home',
-    //   label: '首页',
-    //   disable: false
-    // },
-    // {
-    //   index: 'businessNum',
-    //   label: '业务数量',
-    //   disable: false
-    // },
+    {
+      index: 'home',
+      label: '首页',
+      disable: true
+    },
+    {
+      index: 'businessNum',
+      label: '业务数量',
+      disable: true
+    },
     {
       index: 'none',
       label: '调解队伍分析',
@@ -34,32 +35,29 @@ const state = {
         label: '调解人员排名',
         disable: false
       }]
+    },
+    {
+      index: 'workquality',
+      label: '工作质量分析',
+      disable: true
     }
-    // {
-    //   index: 'workquality',
-    //   label: '工作质量分析',
-    //   disable: false
-    // }
   ]
-}
-
-// getters
-const getters = {
-  asideMenuData: (state, getters) => {
-    return state.asideMenuData
-  }
 }
 
 // actions
 const actions = {
   // 切换侧边栏状态
-  changeAsideCollapseStatus ({ state, commit }, obj) {
+  changeAsideCollapseStatus ({ commit }, obj) {
     commit('changeAsideCollapseStatus', obj.amount)
   },
   // 异步获取侧边栏数据
-  getAsideMenuData ({ state, commit }) {
+  getAsideMenuData ({ commit }) {
     let data = []
     commit('setAsideMenuData', data)
+  },
+  // 设置侧边栏当前选中项
+  setCurrentModule ({ commit }, obj) {
+    commit('setCurrentModule', obj.amount)
   }
 }
 
@@ -70,13 +68,15 @@ const mutations = {
   },
   setAsideMenuData (state, data) {
     state.asideMenuData = data
+  },
+  setCurrentModule (state, data) {
+    state.activeItem = data
   }
 }
 
 export default {
   namespaced: true,
   state,
-  getters,
   actions,
   mutations
 }

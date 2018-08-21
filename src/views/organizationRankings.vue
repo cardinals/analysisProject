@@ -2,15 +2,17 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-13 11:34:18
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-17 17:30:56
+ * @Last Modified time: 2018-08-21 11:09:21
  */
 
 <template>
   <div class="view">
     <div class="view-info">
-      <el-breadcrumb separator=">">
+      <el-breadcrumb class="breadcrumb" separator=">">
+        <el-breadcrumb-item>调解队伍分析</el-breadcrumb-item>
         <el-breadcrumb-item>{{$route.name}}</el-breadcrumb-item>
       </el-breadcrumb>
+      <el-input class="search-input" placeholder="请输入搜索内容, 回车执行搜索" suffix-icon="el-icon-search"  size="mini" v-model="search" @keyup.enter.native="handleSearch()"></el-input>
     </div>
     <div class="view-selector">
       <div>
@@ -57,17 +59,18 @@
       </div>
       <div class="view-body">
         <div class="table">
-          <el-table :data="tableInfo.tableData" stripe style="width: 100%">
-            <el-table-column prop="name" label="机构名称"></el-table-column>
-            <el-table-column prop="yewusl" label="业务数量"></el-table-column>
-            <!-- <el-table-column prop="" label="调解案件数量"></el-table-column>
-            <el-table-column prop="" label="调解案例上报数"></el-table-column>
-            <el-table-column prop="" label=""></el-table-column>
-            <el-table-column prop="" label=""></el-table-column>
-            <el-table-column prop="" label=""></el-table-column>
-            <el-table-column prop="" label=""></el-table-column>
-            <el-table-column prop="" label=""></el-table-column>
-            <el-table-column prop="" label=""></el-table-column> -->
+          <el-table :data="tableInfo.tableData" stripe :default-sort="{prop: tableInfo.orderBy, order: tableInfo.orderRule}" @sort-change="handleSortChange" @row-click="handleRowClick">
+            <!-- id -->
+            <el-table-column type="index" :index="indexMethod"  label="排名" width="60"></el-table-column>
+            <el-table-column prop="name" sortable="custom" label="机构名称" show-overflow-tooltip></el-table-column>
+            <el-table-column prop="yewusl" sortable="custom" :formatter="numFormatMethod" label="业务数量"></el-table-column>
+            <el-table-column prop="tiaojieaj" sortable="custom" :formatter="numFormatMethod" label="调解案件数"></el-table-column>
+            <el-table-column prop="shangbaosl" sortable="custom" :formatter="numFormatMethod" label="调解案例上报数"></el-table-column>
+            <el-table-column prop="paichafk" sortable="custom" :formatter="numFormatMethod" label="排查反馈数"></el-table-column>
+            <el-table-column prop="zixunrz" sortable="custom" :formatter="numFormatMethod" label="咨询管理日志数"></el-table-column>
+            <el-table-column prop="chunjufw" sortable="custom" :formatter="numFormatMethod" label="村居服务数"></el-table-column>
+            <el-table-column prop="faxuanhd" sortable="custom" :formatter="numFormatMethod" label="法宣活动数"></el-table-column>
+            <el-table-column prop="renyuansl" sortable="custom" :formatter="numFormatMethod" label="登录人次"></el-table-column>
           </el-table>
         </div>
         <div class="pagination">
@@ -77,6 +80,7 @@
         </div>
       </div>
     </div>
+    <footer-com></footer-com>
   </div>
 </template>
 
@@ -89,6 +93,9 @@ export default {
   name: 'organizationRankings',
   data () {
     return {
+      /* ------ info区域 begin ------ */
+      search: '',
+      /* ------ info区域 end ------ */
       /* ------ selector区域 begin ------ */
       // 所属地区字段
       area: area[0]['value'],
@@ -110,7 +117,9 @@ export default {
         tableData: [],
         pageSize: 10,
         currentPage: 1,
-        total: 0
+        total: 0,
+        orderBy: 'yewusl',
+        orderRule: 'descending'
       }
       /* ------ selector区域 end ------ */
     }
@@ -118,15 +127,23 @@ export default {
   watch: {
     type: function (newValue, oldValue) {
       console.log(newValue, oldValue)
+      this.tableInfo.currentPage = 1
+      this.onLoad()
     },
     area: function (newValue, oldValue) {
       console.log(newValue, oldValue)
+      this.tableInfo.currentPage = 1
+      this.onLoad()
     },
     top: function (newValue, oldValue) {
       console.log(newValue, oldValue)
+      this.tableInfo.currentPage = 1
+      this.onLoad()
     },
     date: function (newValue, oldValue) {
       console.log(newValue, oldValue)
+      this.tableInfo.currentPage = 1
+      this.onLoad()
     }
   },
   created () {
@@ -139,8 +156,8 @@ export default {
       organizationRankings({
         location: this.area,
         mediationtype: 'allinformation',
-        obj: 'yewusl',
-        reorder: 'DESC',
+        obj: this.tableInfo.orderBy,
+        reorder: this.tableInfo.orderRule === 'descending' ? 'DESC' : 'ASC',
         pagesize: this.tableInfo.pageSize,
         currentpage: this.tableInfo.currentPage,
         download: 0,
@@ -148,30 +165,64 @@ export default {
         enddate: this.date[1],
         label: this.type,
         limit: this.top,
-        keyword: ''
+        keyword: this.search
       }).then(res => {
         // 获取数据成功后的其他操作
         this.tableInfo.tableData = res.data.pageData
-        this.tableInfo.pageSize = res.data.pageinfo.pagesize
         this.tableInfo.total = res.data.pageinfo.total
       })
     },
-    handleSizeChange () {
+    indexMethod (index) {
+      return (this.tableInfo.currentPage - 1) * this.tableInfo.pageSize + index + 1
+    },
+    percentFormatMethod (row, column, cellValue, index) {
+      return `${cellValue * 100}%`
+    },
+    numFormatMethod (row, column, cellValue, index) {
+      const reg = /\d{1,3}(?=(\d{3})+$)/g
+      return String(cellValue).replace(reg, '$&,')
+    },
+    handleSearch () {
+      this.tableInfo.currentPage = 1
       this.onLoad()
     },
-    handleCurrentChange () {
+    handleSizeChange (pageSize) {
+      this.tableInfo.pageSize = pageSize
       this.onLoad()
+    },
+    handleCurrentChange (currentPage) {
+      this.tableInfo.currentPage = currentPage
+      this.onLoad()
+    },
+    handleSortChange (sort) {
+      this.tableInfo.orderBy = sort.prop
+      this.tableInfo.orderRule = sort.order
+      this.onLoad()
+    },
+    handleRowClick (row, event, column) {
+      this.$router.push({path: `/organizationDetail/${row.id}`})
     }
   }
 }
 </script>
 
 <style lang="less" scoped>
+  @import '~@/assets/css/common.less';
   .view {
     width: 100%;
     background: #F0F2F5;
     .view-info {
       width: 100%;
+      height: 28px;
+      .breadcrumb {
+        float: left;
+        width: 300px !important;
+        line-height: 28px;
+      }
+      .search-input {
+        float: right;
+        width: 220px;
+      }
     }
     .view-selector {
       width: 100%;
@@ -179,7 +230,7 @@ export default {
       height: 144px;
       background: #FFFFFF;
       box-sizing: border-box;
-      padding: 0px 10px;
+      padding: 0px 7px;
       line-height: 48px;
       font-size: 14px;
     }
@@ -216,13 +267,15 @@ export default {
         display: flex;
         flex-direction: column;
         width: 100%;
+        padding: 0 15px;
+        box-sizing: border-box;
         .table {
           width: 100%;
-          margin: 20px 15px;
+          margin-top: 15px;
         }
         .pagination {
           width: 100%;
-          margin: 20px 15px;
+          margin: 15px 0;
           text-align: center;
         }
       }

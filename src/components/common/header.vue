@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-10 16:26:00
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-16 13:47:40
+ * @Last Modified time: 2018-08-21 11:08:00
  */
 <template>
   <div class="header">
@@ -47,7 +47,6 @@ export default {
   .header {
     display: flex;
     width: 100%;
-    height: 100%;
     .left {
       flex-grow: 0;
       height: 100%;
@@ -55,10 +54,10 @@ export default {
       box-sizing: border-box;
       background: #002140;
       .widelogo {
-        background: url(../assets/images/icon-system-logo-wide.png) no-repeat center;
+        background: url(../../assets/images/icon-system-logo-wide.png) no-repeat center;
       }
       .narrowlogo {
-        background: url(../assets/images/icon-system-logo-narrow.png) no-repeat center;
+        background: url(../../assets/images/icon-system-logo-narrow.png) no-repeat center;
       }
     }
     .right {
@@ -72,7 +71,7 @@ export default {
         display: block;
         width: 22px;
         height: 18.5px;
-        background: url(../assets/images/icon-hamburger.png);
+        background: url(../../assets/images/icon-hamburger.png);
         margin: 20px 15px;
       }
       .collapselogo{
@@ -103,7 +102,7 @@ export default {
             width: 40px;
             height: 40px;
             border-radius: 10px;
-            background: url(../assets/images/icon-user.png) no-repeat center;
+            background: url(../../assets/images/icon-user.png) no-repeat center;
           }
           .user-name {
             float: left;

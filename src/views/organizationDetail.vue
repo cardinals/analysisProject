@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-13 11:33:54
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-14 09:47:31
+ * @Last Modified time: 2018-08-21 11:09:13
  */
 
 <template>
@@ -126,53 +126,8 @@
           </div>
           <div class="sContents">
             <div class="ul">
-              <div class="li">
-                <span class="sort">1</span>
-                <span class="name">史国庆</span>
-                <span class="number">1234</span>
-              </div>
-              <div class="li">
-                <span class="sort">2</span>
-                <span class="name">史国庆</span>
-                <span class="number">124</span>
-              </div>
-              <div class="li">
-                <span class="sort">3</span>
-                <span class="name">史国庆</span>
-                <span class="number">134</span>
-              </div>
-              <div class="li">
-                <span class="sort">4</span>
-                <span class="name">史国庆</span>
-                <span class="number">14</span>
-              </div>
-              <div class="li">
-                <span class="sort">5</span>
-                <span class="name">史国庆</span>
-                <span class="number">1234</span>
-              </div>
-              <div class="li">
-                <span class="sort">6</span>
-                <span class="name">史国庆</span>
-                <span class="number">1234</span>
-              </div>
-              <div class="li">
-                <span class="sort">7</span>
-                <span class="name">史国庆</span>
-                <span class="number">1234</span>
-              </div>
-              <div class="li">
-                <span class="sort">8</span>
-                <span class="name">史国庆</span>
-                <span class="number">1234</span>
-              </div>
-              <div class="li">
-                <span class="sort">9</span>
-                <span class="name">史国庆</span>
-                <span class="number">1234</span>
-              </div>
-              <div class="li">
-                <span class="sort">10</span>
+              <div class="li" v-for="(item,index) in 10" :key="index">
+                <span class="sort">{{index+1}}</span>
                 <span class="name">史国庆</span>
                 <span class="number">1234</span>
               </div>
@@ -256,38 +211,8 @@
               <div class="dis">理赔金额排名(万元)</div>
             </div>
             <div class="sContents">
-              <div class="li">
-                <span class="sort">1</span>
-                <span class="name">史国庆</span>
-                <span class="number">1234</span>
-              </div>
-              <div class="li">
-                <span class="sort">2</span>
-                <span class="name">史国庆</span>
-                <span class="number">1234</span>
-              </div>
-              <div class="li">
-                <span class="sort">3</span>
-                <span class="name">史国庆</span>
-                <span class="number">1234</span>
-              </div>
-              <div class="li">
-                <span class="sort">4</span>
-                <span class="name">史国庆</span>
-                <span class="number">1234</span>
-              </div>
-              <div class="li">
-                <span class="sort">5</span>
-                <span class="name">史国庆</span>
-                <span class="number">1234</span>
-              </div>
-              <div class="li">
-                <span class="sort">6</span>
-                <span class="name">史国庆</span>
-                <span class="number">1234</span>
-              </div>
-              <div class="li">
-                <span class="sort">7</span>
+              <div class="li" v-for="(item,index) in 7" :key="index">
+                <span class="sort">{{index+1}}</span>
                 <span class="name">史国庆</span>
                 <span class="number">1234</span>
               </div>
@@ -321,38 +246,8 @@
               <div class="dis">调解时长排名(天)</div>
             </div>
             <div class="sContents">
-              <div class="li">
-                <span class="sort">1</span>
-                <span class="name">史国庆</span>
-                <span class="number">1234</span>
-              </div>
-              <div class="li">
-                <span class="sort">2</span>
-                <span class="name">史国庆</span>
-                <span class="number">1234</span>
-              </div>
-              <div class="li">
-                <span class="sort">3</span>
-                <span class="name">史国庆</span>
-                <span class="number">1234</span>
-              </div>
-              <div class="li">
-                <span class="sort">4</span>
-                <span class="name">史国庆</span>
-                <span class="number">1234</span>
-              </div>
-              <div class="li">
-                <span class="sort">5</span>
-                <span class="name">史国庆</span>
-                <span class="number">1234</span>
-              </div>
-              <div class="li">
-                <span class="sort">6</span>
-                <span class="name">史国庆</span>
-                <span class="number">1234</span>
-              </div>
-              <div class="li">
-                <span class="sort">7</span>
+              <div class="li" v-for="(item,index) in 7" :key="index">
+                <span class="sort">{{index+1}}</span>
                 <span class="name">史国庆</span>
                 <span class="number">1234</span>
               </div>
@@ -361,14 +256,7 @@
         </div>
       </div>
     </div>
-    <div class="footer">
-      <div class="center">
-        <div class="span">帮助</div>
-        <div class="span">隐私</div>
-        <div class="span">条款</div>
-        <div class="span2">copyright©2018 银江股份</div>
-      </div>
-    </div>
+    <footer-com></footer-com>
   </div>
 </template>
 
