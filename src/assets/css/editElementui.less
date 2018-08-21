@@ -1,0 +1,31 @@
+/*
+ * @Author: wupeiwen javapeiwen2010@gmail.com 
+ * @Date: 2018-08-21 11:32:15 
+ * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
+ * @Last Modified time: 2018-08-21 11:34:05
+ * @Description: 修改elementui默认样式
+ */  
+
+  // 修改 el-radio 单选框样式 （列表页 选择项）
+  .el-radio+.el-radio {
+    margin-left: 0px !important;
+  }
+  .el-radio__inner {
+    display: none !important;
+  }
+  .el-radio__input.is-checked+.el-radio__label {
+    color: #ffffff !important;
+    background: #409EFF !important;
+  }
+  .el-radio__input+.el-radio__label:hover {
+    color: #409EFF !important;
+    background: #ffffff !important;
+  }
+  .el-radio__label {
+    padding: 5px 9px !important;
+  }
+
+  // 表格行 cover效果
+  .el-table__row {
+    cursor: pointer !important;
+  }

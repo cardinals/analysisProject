@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-10 11:54:18
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-21 11:03:38
+ * @Last Modified time: 2018-08-21 11:34:49
  */
 <template>
   <!-- 外层容器，当子元素中包含 <el-header> 或 <el-footer> 时，全部子元素会垂直上下排列，否则会水平左右排列。 -->
@@ -30,6 +30,10 @@ export default {
 </script>
 
 <style lang="less">
+  // 通用css
+  @import '~@/assets/css/common.less';
+  // 修改elementui默认样式
+  @import '~@/assets/css/editElementui.less';
   .container {
     width: 100%;
     height: 100%;
@@ -72,40 +76,5 @@ export default {
         overflow: auto;
       }
     }
-  }
-
-  .fade-enter-active,
-  .fade-leave-active {
-    transition: opacity 1s;
-  }
-
-  .fade-enter,
-  .fade-leave-to {
-    opacity: 0;
-  }
-
-  .icon{
-    display: block;
-    height: 100%;
-    line-height: 100%;
-  }
-
-  // 修改 el-radio 单选框样式
-  .el-radio+.el-radio {
-    margin-left: 0px !important;
-  }
-  .el-radio__inner {
-    display: none !important;
-  }
-  .el-radio__input.is-checked+.el-radio__label {
-    color: #ffffff !important;
-    background: #409EFF !important;
-  }
-  .el-radio__input+.el-radio__label:hover {
-    color: #409EFF !important;
-    background: #ffffff !important;
-  }
-  .el-radio__label {
-    padding: 5px 9px !important;
   }
 </style>
