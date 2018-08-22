@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-10 11:54:28
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-22 16:47:57
+ * @Last Modified time: 2018-08-22 18:03:46
  */
 import Vue from 'vue'
 import App from './App.vue'
@@ -29,7 +29,7 @@ Vue.filter('percentFormat', function (value) {
 Vue.filter('numFormat', function (value) {
   if (!value) return 0
   const reg = /\d{1,3}(?=(\d{3})+$)/g
-  return String(value.toFixed(1)).replace(reg, '$&,')
+  return String(String(value).indexOf('.') > 0 ? value.toFixed(1) : parseInt(value)).replace(reg, '$&,')
 })
 
 new Vue({
