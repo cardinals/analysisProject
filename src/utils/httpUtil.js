@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-14 09:28:41
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-21 09:34:58
+ * @Last Modified time: 2018-08-22 10:33:52
  */
 
 import axios from 'axios'
@@ -80,6 +80,24 @@ export let post = (url, params) => {
         resolve(res.data)
       })
       .catch(err => {
+        reject(err.data)
+      })
+  })
+}
+
+/**
+ * all方法，对应all请求
+ * @param {List} queryList [多个请求的url地址和参数的集合]
+ */
+export let all = (queryList) => {
+  let query = queryList.map((item) => {
+    return axios.get(item.url, { params: item.params })
+  })
+  return new Promise((resolve, reject) => {
+    axios.all(query)
+      .then((iterable) => {
+        resolve(iterable)
+      }).catch(err => {
         reject(err.data)
       })
   })

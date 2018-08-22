@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-13 11:33:54
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-21 11:09:13
+ * @Last Modified time: 2018-08-22 17:54:17
  */
 
 <template>
@@ -18,11 +18,11 @@
         <div class="contents">
           <div class="name_info">
             <div class="img"></div>
-            <div class="name">闵行区司法局</div>
+            <div class="name">{{data.jiBenXX.mingChen||''}}</div>
           </div>
           <div class="other_info">
-            <div class="line">联系地址:萃潭路384号</div>
-            <div class="line">联系电话:0571-88808880</div>
+            <div class="line">联系地址: {{data.jiBenXX.lianXiDZ||''}}</div>
+            <div class="line">联系电话: {{data.jiBenXX.lianXiDH||''}}</div>
           </div>
         </div>
       </div>
@@ -36,19 +36,20 @@
             </div>
             <div class="sContents flexRow">
               <div class="info">
-                <div class="number">616</div>
+                <div class="number">{{(data.tiaoJieDW.tiaoJieJGSL.jiGouSL||0) | numFormat}}</div>
                 <div class="others">
                   <div class="line">
                     <label>调解委员会：</label>
-                    <span>595家</span>
+                    <span>{{(data.tiaoJieDW.tiaoJieJGSL.tiaoJieWYH||0) | numFormat}}家</span>
                   </div>
                   <div class="line">
                     <label>调解工作室：</label>
-                    <span>21家</span>
+                    <span>{{(data.tiaoJieDW.tiaoJieJGSL.tiaoJieGZS||0) | numFormat}}家</span>
                   </div>
                 </div>
               </div>
-              <div class="chart"></div>
+              <!-- <div class="chart"></div> -->
+              <g2-pie class="chart" :id="'pie1'" :height="124"></g2-pie>
             </div>
           </div>
           <div class="atRight">
@@ -58,19 +59,20 @@
             </div>
             <div class="sContents flexRow">
               <div class="info">
-                <div class="number">2580</div>
+                <div class="number">{{(data.tiaoJieDW.tiaoJieYSL.renYuanSL||0) | numFormat}}</div>
                 <div class="others">
                   <div class="line">
                     <label>专职调解员：</label>
-                    <span>155名</span>
+                    <span>{{(data.tiaoJieDW.tiaoJieYSL.zhuanZhiTJY||0) | numFormat}}名</span>
                   </div>
                   <div class="line">
                     <label>兼职或其他：</label>
-                    <span>2000名</span>
+                    <span>{{(data.tiaoJieDW.tiaoJieYSL.jianZhiHQT||0) | numFormat}}名</span>
                   </div>
                 </div>
               </div>
-              <div class="chart"></div>
+              <!-- <div class="chart"></div> -->
+              <g2-pie class="chart" :id="'pie2'" :height="124" @itemClick="handlePieClick"></g2-pie>
             </div>
           </div>
         </div>
@@ -89,26 +91,14 @@
           </div>
           <div class="sContents">
             <div class="number">
-              <span class="span1">16989</span>
+              <span class="span1">{{(data.tiaoJieAJSL.zongLiang||0) | numFormat}}</span>
               <span class="span2">万人比<i>?</i></span>
-              <span class="span3">9.5件/万人</span>
+              <span class="span3">{{(data.tiaoJieAJSL.wanRenB||0) | numFormat}}件/万人</span>
             </div>
             <div class="others">
-              <div class="once_block">
-                <label>群体事件</label>
-                <span>12</span>
-              </div>
-              <div class="once_block">
-                <label>人员死亡事件</label>
-                <span>12</span>
-              </div>
-              <div class="once_block">
-                <label>久调不解</label>
-                <span>12</span>
-              </div>
-              <div class="once_block">
-                <label>涉重点人员事件</label>
-                <span>12</span>
+              <div class="once_block" v-if="data.tiaoJieAJSL.zhongDianSJFB&&(index<=3)" v-for="(item,index) in data.tiaoJieAJSL.zhongDianSJFB" :key="index">
+                <label>{{item.name}}</label>
+                <span>{{item.value | numFormat}}</span>
               </div>
             </div>
           </div>
@@ -118,6 +108,7 @@
             <div class="border"></div>
             <div class="dis">受理案件数量分布</div>
           </div>
+          <g2-interval :id="'interval'" :height="300" :data="data.tiaoJieAJSL.tiaoJieYSLAJSLFB" :axisName="{name:'案件数量', value:'调解员人数'}"></g2-interval>
         </div>
         <div class="right">
           <div class="sTitle">
@@ -126,10 +117,10 @@
           </div>
           <div class="sContents">
             <div class="ul">
-              <div class="li" v-for="(item,index) in 10" :key="index">
+              <div class="li" v-if="data.tiaoJieAJSL.tiaoJieYSLAJSLPM" v-for="(item,index) in data.tiaoJieAJSL.tiaoJieYSLAJSLPM" :key="index">
                 <span class="sort">{{index+1}}</span>
-                <span class="name">史国庆</span>
-                <span class="number">1234</span>
+                <span class="name">{{item.name}}</span>
+                <span class="number">{{item.value | numFormat}}</span>
               </div>
             </div>
           </div>
@@ -146,17 +137,20 @@
           </div>
           <div class="sContents">
             <div class="infos">
-              <span class="span1">78%</span>
+              <span class="span1">{{(data.tiaoJieZYHCD.zhuanYeTJZB||0) | percentFormat}}</span>
               <span class="span2">全市</span>
-              <span class="span3">46.1%</span>
+              <span class="span3">{{(data.tiaoJieZYHCD.quanShiHZBL||0) | percentFormat}}</span>
             </div>
-            <div class="chart"></div>
+            <!-- <div class="chart"></div> -->
+            <g2-point class="chart" :id="'point1'" :height="280" :axisName="{type:'类型', size:'人均案件量', x:'案件数量', y:'人员数量'}"
+            :data='data.tiaoJieZYHCD.qiPaoT.map(item=>{return {type: item.name, size: item.value3, x: item.value1, y: item.value2}})'></g2-point>
           </div>
         </div>
       </div>
       <div class="right">
         <div class="title">调解资源占比</div>
-        <div class="contents"></div>
+        <!-- <div class="contents"></div> -->
+        <g2-mirrorInterval class="contents" :id="'mirrorInterval'" v-if="mirrorInterval.length>0" :height="376" :data='mirrorInterval'></g2-mirrorInterval>
       </div>
     </div>
     <div class="block4 flexRow">
@@ -170,9 +164,9 @@
             </div>
             <div class="sContents">
               <div class="infos">
-                <span class="span1">78%</span>
+                <span class="span1">{{(data.tiaoJieCGL.zongHeTJCGL||0) | percentFormat}}</span>
                 <span class="span2">全市</span>
-                <span class="span3">46.1%</span>
+                <span class="span3">{{(data.tiaoJieCGL.quanShiCGL||0) | percentFormat}}</span>
               </div>
             </div>
           </div>
@@ -181,7 +175,9 @@
               <div class="border"></div>
               <div class="dis">案件成功率分布</div>
             </div>
-            <div class="sContents"></div>
+            <!-- <div class="sContents"></div> -->
+            <g2-point class="sContents" :id="'point2'" :height="240" :axisName="{type:'类型', x:'调解成功率', y:'案件数量'}" :type='"散点图"'
+            :data='data.tiaoJieCGL.anJianCGLFB.map(item=>{return {type: item.name, size: 1, x: item.value, y: item.labelValue}})'></g2-point>
           </div>
         </div>
       </div>
@@ -200,7 +196,7 @@
             </div>
             <div class="sContents">
               <div class="infos">
-                <span class="span1">1234</span>
+                <span class="span1">{{(data.leiJiXYJE/10000||0) | numFormat}}</span>
                 <span class="span2">万元</span>
               </div>
             </div>
@@ -211,10 +207,10 @@
               <div class="dis">理赔金额排名(万元)</div>
             </div>
             <div class="sContents">
-              <div class="li" v-for="(item,index) in 7" :key="index">
+              <div class="li" v-for="(item,index) in data.liPeiJEPM.anJianLPJEPM" :key="index">
                 <span class="sort">{{index+1}}</span>
-                <span class="name">史国庆</span>
-                <span class="number">1234</span>
+                <el-tooltip :content="item.name" placement="top" effect="light"><span class="name">{{item.name}}</span></el-tooltip>
+                <span class="number">{{(item.value/10000||0) | numFormat}}</span>
               </div>
             </div>
           </div>
@@ -235,7 +231,7 @@
             </div>
             <div class="sContents">
               <div class="infos">
-                <span class="span1">12</span>
+                <span class="span1">{{(data.pingJunTJSC||0) | numFormat}}</span>
                 <span class="span2">天</span>
               </div>
             </div>
@@ -246,10 +242,10 @@
               <div class="dis">调解时长排名(天)</div>
             </div>
             <div class="sContents">
-              <div class="li" v-for="(item,index) in 7" :key="index">
+              <div class="li" v-for="(item,index) in data.tiaoJieSCPM.anJianTJSCPM" :key="index">
                 <span class="sort">{{index+1}}</span>
-                <span class="name">史国庆</span>
-                <span class="number">1234</span>
+                <span class="name">{{item.name}}</span>
+                <span class="number">{{(item.value||0) | numFormat}}</span>
               </div>
             </div>
           </div>
@@ -261,23 +257,44 @@
 </template>
 
 <script>
-// import { organizationDetails } from '@/api/api'
+import { organizationDetails } from '@/api/api'
 export default {
-  name: 'organizationDetails'
-  // created () {
-  //   this.onLoad()
-  // },
-  // methods: {
-  //   onLoad () {
-  //     organizationDetails({
-  //       id: this.$route.params.id,
-  //       time: 'benYue',
-  //       categoryType: 'tiaoWeiH'
-  //     }).then(res => {
-  //       console.log('load organizationDetails success')
-  //     })
-  //   }
-  // }
+  name: 'organizationDetails',
+  data () {
+    return {
+      // 所有数据
+      data: null,
+      // 调解资源占比数据
+      mirrorInterval: []
+    }
+  },
+  created () {
+    this.onLoad()
+  },
+  methods: {
+    onLoad () {
+      organizationDetails({
+        id: this.$route.params.id,
+        time: 2018,
+        organizationType: 'JUSTICEBUREAU'
+      }).then(resList => {
+        this.$nextTick(() => {
+          // 合并三个接口的数据
+          this.data = Object.assign(resList[0].data.data, resList[1].data.data, resList[2].data.data)
+          // 处理调解资源占比数据
+          this.data.tiaoJieZYPB.map(item => {
+            this.mirrorInterval.push({name: item.name, value: item.value1, type: '案件数量'})
+            this.mirrorInterval.push({name: item.name, value: item.value2, type: '调解员数量'})
+          })
+        })
+      }).catch(err => {
+        console.log(err)
+      })
+    },
+    handlePieClick (data) {
+      console.log(data)
+    }
+  }
 }
 </script>
 
@@ -499,6 +516,10 @@ export default {
             font-size: @fontMiddle;
             color:@gray;
             line-height: 33px;
+            width: 65%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
           }
           .number{
             float: right;
@@ -581,8 +602,7 @@ export default {
       flex: 750;
       margin-left: 14px;
       .contents{
-        padding-top:20px;
-        padding-bottom: 26px;
+        padding: 0;
       }
     }
   }
@@ -720,6 +740,10 @@ export default {
             font-size: @fontMiddle;
             color:@gray;
             line-height: 33px;
+            width: 80%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
           }
           .number{
             float: right;
@@ -832,6 +856,10 @@ export default {
             font-size: @fontMiddle;
             color:@gray;
             line-height: 33px;
+            width: 80%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
           }
           .number{
             float: right;

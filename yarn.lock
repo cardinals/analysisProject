@@ -14,22 +14,22 @@
   dependencies:
     "@antv/util" "~1.0.11"
 
-"@antv/g2@^3.2.6":
-  version "3.2.6"
-  resolved "https://registry.yarnpkg.com/@antv/g2/-/g2-3.2.6.tgz#64036d381d32daf81ebbdab00eb769e1668da1df"
+"@antv/g2@^3.2.7":
+  version "3.2.7"
+  resolved "https://registry.yarnpkg.com/@antv/g2/-/g2-3.2.7.tgz#ea3c7c008bbf016af28f8013687b541f291a012d"
   dependencies:
     "@antv/adjust" "~0.0.6"
     "@antv/attr" "~0.0.6"
-    "@antv/g" "~3.0.0-beta.11"
-    "@antv/interaction" "~0.0.8"
+    "@antv/g" "~3.1.1"
+    "@antv/interaction" "~0.1.5"
     "@antv/scale" "~0.0.5"
     "@antv/util" "~1.0.12"
     venn.js "~0.2.20"
     wolfy87-eventemitter "~5.1.0"
 
-"@antv/g@^3.0.0-beta.11":
-  version "3.1.1"
-  resolved "https://registry.yarnpkg.com/@antv/g/-/g-3.1.1.tgz#9692866dc9e2ea6d3e709e96efaf8755b24ede32"
+"@antv/g@3.1.0-beta.6":
+  version "3.1.0-beta.6"
+  resolved "https://registry.yarnpkg.com/@antv/g/-/g-3.1.0-beta.6.tgz#d9e2f53e288b6fb4dcb2787bba8d6d5527664484"
   dependencies:
     "@antv/gl-matrix" "~2.7.1"
     "@antv/util" "~1.0.11"
@@ -38,9 +38,9 @@
     d3-timer "~1.0.6"
     wolfy87-eventemitter "~5.1.0"
 
-"@antv/g@~3.0.0-beta.11":
-  version "3.0.0-beta.11"
-  resolved "https://registry.yarnpkg.com/@antv/g/-/g-3.0.0-beta.11.tgz#2469d5c1b00d5fd1403d3620cecb3bc1d4ed221e"
+"@antv/g@~3.1.1":
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/@antv/g/-/g-3.1.2.tgz#08b958782f5aeb96f0f49518176a2edcf18980eb"
   dependencies:
     "@antv/gl-matrix" "~2.7.1"
     "@antv/util" "~1.0.11"
@@ -53,11 +53,11 @@
   version "2.7.1"
   resolved "https://registry.yarnpkg.com/@antv/gl-matrix/-/gl-matrix-2.7.1.tgz#acb8e37f7ab3df01345aba4372d7942be42eba14"
 
-"@antv/interaction@~0.0.8":
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/@antv/interaction/-/interaction-0.0.8.tgz#18bf1a7c8e87c96d7a989720d6471582c3aa859d"
+"@antv/interaction@~0.1.5":
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/@antv/interaction/-/interaction-0.1.5.tgz#6587cf7bdc6820826791dcb060baf61d2fdce77e"
   dependencies:
-    "@antv/g" "^3.0.0-beta.11"
+    "@antv/g" "3.1.0-beta.6"
     "@antv/util" "~1.0.11"
 
 "@antv/scale@~0.0.5":

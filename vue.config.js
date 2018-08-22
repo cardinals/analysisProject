@@ -13,8 +13,8 @@ module.exports = {
     hotOnly: false,
     proxy: {
       '/peopleMediate': {
-        // target: 'http://192.168.22.137:8850',
-        target: 'http://192.168.22.209:8860',
+        target: 'http://192.168.22.137:8850',
+        // target: 'http://192.168.22.209:8860',
         changeOrigin: true
       }
     },

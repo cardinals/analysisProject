@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-19 22:18:59
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-19 22:21:20
+ * @Last Modified time: 2018-08-22 16:23:04
   * @Description: 基础散点图
  */
 <template>
@@ -17,10 +17,31 @@ export default {
     data: {
       type: Array,
       default: () => [
-        { name: '暂无数据', value: 0 }
+        { x: 20, y: 5, size: 5, type: 'type1' },
+        { x: 30, y: 10, size: 8, type: 'type2' },
+        { x: 15, y: 20, size: 15, type: 'type3' }
       ]
     },
-    id: String
+    id: String,
+    height: {
+      type: Number,
+      default: 300
+    },
+    type: {
+      type: String,
+      default: '气泡图'
+    },
+    axisName: {
+      type: Object,
+      default: () => {
+        return {
+          x: '数据2',
+          y: '数据2',
+          type: '类型',
+          size: '大小'
+        }
+      }
+    }
   },
   data () {
     return {
@@ -42,13 +63,48 @@ export default {
         this.chart = new G2.Chart({
           container: this.id,
           forceFit: true,
-          height: 300
+          height: this.height,
+          padding: [30, 100, 30, 40]
         })
       }
-      this.chart.source(data)
-      this.chart.point().position('name*value')
+      this.chart.source(data, {
+        x: {
+          alias: this.axisName.x
+        },
+        y: {
+          alias: this.axisName.y
+        },
+        size: {
+          alias: this.axisName.size
+        },
+        type: {
+          alias: this.axisName.type
+        }
+      })
+      this.chart.legend('size', false)
+      this.chart.tooltip({showTitle: false})
+      const colorMap = Array.from(new Array(8), (v, i) => { return G2.Global.colors[i] })
+      let point = this.chart.point().position('x*y').shape('circle')
+      if (this.type === '散点图') {
+        this.chart.legend('type', false)
+        point.color('x', function (val) {
+          if (val >= 0.75) {
+            return colorMap[0]
+          } else if (val >= 0.5) {
+            return colorMap[1]
+          } else {
+            return colorMap[2]
+          }
+        }).size('size').opacity(0.8).tooltip('type*x*y')
+      } else if (this.type === '气泡图') {
+        this.chart.legend('type', {position: 'right-top'})
+        point.color('type', colorMap).size('size', [5, 20]).opacity(0.5).tooltip('type*x*y*size')
+      }
       this.chart.render()
     }
+  },
+  mounted () {
+    this.drawChart(this.data)
   }
 }
 </script>
