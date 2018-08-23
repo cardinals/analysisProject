@@ -2,15 +2,17 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-13 11:34:01
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-21 11:09:28
+ * @Last Modified time: 2018-08-23 17:39:52
  */
 
 <template>
-  <div class="peopleDetail_container">
+  <div class="peopleDetail_container" v-if="data">
     <div class="nav">
       <span class="span1">调解队伍分析</span>
       <span class="span1">>调解人员排名</span>
       <span class="span2">>人员画像</span>
+      <el-date-picker class="dateSelector" v-model="date" :picker-options="pickerDisabledDate" value-format="yyyy" type="year"
+        placeholder="选择年" size='mini'></el-date-picker>
     </div>
     <div class="top">
       <div class="left">
@@ -110,58 +112,22 @@
         </div>
         <div class="table_container">
           <div class="atLeft">
-            <div class="table">
-              <div class="line head">
-                <div class="td td1">案件名称</div>
-                <div class="td td2">案件类型</div>
-                <div class="td td3">处理状态</div>
-                <div class="td td4">受理时间</div>
-                <div class="td td5">结案时间</div>
-              </div>
-              <div class="line body">
-                <div class="td td1">重桂英、刘金鹏之间的婚姻家庭争议纠纷重桂</div>
-                <div class="td td2"><span class="bg1">婚姻家庭</span></div>
-                <div class="td td3">调解成功</div>
-                <div class="td td4">2018/7/28</div>
-                <div class="td td5">2018/7/28</div>
-              </div>
-              <div class="line body">
-                <div class="td td1">重桂英、刘金鹏之间的婚姻家庭争议纠纷重桂</div>
-                <div class="td td2"><span class="bg2">婚姻家庭</span></div>
-                <div class="td td3">调解成功</div>
-                <div class="td td4">2018/7/28</div>
-                <div class="td td5">2018/7/28</div>
-              </div>
-              <div class="line body">
-                <div class="td td1">重桂英、刘金鹏之间的婚姻家庭争议纠纷重桂</div>
-                <div class="td td2"><span class="bg3">婚姻家庭</span></div>
-                <div class="td td3">调解成功</div>
-                <div class="td td4">2018/7/28</div>
-                <div class="td td5">2018/7/28</div>
-              </div>
-              <div class="line body">
-                <div class="td td1">重桂英、刘金鹏之间的婚姻家庭争议纠纷重桂</div>
-                <div class="td td2"><span class="bg1">婚姻家庭</span></div>
-                <div class="td td3">调解成功</div>
-                <div class="td td4">2018/7/28</div>
-                <div class="td td5">2018/7/28</div>
-              </div>
-              <div class="line body">
-                <div class="td td1">重桂英、刘金鹏之间的婚姻家庭争议纠纷重桂</div>
-                <div class="td td2"><span class="bg1">婚姻家庭</span></div>
-                <div class="td td3">调解成功</div>
-                <div class="td td4">2018/7/28</div>
-                <div class="td td5">2018/7/28</div>
-              </div>
-              <div class="line body">
-                <div class="td td1">重桂英、刘金鹏之间的婚姻家庭争议纠纷重桂</div>
-                <div class="td td2"><span class="bg1">婚姻家庭</span></div>
-                <div class="td td3">调解成功</div>
-                <div class="td td4">2018/7/28</div>
-                <div class="td td5">2018/7/28</div>
-              </div>
+            <el-table :data="currentTableData" stripe class="table" @filter-change="handleFilterChange">
+              <el-table-column prop="name" label="案件名称" show-overflow-tooltip></el-table-column>
+              <el-table-column prop="caselabel" label="案件类型" show-overflow-tooltip column-key="caselabel" :filters="caseType" :filter-multiple="false" :filtered-value="filteredCaselabel">
+                <template slot-scope="scope">
+                  <el-tag :type="scope.row.caselabel === '类型1' ? 'success' : 'primary'" disable-transitions>{{scope.row.caselabel}}</el-tag>
+                </template>
+              </el-table-column>
+              <el-table-column prop="chulizt" label="处理状态" column-key="chulizt" :filters="caseStatus" :filter-multiple="false" :filtered-value="filteredChulizt"></el-table-column>
+              <el-table-column prop="dateaccepted" sortable label="受理时间"></el-table-column>
+              <el-table-column prop="datefinished" sortable label="结案时间"></el-table-column>
+            </el-table>
+            <div class="page">
+              <el-pagination @current-change="handleCurrentChange" :current-page="pageInfo.currentPage"
+                :page-sizes="[4]" :page-size="pageInfo.pageSize" layout="total, sizes, prev, pager, next, jumper" :total="pageInfo.total">
+              </el-pagination>
             </div>
-            <div class="page"></div>
           </div>
           <div class="atRight flexColumn">
             <div class="once">
@@ -169,14 +135,14 @@
               <span class="span2">1716</span>
               <span class="span3">件</span>
             </div>
-             <div class="once">
-              <span class="span1">调解成功（交通事故）</span>
-              <span class="span2">1716</span>
+            <div class="once">
+              <span class="span1">调解终止（交通事故）</span>
+              <span class="span2">33</span>
               <span class="span3">件</span>
             </div>
-             <div class="once">
-              <span class="span1">调解成功（交通事故）</span>
-              <span class="span2">1716</span>
+            <div class="once">
+              <span class="span1">未结案（交通事故）</span>
+              <span class="span2">21</span>
               <span class="span3">件</span>
             </div>
           </div>
@@ -188,8 +154,126 @@
 </template>
 
 <script>
+import { peopleDetails } from '@/api/api'
+import { defaultYear, pickerDisabledDate } from '@/utils/index'
+import { caseType, caseStatus } from '@/utils/dictionaryMapping'
+
 export default {
-  name: 'peopleDetail'
+  name: 'peopleDetails',
+  data () {
+    return {
+      // 时间选择器的选中年份
+      date: defaultYear(),
+      // 时间选择器禁用日期
+      pickerDisabledDate: pickerDisabledDate,
+      // 所有数据
+      data: null,
+      // 受理案件数量的选中类别
+      target1: 'tiaoJieY',
+      // 理赔金额排名的选中类别
+      target2: 'anJian',
+      // 调解时长排名的选中类别
+      target3: 'anJian',
+      // 分页信息
+      pageInfo: {
+        pageSize: 4,
+        currentPage: 1
+      },
+      clickBusinessType: '',
+      clickCaseType: '',
+      caseType: caseType.map(item => { return {text: item, value: item} }),
+      caseStatus: caseStatus.map(item => { return {text: item, value: item} }),
+      filteredCaselabel: [],
+      filteredChulizt: []
+    }
+  },
+  computed: {
+    // 计算当前筛选条件下的表格数据
+    filteredtableData: {
+      get: function () {
+        if (this.data.case) {
+          let temp = this.data.case
+          if (this.filteredCaselabel.length > 0) {
+            temp = temp.filter(item => { if (item.caselabel === this.filteredCaselabel[0]) { return true } })
+          }
+          if (this.filteredChulizt.length > 0) {
+            temp = temp.filter(item => { if (item.chulizt === this.filteredChulizt[0]) { return true } })
+          }
+          return temp
+        }
+      },
+      set: function (newValue) {}
+    },
+    // 计算当前分页的表格数据
+    currentTableData: {
+      get: function () {
+        const start = (this.pageInfo.currentPage - 1) * this.pageInfo.pageSize
+        const end = this.pageInfo.currentPage * this.pageInfo.pageSize
+        return this.filteredtableData.slice(start, end)
+      },
+      set: function (newValue) {}
+    },
+    // 计算当前分页的表格数据
+    'pageInfo.total': {
+      get: function () {
+        console.log(1)
+        return 20
+      },
+      set: function (newValue) {}
+    }
+
+  },
+  watch: {
+    // 监听时间选择器数据变化
+    date (newValue, oldValue) {
+      this.onLoad()
+    },
+    // 监听当前筛选条件下的表格数据变化
+    // filteredtableData (newValue, oldValue) {
+    //   this.pageInfo.total = newValue.length
+    // },
+    // 监听业务专长中选中业务类型的变化
+    clickBusinessType (newValue, oldValue) {
+      console.log(newValue)
+    },
+    // 监听案件清单中选中案件类型变化
+    clickCaseType (newValue, oldValue) {
+      console.log(newValue)
+    }
+  },
+  created () {
+    this.onLoad()
+  },
+  methods: {
+    onLoad () {
+      peopleDetails({
+        id: this.$route.params.id,
+        year: this.date
+      }).then(resList => {
+        if (resList[0].data.code && resList[1].data.code && resList[2].data.code) {
+          // 合并接口的数据
+          this.data = Object.assign(resList[0].data.data, resList[1].data.data, resList[2].data.data)
+        } else {
+          this.data = null
+          this.$message({type: 'error', message: '数据请求失败'})
+        }
+      }).catch(err => {
+        console.log(err)
+      })
+    },
+    // 案件清单表格
+    handleFilterChange (obj) {
+      if (obj.chulizt) {
+        this.filteredChulizt = obj.chulizt
+      } else if (obj.caselabel) {
+        this.filteredCaselabel = obj.caselabel
+      }
+    },
+    // 处理当前页变化
+    handleCurrentChange (currentPage) {
+      this.pageInfo.currentPage = currentPage
+    }
+  }
 }
 </script>
 

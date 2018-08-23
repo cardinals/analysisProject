@@ -33,7 +33,7 @@ export let dateFormat = (dateTime, valueFormat) => {
   })
   return valueFormat
 }
-// 时间选择器配置--包含禁用日期、快捷选项和周起始日
+// 日期选择器配置--包含禁用日期、快捷选项和周起始日
 export const pickerOptions = {
   disabledDate (time) {
     return time.getTime() > Date.now()
@@ -82,7 +82,7 @@ export const pickerOptions = {
   firstDayOfWeek: 1
 }
 
-// 时间选择器配置--包含禁用日期和周起始日
+// 日期选择器配置--包含禁用日期和周起始日
 export const pickerDisabledDate = {
   disabledDate (time) {
     return time.getTime() > Date.now()
@@ -90,11 +90,18 @@ export const pickerDisabledDate = {
   firstDayOfWeek: 1
 }
 
-// 时间范围选择器默认时间范围(本年)
-export let defaultDataRage = () => {
+// 日期范围选择器默认日期范围(本年)
+export let defaultDateRage = () => {
   const enddate = dateFormat(new Date())
   const startDate = dateFormat(new Date(new Date().setDate(1)).setMonth(0))
   return [startDate, enddate]
+}
+
+// 日期选择器默认日期(本年)
+
+export let defaultYear = () => {
+  const year = dateFormat(new Date(), 'yyyy')
+  return year
 }
 
 // 通过地区名称查找地区编码

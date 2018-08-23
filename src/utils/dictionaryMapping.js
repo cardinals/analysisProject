@@ -68,71 +68,9 @@ export const area = [{
   'coordinates': [121.491, 31.237]
 }]
 
-export const caseType = [{
-  'label': '民事',
-  'value': '民事'
-}, {
-  'label': '刑事',
-  'value': '刑事'
-}, {
-  'label': '治安',
-  'value': '治安'
-}, {
-  'label': '房产',
-  'value': '房产'
-}, {
-  'label': '医患',
-  'value': '医患'
-}, {
-  'label': '交通',
-  'value': '交通'
-}, {
-  'label': '劳动',
-  'value': '劳动'
-}, {
-  'label': '涉校',
-  'value': '涉校'
-}, {
-  'label': '知产',
-  'value': '知产'
-}]
+export const caseType = ['涉校纠纷', '医患纠纷', '交通纠纷', '知识产权', '劳动纠纷', '邻里纠纷', '婚姻家庭', '房屋占地', '治安事件', '刑事事件', '消费纠纷', '侵权损害', '其他纠纷']
 
-export const commonCaseType = [{
-  'label': '民事',
-  'value': '民事'
-}, {
-  'label': '治安',
-  'value': '治安'
-}, {
-  'label': '房产',
-  'value': '房产'
-}, {
-  'label': '医患',
-  'value': '医患'
-}, {
-  'label': '交通',
-  'value': '交通'
-}, {
-  'label': '劳动',
-  'value': '劳动'
-}, {
-  'label': '知产',
-  'value': '知产'
-}]
-
-export const businessType = [{
-  'label': '人民调解',
-  'value': '人民调解'
-}, {
-  'label': '110联动',
-  'value': '110联动'
-}, {
-  'label': '公共法律服务',
-  'value': '公共法律服务'
-}, {
-  'label': '纠纷排查',
-  'value': '纠纷排查'
-}]
+export const caseStatus = ['调解成功', '调解终止', '未结案']
 
 export const coordinationType = [
   {label: '全部调委会', value: 'allinformation'},

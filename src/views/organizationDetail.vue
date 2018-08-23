@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-13 11:33:54
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-23 10:53:23
+ * @Last Modified time: 2018-08-23 14:09:30
  */
 
 <template>
@@ -11,6 +11,8 @@
       <span class="span1">调解队伍分析</span>
       <span class="span1">>调解机构排名</span>
       <span class="span2">>机构画像</span>
+      <el-date-picker class="dateSelector" v-model="date" :picker-options="pickerDisabledDate"
+      value-format="yyyy" type="year" placeholder="选择年" size='mini'></el-date-picker>
     </div>
     <div class="block1 flexRow">
       <div class="left">
@@ -23,6 +25,7 @@
           <div class="other_info">
             <div class="line">联系地址: {{data.jiBenXX.lianXiDZ||''}}</div>
             <div class="line">联系电话: {{data.jiBenXX.lianXiDH||''}}</div>
+            <div class="line" v-if="data.jiBenXX.jiGouLX!==''">街道/乡镇: {{data.jiBenXX.jiGouLX}}</div>
           </div>
         </div>
       </div>
@@ -92,11 +95,12 @@
           <div class="sContents">
             <div class="number">
               <span class="span1">{{(data.tiaoJieAJSL.zongLiang||0) | numFormat}}</span>
-              <span class="span2">万人比<el-tooltip content="万人比示意" placement="top-end"><i>?</i></el-tooltip></span>
-              <span class="span3">{{(data.tiaoJieAJSL.wanRenB||0) | numFormat}}件/万人</span>
+              <!-- 机构类型为司法所时不显示万人比 -->
+              <span class="span2" v-if="data.jiBenXX.jiGouLX===''">万人比<el-tooltip content="万人比示意" placement="top-end"><i>?</i></el-tooltip></span>
+              <span class="span3" v-if="data.jiBenXX.jiGouLX===''">{{(data.tiaoJieAJSL.wanRenB||0) | numFormat}}件/万人</span>
             </div>
             <div class="others">
-              <div class="once_block" v-if="index<=3" v-for="(item,index) in data.tiaoJieAJSL.zhongDianSJFB" :key="index">
+              <div class="once_block" v-for="(item,index) in zhongDianSJFB" :key="index">
                 <label>{{item.name}}</label>
                 <span>{{item.value | numFormat}}</span>
               </div>
@@ -140,7 +144,7 @@
           <div class="sContents">
             <div class="infos">
               <span class="span1">{{(data.tiaoJieZYHCD.zhuanYeTJZB||0) | percentFormat}}</span>
-              <span class="span2">全市</span>
+              <span class="span2">{{data.jiBenXX.jiGouLX!==''?'全区':'全市'}}</span>
               <span class="span3">{{(data.tiaoJieZYHCD.quanShiHZBL||0) | percentFormat}}</span>
             </div>
             <!-- <div class="chart"></div> -->
@@ -152,7 +156,7 @@
       <div class="right">
         <div class="title">调解资源占比</div>
         <!-- <div class="contents"></div> -->
-        <g2-mirrorInterval class="contents" :id="'mirrorInterval'" v-if="mirrorInterval.length>0" :height="376" :data='mirrorInterval.reverse()'></g2-mirrorInterval>
+        <g2-mirrorInterval class="contents" :id="'mirrorInterval'" v-if="mirrorInterval.length>0" :height="376" :data='mirrorInterval'></g2-mirrorInterval>
       </div>
     </div>
     <div class="block4 flexRow">
@@ -167,7 +171,7 @@
             <div class="sContents">
               <div class="infos">
                 <span class="span1">{{(data.tiaoJieCGL.zongHeTJCGL||0) | percentFormat}}</span>
-                <span class="span2">全市</span>
+                <span class="span2">{{data.jiBenXX.jiGouLX!==''?'全区':'全市'}}</span>
                 <span class="span3">{{(data.tiaoJieCGL.quanShiCGL||0) | percentFormat}}</span>
               </div>
             </div>
@@ -262,33 +266,63 @@
 
 <script>
 import { organizationDetails } from '@/api/api'
+import { defaultYear, pickerDisabledDate } from '@/utils/index'
 export default {
   name: 'organizationDetails',
   data () {
     return {
+      // 时间选择器的选中年份
+      date: defaultYear(),
+      // 时间选择器禁用日期
+      pickerDisabledDate: pickerDisabledDate,
       // 所有数据
       data: null,
-      // 调解资源占比数据
-      mirrorInterval: [],
+      // 受理案件数量的选中类别
       target1: 'tiaoJieY',
-      targetData1: [],
+      // 理赔金额排名的选中类别
       target2: 'anJian',
-      targetData2: [],
-      target3: 'anJian',
-      targetData3: []
+      // 调解时长排名的选中类别
+      target3: 'anJian'
+    }
+  },
+  computed: {
+    // 重点事件分布数据
+    zhongDianSJFB: function () {
+      return this.data.tiaoJieAJSL.zhongDianSJFB.slice(0, 4)
+    },
+    // 调解资源占比数据
+    mirrorInterval: function () {
+      let temp = []
+      this.data.tiaoJieZYPB.map(item => {
+        temp.push({name: item.name, value: item.value1, type: '案件数量'})
+        temp.push({name: item.name, value: item.value2, type: '调解员数量'})
+      })
+      return temp.reverse()
+    },
+    // 受理案件数量排名数据
+    targetData1: function () {
+      return this.data.tiaoJieAJSL.tiaoJieYSLAJSLPM
+    },
+    // 理赔金额排名数据
+    targetData2: function () {
+      return this.data.liPeiJEPM.anJianLPJEPM
+    },
+    // 调解时长排名数据
+    targetData3: function () {
+      return this.data.tiaoJieSCPM.anJianTJSCPM
     }
   },
   watch: {
+    date (newValue, oldValue) {
+      this.onLoad()
+    },
     target1 (newValue, oldValue) {
-      console.log(newValue)
       this.targetData1 = this.data.tiaoJieAJSL[`${newValue}SLAJSLPM`]
     },
     target2 (newValue, oldValue) {
-      console.log(newValue)
       this.targetData2 = this.data.liPeiJEPM[`${newValue}LPJEPM`]
     },
     target3 (newValue, oldValue) {
-      console.log(newValue)
       this.targetData3 = this.data.tiaoJieSCPM[`${newValue}TJSCPM`]
     }
   },
@@ -299,21 +333,15 @@ export default {
     onLoad () {
       organizationDetails({
         id: this.$route.params.id,
-        time: 2018,
-        organizationType: 'JUSTICEBUREAU'
+        time: this.date
       }).then(resList => {
-        this.$nextTick(() => {
-          // 合并三个接口的数据
+        if (resList[0].data.code && resList[1].data.code && resList[2].data.code) {
+          // 合并接口的数据
           this.data = Object.assign(resList[0].data.data, resList[1].data.data, resList[2].data.data)
-          // 处理调解资源占比数据
-          this.data.tiaoJieZYPB.map(item => {
-            this.mirrorInterval.push({name: item.name, value: item.value1, type: '案件数量'})
-            this.mirrorInterval.push({name: item.name, value: item.value2, type: '调解员数量'})
-          })
-          this.targetData1 = this.data.tiaoJieAJSL.tiaoJieYSLAJSLPM
-          this.targetData2 = this.data.liPeiJEPM.anJianLPJEPM
-          this.targetData3 = this.data.tiaoJieSCPM.anJianTJSCPM
-        })
+        } else {
+          this.data = null
+          this.$message({type: 'error', message: '数据请求失败'})
+        }
       }).catch(err => {
         console.log(err)
       })
@@ -334,7 +362,7 @@ export default {
       .name_info{
         height: 45px;
         display: block;
-        padding:40px 0 31px 0;
+        padding:40px 0 16px 0;
         .img{
           width: 45px;
           height: 45px;
@@ -360,6 +388,9 @@ export default {
           color:@gray;
           font-size: @fontMiddle;
           &:nth-child(1){
+            margin-bottom: 8px;
+          }
+          &:nth-child(2){
             margin-bottom: 8px;
           }
         }

@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-13 11:34:18
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-21 11:09:21
+ * @Last Modified time: 2018-08-23 15:22:32
  */
 
 <template>
@@ -60,7 +60,6 @@
       <div class="view-body">
         <div class="table">
           <el-table :data="tableInfo.tableData" stripe :default-sort="{prop: tableInfo.orderBy, order: tableInfo.orderRule}" @sort-change="handleSortChange" @row-click="handleRowClick">
-            <!-- id -->
             <el-table-column type="index" :index="indexMethod"  label="排名" width="60"></el-table-column>
             <el-table-column prop="name" sortable="custom" label="机构名称" show-overflow-tooltip></el-table-column>
             <el-table-column prop="yewusl" sortable="custom" :formatter="numFormatMethod" label="业务数量"></el-table-column>
@@ -87,7 +86,7 @@
 <script>
 import { organizationRankings } from '@/api/api'
 import { area, coordinationType, top } from '@/utils/dictionaryMapping'
-import { pickerOptions, defaultDataRage } from '@/utils/index'
+import { pickerOptions, defaultDateRage } from '@/utils/index'
 
 export default {
   name: 'organizationRankings',
@@ -111,7 +110,7 @@ export default {
       topList: top,
       /* ------ selector区域 end ------ */
       /* ------ content区域 begin ------ */
-      date: defaultDataRage(),
+      date: defaultDateRage(),
       pickerOptions: pickerOptions,
       tableInfo: {
         tableData: [],
@@ -126,22 +125,18 @@ export default {
   },
   watch: {
     type: function (newValue, oldValue) {
-      console.log(newValue, oldValue)
       this.tableInfo.currentPage = 1
       this.onLoad()
     },
     area: function (newValue, oldValue) {
-      console.log(newValue, oldValue)
       this.tableInfo.currentPage = 1
       this.onLoad()
     },
     top: function (newValue, oldValue) {
-      console.log(newValue, oldValue)
       this.tableInfo.currentPage = 1
       this.onLoad()
     },
     date: function (newValue, oldValue) {
-      console.log(newValue, oldValue)
       this.tableInfo.currentPage = 1
       this.onLoad()
     }
@@ -200,7 +195,11 @@ export default {
       this.onLoad()
     },
     handleRowClick (row, event, column) {
-      this.$router.push({path: `/organizationDetail/${row.id}`})
+      if (this.type === 'JUSTICEBUREAU' || this.type === 'JUSTICEOFFICE') {
+        this.$router.push({path: `/organizationDetail/${row.id}`})
+      } else {
+        this.$router.push({path: `/mediationDetail/${row.id}`})
+      }
     }
   }
 }

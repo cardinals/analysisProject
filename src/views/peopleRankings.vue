@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-13 11:34:06
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-21 11:12:26
+ * @Last Modified time: 2018-08-23 11:10:31
  */
 
 <template>
@@ -58,7 +58,6 @@
       <div class="view-body">
         <div class="table">
           <el-table :data="tableInfo.tableData" stripe :default-sort="{prop: tableInfo.orderBy, order: tableInfo.orderRule}" @sort-change="handleSortChange" @row-click="handleRowClick">
-            <!-- id -->
             <el-table-column type="index" :index="indexMethod"  label="排名" width="60"></el-table-column>
             <el-table-column prop="name" sortable="custom" label="姓名" width="100"></el-table-column>
             <el-table-column prop="shortname" sortable="custom" label="所属单位" show-overflow-tooltip></el-table-column>
@@ -83,7 +82,7 @@
 <script>
 import { peopleRankings } from '@/api/api'
 import { area, coordinationType, top } from '@/utils/dictionaryMapping'
-import { pickerOptions, defaultDataRage } from '@/utils/index'
+import { pickerOptions, defaultDateRage } from '@/utils/index'
 
 export default {
   name: 'peopleRankings',
@@ -107,7 +106,7 @@ export default {
       topList: top,
       /* ------ selector区域 end ------ */
       /* ------ content区域 begin ------ */
-      date: defaultDataRage(),
+      date: defaultDateRage(),
       pickerOptions: pickerOptions,
       tableInfo: {
         tableData: [],
@@ -122,22 +121,18 @@ export default {
   },
   watch: {
     type: function (newValue, oldValue) {
-      console.log(newValue, oldValue)
       this.tableInfo.currentPage = 1
       this.onLoad()
     },
     area: function (newValue, oldValue) {
-      console.log(newValue, oldValue)
       this.tableInfo.currentPage = 1
       this.onLoad()
     },
     top: function (newValue, oldValue) {
-      console.log(newValue, oldValue)
       this.tableInfo.currentPage = 1
       this.onLoad()
     },
     date: function (newValue, oldValue) {
-      console.log(newValue, oldValue)
       this.tableInfo.currentPage = 1
       this.onLoad()
     }

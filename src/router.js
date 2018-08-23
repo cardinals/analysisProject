@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-10 11:54:33
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-19 22:21:54
+ * @Last Modified time: 2018-08-23 11:08:53
  */
 import Vue from 'vue'
 import Router from 'vue-router'
@@ -31,6 +31,12 @@ export default new Router({
       name: '机构详情',
       // 机构详情模块
       component: () => import('./views/organizationDetail.vue')
+    },
+    {
+      path: '/mediationDetail/:id',
+      name: '调委会详情',
+      // 调委会详情模块
+      component: () => import('./views/mediationDetail.vue')
     },
     {
       path: '/peopleRankings',
