@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-19 22:10:56
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-22 09:27:43
+ * @Last Modified time: 2018-08-23 09:14:33
  * @Description: 基础饼图
  */
 <template>
@@ -48,21 +48,19 @@ export default {
         container: this.id,
         forceFit: true,
         height: this.height,
-        padding: 0
+        padding: 'auto'
       })
       this.chart.source(data, {
         name: {
-          sync: true,
           alias: '类型'
         },
         value: {
-          sync: true,
           alias: '数值'
         }
       })
       this.chart.guide().html({
         position: ['50%', '50%'],
-        html: `<div style="text-align: center;width: 10em;"><span style="color:#1890FF;font-size:16px">${data[0]['value']}</span></div>`,
+        html: `<div style="text-align: center;width: 10em;"><span style="color:#1890FF;font-size:16px">${data[0]['value'] < 1 ? String((data[0]['value'] * 100).toFixed(2)) + '%' : data[0]['value']}</span></div>`,
         alignX: 'middle',
         alignY: 'middle'
       })
@@ -71,8 +69,11 @@ export default {
         itemTpl: '<li><span style="background-color:{color};" class="g2-tooltip-marker"></span>{name}: {value}</li>'
       })
       this.chart.coord('theta', {
-        radius: 0.8,
-        innerRadius: 0.65
+        radius: 1,
+        innerRadius: 0.7
+      })
+      this.chart.legend('name', {
+        position: 'bottom-center'
       })
       this.chart.intervalStack().position('value').color('name', ['#1890FF', '#E9E9E9']).tooltip('name*value', function (name, value) {
         return {

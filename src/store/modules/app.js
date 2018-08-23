@@ -2,13 +2,13 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-13 08:53:14
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-21 08:46:15
+ * @Last Modified time: 2018-08-22 19:41:16
  */
 
 const state = {
   // 遮罩加载状态
   isShowLoading: false,
-  // 登录后的tocken
+  // 登录后的token
   token: ''
 }
 

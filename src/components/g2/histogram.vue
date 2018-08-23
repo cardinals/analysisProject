@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-19 22:10:56
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-22 14:32:10
+ * @Last Modified time: 2018-08-23 10:28:13
  * @Description: 基础柱状图
  */
 <template>
@@ -11,6 +11,7 @@
 
 <script>
 import G2 from '@antv/g2'
+import DataSet from '@antv/data-set'
 
 export default {
   props: {
@@ -65,6 +66,9 @@ export default {
             textBaseline: 'bottom'
           },
           position: 'end'
+        },
+        label: {
+          autoRotate: false
         }
       })
       this.chart.axis('value', {
@@ -79,22 +83,15 @@ export default {
           position: 'end'
         }
       })
-      this.chart.axis('name', {
-        tickLine: null,
-        label: {
-          autoRotate: false
-        },
-        title: {
-          autoRotate: false,
-          textStyle: {
-            fill: 'rgba(0, 0, 0, 0.7)',
-            fontSize: '14',
-            textBaseline: 'bottom'
-          },
-          position: 'end'
-        }
+      const ds = new DataSet()
+      const dv = ds.createView().source(data)
+      dv.transform({
+        type: 'bin.histogram',
+        field: 'name',
+        bins: 20,
+        as: ['name', 'value']
       })
-      this.chart.source(data, {
+      this.chart.source(dv, {
         name: {
           sync: true,
           alias: this.axisName.name
@@ -104,7 +101,7 @@ export default {
           alias: this.axisName.value
         }
       })
-      this.chart.interval().size(30).position('name*value')
+      this.chart.interval().position('name*value')
       this.chart.render()
     }
   },

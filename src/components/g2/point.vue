@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-19 22:18:59
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-22 16:23:04
+ * @Last Modified time: 2018-08-23 09:26:31
   * @Description: 基础散点图
  */
 <template>
@@ -48,12 +48,6 @@ export default {
       chart: null
     }
   },
-  watch: {
-    // 监听data，当发生变化时，重新绘制图表
-    data: function (val, oldVal) {
-      this.drawChart(val)
-    }
-  },
   methods: {
     drawChart: function (data) {
       // 如果图形存在则销毁后再创建
@@ -86,7 +80,9 @@ export default {
       const colorMap = Array.from(new Array(8), (v, i) => { return G2.Global.colors[i] })
       let point = this.chart.point().position('x*y').shape('circle')
       if (this.type === '散点图') {
+        // 关闭图例
         this.chart.legend('type', false)
+        // 配置 颜色 大小 tooltip
         point.color('x', function (val) {
           if (val >= 0.75) {
             return colorMap[0]
@@ -97,7 +93,9 @@ export default {
           }
         }).size('size').opacity(0.8).tooltip('type*x*y')
       } else if (this.type === '气泡图') {
+        // 打开图例
         this.chart.legend('type', {position: 'right-top'})
+        // 配置 颜色 大小 tooltip
         point.color('type', colorMap).size('size', [5, 20]).opacity(0.5).tooltip('type*x*y*size')
       }
       this.chart.render()

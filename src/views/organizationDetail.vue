@@ -2,11 +2,11 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-13 11:33:54
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-22 17:54:17
+ * @Last Modified time: 2018-08-23 10:53:23
  */
 
 <template>
-  <div class="organizationDetail_container">
+  <div class="organizationDetail_container" v-if="data">
     <div class="nav">
       <span class="span1">调解队伍分析</span>
       <span class="span1">>调解机构排名</span>
@@ -49,7 +49,7 @@
                 </div>
               </div>
               <!-- <div class="chart"></div> -->
-              <g2-pie class="chart" :id="'pie1'" :height="124"></g2-pie>
+              <g2-pie class="chart" :id="'pie1'" :height="124" :data="[{ name: '专业调解', value: data.tiaoJieDW.tiaoJieJGSL.jiGouHZB },{ name: '传统调解', value: 1-data.tiaoJieDW.tiaoJieJGSL.jiGouHZB }]"></g2-pie>
             </div>
           </div>
           <div class="atRight">
@@ -72,7 +72,7 @@
                 </div>
               </div>
               <!-- <div class="chart"></div> -->
-              <g2-pie class="chart" :id="'pie2'" :height="124" @itemClick="handlePieClick"></g2-pie>
+              <g2-pie class="chart" :id="'pie2'" :height="124" :data="[{ name: '专业调解', value: data.tiaoJieDW.tiaoJieYSL.tiaoJieYHZB },{ name: '传统调解', value: 1-data.tiaoJieDW.tiaoJieYSL.tiaoJieYHZB }]"></g2-pie>
             </div>
           </div>
         </div>
@@ -80,8 +80,8 @@
     </div>
     <div class="block2">
       <div class="title">调解案件数量
-        <div class="btn active">调解员</div>
-        <div class="btn">调委会</div>
+        <div class="btn" :class="{active: target1==='tiaoJieY'}" @click="target1='tiaoJieY'">调解员</div>
+        <div class="btn" :class="{active: target1==='tiaoWeiH'}" @click="target1='tiaoWeiH'">调委会</div>
       </div>
       <div class="contents flexRow">
         <div class="left">
@@ -92,11 +92,11 @@
           <div class="sContents">
             <div class="number">
               <span class="span1">{{(data.tiaoJieAJSL.zongLiang||0) | numFormat}}</span>
-              <span class="span2">万人比<i>?</i></span>
+              <span class="span2">万人比<el-tooltip content="万人比示意" placement="top-end"><i>?</i></el-tooltip></span>
               <span class="span3">{{(data.tiaoJieAJSL.wanRenB||0) | numFormat}}件/万人</span>
             </div>
             <div class="others">
-              <div class="once_block" v-if="data.tiaoJieAJSL.zhongDianSJFB&&(index<=3)" v-for="(item,index) in data.tiaoJieAJSL.zhongDianSJFB" :key="index">
+              <div class="once_block" v-if="index<=3" v-for="(item,index) in data.tiaoJieAJSL.zhongDianSJFB" :key="index">
                 <label>{{item.name}}</label>
                 <span>{{item.value | numFormat}}</span>
               </div>
@@ -108,7 +108,8 @@
             <div class="border"></div>
             <div class="dis">受理案件数量分布</div>
           </div>
-          <g2-interval :id="'interval'" :height="300" :data="data.tiaoJieAJSL.tiaoJieYSLAJSLFB" :axisName="{name:'案件数量', value:'调解员人数'}"></g2-interval>
+          <g2-histogram :id="'interval'" :height="300" :data="data.tiaoJieAJSL.tiaoJieYSLAJSLFB.map(item => {return {name: Number(item.name), value: Number(item.value)}})"
+            :axisName="{name:'案件数量', value:'调解员人数'}"></g2-histogram>
         </div>
         <div class="right">
           <div class="sTitle">
@@ -117,9 +118,10 @@
           </div>
           <div class="sContents">
             <div class="ul">
-              <div class="li" v-if="data.tiaoJieAJSL.tiaoJieYSLAJSLPM" v-for="(item,index) in data.tiaoJieAJSL.tiaoJieYSLAJSLPM" :key="index">
+              <div class="li" v-for="(item,index) in targetData1" :key="index">
                 <span class="sort">{{index+1}}</span>
-                <span class="name">{{item.name}}</span>
+                <el-tooltip v-if="target1!=='tiaoJieY'" :content="item.name" placement="top" effect="light"><span class="name">{{item.name}}</span></el-tooltip>
+                <span v-else class="name">{{item.name}}</span>
                 <span class="number">{{item.value | numFormat}}</span>
               </div>
             </div>
@@ -150,7 +152,7 @@
       <div class="right">
         <div class="title">调解资源占比</div>
         <!-- <div class="contents"></div> -->
-        <g2-mirrorInterval class="contents" :id="'mirrorInterval'" v-if="mirrorInterval.length>0" :height="376" :data='mirrorInterval'></g2-mirrorInterval>
+        <g2-mirrorInterval class="contents" :id="'mirrorInterval'" v-if="mirrorInterval.length>0" :height="376" :data='mirrorInterval.reverse()'></g2-mirrorInterval>
       </div>
     </div>
     <div class="block4 flexRow">
@@ -189,9 +191,9 @@
               <div class="border"></div>
               <div class="dis">累计理赔金额</div>
               <div class="btn_container">
-                <span class="btn active">案件</span>
-                <span class="btn">调委会</span>
-                <span class="btn">调解员</span>
+                <span class="btn" :class="{active: target2==='anJian'}" @click="target2='anJian'">案件</span>
+                <span class="btn" :class="{active: target2==='tiaoWeiH'}" @click="target2='tiaoWeiH'">调委会</span>
+                <span class="btn" :class="{active: target2==='tiaoJieY'}" @click="target2='tiaoJieY'">调解员</span>
               </div>
             </div>
             <div class="sContents">
@@ -207,9 +209,10 @@
               <div class="dis">理赔金额排名(万元)</div>
             </div>
             <div class="sContents">
-              <div class="li" v-for="(item,index) in data.liPeiJEPM.anJianLPJEPM" :key="index">
+              <div class="li" v-for="(item,index) in targetData2" :key="index">
                 <span class="sort">{{index+1}}</span>
-                <el-tooltip :content="item.name" placement="top" effect="light"><span class="name">{{item.name}}</span></el-tooltip>
+                <el-tooltip v-if="target2!=='tiaoJieY'" :content="item.name" placement="top" effect="light"><span class="name">{{item.name}}</span></el-tooltip>
+                <span v-else class="name">{{item.name}}</span>
                 <span class="number">{{(item.value/10000||0) | numFormat}}</span>
               </div>
             </div>
@@ -224,9 +227,9 @@
               <div class="border"></div>
               <div class="dis">平均调解时长</div>
               <div class="btn_container">
-                <span class="btn active">案件</span>
-                <span class="btn">调委会</span>
-                <span class="btn">调解员</span>
+                <span class="btn" :class="{active: target3==='anJian'}" @click="target3='anJian'">案件</span>
+                <span class="btn" :class="{active: target3==='tiaoWeiH'}" @click="target3='tiaoWeiH'">调委会</span>
+                <span class="btn" :class="{active: target3==='tiaoJieY'}" @click="target3='tiaoJieY'">调解员</span>
               </div>
             </div>
             <div class="sContents">
@@ -242,9 +245,10 @@
               <div class="dis">调解时长排名(天)</div>
             </div>
             <div class="sContents">
-              <div class="li" v-for="(item,index) in data.tiaoJieSCPM.anJianTJSCPM" :key="index">
+              <div class="li" v-for="(item,index) in targetData3" :key="index">
                 <span class="sort">{{index+1}}</span>
-                <span class="name">{{item.name}}</span>
+                <el-tooltip v-if="target3!=='tiaoJieY'" :content="item.name" placement="top" effect="light"><span class="name">{{item.name}}</span></el-tooltip>
+                <span v-else class="name">{{item.name}}</span>
                 <span class="number">{{(item.value||0) | numFormat}}</span>
               </div>
             </div>
@@ -265,7 +269,27 @@ export default {
       // 所有数据
       data: null,
       // 调解资源占比数据
-      mirrorInterval: []
+      mirrorInterval: [],
+      target1: 'tiaoJieY',
+      targetData1: [],
+      target2: 'anJian',
+      targetData2: [],
+      target3: 'anJian',
+      targetData3: []
+    }
+  },
+  watch: {
+    target1 (newValue, oldValue) {
+      console.log(newValue)
+      this.targetData1 = this.data.tiaoJieAJSL[`${newValue}SLAJSLPM`]
+    },
+    target2 (newValue, oldValue) {
+      console.log(newValue)
+      this.targetData2 = this.data.liPeiJEPM[`${newValue}LPJEPM`]
+    },
+    target3 (newValue, oldValue) {
+      console.log(newValue)
+      this.targetData3 = this.data.tiaoJieSCPM[`${newValue}TJSCPM`]
     }
   },
   created () {
@@ -286,13 +310,13 @@ export default {
             this.mirrorInterval.push({name: item.name, value: item.value1, type: '案件数量'})
             this.mirrorInterval.push({name: item.name, value: item.value2, type: '调解员数量'})
           })
+          this.targetData1 = this.data.tiaoJieAJSL.tiaoJieYSLAJSLPM
+          this.targetData2 = this.data.liPeiJEPM.anJianLPJEPM
+          this.targetData3 = this.data.tiaoJieSCPM.anJianTJSCPM
         })
       }).catch(err => {
         console.log(err)
       })
-    },
-    handlePieClick (data) {
-      console.log(data)
     }
   }
 }
@@ -449,14 +473,14 @@ export default {
       .others{
         height: 170px;
         .once_block{
-          width: calc(50% - 35px);
+          width: calc(50% - 28px);
           height: 66px;
           float: left;
           box-sizing: border-box;
           background: #D1E9FF;
           border:1px solid #98CEFF;
           border-radius: 4px;
-          padding:8px 12px;
+          padding:8px 10px;
           label{
             font-size: @fontMiddle;
             color:@gray;
@@ -468,7 +492,7 @@ export default {
             display: block;
           }
           &:nth-child(2n){
-            margin-left: 70px;
+            margin-left: 56px;
           }
           &:nth-child(1){
             margin-bottom: 38px;
@@ -516,7 +540,7 @@ export default {
             font-size: @fontMiddle;
             color:@gray;
             line-height: 33px;
-            width: 65%;
+            width: 150px;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
@@ -740,7 +764,7 @@ export default {
             font-size: @fontMiddle;
             color:@gray;
             line-height: 33px;
-            width: 80%;
+            width: 250px;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
@@ -856,7 +880,7 @@ export default {
             font-size: @fontMiddle;
             color:@gray;
             line-height: 33px;
-            width: 80%;
+            width: 250px;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;

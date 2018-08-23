@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-21 13:44:57
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-22 17:48:12
+ * @Last Modified time: 2018-08-23 10:53:03
  * @Description: 镜像分面柱图
  */
 
@@ -31,12 +31,6 @@ export default {
   data () {
     return {
       chart: null
-    }
-  },
-  watch: {
-    // 监  data，当发生变化时，重新绘制图表
-    data: function (val, oldVal) {
-      this.drawChart(val)
     }
   },
   methods: {
@@ -90,7 +84,7 @@ export default {
           // 隐藏 value 坐标轴
           view.axis('value', false)
           // 绘制 柱图
-          view.interval().size(20).position('name*value')
+          view.interval().size(25).position('name*value')
             .color('type', [ '#2FC25A', '#1890FF' ])
         }
       })
