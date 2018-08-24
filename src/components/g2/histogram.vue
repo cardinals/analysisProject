@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-19 22:10:56
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-23 10:28:13
+ * @Last Modified time: 2018-08-24 11:09:05
  * @Description: 基础柱状图
  */
 <template>
@@ -18,7 +18,8 @@ export default {
     data: {
       type: Array,
       default: () => [
-        { name: '暂无数据', value: 0 }
+        { name: 1, value: 0 },
+        { name: 2, value: 0 }
       ]
     },
     id: String,

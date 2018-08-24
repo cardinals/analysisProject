@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-19 22:18:56
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-19 22:21:06
+ * @Last Modified time: 2018-08-24 11:15:08
  * @Description: 基础折线图
  */
 <template>
@@ -16,9 +16,13 @@ export default {
   props: {
     data: {
       type: Array,
-      default: () => [
-        { name: '暂无数据', value: 0 }
-      ]
+      default: () => {
+        return [
+          { name: 'a', value: 0 },
+          { name: 'b', value: 1 },
+          { name: 'c', value: 2 }
+        ]
+      }
     },
     id: String
   },

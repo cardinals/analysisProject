@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-13 11:33:54
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-23 14:09:30
+ * @Last Modified time: 2018-08-24 10:44:04
  */
 
 <template>
@@ -52,7 +52,7 @@
                 </div>
               </div>
               <!-- <div class="chart"></div> -->
-              <g2-pie class="chart" :id="'pie1'" :height="124" :data="[{ name: '专业调解', value: data.tiaoJieDW.tiaoJieJGSL.jiGouHZB },{ name: '传统调解', value: 1-data.tiaoJieDW.tiaoJieJGSL.jiGouHZB }]"></g2-pie>
+              <g2-pie class="chart" :id="'pie1'" :height="124" :colorMap="['#1890FF', '#E9E9E9']" :data="[{ name: '专业调解', value: data.tiaoJieDW.tiaoJieJGSL.jiGouHZB },{ name: '传统调解', value: 1-data.tiaoJieDW.tiaoJieJGSL.jiGouHZB }]"></g2-pie>
             </div>
           </div>
           <div class="atRight">
@@ -75,7 +75,7 @@
                 </div>
               </div>
               <!-- <div class="chart"></div> -->
-              <g2-pie class="chart" :id="'pie2'" :height="124" :data="[{ name: '专业调解', value: data.tiaoJieDW.tiaoJieYSL.tiaoJieYHZB },{ name: '传统调解', value: 1-data.tiaoJieDW.tiaoJieYSL.tiaoJieYHZB }]"></g2-pie>
+              <g2-pie class="chart" :id="'pie2'" :height="124" :colorMap="['#1890FF', '#E9E9E9']" :data="[{ name: '专业调解', value: data.tiaoJieDW.tiaoJieYSL.tiaoJieYHZB },{ name: '传统调解', value: 1-data.tiaoJieDW.tiaoJieYSL.tiaoJieYHZB }]"></g2-pie>
             </div>
           </div>
         </div>
@@ -122,7 +122,7 @@
           </div>
           <div class="sContents">
             <div class="ul">
-              <div class="li" v-for="(item,index) in targetData1" :key="index">
+              <div class="li" v-for="(item,index) in targetData1" :key="index" @click="handleChangeRouter(item.id,target1)">
                 <span class="sort">{{index+1}}</span>
                 <el-tooltip v-if="target1!=='tiaoJieY'" :content="item.name" placement="top" effect="light"><span class="name">{{item.name}}</span></el-tooltip>
                 <span v-else class="name">{{item.name}}</span>
@@ -213,7 +213,7 @@
               <div class="dis">理赔金额排名(万元)</div>
             </div>
             <div class="sContents">
-              <div class="li" v-for="(item,index) in targetData2" :key="index">
+              <div class="li" v-for="(item,index) in targetData2" :key="index" @click="handleChangeRouter(item.id,target2)">
                 <span class="sort">{{index+1}}</span>
                 <el-tooltip v-if="target2!=='tiaoJieY'" :content="item.name" placement="top" effect="light"><span class="name">{{item.name}}</span></el-tooltip>
                 <span v-else class="name">{{item.name}}</span>
@@ -249,7 +249,7 @@
               <div class="dis">调解时长排名(天)</div>
             </div>
             <div class="sContents">
-              <div class="li" v-for="(item,index) in targetData3" :key="index">
+              <div class="li" v-for="(item,index) in targetData3" :key="index" @click="handleChangeRouter(item.id,target3)">
                 <span class="sort">{{index+1}}</span>
                 <el-tooltip v-if="target3!=='tiaoJieY'" :content="item.name" placement="top" effect="light"><span class="name">{{item.name}}</span></el-tooltip>
                 <span v-else class="name">{{item.name}}</span>
@@ -300,30 +300,37 @@ export default {
       return temp.reverse()
     },
     // 受理案件数量排名数据
-    targetData1: function () {
-      return this.data.tiaoJieAJSL.tiaoJieYSLAJSLPM
+    targetData1: {
+      get: function () {
+        let temp = this.data.tiaoJieAJSL[`${this.target1}SLAJSLPM`]
+        return temp.sort((item1, item2) => {
+          if (item1.value > item2.value) {
+            return -1
+          } else {
+            return 1
+          }
+        })
+      },
+      set: function (newValue) {}
     },
     // 理赔金额排名数据
-    targetData2: function () {
-      return this.data.liPeiJEPM.anJianLPJEPM
+    targetData2: {
+      get: function () {
+        return this.data.liPeiJEPM[`${this.target2}LPJEPM`]
+      },
+      set: function (newValue) {}
     },
     // 调解时长排名数据
-    targetData3: function () {
-      return this.data.tiaoJieSCPM.anJianTJSCPM
+    targetData3: {
+      get: function () {
+        return this.data.tiaoJieSCPM[`${this.target3}TJSCPM`]
+      },
+      set: function (newValue) {}
     }
   },
   watch: {
     date (newValue, oldValue) {
       this.onLoad()
-    },
-    target1 (newValue, oldValue) {
-      this.targetData1 = this.data.tiaoJieAJSL[`${newValue}SLAJSLPM`]
-    },
-    target2 (newValue, oldValue) {
-      this.targetData2 = this.data.liPeiJEPM[`${newValue}LPJEPM`]
-    },
-    target3 (newValue, oldValue) {
-      this.targetData3 = this.data.tiaoJieSCPM[`${newValue}TJSCPM`]
     }
   },
   created () {
@@ -345,6 +352,12 @@ export default {
       }).catch(err => {
         console.log(err)
       })
+    },
+    handleChangeRouter (id, type) {
+      console.log(id, type)
+      if (type === 'tiaoJieY') {
+        this.$router.push({path: `/peopleDetail/${id}`})
+      }
     }
   }
 }
@@ -553,6 +566,9 @@ export default {
         .li{
           height: 33px;
           display: block;
+          &:hover{
+            cursor: pointer;
+          }
           .sort{
             float: left;
             width: 19px;
@@ -777,6 +793,9 @@ export default {
         .li{
           height: 33px;
           display: block;
+          &:hover{
+            cursor: pointer;
+          }
           .sort{
             float: left;
             width: 19px;
@@ -893,6 +912,9 @@ export default {
         .li{
           height: 33px;
           display: block;
+          &:hover{
+            cursor: pointer;
+          }
           .sort{
             float: left;
             width: 19px;

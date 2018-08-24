@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-13 11:34:01
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-23 17:39:52
+ * @Last Modified time: 2018-08-24 14:23:07
  */
 
 <template>
@@ -20,17 +20,17 @@
         <div class="contents">
           <div class="atTop clearfix">
             <div class="headImg"></div>
-            <span class="name">石国清</span>
-            <span class="year">10年</span>
-            <span class="type">专业调节</span>
+            <span class="name">{{data.base.name}}</span>
+            <span class="year">{{data.base.gongzuonx}}年</span>
+            <span class="type">{{data.base.tiaoweihuisx}}</span>
           </div>
           <div class="atBottom">
-            <div class="once">工作职务：主任</div>
-            <el-tooltip content="普陀区长风新村街道长风二村第一居民第一居民民第一居民第一居第一居民" placement="top">
-              <div class="once">所属单位：普陀区长风新村街道长风二村第一居民第一居民民第一居民第一居第一居民</div>
-            </el-tooltip>
-            <div class="once">联系电话：133-1111-2222</div>
-            <div class="once">任职方式：兼职</div>
+            <div class="once">工作职务：{{data.base.zhiwu}}</div>
+            <!-- <el-tooltip :content="data.base.shortname" placement="top"> -->
+              <div class="once">{{data.base.shortname}}</div>
+            <!-- </el-tooltip> -->
+            <div class="once">联系电话：{{data.base.phone}}</div>
+            <div class="once">任职方式：{{data.base.renzhifs}}</div>
           </div>
         </div>
       </div>
@@ -41,65 +41,66 @@
             <div class="sTitle">
               <div class="border"></div>
               <span class="dis">综合能力指数</span>
-              <i class="icon"></i>
             </div>
-            <div class="number">6.4</div>
+            <div class="number">{{data.zonghenl}}</div>
             <div class="others">
               <div class="once">
                 <span class="span1">业务受理</span>
-                <span class="span2">8.1</span>
+                <span class="span2">{{data.yewusl}}</span>
               </div>
               <div class="border"></div>
               <div class="once">
                 <span class="span1">工作质量</span>
-                <span class="span2">8.1</span>
+                <span class="span2">{{data.gongzuozl}}</span>
               </div>
               <div class="border"></div>
               <div class="once">
                 <span class="span1">重大纠纷化解</span>
-                <span class="span2">8.1</span>
+                <span class="span2">{{data.zhongdajfhj}}</span>
               </div>
             </div>
           </div>
-          <div class="chart"></div>
+          <!-- <div class="chart"></div> -->
+          <g2-radar class="chart" :id="'radar'" :height="219" :data="radarData" :axisName="{a: '个人',b: '全市平均',c: '全区平均'}" :max="1"></g2-radar>
         </div>
       </div>
     </div>
     <div class="middle">
       <div class="title">业务专长</div>
       <div class="contents flexRow">
-        <div class="chart_round"></div>
+        <!-- <div class="chart_round"></div> -->
+        <g2-pie class="chart_round" :id="'pie'" :height="286" :data="data.business" :guide="{name: '受理案件总数', value:data.number[0].yewusl}" @itemClick="handlePieClick"></g2-pie>
         <div class="chart_other">
           <div class="sTitle">
-            <div class="dis">案件受理数量(其他)</div>
+            <div class="dis">案件受理数量({{clickBusinessType}})</div>
           </div>
           <div class="atMiddle">
-            <span class="number">165</span>
+            <span class="number">{{(businessTypeData.yewusl||0) | numFormat}}</span>
             <span class="danwei">件</span>
           </div>
           <div class="chart"></div>
-          <div class="atBottom">案件受理量优于99%的调解员</div>
+          <div class="atBottom">案件受理量优于{{(businessTypeData.yewuslzb||0) | percentFormat}}的调解员</div>
         </div>
         <div class="chart_other">
           <div class="sTitle">
-            <div class="dis">调解成功率(其他)</div>
+            <div class="dis">调解成功率({{clickBusinessType}})</div>
           </div>
           <div class="atMiddle">
-            <span class="number">98.5%</span>
+            <span class="number">{{(businessTypeData.tiaojiecgl||0) | percentFormat}}</span>
           </div>
           <div class="chart"></div>
-          <div class="atBottom">调解成功率优于99%的调解员</div>
+          <div class="atBottom">调解成功率优于{{(businessTypeData.cglzb||0) | percentFormat}}的调解员</div>
         </div>
         <div class="chart_other">
           <div class="sTitle">
-            <div class="dis">平均调解时长(其他)</div>
+            <div class="dis">平均调解时长({{clickBusinessType}})</div>
           </div>
           <div class="atMiddle">
-            <span class="number">1121</span>
+            <span class="number">{{(businessTypeData.pingjuntjzq||0) | numFormat}}</span>
             <span class="danwei">小时</span>
           </div>
           <div class="chart"></div>
-          <div class="atBottom">平均调解时长优于99%的调解员</div>
+          <div class="atBottom">平均调解时长优于{{(businessTypeData.tjzqzb||0) | percentFormat}}的调解员</div>
         </div>
       </div>
     </div>
@@ -112,7 +113,7 @@
         </div>
         <div class="table_container">
           <div class="atLeft">
-            <el-table :data="currentTableData" stripe class="table" @filter-change="handleFilterChange">
+            <el-table :data="currentTableData" stripe class="table" @filter-change="handleFilterChange" @row-click="handleRowClick">
               <el-table-column prop="name" label="案件名称" show-overflow-tooltip></el-table-column>
               <el-table-column prop="caselabel" label="案件类型" show-overflow-tooltip column-key="caselabel" :filters="caseType" :filter-multiple="false" :filtered-value="filteredCaselabel">
                 <template slot-scope="scope">
@@ -131,18 +132,18 @@
           </div>
           <div class="atRight flexColumn">
             <div class="once">
-              <span class="span1">调解成功（交通事故）</span>
-              <span class="span2">1716</span>
+              <span class="span1">调解成功（{{clickCaseType}}）</span>
+              <span class="span2">{{(caseTypeData.tiaojiecg||0) | numFormat}}</span>
               <span class="span3">件</span>
             </div>
             <div class="once">
-              <span class="span1">调解终止（交通事故）</span>
-              <span class="span2">33</span>
+              <span class="span1">调解终止（{{clickCaseType}}）</span>
+              <span class="span2">{{(caseTypeData.tiaojiezz||0) | numFormat}}</span>
               <span class="span3">件</span>
             </div>
             <div class="once">
-              <span class="span1">未结案（交通事故）</span>
-              <span class="span2">21</span>
+              <span class="span1">未结案（{{clickCaseType}}）</span>
+              <span class="span2">{{(caseTypeData.weijiean||0) | numFormat}}</span>
               <span class="span3">件</span>
             </div>
           </div>
@@ -156,7 +157,7 @@
 <script>
 import { peopleDetails } from '@/api/api'
 import { defaultYear, pickerDisabledDate } from '@/utils/index'
-import { caseType, caseStatus } from '@/utils/dictionaryMapping'
+import { caseStatus } from '@/utils/dictionaryMapping'
 
 export default {
   name: 'peopleDetails',
@@ -168,60 +169,66 @@ export default {
       pickerDisabledDate: pickerDisabledDate,
       // 所有数据
       data: null,
-      // 受理案件数量的选中类别
-      target1: 'tiaoJieY',
-      // 理赔金额排名的选中类别
-      target2: 'anJian',
-      // 调解时长排名的选中类别
-      target3: 'anJian',
       // 分页信息
       pageInfo: {
         pageSize: 4,
-        currentPage: 1
+        currentPage: 1,
+        total: 0
       },
-      clickBusinessType: '',
-      clickCaseType: '',
-      caseType: caseType.map(item => { return {text: item, value: item} }),
+      // 当前点击选中的业务专长（饼图）
+      clickBusinessType: '全部',
+      // 当前点击选中的案件类型（表格）
+      clickCaseType: '全部',
+      // 筛选项--案件状态（备选）
       caseStatus: caseStatus.map(item => { return {text: item, value: item} }),
+      // 筛选项--案件类型（已选中）
       filteredCaselabel: [],
+      // 筛选项--案件状态（已选中）
       filteredChulizt: []
     }
   },
   computed: {
+    radarData: function () {
+      const temp = this.data.indicator.map((item, index) => {
+        return { item: item.name, a: this.data.geren[index], b: this.data.quanshi[index], c: this.data.quanqu[index], max: item.max }
+      })
+      return temp
+    },
+    // 生成表格筛选项--案件类型（备选）
+    caseType: function () {
+      return this.data.business.map(item => { return {text: item.name, value: item.name} })
+    },
     // 计算当前筛选条件下的表格数据
-    filteredtableData: {
-      get: function () {
-        if (this.data.case) {
-          let temp = this.data.case
-          if (this.filteredCaselabel.length > 0) {
-            temp = temp.filter(item => { if (item.caselabel === this.filteredCaselabel[0]) { return true } })
-          }
-          if (this.filteredChulizt.length > 0) {
-            temp = temp.filter(item => { if (item.chulizt === this.filteredChulizt[0]) { return true } })
-          }
-          return temp
+    filteredtableData: function () {
+      if (this.data) {
+        let temp = this.data.case
+        if (this.filteredCaselabel.length > 0) {
+          temp = temp.filter(item => { if (item.caselabel === this.filteredCaselabel[0]) { return true } })
         }
-      },
-      set: function (newValue) {}
+        if (this.filteredChulizt.length > 0) {
+          temp = temp.filter(item => { if (item.chulizt === this.filteredChulizt[0]) { return true } })
+        }
+        return temp
+      }
     },
     // 计算当前分页的表格数据
-    currentTableData: {
-      get: function () {
-        const start = (this.pageInfo.currentPage - 1) * this.pageInfo.pageSize
-        const end = this.pageInfo.currentPage * this.pageInfo.pageSize
-        return this.filteredtableData.slice(start, end)
-      },
-      set: function (newValue) {}
+    currentTableData: function () {
+      const start = (this.pageInfo.currentPage - 1) * this.pageInfo.pageSize
+      const end = this.pageInfo.currentPage * this.pageInfo.pageSize
+      return this.filteredtableData.slice(start, end)
     },
-    // 计算当前分页的表格数据
-    'pageInfo.total': {
-      get: function () {
-        console.log(1)
-        return 20
-      },
-      set: function (newValue) {}
+    // 计算表格右侧统计数据
+    caseTypeData: function () {
+      let temp = {}
+      this.data.caselabel.map(item => { if (this.clickCaseType === item.caselabel) { temp = item } })
+      return temp
+    },
+    // 计算表格右侧统计数据
+    businessTypeData: function () {
+      let temp = {}
+      this.data.number.map(item => { if (this.clickBusinessType === item.name) { temp = item } })
+      return temp
     }
-
   },
   watch: {
     // 监听时间选择器数据变化
@@ -229,16 +236,8 @@ export default {
       this.onLoad()
     },
     // 监听当前筛选条件下的表格数据变化
-    // filteredtableData (newValue, oldValue) {
-    //   this.pageInfo.total = newValue.length
-    // },
-    // 监听业务专长中选中业务类型的变化
-    clickBusinessType (newValue, oldValue) {
-      console.log(newValue)
-    },
-    // 监听案件清单中选中案件类型变化
-    clickCaseType (newValue, oldValue) {
-      console.log(newValue)
+    filteredtableData (newValue, oldValue) {
+      this.pageInfo.total = newValue.length
     }
   },
   created () {
@@ -261,17 +260,30 @@ export default {
         console.log(err)
       })
     },
-    // 案件清单表格
+    // 处理表格筛选条件变化
     handleFilterChange (obj) {
+      this.pageInfo.currentPage = 1
       if (obj.chulizt) {
         this.filteredChulizt = obj.chulizt
       } else if (obj.caselabel) {
         this.filteredCaselabel = obj.caselabel
+        // 改变右侧统计数据的类型
+        obj.caselabel[0] ? this.clickCaseType = obj.caselabel[0] : this.clickCaseType = '全部'
+      }
+    },
+    // 处理表格行点击
+    handleRowClick (row, event, column) {
+      if (column.columnKey === 'caselabel') {
+        this.clickCaseType = row.caselabel
       }
     },
     // 处理当前页变化
     handleCurrentChange (currentPage) {
       this.pageInfo.currentPage = currentPage
+    },
+    // 处理饼图点击
+    handlePieClick (data) {
+      this.clickBusinessType = data.name
     }
   }
 }

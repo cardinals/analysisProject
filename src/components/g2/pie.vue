@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-19 22:10:56
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-23 09:14:33
+ * @Last Modified time: 2018-08-24 14:25:55
  * @Description: 基础饼图
  */
 <template>
@@ -25,6 +25,18 @@ export default {
     height: {
       type: Number,
       default: 300
+    },
+    colorMap: {
+      type: Array,
+      default: () => {
+        return G2.Global.colors
+      }
+    },
+    guide: {
+      type: Object,
+      default: () => {
+        return {}
+      }
     }
   },
   data () {
@@ -58,12 +70,21 @@ export default {
           alias: '数值'
         }
       })
-      this.chart.guide().html({
-        position: ['50%', '50%'],
-        html: `<div style="text-align: center;width: 10em;"><span style="color:#1890FF;font-size:16px">${data[0]['value'] < 1 ? String((data[0]['value'] * 100).toFixed(2)) + '%' : data[0]['value']}</span></div>`,
-        alignX: 'middle',
-        alignY: 'middle'
-      })
+      if (this.guide === {}) {
+        this.chart.guide().html({
+          position: ['50%', '50%'],
+          html: `<div style="text-align: center;width: 10em;"><span style="color:#1890FF;font-size:16px">${data[0]['value'] < 1 ? String((data[0]['value'] * 100).toFixed(2)) + '%' : data[0]['value']}</span></div>`,
+          alignX: 'middle',
+          alignY: 'middle'
+        })
+      } else {
+        this.chart.guide().html({
+          position: ['50%', '50%'],
+          html: `<div style="text-align: center;width: 10em;"><span style="color:rgba(0,0,0,0.65);font-size:12px">${this.guide.name}</span><br><span style="color:#000000;font-size:34px">${this.guide.value}</span></div>`,
+          alignX: 'middle',
+          alignY: 'middle'
+        })
+      }
       this.chart.tooltip({
         showTitle: false,
         itemTpl: '<li><span style="background-color:{color};" class="g2-tooltip-marker"></span>{name}: {value}</li>'
@@ -75,7 +96,10 @@ export default {
       this.chart.legend('name', {
         position: 'bottom-center'
       })
-      this.chart.intervalStack().position('value').color('name', ['#1890FF', '#E9E9E9']).tooltip('name*value', function (name, value) {
+      this.chart.intervalStack().position('value').color('name', this.colorMap).style({
+        lineWidth: 3,
+        stroke: '#fff'
+      }).tooltip('name*value', function (name, value) {
         return {
           name: name,
           value: value

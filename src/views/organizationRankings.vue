@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-13 11:34:18
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-23 15:22:32
+ * @Last Modified time: 2018-08-24 14:42:28
  */
 
 <template>
@@ -139,6 +139,9 @@ export default {
     date: function (newValue, oldValue) {
       this.tableInfo.currentPage = 1
       this.onLoad()
+    },
+    'tableInfo.orderRule': function (newValue, oldValue) {
+      console.log(newValue)
     }
   },
   created () {
@@ -152,7 +155,7 @@ export default {
         location: this.area,
         mediationtype: 'allinformation',
         obj: this.tableInfo.orderBy,
-        reorder: this.tableInfo.orderRule === 'descending' ? 'DESC' : 'ASC',
+        reorder: this.tableInfo.orderRule,
         pagesize: this.tableInfo.pageSize,
         currentpage: this.tableInfo.currentPage,
         download: 0,
@@ -190,8 +193,8 @@ export default {
       this.onLoad()
     },
     handleSortChange (sort) {
-      this.tableInfo.orderBy = sort.prop
-      this.tableInfo.orderRule = sort.order
+      this.tableInfo.orderBy = sort.prop === null ? 'yewusl' : sort.prop
+      this.tableInfo.orderRule = sort.order === 'ascending' ? 'ASC' : 'DESC'
       this.onLoad()
     },
     handleRowClick (row, event, column) {
