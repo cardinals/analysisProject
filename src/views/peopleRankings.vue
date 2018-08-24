@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-13 11:34:06
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-24 14:43:56
+ * @Last Modified time: 2018-08-24 15:31:52
  */
 
 <template>
@@ -146,7 +146,7 @@ export default {
       // 调用api接口，并且提供了两个参数
       peopleRankings({
         location: this.area,
-        mediationtype: 'allinformation',
+        mediationtype: this.type,
         obj: this.tableInfo.orderBy,
         reorder: this.tableInfo.orderRule,
         pagesize: this.tableInfo.pageSize,
@@ -154,7 +154,6 @@ export default {
         download: 0,
         startdate: this.date[0],
         enddate: this.date[1],
-        label: this.type,
         limit: this.top,
         keyword: this.search
       }).then(res => {

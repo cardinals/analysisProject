@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-19 22:10:56
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-24 11:09:05
+ * @Last Modified time: 2018-08-24 16:43:54
  * @Description: 基础柱状图
  */
 <template>

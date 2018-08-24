@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-13 11:33:54
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-24 10:44:04
+ * @Last Modified time: 2018-08-24 17:04:22
  */
 
 <template>
@@ -112,8 +112,7 @@
             <div class="border"></div>
             <div class="dis">受理案件数量分布</div>
           </div>
-          <g2-histogram :id="'interval'" :height="300" :data="data.tiaoJieAJSL.tiaoJieYSLAJSLFB.map(item => {return {name: Number(item.name), value: Number(item.value)}})"
-            :axisName="{name:'案件数量', value:'调解员人数'}"></g2-histogram>
+          <g2-histogram :id="'interval'" :height="300" :data="targetData1_1" :axisName="histogramAxisName"></g2-histogram>
         </div>
         <div class="right">
           <div class="sTitle">
@@ -122,7 +121,7 @@
           </div>
           <div class="sContents">
             <div class="ul">
-              <div class="li" v-for="(item,index) in targetData1" :key="index" @click="handleChangeRouter(item.id,target1)">
+              <div class="li" v-for="(item,index) in targetData1_2" :key="index" @click="handleChangeRouter(item.id,target1)">
                 <span class="sort">{{index+1}}</span>
                 <el-tooltip v-if="target1!=='tiaoJieY'" :content="item.name" placement="top" effect="light"><span class="name">{{item.name}}</span></el-tooltip>
                 <span v-else class="name">{{item.name}}</span>
@@ -299,8 +298,29 @@ export default {
       })
       return temp.reverse()
     },
+    // 受理案件数量分布--坐标轴名称
+    histogramAxisName: {
+      get: function () {
+        let temp = {}
+        if (this.target1 === 'tiaoJieY') {
+          temp = {name: '案件数量', value: '调解员人数'}
+        } else {
+          temp = {name: '案件数量', value: '调委会数量'}
+        }
+        return temp
+      },
+      set: function (newValue) {}
+    },
+    // 受理案件数量分布--数据
+    targetData1_1: {
+      get: function () {
+        let temp = this.data.tiaoJieAJSL[`${this.target1}SLAJSLFB`]
+        return temp.map(item => { return {name: Number(item), value: Number(item)} })
+      },
+      set: function (newValue) {}
+    },
     // 受理案件数量排名数据
-    targetData1: {
+    targetData1_2: {
       get: function () {
         let temp = this.data.tiaoJieAJSL[`${this.target1}SLAJSLPM`]
         return temp.sort((item1, item2) => {

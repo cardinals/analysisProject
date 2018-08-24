@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-10 11:54:23
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-21 08:19:26
+ * @Last Modified time: 2018-08-24 17:48:44
  */
 <template>
   <div id="app" v-loading="$store.state.app.isShowLoading">
@@ -26,8 +26,6 @@ export default {
     height: 100%;
     width: 100%;
     margin: 0;
-    min-width: 1366px;
-    overflow-x: auto;
   }
   #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;

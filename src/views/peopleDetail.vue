@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-13 11:34:01
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-24 14:23:07
+ * @Last Modified time: 2018-08-24 15:30:09
  */
 
 <template>
@@ -121,8 +121,8 @@
                 </template>
               </el-table-column>
               <el-table-column prop="chulizt" label="处理状态" column-key="chulizt" :filters="caseStatus" :filter-multiple="false" :filtered-value="filteredChulizt"></el-table-column>
-              <el-table-column prop="dateaccepted" sortable label="受理时间"></el-table-column>
-              <el-table-column prop="datefinished" sortable label="结案时间"></el-table-column>
+              <el-table-column prop="dateaccepted" label="受理时间"></el-table-column>
+              <el-table-column prop="datefinished" label="结案时间"></el-table-column>
             </el-table>
             <div class="page">
               <el-pagination @current-change="handleCurrentChange" :current-page="pageInfo.currentPage"

@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-19 22:10:56
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-24 14:25:55
+ * @Last Modified time: 2018-08-24 15:08:17
  * @Description: 基础饼图
  */
 <template>
@@ -70,17 +70,17 @@ export default {
           alias: '数值'
         }
       })
-      if (this.guide === {}) {
+      if (this.guide.name) {
         this.chart.guide().html({
           position: ['50%', '50%'],
-          html: `<div style="text-align: center;width: 10em;"><span style="color:#1890FF;font-size:16px">${data[0]['value'] < 1 ? String((data[0]['value'] * 100).toFixed(2)) + '%' : data[0]['value']}</span></div>`,
+          html: `<div style="text-align: center;width: 10em;"><span style="color:rgba(0,0,0,0.65);font-size:12px">${this.guide.name}</span><br><span style="color:#000000;font-size:34px">${this.guide.value}</span></div>`,
           alignX: 'middle',
           alignY: 'middle'
         })
       } else {
         this.chart.guide().html({
           position: ['50%', '50%'],
-          html: `<div style="text-align: center;width: 10em;"><span style="color:rgba(0,0,0,0.65);font-size:12px">${this.guide.name}</span><br><span style="color:#000000;font-size:34px">${this.guide.value}</span></div>`,
+          html: `<div style="text-align: center;width: 10em;"><span style="color:#1890FF;font-size:16px">${data[0]['value'] < 1 ? String((data[0]['value'] * 100).toFixed(2)) + '%' : data[0]['value']}</span></div>`,
           alignX: 'middle',
           alignY: 'middle'
         })

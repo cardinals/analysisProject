@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-13 11:34:18
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-24 14:42:28
+ * @Last Modified time: 2018-08-24 18:17:09
  */
 
 <template>
@@ -64,9 +64,9 @@
             <el-table-column prop="name" sortable="custom" label="机构名称" show-overflow-tooltip></el-table-column>
             <el-table-column prop="yewusl" sortable="custom" :formatter="numFormatMethod" label="业务数量"></el-table-column>
             <el-table-column prop="tiaojieaj" sortable="custom" :formatter="numFormatMethod" label="调解案件数"></el-table-column>
-            <el-table-column prop="shangbaosl" sortable="custom" :formatter="numFormatMethod" label="调解案例上报数"></el-table-column>
+            <el-table-column prop="shangbaosl" sortable="custom" :formatter="numFormatMethod" label="案例上报数"></el-table-column>
             <el-table-column prop="paichafk" sortable="custom" :formatter="numFormatMethod" label="排查反馈数"></el-table-column>
-            <el-table-column prop="zixunrz" sortable="custom" :formatter="numFormatMethod" label="咨询管理日志数"></el-table-column>
+            <el-table-column prop="zixunrz" sortable="custom" :formatter="numFormatMethod" label="咨询管理数"></el-table-column>
             <el-table-column prop="chunjufw" sortable="custom" :formatter="numFormatMethod" label="村居服务数"></el-table-column>
             <el-table-column prop="faxuanhd" sortable="custom" :formatter="numFormatMethod" label="法宣活动数"></el-table-column>
             <el-table-column prop="renyuansl" sortable="custom" :formatter="numFormatMethod" label="登录人次"></el-table-column>
