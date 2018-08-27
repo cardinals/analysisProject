@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-10 11:54:18
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-24 18:18:34
+ * @Last Modified time: 2018-08-27 11:23:16
  */
 <template>
   <!-- 外层容器，当子元素中包含 <el-header> 或 <el-footer> 时，全部子元素会垂直上下排列，否则会水平左右排列。 -->
@@ -26,7 +26,14 @@
 export default {
   name: 'container',
   created () {
-    this.$store.dispatch({ type: 'app/setToken', amount: 123 })
+    // 保存url search 中的token
+    const search = window.location.search
+    if (search) {
+      const token = search.split('?token=')[1]
+      if (token) {
+        this.$store.dispatch({ type: 'app/setToken', amount: token.split('/')[0] })
+      }
+    }
   }
 }
 </script>

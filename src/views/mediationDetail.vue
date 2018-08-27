@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-24 14:57:25
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-24 17:31:41
+ * @Last Modified time: 2018-08-27 11:31:05
  */
 
 <template>
@@ -51,19 +51,23 @@
                   </div>
                 </div>
               </div>
-              <g2-pie class="chart" :id="'pie2'" :height="124" :colorMap="['#1890FF', '#E9E9E9']" :data="[{ name: '高中及以上', value: data.tiaoJieDW.xueLiFB },{ name: '高中以下', value: 1-data.tiaoJieDW.xueLiFB }]"></g2-pie>
+              <g2-pie class="chart" :id="'pie1'" :height="124" :colorMap="['#1890FF', '#E9E9E9']" :data="[{ name: '高中及以上', value: data.tiaoJieDW.xueLiFB },{ name: '高中以下', value: 1-data.tiaoJieDW.xueLiFB }]"></g2-pie>
             </div>
           </div>
           <div class="atRight">
-            <!-- 柱状图 -->
+            <div class="sTitle">
+              <div class="border"></div>
+              <div class="dis">年龄分布</div>
+            </div>
+            <g2-histogram :id="'interval'" :height="124" :data="data.tiaoJieDW.nianLingFB.map(item => { return {name: Number(item), value: Number(item)} })"
+               :axisName="{name: '年龄', value: '数量'}"></g2-histogram>
           </div>
         </div>
       </div>
     </div>
     <div class="block2">
       <div class="title">案件受理
-        <div class="btn" :class="{active: target1==='tiaoJieY'}" @click="target1='tiaoJieY'">调解员</div>
-        <div class="btn" :class="{active: target1==='tiaoWeiH'}" @click="target1='tiaoWeiH'">调委会</div>
+        <!-- <div class="btn" :class="{active: target1==='tiaoJieY'}" @click="target1='tiaoJieY'">调解员</div> -->
       </div>
       <div class="contents flexRow">
         <div class="left">
@@ -91,6 +95,7 @@
             <div class="dis">受理案件数量分布</div>
           </div>
           <!-- 饼图 -->
+          <g2-pie :id="'pie2'" :height="258" :data="data.anJianSL.shouLiAJLX" :guide="{name: '受理案件总数', value:data.anJianSL.zongLiang}"></g2-pie>
         </div>
         <div class="right">
           <div class="sTitle">
@@ -101,8 +106,7 @@
             <div class="ul">
               <div class="li" v-if="targetData1.length>0" v-for="(item,index) in targetData1" :key="index" @click="handleChangeRouter(item.id,target1)">
                 <span class="sort">{{index+1}}</span>
-                <el-tooltip v-if="target1!=='tiaoJieY'" :content="item.name" placement="top" effect="light"><span class="name">{{item.name}}</span></el-tooltip>
-                <span v-else class="name">{{item.name}}</span>
+                <span class="name">{{item.name}}</span>
                 <span class="number">{{item.value | numFormat}}</span>
               </div>
             </div>
@@ -118,6 +122,10 @@
             <div class="sTitle">
               <div class="border"></div>
               <div class="dis">综合调解成功率</div>
+              <div class="btn_container">
+                <span class="btn" :class="{active: target2==='leiXing'}" @click="target2='leiXing'">类型</span>
+                <span class="btn" :class="{active: target2==='tiaoJieY'}" @click="target2='tiaoJieY'">调解员</span>
+              </div>
             </div>
             <div class="sContents">
               <div class="infos">
@@ -130,8 +138,13 @@
               <div class="border"></div>
               <div class="dis">案件成功率分布</div>
             </div>
-            <!-- <div class="sContents"></div> -->
-            <!-- 列表 -->
+            <div class="sContents">
+              <div class="li" v-if="targetData2.length>0" v-for="(item,index) in targetData2" :key="index" @click="handleChangeRouter(item.id,target2)">
+                <span class="sort">{{index+1}}</span>
+                <span class="name">{{item.name}}</span>
+                <span class="number">{{(item.value||0) | percentFormat}}</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -143,8 +156,8 @@
               <div class="border"></div>
               <div class="dis">累计理赔金额</div>
               <div class="btn_container">
-                <span class="btn" :class="{active: target2==='anJian'}" @click="target2='anJian'">案件</span>
-                <span class="btn" :class="{active: target2==='tiaoJieY'}" @click="target2='tiaoJieY'">调解员</span>
+                <span class="btn" :class="{active: target3==='anJian'}" @click="target3='anJian'">案件</span>
+                <span class="btn" :class="{active: target3==='tiaoJieY'}" @click="target3='tiaoJieY'">调解员</span>
               </div>
             </div>
             <div class="sContents">
@@ -160,9 +173,9 @@
               <div class="dis">理赔金额排名(万元)</div>
             </div>
             <div class="sContents">
-              <div class="li" v-if="targetData2.length>0" v-for="(item,index) in targetData2" :key="index" @click="handleChangeRouter(item.id,target2)">
+              <div class="li" v-if="targetData3.length>0" v-for="(item,index) in targetData3" :key="index" @click="handleChangeRouter(item.id,target3)">
                 <span class="sort">{{index+1}}</span>
-                <el-tooltip v-if="target2!=='tiaoJieY'" :content="item.name" placement="top" effect="light"><span class="name">{{item.name}}</span></el-tooltip>
+                <el-tooltip v-if="target3!=='tiaoJieY'" :content="item.name" placement="top" effect="light"><span class="name">{{item.name}}</span></el-tooltip>
                 <span v-else class="name">{{item.name}}</span>
                 <span class="number">{{(item.value/10000||0) | numFormat}}</span>
               </div>
@@ -178,8 +191,8 @@
               <div class="border"></div>
               <div class="dis">平均调解时长</div>
               <div class="btn_container">
-                <span class="btn" :class="{active: target3==='anJian'}" @click="target3='anJian'">案件</span>
-                <span class="btn" :class="{active: target3==='tiaoJieY'}" @click="target3='tiaoJieY'">调解员</span>
+                <span class="btn" :class="{active: target4==='anJian'}" @click="target4='anJian'">案件</span>
+                <span class="btn" :class="{active: target4==='tiaoJieY'}" @click="target4='tiaoJieY'">调解员</span>
               </div>
             </div>
             <div class="sContents">
@@ -195,9 +208,9 @@
               <div class="dis">调解时长排名(天)</div>
             </div>
             <div class="sContents">
-              <div class="li" v-if="targetData3.length>0" v-for="(item,index) in targetData3" :key="index" @click="handleChangeRouter(item.id,target3)">
+              <div class="li" v-if="targetData4.length>0" v-for="(item,index) in targetData4" :key="index" @click="handleChangeRouter(item.id,target4)">
                 <span class="sort">{{index+1}}</span>
-                <el-tooltip v-if="target3!=='tiaoJieY'" :content="item.name" placement="top" effect="light"><span class="name">{{item.name}}</span></el-tooltip>
+                <el-tooltip v-if="target4!=='tiaoJieY'" :content="item.name" placement="top" effect="light"><span class="name">{{item.name}}</span></el-tooltip>
                 <span v-else class="name">{{item.name}}</span>
                 <span class="number">{{(item.value||0) | numFormat}}</span>
               </div>
@@ -225,10 +238,12 @@ export default {
       data: null,
       // 受理案件数量的选中类别
       target1: 'tiaoJieY',
+      // 调解成功率分布的选中类别
+      target2: 'leiXing',
       // 理赔金额排名的选中类别
-      target2: 'anJian',
+      target3: 'anJian',
       // 调解时长排名的选中类别
-      target3: 'anJian'
+      target4: 'anJian'
     }
   },
   computed: {
@@ -236,7 +251,7 @@ export default {
     zhongDianSJFB: function () {
       return this.data.anJianSL.zhongDianSJFB.slice(0, 4)
     },
-    // 受理案件数量排名数据
+    // 调解成功率分布数据
     targetData1: {
       get: function () {
         let temp = this.data.anJianSL[`${this.target1}SLAJSLPM`]
@@ -250,17 +265,31 @@ export default {
       },
       set: function (newValue) {}
     },
-    // 理赔金额排名数据
+    // 受理案件数量排名数据
     targetData2: {
       get: function () {
-        return this.data.liPeiJEPM[`${this.target2}LPJEPM`]
+        let temp = this.data.tiaoJieCGL[`${this.target2}TJZZLPM`]
+        return temp.sort((item1, item2) => {
+          if (item1.value > item2.value) {
+            return -1
+          } else {
+            return 1
+          }
+        })
+      },
+      set: function (newValue) {}
+    },
+    // 理赔金额排名数据
+    targetData3: {
+      get: function () {
+        return this.data.liPeiJEPM[`${this.target3}LPJEPM`]
       },
       set: function (newValue) {}
     },
     // 调解时长排名数据
-    targetData3: {
+    targetData4: {
       get: function () {
-        return this.data.tiaoJieSCPM[`${this.target3}TJSCPM`]
+        return this.data.tiaoJieSCPM[`${this.target4}TJSCPM`]
       },
       set: function (newValue) {}
     }
@@ -566,6 +595,33 @@ export default {
     .left{
       background:@block;
       flex: 1;
+      .sTitle{
+        position: relative;
+        .btn_container{
+          position: absolute;
+          right: 0;
+          .btn{
+            padding:8px 10px;
+            border:1px solid #D9D9D9;
+            border-left: 0;
+            font-size: @fontMiddle;
+            cursor: pointer;
+            &:nth-child(1){
+              border-left: 1px solid #D9D9D9;
+              border-top-left-radius: 4px;
+              border-bottom-left-radius: 4px;
+            }
+            &:nth-child(3){
+              border-top-right-radius: 4px;
+              border-bottom-right-radius: 4px;
+            }
+          }
+          .active{
+            border:1px solid #389EFB!important;
+            color:#389EFB;
+          }
+        }
+      }
       .contents{
         padding-top:20px;
         padding-bottom: 26px;
@@ -608,6 +664,64 @@ export default {
         height: 280px;
         box-sizing: border-box;
         padding-top: 18px;
+        .sContents{
+          padding-top: 9px;
+        }
+        .li{
+          height: 33px;
+          display: block;
+          &:hover{
+            cursor: pointer;
+          }
+          .sort{
+            float: left;
+            width: 19px;
+            height: 19px;
+            font-size: @fontMiddle;
+            color:#314659;
+            background: #F0F2F5;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 19px;
+            margin:7px 22px 7px 0;
+          }
+          .name{
+            float: left;
+            height: 33px;
+            font-size: @fontMiddle;
+            color:@gray;
+            line-height: 33px;
+            width: 250px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
+          .number{
+            float: right;
+            height: 33px;
+            font-size: @fontMiddle;
+            color:@gray;
+            line-height: 33px;
+          }
+          &:nth-child(1){
+            .sort{
+              background: #314659;
+              color:white;
+            }
+          }
+          &:nth-child(2){
+            .sort{
+              background: #314659;
+              color:white;
+            }
+          }
+          &:nth-child(3){
+            .sort{
+              background: #314659;
+              color:white;
+            }
+          }
+        }
       }
     }
     .middle{

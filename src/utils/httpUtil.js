@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-14 09:28:41
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-22 19:34:20
+ * @Last Modified time: 2018-08-27 11:57:45
  */
 
 import axios from 'axios'
@@ -39,6 +39,10 @@ axios.interceptors.response.use(
   response => {
     // 关闭加载遮罩
     store.dispatch({ type: 'app/changeLoadingStatus', amount: false })
+    // 未登录状态跳转登录页
+    if (response.data.code === 10) {
+      window.location.href = response.data.data
+    }
     return Promise.resolve(response)
   },
   error => {

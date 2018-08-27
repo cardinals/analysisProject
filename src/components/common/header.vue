@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-10 16:26:00
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-21 11:35:36
+ * @Last Modified time: 2018-08-27 11:18:51
  */
 <template>
   <div class="header">
@@ -11,14 +11,14 @@
     </div>
     <div class="right">
       <i class="icon hamburger" :class="{ 'collapselogo': !$store.state.aside.isCollapseAside, 'spreadlogo': $store.state.aside.isCollapseAside }" @click="handleCollapseChange()"></i>
-      <el-dropdown class="avatar-container" trigger="click">
+      <el-dropdown class="avatar-container" trigger="click" @command="handleCommand">
         <div class="avatar-wrapper">
           <i class="icon user-logo"></i>
           <span class="user-name">用户名</span>
           <i class="el-icon-caret-bottom"></i>
         </div>
         <el-dropdown-menu class="user-dropdown" slot="dropdown">
-          <el-dropdown-item>
+          <el-dropdown-item command="logout">
             <span style="display:block;">退出</span>
           </el-dropdown-item>
         </el-dropdown-menu>
@@ -28,6 +28,7 @@
 </template>
 
 <script>
+import { logout } from '@/api/api'
 export default {
   components: {
   },
@@ -38,6 +39,20 @@ export default {
   methods: {
     handleCollapseChange () {
       this.$store.dispatch({ type: 'aside/changeAsideCollapseStatus', amount: !this.$store.state.aside.isCollapseAside })
+    },
+    handleCommand (command) {
+      if (command === 'logout') {
+        logout().then(res => {
+          if (res.code === 1) {
+            // 清空本地token
+            this.$store.dispatch({ type: 'app/clearToken', amount: '' })
+            // 跳转cas登录页
+            location.href = res.data
+          }
+        }).catch(error => {
+          console.log(error)
+        })
+      }
     }
   }
 }

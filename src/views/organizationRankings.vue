@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-13 11:34:18
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-24 18:17:09
+ * @Last Modified time: 2018-08-27 11:25:41
  */
 
 <template>
@@ -139,9 +139,6 @@ export default {
     date: function (newValue, oldValue) {
       this.tableInfo.currentPage = 1
       this.onLoad()
-    },
-    'tableInfo.orderRule': function (newValue, oldValue) {
-      console.log(newValue)
     }
   },
   created () {

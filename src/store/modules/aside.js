@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-13 08:52:29
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-21 08:38:50
+ * @Last Modified time: 2018-08-27 11:39:18
  */
 
 const state = {
@@ -18,11 +18,6 @@ const state = {
       disable: true
     },
     {
-      index: 'businessNum',
-      label: '业务数量',
-      disable: true
-    },
-    {
       index: 'none',
       label: '调解队伍分析',
       disable: false,
@@ -35,11 +30,6 @@ const state = {
         label: '调解人员排名',
         disable: false
       }]
-    },
-    {
-      index: 'workquality',
-      label: '工作质量分析',
-      disable: true
     }
   ]
 }

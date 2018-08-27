@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-19 22:10:56
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-24 15:08:17
+ * @Last Modified time: 2018-08-27 10:15:59
  * @Description: 基础饼图
  */
 <template>
@@ -80,7 +80,7 @@ export default {
       } else {
         this.chart.guide().html({
           position: ['50%', '50%'],
-          html: `<div style="text-align: center;width: 10em;"><span style="color:#1890FF;font-size:16px">${data[0]['value'] < 1 ? String((data[0]['value'] * 100).toFixed(2)) + '%' : data[0]['value']}</span></div>`,
+          html: `<div style="text-align: center;width: 10em;"><span style="color:#1890FF;font-size:16px">${data[0]['value'] <= 1 ? String((data[0]['value'] * 100).toFixed(1)) + '%' : data[0]['value']}</span></div>`,
           alignX: 'middle',
           alignY: 'middle'
         })

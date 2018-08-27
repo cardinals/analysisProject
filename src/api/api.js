@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-13 10:30:00
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-22 17:37:13
+ * @Last Modified time: 2018-08-27 10:58:55
  */
 
 //  引入httpUtil
@@ -11,11 +11,11 @@ import { get, post, all } from '@/utils/httpUtil'
 // 基本路径
 const baseUrl = '/peopleMediate/V1.1.0'
 
-// 登录状态接口
-export const status = (params) => get(`${baseUrl}/loginStatus`, params)
+// 退出登录
+export const logout = (params) => get(`${baseUrl}/logout`, params)
 
-// 登录接口
-export const login = (params) => get(`${baseUrl}/login`, params)
+// 获取模块权限
+export const fetchPermission = (params) => get(`${baseUrl}/permission`, params)
 
 // 机构排名接口
 export const organizationRankings = (params) => post(`${baseUrl}/institutionalRankings`, params)

@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-19 22:10:56
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-24 16:43:54
+ * @Last Modified time: 2018-08-27 11:36:19
  * @Description: 基础柱状图
  */
 <template>
@@ -55,7 +55,7 @@ export default {
         container: this.id,
         forceFit: true,
         height: this.height,
-        padding: [50, 100, 80, 100]
+        padding: 'auto'
       })
       this.chart.axis('name', {
         tickLine: null,
@@ -89,7 +89,7 @@ export default {
       dv.transform({
         type: 'bin.histogram',
         field: 'name',
-        bins: 20,
+        bins: 10,
         as: ['name', 'value']
       })
       this.chart.source(dv, {

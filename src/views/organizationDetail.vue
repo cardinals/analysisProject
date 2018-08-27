@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-13 11:33:54
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-24 17:04:22
+ * @Last Modified time: 2018-08-27 11:33:53
  */
 
 <template>
@@ -112,7 +112,7 @@
             <div class="border"></div>
             <div class="dis">受理案件数量分布</div>
           </div>
-          <g2-histogram :id="'interval'" :height="300" :data="targetData1_1" :axisName="histogramAxisName"></g2-histogram>
+          <g2-histogram :id="'interval'" :height="280" :data="targetData1_1" :axisName="histogramAxisName"></g2-histogram>
         </div>
         <div class="right">
           <div class="sTitle">

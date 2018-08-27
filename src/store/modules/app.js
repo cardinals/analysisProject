@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-13 08:53:14
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-22 19:41:16
+ * @Last Modified time: 2018-08-27 11:07:26
  */
 
 const state = {
@@ -23,6 +23,12 @@ const actions = {
     commit('setToken', obj.amount)
     // 将token写入本地存储
     window.localStorage.setItem('token', obj.amount)
+  },
+  // 清空token
+  clearToken  ({ commit }, obj) {
+    commit('setToken', obj.amount)
+    // 将token写入本地存储
+    window.localStorage.removeItem('token')
   }
 }
 
@@ -32,7 +38,7 @@ const mutations = {
     state.isShowLoading = status
   },
   setToken (state, status) {
-    state.setToken = status
+    state.token = status
   }
 }
 
