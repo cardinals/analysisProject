@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-13 11:34:01
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-24 15:30:09
+ * @Last Modified time: 2018-08-27 15:23:36
  */
 
 <template>
@@ -42,21 +42,21 @@
               <div class="border"></div>
               <span class="dis">综合能力指数</span>
             </div>
-            <div class="number">{{data.zonghenl}}</div>
+            <div class="number">{{(data.zonghenl||0) | numFormat}}</div>
             <div class="others">
               <div class="once">
                 <span class="span1">业务受理</span>
-                <span class="span2">{{data.yewusl}}</span>
+                <span class="span2">{{(data.yewusl||0) | numFormat}}</span>
               </div>
               <div class="border"></div>
               <div class="once">
                 <span class="span1">工作质量</span>
-                <span class="span2">{{data.gongzuozl}}</span>
+                <span class="span2">{{(data.gongzuozl||0) | numFormat}}</span>
               </div>
               <div class="border"></div>
               <div class="once">
                 <span class="span1">重大纠纷化解</span>
-                <span class="span2">{{data.zhongdajfhj}}</span>
+                <span class="span2">{{(data.zhongdajfhj||0) | numFormat}}</span>
               </div>
             </div>
           </div>

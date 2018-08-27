@@ -44,12 +44,6 @@ export default {
       chart: null
     }
   },
-  watch: {
-    // 监听data，当发生变化时，重新绘制图表
-    data: function (val, oldVal) {
-      this.drawChart(val)
-    }
-  },
   methods: {
     drawChart: function (data) {
       // 如果图形存在则销毁后再创建
