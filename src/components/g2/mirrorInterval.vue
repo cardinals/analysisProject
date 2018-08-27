@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-21 13:44:57
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-24 16:25:20
+ * @Last Modified time: 2018-08-27 18:33:03
  * @Description: 镜像分面柱图
  */
 
@@ -31,6 +31,12 @@ export default {
   data () {
     return {
       chart: null
+    }
+  },
+  watch: {
+    // 监控data，当发生变化时，重新绘制图表
+    data: function (val, oldVal) {
+      this.drawChart(val)
     }
   },
   methods: {

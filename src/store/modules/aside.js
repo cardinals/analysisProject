@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-13 08:52:29
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-27 11:39:18
+ * @Last Modified time: 2018-08-27 19:57:31
  */
 
 const state = {
@@ -15,7 +15,7 @@ const state = {
     {
       index: 'home',
       label: '首页',
-      disable: true
+      disable: false
     },
     {
       index: 'none',

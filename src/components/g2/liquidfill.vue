@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-27 14:29:48
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-27 15:10:01
+ * @Last Modified time: 2018-08-27 18:32:57
  * @Description: 液体填充
  */
 
@@ -30,6 +30,12 @@ export default {
   data () {
     return {
       chart: null
+    }
+  },
+  watch: {
+    // 监控data，当发生变化时，重新绘制图表
+    data: function (val, oldVal) {
+      this.drawChart(val)
     }
   },
   methods: {

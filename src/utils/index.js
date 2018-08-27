@@ -100,8 +100,7 @@ export let defaultDateRage = () => {
 // 日期选择器默认日期(本年)
 
 export let defaultYear = () => {
-  const year = dateFormat(new Date(), 'yyyy')
-  return year
+  return dateFormat(new Date(), 'yyyy')
 }
 
 // 通过地区名称查找地区编码

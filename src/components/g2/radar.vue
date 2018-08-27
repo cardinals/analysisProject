@@ -63,19 +63,24 @@ export default {
       chart: null
     }
   },
+  watch: {
+    // 监控data，当发生变化时，重新绘制图表
+    data: function (val, oldVal) {
+      this.drawChart(val)
+    }
+  },
   methods: {
     drawChart: function (data) {
       // 如果图形存在则销毁后再创建
       if (this.chart) {
         this.chart.destroy()
-      } else {
-        this.chart = new G2.Chart({
-          container: this.id,
-          forceFit: true,
-          height: this.height,
-          padding: 'auto'
-        })
       }
+      this.chart = new G2.Chart({
+        container: this.id,
+        forceFit: true,
+        height: this.height,
+        padding: 'auto'
+      })
       var dv = new DataSet.DataView()
         .source(data).transform({
           type: 'rename',

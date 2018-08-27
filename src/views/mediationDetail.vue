@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-24 14:57:25
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-27 11:31:05
+ * @Last Modified time: 2018-08-27 16:47:34
  */
 
 <template>
@@ -309,7 +309,6 @@ export default {
         time: this.date
       }).then(res => {
         if (res.code) {
-          // 合并接口的数据
           this.data = res.data
         } else {
           this.data = null

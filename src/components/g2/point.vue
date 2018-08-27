@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-19 22:18:59
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-23 09:26:31
+ * @Last Modified time: 2018-08-27 19:03:16
   * @Description: 基础散点图
  */
 <template>
@@ -48,19 +48,24 @@ export default {
       chart: null
     }
   },
+  watch: {
+    // 监控data，当发生变化时，重新绘制图表
+    data: function (val, oldVal) {
+      this.drawChart(val)
+    }
+  },
   methods: {
     drawChart: function (data) {
       // 如果图形存在则销毁后再创建
       if (this.chart) {
         this.chart.destroy()
-      } else {
-        this.chart = new G2.Chart({
-          container: this.id,
-          forceFit: true,
-          height: this.height,
-          padding: [30, 100, 30, 40]
-        })
       }
+      this.chart = new G2.Chart({
+        container: this.id,
+        forceFit: true,
+        height: this.height,
+        padding: [30, 100, 30, 40]
+      })
       this.chart.source(data, {
         x: {
           alias: this.axisName.x

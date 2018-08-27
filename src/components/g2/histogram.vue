@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-19 22:10:56
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-27 11:36:19
+ * @Last Modified time: 2018-08-27 18:28:42
  * @Description: 基础柱状图
  */
 <template>
@@ -40,7 +40,7 @@ export default {
     }
   },
   watch: {
-    // 监  data，当发生变化时，重新绘制图表
+    // 监控data，当发生变化时，重新绘制图表
     data: function (val, oldVal) {
       this.drawChart(val)
     }

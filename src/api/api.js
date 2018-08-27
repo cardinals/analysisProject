@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-13 10:30:00
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-27 10:58:55
+ * @Last Modified time: 2018-08-27 19:48:56
  */
 
 //  引入httpUtil
@@ -38,4 +38,13 @@ export const peopleDetails = (params) => all([
   {url: `${baseUrl}/portraitDetailbaseinfo`, params: params},
   {url: `${baseUrl}/portraitDetailbusinessinfo`, params: params},
   {url: `${baseUrl}/portraitDetailcaseinfo`, params: params}
+])
+
+// 首页
+export const homeData = (params) => all([
+  {url: `${baseUrl}/businessMap`, params: params},
+  {url: `${baseUrl}/businessCount`, params: params},
+  {url: `${baseUrl}/businessType`, params: params},
+  {url: `${baseUrl}/businessProcess`, params: params},
+  {url: `${baseUrl}/onlineNumber`, params: params}
 ])

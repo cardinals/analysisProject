@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-19 22:10:56
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-27 10:15:59
+ * @Last Modified time: 2018-08-27 18:28:52
  * @Description: 基础饼图
  */
 <template>
@@ -42,6 +42,12 @@ export default {
   data () {
     return {
       chart: null
+    }
+  },
+  watch: {
+    // 监控data，当发生变化时，重新绘制图表
+    data: function (val, oldVal) {
+      this.drawChart(val)
     }
   },
   methods: {
