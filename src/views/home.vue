@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-27 14:03:38
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-28 10:49:03
+ * @Last Modified time: 2018-08-28 13:55:07
  */
 
 <template>
@@ -68,15 +68,14 @@
         </div>
         <div class="block-r2">
           <div class="title">业务处理</div>
-          <g2-pie class="contents" :id="'pie1'" :height="210" :colorMap="['#1890FF', '#E9E9E9']" :data="data.businessProcess"></g2-pie>
+          <g2-pie class="contents" :id="'pie1'" :height="141" :colorMap="['#1890FF', '#E9E9E9']" :data="data.businessProcess"></g2-pie>
         </div>
         <div class="block-r3">
           <div class="title">系统应用</div>
-          <g2-pie class="contents" :id="'pie2'" :height="228" :colorMap="['#1890FF', '#E9E9E9']" :data="data.onlineNumber"></g2-pie>
+          <g2-pie class="contents" :id="'pie2'" :height="146" :colorMap="['#1890FF', '#E9E9E9']" :data="data.onlineNumber"></g2-pie>
         </div>
       </div>
     </div>
-    <footer-com></footer-com>
   </div>
 </template>
 
@@ -135,7 +134,6 @@ export default {
           }).reverse()}
           const data5 = {onlineNumber: [{name: '登录人数占比', value: resList[4].data.data.denglurszb}, {name: '未登录人数占比', value: 1 - resList[4].data.data.denglurszb}]}
           this.data = Object.assign(data1, data2, data3, data4, data5)
-          console.log(this.data)
           this.drawMap()
         } else {
           this.data = null
@@ -176,8 +174,10 @@ export default {
   @import '~@/assets/css/common.less';
   .home {
     background: #EDEDED;
+    box-sizing: content-box;
+    height: 100%;
     .block {
-      height: 880px;
+      height: calc(100% - 24px);
       .left {
         flex: 847;
         background: @block;
@@ -189,10 +189,10 @@ export default {
         .contents {
           padding: 0;
           .block-l1 {
-            flex: 674;
+            flex: 514;
           }
           .block-l2 {
-            flex: 82;
+            flex: 60;
             .one {
               flex: 212;
               background: RGBA(49, 49, 49, 0.7);
@@ -238,13 +238,12 @@ export default {
         margin-left: 16px;
         flex: 266;
         .block-r1 {
-          flex: 248;
+          flex: 194;
           background: @block;
           .ul {
             width: 100%;
             overflow: hidden;
-            padding-top: 20px;
-            height: 238px;
+            padding-top: 15px;
             &:hover {
               overflow-y: auto;
             }
@@ -307,7 +306,7 @@ export default {
           }
         }
         .block-r2 {
-          flex: 262;
+          flex: 178;
           margin-top: 16px;
           background: @block;
           .contents{
@@ -315,7 +314,7 @@ export default {
           }
         }
         .block-r3 {
-          flex: 265;
+          flex: 184;
           margin-top: 16px;
           background: @block;
           .contents{
