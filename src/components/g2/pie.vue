@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-19 22:10:56
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-27 18:28:52
+ * @Last Modified time: 2018-08-27 20:31:15
  * @Description: 基础饼图
  */
 <template>
@@ -90,8 +90,8 @@ export default {
         itemTpl: '<li><span style="background-color:{color};" class="g2-tooltip-marker"></span>{name}: {value}</li>'
       })
       this.chart.coord('theta', {
-        radius: 1,
-        innerRadius: 0.7
+        radius: 0.9,
+        innerRadius: 0.75
       })
       this.chart.legend('name', {
         position: 'bottom-center'
@@ -102,7 +102,7 @@ export default {
       }).tooltip('name*value', function (name, value) {
         return {
           name: name,
-          value: value
+          value: value <= 1 ? (value * 100).toFixed(1) + '%' : value
         }
       })
       this.chart.render()

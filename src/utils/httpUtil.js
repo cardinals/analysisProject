@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-14 09:28:41
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-27 11:57:45
+ * @Last Modified time: 2018-08-28 11:51:29
  */
 
 import axios from 'axios'
@@ -77,9 +77,9 @@ export let get = (url, params) => {
  * @param {String} url [请求的url地址]
  * @param {Object} params [请求时携带的参数]
  */
-export let post = (url, params) => {
+export let post = (url, params, responseType) => {
   return new Promise((resolve, reject) => {
-    axios.post(url, params)
+    axios({method: 'post', url: url, data: params, responseType: responseType || 'json'})
       .then(res => {
         resolve(res.data)
       })

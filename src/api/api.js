@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-13 10:30:00
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-27 19:48:56
+ * @Last Modified time: 2018-08-28 11:10:08
  */
 
 //  引入httpUtil
@@ -18,7 +18,7 @@ export const logout = (params) => get(`${baseUrl}/logout`, params)
 export const fetchPermission = (params) => get(`${baseUrl}/permission`, params)
 
 // 机构排名接口
-export const organizationRankings = (params) => post(`${baseUrl}/institutionalRankings`, params)
+export const organizationRankings = (params, responseType) => post(`${baseUrl}/institutionalRankings`, params, responseType)
 
 // 机构详情接口 (司法局和司法所)
 export const organizationDetails = (params) => all([
@@ -31,7 +31,7 @@ export const organizationDetails = (params) => all([
 export const mediationDetails = (params) => get(`${baseUrl}/mediationCommitteeDetails`, params)
 
 // 人员排名接口
-export const peopleRankings = (params) => post(`${baseUrl}/portraysList`, params)
+export const peopleRankings = (params, responseType) => post(`${baseUrl}/portraysList`, params, responseType)
 
 // 人员详情接口
 export const peopleDetails = (params) => all([

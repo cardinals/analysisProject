@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-13 11:34:06
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-24 15:31:52
+ * @Last Modified time: 2018-08-28 11:54:47
  */
 
 <template>
@@ -43,14 +43,14 @@
           </el-date-picker>
         </div>
         <div class="download">
-          <el-dropdown>
+          <el-dropdown @command="handleCommand">
             <el-button type="primary" size="mini">
               下载
               <i class="el-icon-arrow-down el-icon--right"></i>
             </el-button>
             <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item>CSV</el-dropdown-item>
-              <el-dropdown-item>Excel</el-dropdown-item>
+              <el-dropdown-item  command="csv">CSV</el-dropdown-item>
+              <el-dropdown-item  command="excl">EXCEL</el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
         </div>
@@ -142,7 +142,7 @@ export default {
   },
   methods: {
     // 获取数据
-    onLoad () {
+    onLoad (type) {
       // 调用api接口，并且提供了两个参数
       peopleRankings({
         location: this.area,
@@ -151,15 +151,32 @@ export default {
         reorder: this.tableInfo.orderRule,
         pagesize: this.tableInfo.pageSize,
         currentpage: this.tableInfo.currentPage,
-        download: 0,
+        download: type || 0,
         startdate: this.date[0],
         enddate: this.date[1],
         limit: this.top,
         keyword: this.search
-      }).then(res => {
-        // 获取数据成功后的其他操作
-        this.tableInfo.tableData = res.data.pageData
-        this.tableInfo.total = res.data.pageinfo.total
+      }, type ? 'arraybuffer' : 'json').then(res => {
+        if (type) {
+          // 下载
+          let blob = new Blob([res]) // 创建一个blob对象
+          let a = document.createElement('a') // 创建一个<a></a>标签
+          a.href = URL.createObjectURL(blob) // response is a blob
+          // 文件名称
+          if (type === 'csv') {
+            a.download = '调解员排名CSV.csv'
+          } else if (type === 'excl') {
+            a.download = '调解员排名EXCEL.xls'
+          }
+          a.style.display = 'none'
+          document.body.appendChild(a)
+          a.click()
+          a.remove()
+        } else {
+          // 表格数据
+          this.tableInfo.tableData = res.data.pageData
+          this.tableInfo.total = res.data.pageinfo.total
+        }
       })
     },
     indexMethod (index) {
@@ -191,6 +208,9 @@ export default {
     },
     handleRowClick (row, event, column) {
       this.$router.push({path: `/peopleDetail/${row.id_}`})
+    },
+    handleCommand (command) {
+      this.onLoad(command)
     }
   }
 }

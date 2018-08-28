@@ -5,7 +5,7 @@ export const setMapbox = (caseData, centerPoint) => {
     visualMap: [{
       type: 'continuous',
       show: false,
-      max: 50,
+      max: 10,
       calculable: true,
       realtime: false,
       inRange: {

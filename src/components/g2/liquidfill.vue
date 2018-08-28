@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-27 14:29:48
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-27 18:32:57
+ * @Last Modified time: 2018-08-28 09:50:06
  * @Description: 液体填充
  */
 
@@ -71,7 +71,6 @@ export default {
         },
         content: data[0].value + '%',
         style: {
-          fill: '#fff',
           opacity: 0.75,
           fontSize: 26,
           textAlign: 'center'

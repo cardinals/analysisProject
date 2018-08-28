@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-27 14:03:38
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-27 19:56:22
+ * @Last Modified time: 2018-08-28 10:49:03
  */
 
 <template>
@@ -38,18 +38,18 @@
                 <span class="one-num">{{(data.businessCount.MMS_ALARM110INFO||0) | numFormat}}</span>
               </div>
             </div>
-            <div class="one" :class="{active: target==='CDS_INVESTIGATIONFEEDBAC'}" @click="target='CDS_INVESTIGATIONFEEDBAC'">
+            <div class="one" :class="{active: target==='WWS_CONSULT'}" @click="target='WWS_CONSULT'">
               <i class="icon jicengflfw"></i>
               <div class="one-content">
                 <span class="one-title">基层法律服务</span><br>
-                <span class="one-num">{{(data.businessCount.CDS_INVESTIGATIONFEEDBAC||0) | numFormat}}</span>
+                <span class="one-num">{{(data.businessCount.WWS_CONSULT||0) | numFormat}}</span>
               </div>
             </div>
-            <div class="one" :class="{active: target==='WWS_CONSULT'}" @click="target='WWS_CONSULT'">
+            <div class="one" :class="{active: target==='CDS_INVESTIGATIONFEEDBAC'}" @click="target='CDS_INVESTIGATIONFEEDBAC'">
               <i class="icon jiufenpc"></i>
               <div class="one-content">
                 <span class="one-title">纠纷排查</span><br>
-                <span class="one-num">{{(data.businessCount.WWS_CONSULT||0) | numFormat}}</span>
+                <span class="one-num">{{(data.businessCount.CDS_INVESTIGATIONFEEDBAC||0) | numFormat}}</span>
               </div>
             </div>
           </div>
@@ -73,7 +73,6 @@
         <div class="block-r3">
           <div class="title">系统应用</div>
           <g2-pie class="contents" :id="'pie2'" :height="228" :colorMap="['#1890FF', '#E9E9E9']" :data="data.onlineNumber"></g2-pie>
-          <!-- <g2-liquidfill class="contents" :id="'liquidfill'" :height="228"></g2-liquidfill> -->
         </div>
       </div>
     </div>
@@ -155,7 +154,7 @@ export default {
         const mapData = this.data.businessMap.map(item => {
           return {
             name: item.diQu,
-            value: [item.jingDu, item.weiDu, item.jianShu],
+            value: [item.jingDu, item.weiDu, parseInt(Math.log(item.jianShu))],
             id: item.bianMa,
             typeList: item.anJian
           }
