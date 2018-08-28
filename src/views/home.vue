@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-27 14:03:38
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-28 13:55:07
+ * @Last Modified time: 2018-08-28 18:10:04
  */
 
 <template>
@@ -102,6 +102,9 @@ export default {
     area: function (newValue, oldValue) {
       this.fetchHomeData()
     },
+    date: function (newValue, oldValue) {
+      this.fetchHomeData()
+    },
     target: function (newValue, oldValue) {
       this.fetchHomeData()
     }
@@ -138,6 +141,7 @@ export default {
         } else {
           this.data = null
           this.$message({type: 'error', message: '数据请求失败'})
+          this.$router.push({path: '/error/500'})
         }
       }).catch(err => {
         console.log(err)
@@ -177,7 +181,8 @@ export default {
     box-sizing: content-box;
     height: 100%;
     .block {
-      height: calc(100% - 24px);
+      padding-bottom: 15px;
+      height: calc(100% - 39px);
       .left {
         flex: 847;
         background: @block;
@@ -197,6 +202,7 @@ export default {
               flex: 212;
               background: RGBA(49, 49, 49, 0.7);
               color: #FFFFFF;
+              padding-left: 35px;
               &:hover {
                 cursor: pointer;
                 background: RGBA(24, 144, 255, 0.7);
@@ -204,7 +210,6 @@ export default {
               .icon {
                 float: left;
                 width: 44px;
-                margin-left: 25px;
               }
               .renmintj{
                 background: url(~@/assets/images/home/icon-renmintj.png) no-repeat center;
@@ -219,7 +224,8 @@ export default {
                 background: url(~@/assets/images/home/icon-jiufenpc.png) no-repeat center;
               }
               .one-content{
-                margin-top: 20px;
+                float: left;
+                margin-top: 10px;
                 .one-title{
                   font-size: 14px;
                 }

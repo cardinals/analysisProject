@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-10 11:54:33
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-27 13:39:06
+ * @Last Modified time: 2018-08-28 16:38:33
  */
 import Vue from 'vue'
 import Router from 'vue-router'
@@ -61,6 +61,16 @@ export default new Router({
       name: '首页',
       // 登录模块
       component: () => import('./views/home.vue')
+    },
+    {
+      path: '/error/:code',
+      name: '错误页',
+      // 错误页
+      component: () => import('./views/error.vue')
+    },
+    {
+      path: '*',
+      redirect: '/error/404'
     }
   ]
 })

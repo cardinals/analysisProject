@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-13 11:34:18
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-28 11:50:19
+ * @Last Modified time: 2018-08-28 16:44:09
  */
 
 <template>
@@ -179,9 +179,16 @@ export default {
           a.remove()
         } else {
           // 表格数据
-          this.tableInfo.tableData = res.data.pageData
-          this.tableInfo.total = res.data.pageinfo.total
+          if (res.code) {
+            this.tableInfo.tableData = res.data.pageData
+            this.tableInfo.total = res.data.pageinfo.total
+          } else {
+            this.$message({type: 'error', message: '数据请求失败'})
+            this.$router.push({path: '/error/500'})
+          }
         }
+      }).catch(error => {
+        console.log(error)
       })
     },
     indexMethod (index) {

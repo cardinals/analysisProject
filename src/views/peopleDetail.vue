@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-13 11:34:01
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-27 19:02:45
+ * @Last Modified time: 2018-08-28 16:44:26
  */
 
 <template>
@@ -255,6 +255,7 @@ export default {
         } else {
           this.data = null
           this.$message({type: 'error', message: '数据请求失败'})
+          this.$router.push({path: '/error/500'})
         }
       }).catch(err => {
         console.log(err)

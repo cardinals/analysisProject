@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-13 11:33:54
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-27 13:55:42
+ * @Last Modified time: 2018-08-28 16:42:17
  */
 
 <template>
@@ -368,13 +368,13 @@ export default {
         } else {
           this.data = null
           this.$message({type: 'error', message: '数据请求失败'})
+          this.$router.push({path: '/error/500'})
         }
       }).catch(err => {
         console.log(err)
       })
     },
     handleChangeRouter (id, type) {
-      console.log(id, type)
       if (type === 'tiaoJieY') {
         this.$router.push({path: `/peopleDetail/${id}`})
       }

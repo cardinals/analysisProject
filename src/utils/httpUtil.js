@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-14 09:28:41
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-28 11:51:29
+ * @Last Modified time: 2018-08-28 18:01:17
  */
 
 import axios from 'axios'
@@ -17,7 +17,7 @@ axios.defaults.headers.put['Content-Type'] = 'application/json'
 axios.defaults.headers.delete['Content-Type'] = 'application/json'
 
 // 请求超时时间
-axios.defaults.timeout = 10000
+axios.defaults.timeout = 20000
 
 // 请求拦截器
 axios.interceptors.request.use(
