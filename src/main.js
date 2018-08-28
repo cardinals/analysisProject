@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-10 11:54:28
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-27 17:07:01
+ * @Last Modified time: 2018-08-28 22:18:18
  */
 import Vue from 'vue'
 import App from './App.vue'
@@ -27,7 +27,8 @@ Vue.use(common)
 // 处理百分比
 Vue.filter('percentFormat', function (value) {
   if (!value) return '0%'
-  return `${(value * 100).toFixed(1)}%`
+  value = value * 100
+  return String(value).indexOf('.') > 0 ? `${value.toFixed(1)}%` : `${parseInt(value)}%`
 })
 // 处理千位分隔
 Vue.filter('numFormat', function (value) {

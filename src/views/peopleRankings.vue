@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-13 11:34:06
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-28 16:44:45
+ * @Last Modified time: 2018-08-28 22:15:55
  */
 
 <template>
@@ -65,7 +65,7 @@
             <el-table-column prop="tiaojiecgl" sortable="custom" :formatter="percentFormatMethod" label="成功率"></el-table-column>
             <el-table-column prop="chengjiaoje" sortable="custom" :formatter="numFormatMethod" label="调解金额"></el-table-column>
             <el-table-column prop="pingjuntjzq" sortable="custom" label="平均调解时长(天)"></el-table-column>
-            <el-table-column prop="denglucs" sortable="custom" :formatter="numFormatMethod" label="登录人次"></el-table-column>
+            <el-table-column prop="denglucs" sortable="custom" :formatter="numFormatMethod" label="登录次数"></el-table-column>
           </el-table>
         </div>
         <div class="pagination">

@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-13 11:34:01
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-28 16:44:26
+ * @Last Modified time: 2018-08-28 21:51:26
  */
 
 <template>
@@ -97,7 +97,7 @@
           </div>
           <div class="atMiddle">
             <span class="number">{{(businessTypeData.pingjuntjzq||0) | numFormat}}</span>
-            <span class="danwei">小时</span>
+            <span class="danwei">天</span>
           </div>
           <div class="chart"></div>
           <div class="atBottom">平均调解时长优于{{(businessTypeData.tjzqzb||0) | percentFormat}}的调解员</div>

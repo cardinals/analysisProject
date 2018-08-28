@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-27 14:03:38
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-28 18:10:04
+ * @Last Modified time: 2018-08-28 21:45:59
  */
 
 <template>
@@ -16,7 +16,7 @@
     </div>
     <div class="block flexRow">
       <div class="left">
-        <div class="title">基本信息
+        <div class="title">基本信息->业务数量
           <el-date-picker class="daterange" type="daterange" size="mini" align="right" unlink-panels range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期"
             value-format="yyyy-MM-dd" v-model="date" :picker-options="pickerOptions">
           </el-date-picker>
@@ -57,7 +57,7 @@
       </div>
       <div class="right flexColumn">
         <div class="block-r1">
-          <div class="title">纠纷类型</div>
+          <div class="title">纠纷类型排名</div>
           <div class="contents ul">
             <div class="li" v-for="(item,index) in data.businessType" :key="index">
               <span class="sort">{{index+1}}</span>
@@ -67,11 +67,11 @@
           </div>
         </div>
         <div class="block-r2">
-          <div class="title">业务处理</div>
+          <div class="title">案件处理结果</div>
           <g2-pie class="contents" :id="'pie1'" :height="141" :colorMap="['#1890FF', '#E9E9E9']" :data="data.businessProcess"></g2-pie>
         </div>
         <div class="block-r3">
-          <div class="title">系统应用</div>
+          <div class="title">系统使用概况</div>
           <g2-pie class="contents" :id="'pie2'" :height="146" :colorMap="['#1890FF', '#E9E9E9']" :data="data.onlineNumber"></g2-pie>
         </div>
       </div>
