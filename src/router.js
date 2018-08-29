@@ -63,6 +63,12 @@ export default new Router({
       component: () => import('./views/home.vue')
     },
     {
+      path: '/logonPerson',
+      name: '登录人次',
+      // 登录人次分析
+      component: () => import('./views/logonPerson.vue')
+    },
+    {
       path: '/error/:code',
       name: '错误页',
       // 错误页
