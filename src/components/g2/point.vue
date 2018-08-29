@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-19 22:18:59
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-27 19:03:16
+ * @Last Modified time: 2018-08-29 09:15:47
   * @Description: 基础散点图
  */
 <template>
@@ -96,12 +96,12 @@ export default {
           } else {
             return colorMap[2]
           }
-        }).size('size').opacity(0.8).tooltip('type*x*y')
+        }).size('size', [1, 5]).opacity(0.8).tooltip('type*x*y')
       } else if (this.type === '气泡图') {
         // 打开图例
         this.chart.legend('type', {position: 'right-top'})
         // 配置 颜色 大小 tooltip
-        point.color('type', colorMap).size('size', [5, 20]).opacity(0.5).tooltip('type*x*y*size')
+        point.color('type', colorMap).size('size', [10, 20]).opacity(0.5).tooltip('type*x*y*size')
       }
       this.chart.render()
     }

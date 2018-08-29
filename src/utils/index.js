@@ -39,44 +39,25 @@ export const pickerOptions = {
     return time.getTime() > Date.now()
   },
   shortcuts: [{
-    text: '最近一周',
+    text: '今日',
     onClick (picker) {
-      const end = new Date()
-      const start = new Date()
-      start.setTime(start.getTime() - 3600 * 1000 * 24 * 7)
-      picker.$emit('pick', [start, end])
+      const enddate = dateFormat(new Date())
+      const startDate = dateFormat(new Date())
+      picker.$emit('pick', [startDate, enddate])
     }
   }, {
-    text: '最近一个月',
+    text: '本月',
     onClick (picker) {
-      const end = new Date()
-      const start = new Date()
-      start.setTime(start.getTime() - 3600 * 1000 * 24 * 30)
-      picker.$emit('pick', [start, end])
+      const enddate = dateFormat(new Date())
+      const startDate = dateFormat(new Date(new Date().setDate(1)))
+      picker.$emit('pick', [startDate, enddate])
     }
   }, {
-    text: '最近三个月',
+    text: '本年',
     onClick (picker) {
-      const end = new Date()
-      const start = new Date()
-      start.setTime(start.getTime() - 3600 * 1000 * 24 * 90)
-      picker.$emit('pick', [start, end])
-    }
-  }, {
-    text: '最近半年',
-    onClick (picker) {
-      const end = new Date()
-      const start = new Date()
-      start.setTime(start.getTime() - 3600 * 1000 * 24 * 180)
-      picker.$emit('pick', [start, end])
-    }
-  }, {
-    text: '最近一年',
-    onClick (picker) {
-      const end = new Date()
-      const start = new Date()
-      start.setTime(start.getTime() - 3600 * 1000 * 24 * 365)
-      picker.$emit('pick', [start, end])
+      const enddate = dateFormat(new Date())
+      const startDate = dateFormat(new Date(new Date().setDate(1)).setMonth(0))
+      picker.$emit('pick', [startDate, enddate])
     }
   }],
   firstDayOfWeek: 1
@@ -116,4 +97,18 @@ export const findAreaNameByValue = (value) => {
 // 找到指定日期所在周星期几的日期
 export const findWeekRangeByToday = (date, weekday) => {
   return new Date(1000 * 60 * 60 * 24 * (weekday - new Date(date).getDay()) + new Date(date).getTime())
+}
+
+// 处理百分比
+export let percentFormat = (value) => {
+  if (!value) return '0%'
+  value = value * 100
+  return String(value).indexOf('.') > 0 ? `${value.toFixed(1)}%` : `${parseInt(value)}%`
+}
+
+// 处理千位分隔
+export let numFormat = (value) => {
+  if (!value) return 0
+  const reg = /\d{1,3}(?=(\d{3})+$)/g
+  return String(String(value).indexOf('.') > 0 ? value.toFixed(1) : parseInt(value)).replace(reg, '$&,')
 }

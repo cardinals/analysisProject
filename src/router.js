@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-10 11:54:33
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-28 16:38:33
+ * @Last Modified time: 2018-08-29 19:19:01
  */
 import Vue from 'vue'
 import Router from 'vue-router'
@@ -63,7 +63,7 @@ export default new Router({
       component: () => import('./views/home.vue')
     },
     {
-      path: '/logonPerson',
+      path: '/login',
       name: '登录人次',
       // 登录人次分析
       component: () => import('./views/logonPerson.vue')

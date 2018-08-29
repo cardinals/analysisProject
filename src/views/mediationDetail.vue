@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-24 14:57:25
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-28 16:42:23
+ * @Last Modified time: 2018-08-29 17:13:16
  */
 
 <template>
@@ -35,7 +35,7 @@
           <div class="atLeft">
             <div class="sTitle">
               <div class="border"></div>
-              <div class="dis">调解机构数量</div>
+              <div class="dis">调解人员数量</div>
             </div>
             <div class="sContents flexRow">
               <div class="info">
@@ -59,7 +59,7 @@
               <div class="border"></div>
               <div class="dis">年龄分布</div>
             </div>
-            <g2-histogram :id="'interval'" :height="124" :data="data.tiaoJieDW.nianLingFB.map(item => { return {name: Number(item), value: Number(item)} })"
+            <g2-histogram :id="'interval'" :height="144" :data="data.tiaoJieDW.nianLingFB.map(item => { return {name: Number(item), value: Number(item)} })"
                :axisName="{name: '年龄', value: '数量'}"></g2-histogram>
           </div>
         </div>
@@ -103,13 +103,14 @@
             <div class="dis">受理案件数量排名</div>
           </div>
           <div class="sContents">
-            <div class="ul">
-              <div class="li" v-if="targetData1.length>0" v-for="(item,index) in targetData1" :key="index" @click="handleChangeRouter(item.id,target1)">
+            <div class="ul" v-if="targetData1&&targetData1.length>0">
+              <div class="li" v-for="(item,index) in targetData1" :key="index" @click="handleChangeRouter(item.id,target1)">
                 <span class="sort">{{index+1}}</span>
                 <span class="name">{{item.name}}</span>
                 <span class="number">{{item.value | numFormat}}</span>
               </div>
             </div>
+            <el-button class="nodata-button" icon="el-icon-info" v-if="targetData1.length===0">暂无数据</el-button>
           </div>
         </div>
       </div>
@@ -144,6 +145,7 @@
                 <span class="name">{{item.name}}</span>
                 <span class="number">{{(item.value||0) | percentFormat}}</span>
               </div>
+              <el-button class="nodata-button" icon="el-icon-info" v-if="targetData2.length===0">暂无数据</el-button>
             </div>
           </div>
         </div>
@@ -179,6 +181,7 @@
                 <span v-else class="name">{{item.name}}</span>
                 <span class="number">{{(item.value/10000||0) | numFormat}}</span>
               </div>
+              <el-button class="nodata-button" icon="el-icon-info" v-if="targetData3.length===0">暂无数据</el-button>
             </div>
           </div>
         </div>
@@ -214,6 +217,7 @@
                 <span v-else class="name">{{item.name}}</span>
                 <span class="number">{{(item.value||0) | numFormat}}</span>
               </div>
+              <el-button class="nodata-button" icon="el-icon-info" v-if="targetData4.length===0">暂无数据</el-button>
             </div>
           </div>
         </div>
@@ -255,13 +259,11 @@ export default {
     targetData1: {
       get: function () {
         let temp = this.data.anJianSL[`${this.target1}SLAJSLPM`]
-        return temp.sort((item1, item2) => {
-          if (item1.value > item2.value) {
-            return -1
-          } else {
-            return 1
-          }
-        })
+        if (temp.length > 7) {
+          return temp.slice(0, 7)
+        } else {
+          return temp
+        }
       },
       set: function (newValue) {}
     },
@@ -269,27 +271,31 @@ export default {
     targetData2: {
       get: function () {
         let temp = this.data.tiaoJieCGL[`${this.target2}TJZZLPM`]
-        return temp.sort((item1, item2) => {
-          if (item1.value > item2.value) {
-            return -1
-          } else {
-            return 1
-          }
-        })
+        return temp
       },
       set: function (newValue) {}
     },
     // 理赔金额排名数据
     targetData3: {
       get: function () {
-        return this.data.liPeiJEPM[`${this.target3}LPJEPM`]
+        let temp = this.data.liPeiJEPM[`${this.target3}LPJEPM`]
+        if (temp.length > 7) {
+          return temp.slice(0, 7)
+        } else {
+          return temp
+        }
       },
       set: function (newValue) {}
     },
     // 调解时长排名数据
     targetData4: {
       get: function () {
-        return this.data.tiaoJieSCPM[`${this.target4}TJSCPM`]
+        let temp = this.data.tiaoJieSCPM[`${this.target4}TJSCPM`]
+        if (temp.length > 7) {
+          return temp.slice(0, 7)
+        } else {
+          return temp
+        }
       },
       set: function (newValue) {}
     }

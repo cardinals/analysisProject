@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-27 14:03:38
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-28 21:45:59
+ * @Last Modified time: 2018-08-29 18:21:07
  */
 
 <template>
@@ -17,9 +17,11 @@
     <div class="block flexRow">
       <div class="left">
         <div class="title">基本信息->业务数量
-          <el-date-picker class="daterange" type="daterange" size="mini" align="right" unlink-panels range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期"
-            value-format="yyyy-MM-dd" v-model="date" :picker-options="pickerOptions">
-          </el-date-picker>
+          <div class="buttons">
+            <el-button size="mini" :type="date==='today'?'primary':'text'" @click="date='today'">今日</el-button>
+            <el-button size="mini" :type="date==='month'?'primary':'text'" @click="date='month'">本月</el-button>
+            <el-button size="mini" :type="date==='year'?'primary':'text'" @click="date='year'">本年</el-button>
+        </div>
         </div>
         <div class="contents flexColumn">
           <div class="block-l1" id="map"></div>
@@ -61,7 +63,9 @@
           <div class="contents ul">
             <div class="li" v-for="(item,index) in data.businessType" :key="index">
               <span class="sort">{{index+1}}</span>
-              <span class="name">{{item.name}}</span>
+              <!-- <el-tooltip :content="item.name" placement="top" effect="light"> -->
+                <span class="name">{{item.name}}</span>
+              <!-- </el-tooltip> -->
               <span class="number">{{item.value | numFormat}}</span>
             </div>
           </div>
@@ -81,7 +85,7 @@
 
 <script>
 import {area} from '@/utils/dictionaryMapping'
-import {pickerOptions, defaultDateRage} from '@/utils/index'
+import {pickerOptions} from '@/utils/index'
 import {homeData} from '@/api/api'
 import {setMapbox} from '@/utils/echartsOptions'
 
@@ -91,7 +95,7 @@ export default {
     return {
       areaOptions: area,
       area: area[0]['value'],
-      date: defaultDateRage(),
+      date: 'year',
       pickerOptions: pickerOptions,
       target: 'MBM_CASE',
       data: null,
@@ -121,7 +125,7 @@ export default {
   },
   methods: {
     fetchHomeData () {
-      homeData({area: this.area, startDate: this.date[0], endDate: this.date[1], biaoming: this.target}).then(resList => {
+      homeData({area: this.area, date: this.date, biaoming: this.target}).then(resList => {
         if (resList[0].data.code && resList[1].data.code && resList[2].data.code && resList[3].data.code && resList[4].data.code) {
           // 合并接口数据
           const data1 = {businessMap: resList[0].data.data}
@@ -156,7 +160,7 @@ export default {
         const mapData = this.data.businessMap.map(item => {
           return {
             name: item.diQu,
-            value: [item.jingDu, item.weiDu, parseInt(Math.log(item.jianShu))],
+            value: [item.jingDu, item.weiDu, parseInt(item.jianShu)],
             id: item.bianMa,
             typeList: item.anJian
           }
@@ -269,7 +273,7 @@ export default {
                 border-radius: 50%;
                 text-align: center;
                 line-height: 19px;
-                margin: 7px 22px 7px 0;
+                margin: 7px 10px 7px 0;
               }
               .name {
                 float: left;
@@ -277,7 +281,7 @@ export default {
                 font-size: @fontMiddle;
                 color: @gray;
                 line-height: 33px;
-                width: 150px;
+                width: 135px;
                 overflow: hidden;
                 text-overflow: ellipsis;
                 white-space: nowrap;

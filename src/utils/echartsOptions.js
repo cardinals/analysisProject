@@ -5,7 +5,7 @@ export const setMapbox = (caseData, centerPoint) => {
     visualMap: [{
       type: 'continuous',
       show: false,
-      max: 10,
+      max: 100,
       calculable: true,
       realtime: false,
       inRange: {
@@ -47,7 +47,7 @@ export const setMapbox = (caseData, centerPoint) => {
       pitch: 50,
       // 地图的旋转角度
       bearing: -10,
-      boxHeight: 30,
+      boxHeight: 10,
       // 后处理特效的相关配置
       postEffect: {
         enable: true,

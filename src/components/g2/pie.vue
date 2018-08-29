@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-19 22:10:56
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-27 20:31:15
+ * @Last Modified time: 2018-08-29 15:19:09
  * @Description: 基础饼图
  */
 <template>
@@ -11,6 +11,7 @@
 
 <script>
 import G2 from '@antv/g2'
+import {percentFormat, numFormat} from '@/utils/index'
 
 export default {
   props: {
@@ -73,14 +74,14 @@ export default {
       if (this.guide.name) {
         this.chart.guide().html({
           position: ['50%', '50%'],
-          html: `<div style="text-align: center;width: 10em;"><span style="color:rgba(0,0,0,0.65);font-size:12px">${this.guide.name}</span><br><span style="color:#000000;font-size:34px">${this.guide.value}</span></div>`,
+          html: `<div style="text-align: center;width: 10em;"><span style="color:rgba(0,0,0,0.65);font-size:12px">${this.guide.name}</span><br><span style="color:#000000;font-size:34px">${numFormat(this.guide.value)}</span></div>`,
           alignX: 'middle',
           alignY: 'middle'
         })
       } else {
         this.chart.guide().html({
           position: ['50%', '50%'],
-          html: `<div style="text-align: center;width: 10em;"><span style="color:#1890FF;font-size:16px">${data[0]['value'] <= 1 ? String((data[0]['value'] * 100).toFixed(1)) + '%' : data[0]['value']}</span></div>`,
+          html: `<div style="text-align: center;width: 10em;"><span style="color:#1890FF;font-size:16px">${data[0]['value'] <= 1 ? percentFormat(data[0]['value']) : numFormat(data[0]['value'])}</span></div>`,
           alignX: 'middle',
           alignY: 'middle'
         })
@@ -102,7 +103,7 @@ export default {
       }).tooltip('name*value', function (name, value) {
         return {
           name: name,
-          value: value <= 1 ? (value * 100).toFixed(1) + '%' : value
+          value: value <= 1 ? percentFormat(value) : numFormat(value)
         }
       })
       this.chart.render()

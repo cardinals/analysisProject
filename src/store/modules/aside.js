@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-13 08:52:29
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-27 19:57:31
+ * @Last Modified time: 2018-08-29 08:30:16
  */
 
 const state = {
@@ -14,7 +14,7 @@ const state = {
   asideMenuData: [
     {
       index: 'home',
-      label: '首页',
+      label: '业务监控',
       disable: false
     },
     {

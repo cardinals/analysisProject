@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-21 13:44:57
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-27 18:33:03
+ * @Last Modified time: 2018-08-29 13:29:59
  * @Description: 镜像分面柱图
  */
 
@@ -50,12 +50,11 @@ export default {
         container: this.id,
         forceFit: true,
         height: this.height,
-        padding: [20, 20, 0, 70]
+        padding: [40, 20, 0, 70]
       })
       this.chart.source(data, {
         name: {
-          sync: true,
-          alias: '类型'
+          sync: true
         },
         value: {
           sync: true
@@ -68,21 +67,22 @@ export default {
       this.chart.facet('mirror', {
         fields: ['type'],
         transpose: true,
+        // 列标题
+        colTitle: {
+          offsetY: -15,
+          style: {
+            fontSize: 14,
+            textAlign: 'center',
+            fill: 'rgba(0, 0, 0, 0.85)'
+          }
+        },
         eachView (view) {
           // name 坐标轴配置项
           view.axis('name', {
             position: 'top',
             line: null,
             tickLine: null,
-            title: {
-              autoRotate: false,
-              textStyle: {
-                fill: 'rgba(0, 0, 0, 0.7)',
-                fontSize: '14',
-                textBaseline: 'bottom'
-              },
-              position: 'end'
-            },
+            title: null,
             label: {
               autoRotate: false
             }
