@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-13 11:34:01
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-28 21:51:26
+ * @Last Modified time: 2018-08-29 20:48:19
  */
 
 <template>
@@ -21,7 +21,7 @@
           <div class="atTop clearfix">
             <div class="headImg"></div>
             <span class="name">{{data.base.name}}</span>
-            <span class="year">{{data.base.gongzuonx}}年</span>
+            <span class="year" v-if="data.base.gongzuonx">{{data.base.gongzuonx}}年</span>
             <span class="type">{{data.base.tiaoweihuisx}}</span>
           </div>
           <div class="atBottom">
@@ -69,7 +69,7 @@
       <div class="title">业务专长</div>
       <div class="contents flexRow">
         <!-- <div class="chart_round"></div> -->
-        <g2-pie class="chart_round" :id="'pie'" :height="286" :data="data.business" :guide="{name: '受理案件总数', value:data.number[0].yewusl}" @itemClick="handlePieClick"></g2-pie>
+        <g2-pie class="chart_round" :id="'pie'" :height="240" :data="data.business" :guide="{name: '受理案件总数', value:data.number[0].yewusl}" @itemClick="handlePieClick"></g2-pie>
         <div class="chart_other">
           <div class="sTitle">
             <div class="dis">案件受理数量({{clickBusinessType}})</div>
@@ -324,7 +324,7 @@ export default {
         .year{
           font-size: @fontMiddle;
           float: left;
-          margin: 14px 33px;
+          margin: 14px 0 14px 33px;
           padding:4px 5px;
           background:rgba(255,167,96,0.2);
           border-radius: 4px;
@@ -333,7 +333,7 @@ export default {
         .type{
           font-size: @fontMiddle;
           float: left;
-          margin: 14px 0px;
+          margin: 14px 0 14px 33px;
           padding:4px 5px;
           background:rgba(29,255,210,0.2);
           border-radius: 4px;

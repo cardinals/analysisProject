@@ -2,13 +2,13 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-27 14:03:38
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-29 18:21:07
+ * @Last Modified time: 2018-08-29 20:38:46
  */
 
 <template>
   <div class="home" v-if="data">
     <div class="nav">
-      <span class="span1">首页</span>
+      <span class="span1">业务监控</span>
       <el-select v-model="area" placeholder="请选择区域" size="mini" class="areaSelector">
         <el-option v-for="(item,index) in areaOptions" :key="index" :label="item.label" :value="item.value">
         </el-option>
@@ -16,12 +16,12 @@
     </div>
     <div class="block flexRow">
       <div class="left">
-        <div class="title">基本信息->业务数量
+        <div class="title">业务数量
           <div class="buttons">
             <el-button size="mini" :type="date==='today'?'primary':'text'" @click="date='today'">今日</el-button>
             <el-button size="mini" :type="date==='month'?'primary':'text'" @click="date='month'">本月</el-button>
             <el-button size="mini" :type="date==='year'?'primary':'text'" @click="date='year'">本年</el-button>
-        </div>
+          </div>
         </div>
         <div class="contents flexColumn">
           <div class="block-l1" id="map"></div>
@@ -29,28 +29,32 @@
             <div class="one" :class="{active: target==='MBM_CASE'}" @click="target='MBM_CASE'">
               <i class="icon renmintj"></i>
               <div class="one-content">
-                <span class="one-title">人民调解</span><br>
+                <span class="one-title">人民调解</span>
+                <br>
                 <span class="one-num">{{(data.businessCount.MBM_CASE||0) | numFormat}}</span>
               </div>
             </div>
             <div class="one" :class="{active: target==='MMS_ALARM110INFO'}" @click="target='MMS_ALARM110INFO'">
               <i class="icon baojingld"></i>
               <div class="one-content">
-                <span class="one-title">110联动</span><br>
+                <span class="one-title">110联动</span>
+                <br>
                 <span class="one-num">{{(data.businessCount.MMS_ALARM110INFO||0) | numFormat}}</span>
               </div>
             </div>
             <div class="one" :class="{active: target==='WWS_CONSULT'}" @click="target='WWS_CONSULT'">
               <i class="icon jicengflfw"></i>
               <div class="one-content">
-                <span class="one-title">基层法律服务</span><br>
+                <span class="one-title">基层法律服务</span>
+                <br>
                 <span class="one-num">{{(data.businessCount.WWS_CONSULT||0) | numFormat}}</span>
               </div>
             </div>
             <div class="one" :class="{active: target==='CDS_INVESTIGATIONFEEDBAC'}" @click="target='CDS_INVESTIGATIONFEEDBAC'">
               <i class="icon jiufenpc"></i>
               <div class="one-content">
-                <span class="one-title">纠纷排查</span><br>
+                <span class="one-title">纠纷排查</span>
+                <br>
                 <span class="one-num">{{(data.businessCount.CDS_INVESTIGATIONFEEDBAC||0) | numFormat}}</span>
               </div>
             </div>
@@ -64,7 +68,7 @@
             <div class="li" v-for="(item,index) in data.businessType" :key="index">
               <span class="sort">{{index+1}}</span>
               <!-- <el-tooltip :content="item.name" placement="top" effect="light"> -->
-                <span class="name">{{item.name}}</span>
+              <span class="name">{{item.name}}</span>
               <!-- </el-tooltip> -->
               <span class="number">{{item.value | numFormat}}</span>
             </div>
@@ -72,11 +76,27 @@
         </div>
         <div class="block-r2">
           <div class="title">案件处理结果</div>
-          <g2-pie class="contents" :id="'pie1'" :height="141" :colorMap="['#1890FF', '#E9E9E9']" :data="data.businessProcess"></g2-pie>
+          <div class="contents flexRow">
+            <div class="r2Left">
+              <span class="span1">调解成功</span><br>
+              <span class="span2">{{data.businessProcess[0].value | numFormat}}</span>
+            </div>
+            <div class="r2right">
+              <g2-pie :id="'pie1'" :height="120" :colorMap="['#1890FF', '#E9E9E9']" :data="data.businessProcess" :guide="{name: '成功率', value: 0.12}" :showLegend="false"></g2-pie>
+            </div>
+          </div>
         </div>
         <div class="block-r3">
           <div class="title">系统使用概况</div>
-          <g2-pie class="contents" :id="'pie2'" :height="146" :colorMap="['#1890FF', '#E9E9E9']" :data="data.onlineNumber"></g2-pie>
+          <div class="contents flexRow">
+            <div class="r3Left">
+              <span  class="span1">登录人数</span><br>
+              <span  class="span2">{{data.onlineNumber.denglurs | numFormat}}</span>
+            </div>
+            <div class="r3right">
+              <g2-pie :id="'pie2'" :height="120" :colorMap="['#1890FF', '#E9E9E9']" :data="data.onlineNumber.denglurszb" :guide="{name: '登录人数占比', value: data.onlineNumber.denglurszb[0].value}" :showLegend="false"></g2-pie>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -136,11 +156,12 @@ export default {
           const data3 = {businessType: resList[2].data.data.map(item => {
             return { name: item.leiXing, value: item.jianShu }
           })}
-          const data4 = {businessProcess: resList[3].data.data.map(item => {
+          const data4 = {businessProcess: resList[3].data.data.reverse().map(item => {
             return { name: item.leiXing, value: item.shuLiang }
-          }).reverse()}
-          const data5 = {onlineNumber: [{name: '登录人数占比', value: resList[4].data.data.denglurszb}, {name: '未登录人数占比', value: 1 - resList[4].data.data.denglurszb}]}
+          })}
+          const data5 = {onlineNumber: {denglurszb: [{name: '登录人数占比', value: resList[4].data.data.denglurszb}, {name: '未登录人数占比', value: 1 - resList[4].data.data.denglurszb}], denglurs: resList[4].data.data.denglurs}}
           this.data = Object.assign(data1, data2, data3, data4, data5)
+          console.log(this.data)
           this.drawMap()
         } else {
           this.data = null
@@ -321,6 +342,25 @@ export default {
           background: @block;
           .contents{
             padding: 0;
+            .r2Left{
+              flex: 1;
+              flex: 1;
+              padding-top: 60px;
+              text-align: center;
+              line-height: 22px;
+              .span1{
+                color: rgba(0,0,0,0.65);
+                font-size: 14px;
+              }
+              .span2{
+                color: rgba(0,0,0,0.85);
+                font-size: 18px;
+              }
+            }
+            .r2right{
+              flex: 1;
+              padding-top: 20px;
+            }
           }
         }
         .block-r3 {
@@ -329,6 +369,24 @@ export default {
           background: @block;
           .contents{
             padding: 0;
+            .r3Left{
+              flex: 1;
+              text-align: center;
+              padding-top: 60px;
+              line-height: 22px;
+              .span1{
+                color: rgba(0,0,0,0.65);
+                font-size: 14px;
+              }
+              .span2{
+                color: rgba(0,0,0,0.85);
+                font-size: 18px;
+              }
+            }
+            .r3right{
+              flex: 1;
+              padding-top: 20px;
+            }
           }
         }
       }

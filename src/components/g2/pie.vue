@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-19 22:10:56
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-29 15:19:09
+ * @Last Modified time: 2018-08-29 20:34:27
  * @Description: 基础饼图
  */
 <template>
@@ -38,6 +38,10 @@ export default {
       default: () => {
         return {}
       }
+    },
+    showLegend: {
+      type: Boolean,
+      default: true
     }
   },
   data () {
@@ -74,7 +78,7 @@ export default {
       if (this.guide.name) {
         this.chart.guide().html({
           position: ['50%', '50%'],
-          html: `<div style="text-align: center;width: 10em;"><span style="color:rgba(0,0,0,0.65);font-size:12px">${this.guide.name}</span><br><span style="color:#000000;font-size:34px">${numFormat(this.guide.value)}</span></div>`,
+          html: `<div style="text-align: center;width: 10em;"><span style="color:rgba(0,0,0,0.65);font-size:12px">${this.guide.name}</span><br><span style="color:#000000;font-size:16px">${this.guide.value <= 1 ? percentFormat(this.guide.value) : numFormat(this.guide.value)}</span></div>`,
           alignX: 'middle',
           alignY: 'middle'
         })
@@ -94,9 +98,6 @@ export default {
         radius: 0.9,
         innerRadius: 0.75
       })
-      this.chart.legend('name', {
-        position: 'bottom-center'
-      })
       this.chart.intervalStack().position('value').color('name', this.colorMap).style({
         lineWidth: 3,
         stroke: '#fff'
@@ -106,6 +107,13 @@ export default {
           value: value <= 1 ? percentFormat(value) : numFormat(value)
         }
       })
+      if (this.showLegend) {
+        this.chart.legend('name', {
+          position: 'bottom-center'
+        })
+      } else {
+        this.chart.legend(false)
+      }
       this.chart.render()
       let vue = this
       this.chart.on('interval:click', ev => {
