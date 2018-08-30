@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-30 15:47:06
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-30 16:37:11
+ * @Last Modified time: 2018-08-30 18:53:15
  * @Description: 基础柱状图
  */
 
@@ -18,10 +18,10 @@ export default {
     data: {
       type: Array,
       default: () => [
-        { name: 'name1', value: 1, type: '类别1' },
-        { name: 'name2', value: 2, type: '类别2' },
-        { name: 'name1', value: 23, type: '类别1' },
-        { name: 'name2', value: 2, type: '类别2' }
+        { name: 'name1', value1: 1, type: '类别1' },
+        { name: 'name2', value2: 2, type: '类别2' },
+        { name: 'name1', value1: 23, type: '类别1' },
+        { name: 'name2', value2: 2, type: '类别2' }
       ]
     },
     id: String,
@@ -53,15 +53,27 @@ export default {
         height: this.height,
         padding: 60
       })
-      this.chart.source(data)
       this.chart.legend('type', {
         position: 'top-center'
       })
-      this.chart.interval().position('name*value').color('type')
+      this.chart.source(data)
+      this.chart.interval().position('name*value1').color('type')
         .adjust([{
           type: 'dodge',
           marginRatio: 1 / 32
         }])
+      this.chart.interval().position('name*value2').color('type')
+        .adjust([{
+          type: 'dodge',
+          marginRatio: 1 / 32
+        }])
+      this.chart.axis('value2', {
+        label: {
+          formatter: val => {
+            return val + '%'
+          }
+        }
+      })
       this.chart.render()
     }
   },

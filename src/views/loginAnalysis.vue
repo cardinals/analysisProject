@@ -103,8 +103,8 @@ export default {
         let list = []
         if (this.data) {
           this.data.peopleHotCount.map(item => {
-            list.push({name: item.shortname, value: item.login, type: '登录人次'})
-            list.push({name: item.shortname, value: item.hot, type: '登录热度'})
+            list.push({name: item.shortname, value1: parseInt(item.login), type: '登录人次'})
+            list.push({name: item.shortname, value2: parseFloat(item.hot * 100), type: '登录热度'})
           })
         }
         return list
@@ -258,11 +258,12 @@ export default {
         line-height: 50px;
       }
       .unit{
-        position: absolute;
         font-size: @fontMiddle;
         color:#000000;
-        right: 0px;
-        bottom: 8px;
+        float: left;
+        height: 80px;
+        line-height: 80px;
+        padding-left: 5px;
       }
     }
     .right{
