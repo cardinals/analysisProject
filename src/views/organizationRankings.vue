@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-13 11:34:18
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-28 16:44:09
+ * @Last Modified time: 2018-08-30 15:11:48
  */
 
 <template>
@@ -86,7 +86,7 @@
 <script>
 import { organizationRankings } from '@/api/api'
 import { area, coordinationType, top } from '@/utils/dictionaryMapping'
-import { pickerOptions, defaultDateRage } from '@/utils/index'
+import { pickerOptions, defaultDateRage, percentFormat, numFormat } from '@/utils/index'
 
 export default {
   name: 'organizationRankings',
@@ -195,11 +195,10 @@ export default {
       return (this.tableInfo.currentPage - 1) * this.tableInfo.pageSize + index + 1
     },
     percentFormatMethod (row, column, cellValue, index) {
-      return `${cellValue * 100}%`
+      return percentFormat(cellValue)
     },
     numFormatMethod (row, column, cellValue, index) {
-      const reg = /\d{1,3}(?=(\d{3})+$)/g
-      return String(cellValue).replace(reg, '$&,')
+      return numFormat(cellValue)
     },
     handleSearch () {
       this.tableInfo.currentPage = 1

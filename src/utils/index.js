@@ -110,5 +110,11 @@ export let percentFormat = (value) => {
 export let numFormat = (value) => {
   if (!value) return 0
   const reg = /\d{1,3}(?=(\d{3})+$)/g
-  return String(String(value).indexOf('.') > 0 ? value.toFixed(1) : parseInt(value)).replace(reg, '$&,')
+  if (String(value).indexOf('.') > 0) {
+    const list = value.toFixed(1).split('.')
+    list[0] = String(list[0]).replace(reg, '$&,')
+    return list.join('.')
+  } else {
+    return String(value).replace(reg, '$&,')
+  }
 }

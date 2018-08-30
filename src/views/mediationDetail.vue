@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-24 14:57:25
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-30 14:01:04
+ * @Last Modified time: 2018-08-30 15:08:15
  */
 
 <template>
@@ -318,7 +318,6 @@ export default {
         id: this.$route.params.id,
         time: this.date
       }).then(res => {
-        console.log(typeof res)
         if (res.code) {
           this.data = res.data
         } else {

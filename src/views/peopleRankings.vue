@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-13 11:34:06
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-28 22:15:55
+ * @Last Modified time: 2018-08-30 15:41:36
  */
 
 <template>
@@ -64,7 +64,7 @@
             <el-table-column prop="yewusl" sortable="custom" :formatter="numFormatMethod" label="调解案例数"></el-table-column>
             <el-table-column prop="tiaojiecgl" sortable="custom" :formatter="percentFormatMethod" label="成功率"></el-table-column>
             <el-table-column prop="chengjiaoje" sortable="custom" :formatter="numFormatMethod" label="调解金额"></el-table-column>
-            <el-table-column prop="pingjuntjzq" sortable="custom" label="平均调解时长(天)"></el-table-column>
+            <el-table-column prop="pingjuntjzq" sortable="custom" :formatter="numFormatMethod" label="平均调解时长(天)"></el-table-column>
             <el-table-column prop="denglucs" sortable="custom" :formatter="numFormatMethod" label="登录次数"></el-table-column>
           </el-table>
         </div>
@@ -82,7 +82,7 @@
 <script>
 import { peopleRankings } from '@/api/api'
 import { area, coordinationType, top } from '@/utils/dictionaryMapping'
-import { pickerOptions, defaultDateRage } from '@/utils/index'
+import { pickerOptions, defaultDateRage, percentFormat, numFormat } from '@/utils/index'
 
 export default {
   name: 'peopleRankings',
@@ -188,11 +188,10 @@ export default {
       return (this.tableInfo.currentPage - 1) * this.tableInfo.pageSize + index + 1
     },
     percentFormatMethod (row, column, cellValue, index) {
-      return `${cellValue * 100}%`
+      return percentFormat(cellValue)
     },
     numFormatMethod (row, column, cellValue, index) {
-      const reg = /\d{1,3}(?=(\d{3})+$)/g
-      return String(cellValue).replace(reg, '$&,')
+      return numFormat(cellValue)
     },
     handleSearch () {
       this.tableInfo.currentPage = 1
