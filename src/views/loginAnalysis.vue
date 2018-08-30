@@ -1,21 +1,14 @@
 <template>
-  <div class="logonPerson_container">
+  <div class="logonPerson_container" v-if="data">
     <div class="nav">
-      <span class="span1">调解队伍分析</span>
-      <span class="span1">>调解人员排名</span>
-      <span class="span2">>人员画像</span>
+      <span class="span1">工作质量分析</span>
+      <span class="span2">>登录人次分析</span>
     </div>
     <div class="top flexRow">
       <div class="left">
         <div class="title">登录统计信息
-          <el-date-picker
-            class="dateSelector"
-            v-model="date"
-            type="daterange"
-            range-separator="至"
-            start-placeholder="开始日期"
-            end-placeholder="结束日期"
-            size="mini">
+          <el-date-picker class="dateSelector" v-model="date" type="daterange" range-separator="至" start-placeholder="开始日期"
+            end-placeholder="结束日期"  :pickerOptions="pickerOptions" size="mini">
           </el-date-picker>
         </div>
         <div class="contents">
@@ -23,14 +16,14 @@
             <div class="cLeft">
               <div class="label">累计登录人次</div>
               <div class="con clearfix">
-                <div class="number">12345678</div>
+                <div class="number">{{data.LoginCountInfo.denglurc | numFormat}}</div>
                 <div class="unit">次</div>
               </div>
             </div>
             <div class="cRight">
-              <div class="label">登录人数</div>
+              <div class="label">零登录人数</div>
               <div class="con clearfix">
-                <div class="number">12345</div>
+                <div class="number">{{data.LoginCountInfo.weidenglurs | numFormat}}</div>
                 <div class="unit">人</div>
               </div>
             </div>
@@ -39,7 +32,7 @@
             <div class="cLeft">
               <div class="label">累计登录人数</div>
               <div class="con clearfix">
-                <div class="number">4321</div>
+                <div class="number">{{data.LoginCountInfo.denglurs | numFormat}}</div>
                 <div class="unit">人</div>
               </div>
             </div>
@@ -47,12 +40,12 @@
               <div class="line line1">
                 <div class="quan"></div>
                 <div class="dec">专职调解员</div>
-                <div class="num">1234</div>
+                <div class="num">{{data.LoginCountInfo.zhuanzhi | numFormat}}</div>
               </div>
               <div class="line line2">
                 <div class="quan"></div>
                 <div class="dec">兼职或其他</div>
-                <div class="num">1234</div>
+                <div class="num">{{data.LoginCountInfo.jianzhi | numFormat}}</div>
               </div>
             </div>
           </div>
@@ -60,50 +53,18 @@
       </div>
       <div class="right">
         <div class="title">今日登录人员
-          <span class="titleRight">共:255人</span>
+          <span class="titleRight">共:{{data.TodayLogin.length | numFormat}}人</span>
         </div>
         <div class="contents">
-          <div class="table">
-            <div class="tr">
-              <div class="td td1">姓名</div>
-              <div class="td td2">所属单位</div>
-              <div class="td td3">今日首次登录时间</div>
-              <div class="td td4">登录次数</div>
-            </div>
-            <div class="tr">
-              <div class="td td1">小青龙</div>
-              <div class="td td2">哈哈哈哈哈</div>
-              <div class="td td3">8：30</div>
-              <div class="td td4">3</div>
-            </div>
-            <div class="tr">
-              <div class="td td1">小青</div>
-              <div class="td td2">哈哈哈哈哈哈哈哈哈哈</div>
-              <div class="td td3">8：30</div>
-              <div class="td td4">3</div>
-            </div>
-            <div class="tr">
-              <div class="td td1">小青龙</div>
-              <div class="td td2">哈哈哈哈哈哈哈</div>
-              <div class="td td3">8：30</div>
-              <div class="td td4">3</div>
-            </div>
-            <div class="tr">
-              <div class="td td1">小青龙</div>
-              <div class="td td2">哈哈哈哈哈哈哈哈</div>
-              <div class="td td3">8：30</div>
-              <div class="td td4">3</div>
-            </div>
-            <div class="tr">
-              <div class="td td1">小青龙</div>
-              <div class="td td2">哈哈哈哈哈哈哈哈</div>
-              <div class="td td3">8：30</div>
-              <div class="td td4">3</div>
-            </div>
-          </div>
+          <el-table :data="currentTableData" stripe class="table" @row-click="handleRowClick">
+              <el-table-column prop="name" :width="100" label="姓名"></el-table-column>
+              <el-table-column prop="shortname" label="所属单位" show-overflow-tooltip></el-table-column>
+              <el-table-column prop="denglusj" label="今日首次登录时间" :formatter="timeFormat"></el-table-column>
+              <el-table-column prop="denglucs" label="登录次数"></el-table-column>
+            </el-table>
           <div class="pageCon">
-            <el-pagination :current-page="1"
-              :page-sizes="[10, 20, 30]" :page-size="10" layout="total, sizes, prev, pager, next, jumper" :total="100">
+            <el-pagination layout="prev, pager, next, jumper" @current-change="handleCurrentChange"
+            :current-page="currentPage" :page-size="pageSize" :total="data.TodayLogin.length">
             </el-pagination>
           </div>
         </div>
@@ -112,27 +73,96 @@
     <div class="bottom">
       <div class="title">
         各区登录人次分析
-        <el-date-picker
-          class="dateSelector"
-          v-model="date2"
-          type="daterange"
-          range-separator="至"
-          start-placeholder="开始日期"
-          end-placeholder="结束日期"
-          size="mini">
+        <el-date-picker class="dateSelector" v-model="date2" type="week" format="yyyy 第 WW 周" placeholder="选择周" :pickerOptions="pickerDisabledDate" size="mini">
         </el-date-picker>
       </div>
+      <g2-groupedColumn :id="'groupedColumn'" :data="groupedColumnData" :height="593"></g2-groupedColumn>
     </div>
     <footer-com></footer-com>
   </div>
 </template>
 
 <script>
+import {loginAnalysis} from '@/api/api'
+import {pickerOptions, pickerDisabledDate, defaultDateRage, defaultWeek, dateFormat, findWeekRangeByToday, numFormat} from '@/utils/index'
 export default {
   data () {
     return {
-      date: '',
-      date2: ''
+      date: defaultDateRage(),
+      date2: findWeekRangeByToday(defaultWeek(), 1),
+      pickerOptions: pickerOptions,
+      pickerDisabledDate: pickerDisabledDate,
+      data: null,
+      currentPage: 1,
+      pageSize: 4
+    }
+  },
+  computed: {
+    groupedColumnData: {
+      get: function () {
+        let list = []
+        if (this.data) {
+          this.data.peopleHotCount.map(item => {
+            list.push({name: item.shortname, value: item.login, type: '登录人次'})
+            list.push({name: item.shortname, value: item.hot, type: '登录热度'})
+          })
+        }
+        return list
+      },
+      set: function () {}
+    },
+    currentTableData: {
+      get: function () {
+        const start = (this.currentPage - 1) * this.pageSize
+        const end = this.currentPage * this.pageSize
+        return this.data.TodayLogin.slice(start, end)
+      },
+      set: function () {}
+    }
+  },
+  watch: {
+    date: function (newValue, oldValue) {
+      this.currentPage = 1
+      this.onLoad()
+    },
+    date2: function (newValue, oldValue) {
+      this.onLoad()
+    }
+  },
+  created () {
+    this.onLoad()
+  },
+  methods: {
+    onLoad () {
+      loginAnalysis([{
+        startdate: dateFormat(findWeekRangeByToday(this.date2, 1)),
+        enddate: dateFormat(findWeekRangeByToday(this.date2, 7))
+      }, {
+        startdate: this.date[0],
+        enddate: this.date[1]
+      }]).then(resList => {
+        if (resList[0].data.code && resList[1].data.code) {
+          this.data = Object.assign(resList[0].data.data, resList[1].data.data)
+        } else {
+          this.data = null
+          this.$message({type: 'error', message: '系统内部错误'})
+          this.$router.push({path: '/error/500'})
+        }
+      }).catch(err => {
+        console.log(err)
+      })
+    },
+    numFormat (value) {
+      return numFormat(parseInt(value))
+    },
+    timeFormat (row, column, cellValue, index) {
+      return cellValue.split(' ')[1]
+    },
+    handleRowClick (row, event, column) {
+      this.$router.push({path: `/peopleDetail/${row.id}`})
+    },
+    handleCurrentChange (currentPage) {
+      this.currentPage = currentPage
     }
   }
 }
@@ -146,7 +176,7 @@ export default {
     margin-bottom: 16px;
     height: 363px;
     .left{
-      flex:545;
+      flex:1;
       margin-right: 16px;
       background: @block;
       .title{
@@ -236,7 +266,7 @@ export default {
       }
     }
     .right{
-      flex: 568;
+      flex: 1;
       background: @block;
       .title{
         .titleRight{
@@ -245,9 +275,8 @@ export default {
         }
       }
       .table{
-        height: 222px;
-        padding-top: 16px;
-        padding-bottom: 22px;
+        height: 240px;
+        margin-bottom: 16px;
         .tr{
           height: 37px;
           color: @gray;
@@ -284,6 +313,7 @@ export default {
       }
       .pageCon{
         height: 51px;
+        text-align: center;
       }
     }
   }

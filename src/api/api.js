@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-13 10:30:00
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-28 11:10:08
+ * @Last Modified time: 2018-08-30 16:19:12
  */
 
 //  引入httpUtil
@@ -47,4 +47,10 @@ export const homeData = (params) => all([
   {url: `${baseUrl}/businessType`, params: params},
   {url: `${baseUrl}/businessProcess`, params: params},
   {url: `${baseUrl}/onlineNumber`, params: params}
+])
+
+// 工作质量分析 登录人员分析
+export const loginAnalysis = (params) => all([
+  {url: `${baseUrl}/loginUser`, params: params[0]},
+  {url: `${baseUrl}/loginCount`, params: params[1]}
 ])

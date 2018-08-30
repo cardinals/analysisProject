@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-13 08:52:29
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-29 08:30:16
+ * @Last Modified time: 2018-08-30 14:18:39
  */
 
 const state = {
@@ -18,7 +18,7 @@ const state = {
       disable: false
     },
     {
-      index: 'none',
+      index: 'teamAnalysis',
       label: '调解队伍分析',
       disable: false,
       children: [{
@@ -28,6 +28,16 @@ const state = {
       }, {
         index: 'peopleRankings',
         label: '调解人员排名',
+        disable: false
+      }]
+    },
+    {
+      index: 'workAnalysis',
+      label: '工作质量分析',
+      disable: false,
+      children: [{
+        index: 'loginAnalysis',
+        label: '登录人次分析',
         disable: false
       }]
     }

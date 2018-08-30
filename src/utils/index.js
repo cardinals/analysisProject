@@ -79,9 +79,14 @@ export let defaultDateRage = () => {
 }
 
 // 日期选择器默认日期(本年)
-
 export let defaultYear = () => {
   return dateFormat(new Date(), 'yyyy')
+}
+
+// 周选择器默认日期(上周)
+export let defaultWeek = () => {
+  const date = new Date()
+  return date.setTime(date.getTime() - 1000 * 60 * 60 * 24 * 7)
 }
 
 // 通过地区名称查找地区编码
