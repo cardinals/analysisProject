@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-27 14:03:38
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-29 20:38:46
+ * @Last Modified time: 2018-08-30 11:58:12
  */
 
 <template>
@@ -78,11 +78,11 @@
           <div class="title">案件处理结果</div>
           <div class="contents flexRow">
             <div class="r2Left">
-              <span class="span1">调解成功</span><br>
-              <span class="span2">{{data.businessProcess[0].value | numFormat}}</span>
+              <span class="span1">{{anJIanCLJGSLBT}}</span><br>
+              <span class="span2">{{data.businessProcess.shuLiang | numFormat}}</span>
             </div>
             <div class="r2right">
-              <g2-pie :id="'pie1'" :height="120" :colorMap="['#1890FF', '#E9E9E9']" :data="data.businessProcess" :guide="{name: '成功率', value: 0.12}" :showLegend="false"></g2-pie>
+              <g2-pie :id="'pie1'" :height="120" :colorMap="['#1890FF', '#E9E9E9']" :data="data.businessProcess.zhanBi" :guide="{name: anJIanCLJGZBBT, value: data.businessProcess.zhanBi[0].value}" :showLegend="false"></g2-pie>
             </div>
           </div>
         </div>
@@ -133,10 +133,29 @@ export default {
       this.fetchHomeData()
     }
   },
+  computed: {
+    // 案件处理结果数量标题
+    anJIanCLJGZBBT: {
+      get: function () {
+        const list = { 'MBM_CASE': '成功率', 'MMS_ALARM110INFO': '申请率', 'WWS_CONSULT': '转化率', 'CDS_INVESTIGATIONFEEDBAC': '转化率' }
+        return list[this.target]
+      },
+      set: function (newValue) {}
+    },
+    // 案件处理结果占比标题
+    anJIanCLJGSLBT: {
+      get: function () {
+        const list = { 'MBM_CASE': '调解成功', 'MMS_ALARM110INFO': '申请调解', 'WWS_CONSULT': '转为调解', 'CDS_INVESTIGATIONFEEDBAC': '转为调解' }
+        return list[this.target]
+      },
+      set: function (newValue) {}
+    }
+  },
   created () {
     this.fetchHomeData()
   },
   mounted () {
+    // 分辨率变化地图模块重置大小
     window.addEventListener('resize', () => {
       this.$nextTick(function () {
         this.myChart.resize()
@@ -156,12 +175,16 @@ export default {
           const data3 = {businessType: resList[2].data.data.map(item => {
             return { name: item.leiXing, value: item.jianShu }
           })}
-          const data4 = {businessProcess: resList[3].data.data.reverse().map(item => {
-            return { name: item.leiXing, value: item.shuLiang }
-          })}
+          const data4 = {
+            businessProcess: {
+              zhanBi: resList[3].data.data.map(item => {
+                return { name: item.leiXing, value: item.zhanBi / 100 }
+              }),
+              shuLiang: resList[3].data.data[0].shuLiang
+            }
+          }
           const data5 = {onlineNumber: {denglurszb: [{name: '登录人数占比', value: resList[4].data.data.denglurszb}, {name: '未登录人数占比', value: 1 - resList[4].data.data.denglurszb}], denglurs: resList[4].data.data.denglurs}}
           this.data = Object.assign(data1, data2, data3, data4, data5)
-          console.log(this.data)
           this.drawMap()
         } else {
           this.data = null
@@ -193,6 +216,16 @@ export default {
           }
         })[0]['coordinates']
         this.myChart.setOption(setMapbox(mapData, center))
+        this.myChart.on('click', (params) => {
+          // params.data.name 调委会/司法所名称
+          // params.data.value[2] 调委会/司法所案件数量
+          // params.data.id 调委会/司法所ID
+          if (this.target === 'MMS_ALARM110INFO') {
+            this.$router.push({path: `/organizationDetail/${params.data.id}`})
+          } else {
+            this.$router.push({path: `/mediationDetail/${params.data.id}`})
+          }
+        })
       })
     }
   }
