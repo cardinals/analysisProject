@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-24 14:57:25
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-30 11:40:30
+ * @Last Modified time: 2018-08-30 14:01:04
  */
 
 <template>
@@ -318,11 +318,12 @@ export default {
         id: this.$route.params.id,
         time: this.date
       }).then(res => {
+        console.log(typeof res)
         if (res.code) {
           this.data = res.data
         } else {
           this.data = null
-          this.$message({type: 'error', message: '数据请求失败'})
+          this.$message({type: 'error', message: '系统内部错误'})
           this.$router.push({path: '/error/500'})
         }
       }).catch(err => {

@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-27 14:03:38
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-30 11:58:12
+ * @Last Modified time: 2018-08-30 13:44:53
  */
 
 <template>
@@ -188,7 +188,7 @@ export default {
           this.drawMap()
         } else {
           this.data = null
-          this.$message({type: 'error', message: '数据请求失败'})
+          this.$message({type: 'error', message: '系统内部错误'})
           this.$router.push({path: '/error/500'})
         }
       }).catch(err => {
@@ -388,6 +388,7 @@ export default {
               .span2{
                 color: rgba(0,0,0,0.85);
                 font-size: 18px;
+                font-weight: 600;
               }
             }
             .r2right{
@@ -414,6 +415,7 @@ export default {
               .span2{
                 color: rgba(0,0,0,0.85);
                 font-size: 18px;
+                font-weight: 600;
               }
             }
             .r3right{

@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-13 11:33:54
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-30 09:43:19
+ * @Last Modified time: 2018-08-30 13:32:56
  */
 
 <template>
@@ -114,7 +114,7 @@
       </div>
       <div class="right">
         <div class="title clearfix">
-          调解案件数量
+          案件受理情况
           <div class="btn" :class="{active: target1==='tiaoJieY'}" @click="target1='tiaoJieY'">调解员</div>
           <div class="btn" :class="{active: target1==='tiaoWeiH'}" @click="target1='tiaoWeiH'">调委会</div>
         </div>
@@ -398,7 +398,7 @@ export default {
           this.data = Object.assign(resList[0].data.data, resList[1].data.data, resList[2].data.data)
         } else {
           this.data = null
-          this.$message({type: 'error', message: '数据请求失败'})
+          this.$message({type: 'error', message: '系统内部错误'})
           this.$router.push({path: '/error/500'})
         }
       }).catch(err => {

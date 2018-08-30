@@ -178,7 +178,7 @@ export default {
             this.tableInfo.tableData = res.data.pageData
             this.tableInfo.total = res.data.pageinfo.total
           } else {
-            this.$message({type: 'error', message: '数据请求失败'})
+            this.$message({type: 'error', message: '系统内部错误'})
             this.$router.push({path: '/error/500'})
           }
         }

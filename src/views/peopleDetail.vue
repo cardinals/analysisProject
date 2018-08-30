@@ -254,7 +254,7 @@ export default {
           this.data = Object.assign(resList[0].data.data, resList[1].data.data, resList[2].data.data)
         } else {
           this.data = null
-          this.$message({type: 'error', message: '数据请求失败'})
+          this.$message({type: 'error', message: '系统内部错误'})
           this.$router.push({path: '/error/500'})
         }
       }).catch(err => {
