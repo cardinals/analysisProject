@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-14 09:28:41
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-28 18:01:17
+ * @Last Modified time: 2018-08-30 19:10:50
  */
 
 import axios from 'axios'
@@ -50,6 +50,9 @@ axios.interceptors.response.use(
     store.dispatch({ type: 'app/changeLoadingStatus', amount: false })
     if (error.status === 500) {
       Message({ type: 'error', message: '500 内部服务器错误！', duration: 5000 })
+    }
+    if (error.status === 404) {
+      Message({ type: 'error', message: '404 接口不存在', duration: 5000 })
     }
     return Promise.reject(error.response)
   }
