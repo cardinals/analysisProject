@@ -59,7 +59,7 @@
           <el-table :data="currentTableData" stripe class="table" @row-click="handleRowClick">
               <el-table-column prop="name" :width="100" label="姓名"></el-table-column>
               <el-table-column prop="shortname" label="所属单位" show-overflow-tooltip></el-table-column>
-              <el-table-column prop="denglusj" label="今日首次登录时间" :formatter="timeFormat"></el-table-column>
+              <el-table-column prop="denglusj" label="最近登录时间" :formatter="timeFormat"></el-table-column>
               <el-table-column prop="denglucs" label="登录次数"></el-table-column>
             </el-table>
           <div class="pageCon">
@@ -104,7 +104,7 @@ export default {
         if (this.data) {
           this.data.peopleHotCount.map(item => {
             list.push({name: item.shortname, value1: parseInt(item.login), type: '登录人次'})
-            list.push({name: item.shortname, value2: parseFloat(item.hot * 100), type: '登录热度'})
+            list.push({name: item.shortname, value2: parseFloat(item.hot), type: '登录热度'})
           })
         }
         return list

@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-27 14:03:38
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-30 13:44:53
+ * @Last Modified time: 2018-08-31 17:30:14
  */
 
 <template>
@@ -216,15 +216,24 @@ export default {
           }
         })[0]['coordinates']
         this.myChart.setOption(setMapbox(mapData, center))
-        this.myChart.on('click', (params) => {
-          // params.data.name 调委会/司法所名称
-          // params.data.value[2] 调委会/司法所案件数量
-          // params.data.id 调委会/司法所ID
-          if (this.target === 'MMS_ALARM110INFO') {
-            this.$router.push({path: `/organizationDetail/${params.data.id}`})
-          } else {
-            this.$router.push({path: `/mediationDetail/${params.data.id}`})
-          }
+        // 获取echarts中的mapbox实例
+        let mapbox
+        this.myChart._model.eachComponent('mapbox3D', function (mapboxModel) {
+          mapbox = mapboxModel._mapbox
+        })
+        // 监听mapbox点击事件, 保存点的经纬度
+        this.myChart.on('click', (echartsParams) => {
+          console.log(echartsParams.data)
+          // 监听mapbox点击事件, 保存点的经纬度
+          mapbox.once('click', (mapboxParams) => {
+            console.log(mapboxParams.lngLat)
+          })
+          // mapbox.on('click', (mapboxParams) => {
+          //   console.log(mapboxParams.lngLat)
+          // })
+          // mapbox.off('click', (mapboxParams) => {
+          //   console.log('off')
+          // })
         })
       })
     }

@@ -123,3 +123,13 @@ export let numFormat = (value) => {
     return String(value).replace(reg, '$&,')
   }
 }
+
+// 处理浮点数或整数(浮点数取一位/整数不做处理)  问题: floatIntFormat(0.58*100) 返回 58.0
+export let floatIntFormat = (value) => {
+  if (!value) return 0
+  if (String(value).indexOf('.') > 0) {
+    return value.toFixed(1)
+  } else {
+    return value
+  }
+}
