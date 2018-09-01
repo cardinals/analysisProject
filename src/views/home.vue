@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-27 14:03:38
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-31 17:30:14
+ * @Last Modified time: 2018-08-31 23:39:10
  */
 
 <template>
@@ -195,6 +195,7 @@ export default {
         console.log(err)
       })
     },
+    // 绘制地图
     drawMap () {
       this.$nextTick(() => {
         if (!this.myChart) {
@@ -223,19 +224,23 @@ export default {
         })
         // 监听mapbox点击事件, 保存点的经纬度
         this.myChart.on('click', (echartsParams) => {
-          console.log(echartsParams.data)
           // 监听mapbox点击事件, 保存点的经纬度
           mapbox.once('click', (mapboxParams) => {
-            console.log(mapboxParams.lngLat)
+            this.drawPopup(mapboxParams.lngLat, echartsParams.data, mapbox)
           })
-          // mapbox.on('click', (mapboxParams) => {
-          //   console.log(mapboxParams.lngLat)
-          // })
-          // mapbox.off('click', (mapboxParams) => {
-          //   console.log('off')
-          // })
         })
       })
+    },
+    // 绘制弹框
+    drawPopup (lngLat, data, map) {
+      const dom = `<div>
+                    <span>${data.name}</span><br>
+                    <span>案件数量:</span><span>${data.value[2]}</span><br>
+                  </div>`
+      new window.mapboxgl.Popup()
+        .setLngLat(lngLat)
+        .setHTML(dom)
+        .addTo(map)
     }
   }
 }
