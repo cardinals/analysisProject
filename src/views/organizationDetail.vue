@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-13 11:33:54
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-30 13:32:56
+ * @Last Modified time: 2018-09-02 14:53:29
  */
 
 <template>
@@ -310,7 +310,7 @@
 
 <script>
 import { organizationDetails } from '@/api/api'
-import { defaultYear, pickerDisabledDate } from '@/utils/index'
+import { defaultYear, pickerDisabledDate, color } from '@/utils/index'
 export default {
   name: 'organizationDetails',
   data () {
@@ -328,7 +328,7 @@ export default {
       // 调解时长排名的选中类别
       target3: 'anJian',
       // 颜色组
-      color: ['#1890FF', '#FBD437', '#EA77FF', '#FF6868']
+      color: color
     }
   },
   computed: {

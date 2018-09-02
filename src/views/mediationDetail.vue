@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-24 14:57:25
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-30 15:08:15
+ * @Last Modified time: 2018-09-02 14:53:43
  */
 
 <template>
@@ -231,7 +231,7 @@
 
 <script>
 import { mediationDetails } from '@/api/api'
-import { defaultYear, pickerDisabledDate } from '@/utils/index'
+import { defaultYear, pickerDisabledDate, color } from '@/utils/index'
 export default {
   name: 'mediationDetails',
   data () {
@@ -251,7 +251,7 @@ export default {
       // 调解时长排名的选中类别
       target4: 'anJian',
       // 颜色组
-      color: ['#1890FF', '#FBD437', '#EA77FF', '#FF6868']
+      color: color
     }
   },
   computed: {

@@ -91,11 +91,7 @@ export const setMapbox = (caseData, centerPoint) => {
       data: caseData,
       silent: false,
       zlevel: -10,
-      emphasis: {
-        label: {
-          show: false
-        }
-      }
+      emphasis: false
     }]
   }
   return option

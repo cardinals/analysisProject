@@ -138,7 +138,60 @@
   line-height: 100%;
 }
 
+// 无数据按钮样式
 .nodata-button{
   margin: calc(50% - 80px) calc(50% - 60px);
   color: rgba(0,0,0,0.45)
 }
+
+// 地图模块 myPopup 自定义样式
+.myPopup{
+  z-index: 999;
+}
+.mapboxgl-popup-tip{
+  border-right-color: rgba(0, 0, 0, 0.8) !important;
+}
+.mapboxgl-popup-content{
+  background-color: rgba(0, 0, 0, 0.8) !important;
+  color:rgba(255,255,255,0.8) !important;
+  padding: 15px 20px !important;
+}
+.mapboxgl-popup-close-button{
+  color:rgba(255,255,255,0.8) !important;
+}
+.popupTitle:hover{
+  color: rgba(255, 187, 25, 1) !important;
+}
+.popupNumber{
+  color: rgba(255, 187, 25, 1) !important;
+}
+.popupBorder{
+  display: block;
+  border-bottom: rgba(255,255,255,0.65) dashed 1px !important;
+  height: 1px;
+  margin: 3px 2px;
+}
+.popupColor {
+  display: inline-block;
+  border-radius: 50%;
+  background: #1890ff;
+  height: 5px;
+  width: 5px;
+  margin-left: 20px;
+  margin-right: 10px;
+}
+.popupIconAddress{
+  display: inline-block;
+  height: 100%;
+  line-height: 100%;
+  background: url(~@/assets/images/home/icon-address.png) no-repeat left !important;
+  padding-left: 20px;
+}
+.popupIconDocumnet{
+  display: inline-block;
+  height: 100%;
+  line-height: 100%;
+  background: url(~@/assets/images/home/icon-document.png) no-repeat left !important;
+  padding-left: 20px;
+}
+

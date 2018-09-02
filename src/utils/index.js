@@ -133,3 +133,6 @@ export let floatIntFormat = (value) => {
     return value
   }
 }
+
+// 颜色组
+export const color = ['#1890FF', '#FBD437', '#EA77FF', '#FF6868']

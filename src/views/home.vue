@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-27 14:03:38
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-31 23:39:10
+ * @Last Modified time: 2018-09-02 14:44:37
  */
 
 <template>
@@ -105,7 +105,7 @@
 
 <script>
 import {area} from '@/utils/dictionaryMapping'
-import {pickerOptions} from '@/utils/index'
+import {pickerOptions, color} from '@/utils/index'
 import {homeData} from '@/api/api'
 import {setMapbox} from '@/utils/echartsOptions'
 
@@ -119,7 +119,9 @@ export default {
       pickerOptions: pickerOptions,
       target: 'MBM_CASE',
       data: null,
-      myChart: null
+      myChart: null,
+      color: color,
+      organizationId: null
     }
   },
   watch: {
@@ -132,6 +134,7 @@ export default {
     target: function (newValue, oldValue) {
       this.fetchHomeData()
     }
+
   },
   computed: {
     // 案件处理结果数量标题
@@ -233,14 +236,27 @@ export default {
     },
     // 绘制弹框
     drawPopup (lngLat, data, map) {
+      let domType = ''
+      data.typeList.map((item, index) => {
+        domType += `<span class='popupColor' style='background: ${this.color[index]}'></span><span>${item.leiXing}: ${item.jianShu}件</span><br>`
+      })
       const dom = `<div>
-                    <span>${data.name}</span><br>
-                    <span>案件数量:</span><span>${data.value[2]}</span><br>
+                    <span class='popupTitle popupIconAddress' onclick='window.organizationDeatil("${data.id}", "${this.target}")'>${data.name}</span><br>
+                    <span class='popupIconDocumnet'>案件数量: <span class='popupNumber'>${data.value[2]}件</span></span><br>
+                    <span class='popupBorder'></span>
+                    ${domType}
                   </div>`
-      new window.mapboxgl.Popup()
+      new window.mapboxgl.Popup({anchor: 'left', className: 'myPopup'})
         .setLngLat(lngLat)
         .setHTML(dom)
         .addTo(map)
+      window.organizationDeatil = function (id, type) {
+        if (type === 'MMS_ALARM110INFO') {
+          window.location.hash = `#/organizationDetail/${id}`
+        } else {
+          window.location.hash = `#/mediationDetail/${id}`
+        }
+      }
     }
   }
 }
