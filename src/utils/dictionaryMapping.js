@@ -89,7 +89,9 @@ export const top = [
   {label: '前20', value: 20},
   {label: '前50', value: 50},
   {label: '前100', value: 100},
-  {label: '前200', value: 200}
+  {label: '前200', value: 200},
+  {label: '零业务', value: 1},
+  {label: '零登录', value: 2}
 ]
 
 export const route = [

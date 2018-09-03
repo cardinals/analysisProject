@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-13 11:34:01
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-29 20:48:19
+ * @Last Modified time: 2018-09-03 15:13:11
  */
 
 <template>
@@ -26,9 +26,7 @@
           </div>
           <div class="atBottom">
             <div class="once">工作职务：{{data.base.zhiwu}}</div>
-            <!-- <el-tooltip :content="data.base.shortname" placement="top"> -->
-              <div class="once">{{data.base.shortname}}</div>
-            <!-- </el-tooltip> -->
+            <div class="once">所属单位：{{data.base.shortname}}</div>
             <div class="once">联系电话：{{data.base.phone}}</div>
             <div class="once">任职方式：{{data.base.renzhifs}}</div>
           </div>

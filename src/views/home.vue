@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-27 14:03:38
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-09-02 14:44:37
+ * @Last Modified time: 2018-09-03 15:18:44
  */
 
 <template>
@@ -120,6 +120,7 @@ export default {
       target: 'MBM_CASE',
       data: null,
       myChart: null,
+      myPopup: new window.mapboxgl.Popup({anchor: 'left', className: 'myPopup'}),
       color: color,
       organizationId: null
     }
@@ -132,6 +133,7 @@ export default {
       this.fetchHomeData()
     },
     target: function (newValue, oldValue) {
+      this.myPopup.remove()
       this.fetchHomeData()
     }
 
@@ -246,8 +248,7 @@ export default {
                     <span class='popupBorder'></span>
                     ${domType}
                   </div>`
-      new window.mapboxgl.Popup({anchor: 'left', className: 'myPopup'})
-        .setLngLat(lngLat)
+      this.myPopup.setLngLat(lngLat)
         .setHTML(dom)
         .addTo(map)
       window.organizationDeatil = function (id, type) {

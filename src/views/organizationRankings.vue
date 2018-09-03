@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-13 11:34:18
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-30 15:11:48
+ * @Last Modified time: 2018-09-03 16:24:30
  */
 
 <template>
@@ -37,13 +37,7 @@
       </div>
     </div>
     <div class="view-content">
-      <div class="top">
-        <div class="title">调解机构排名</div>
-        <div class="dateSelector">
-          <el-date-picker type="daterange" size="mini" align="right" unlink-panels range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期"
-            value-format="yyyy-MM-dd" v-model="date" :picker-options="pickerOptions">
-          </el-date-picker>
-        </div>
+      <div class="title">调解机构排名
         <div class="download">
           <el-dropdown @command="handleCommand">
             <el-button type="primary" size="mini">
@@ -55,6 +49,11 @@
               <el-dropdown-item  command="excl">EXCEL</el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
+        </div>
+        <div class="dateSelector">
+          <el-date-picker type="daterange" size="mini" align="right" unlink-panels range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期"
+            value-format="yyyy-MM-dd" v-model="date" :picker-options="pickerOptions">
+          </el-date-picker>
         </div>
       </div>
       <div class="view-body">
@@ -118,7 +117,7 @@ export default {
         currentPage: 1,
         total: 0,
         orderBy: 'yewusl',
-        orderRule: 'descending'
+        orderRule: 'DESC'
       }
       /* ------ selector区域 end ------ */
     }
@@ -140,9 +139,6 @@ export default {
       this.tableInfo.currentPage = 1
       this.onLoad()
     }
-  },
-  created () {
-    this.onLoad()
   },
   methods: {
     // 获取数据
@@ -265,29 +261,6 @@ export default {
       width: 100%;
       margin-top: 15px;
       background: #FFFFFF;
-      .top {
-        display: flex;
-        flex-direction: row;
-        width: 100%;
-        height: 47px;
-        border-bottom: #EDEDED solid 1px;
-        line-height: 46px;
-        .title {
-          flex-grow: 0;
-          color: #000000;
-          font-size: 16px;
-          margin-left: 12px
-        }
-        .dateSelector {
-          flex-grow: 1;
-          margin-right: 12px;
-          text-align: right;
-        }
-        .download {
-          flex-grow: 0;
-          margin-right: 12px
-        }
-      }
       .view-body {
         display: flex;
         flex-direction: column;
