@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-13 11:33:54
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-09-03 16:51:56
+ * @Last Modified time: 2018-09-03 19:15:31
  */
 
 <template>
@@ -39,7 +39,7 @@
             </div>
             <div class="sContents flexRow">
               <div class="info">
-                <div class="number">{{(data.tiaoJieDW.tiaoJieJGSL.jiGouSL||0) | numFormat}}</div>
+                <div class="number">{{(data.tiaoJieDW.tiaoJieJGSL.jiGouSL||0) | numFormat}}<span style="font-size:14px;">家</span></div>
                 <div class="others">
                   <div class="line">
                     <label>调解委员会：</label>
@@ -61,7 +61,7 @@
             </div>
             <div class="sContents flexRow">
               <div class="info">
-                <div class="number">{{(data.tiaoJieDW.tiaoJieYSL.renYuanSL||0) | numFormat}}</div>
+                <div class="number">{{(data.tiaoJieDW.tiaoJieYSL.renYuanSL||0) | numFormat}}<span style="font-size:14px;">名</span></div>
                 <div class="others">
                   <div class="line">
                     <label>专职调解员：</label>
@@ -89,7 +89,7 @@
           </div>
           <div class="sContents">
             <div class="number">
-              <span class="span1">{{(data.tiaoJieAJSL.zongLiang||0) | numFormat}}</span>
+              <span class="span1">{{(data.tiaoJieAJSL.zongLiang||0) | numFormat}}<span style="font-size:14px;">件</span></span>
               <div class="border"></div>
               <!-- 机构类型为司法所时不显示万人比 -->
               <span class="span2" v-if="data.jiBenXX.jiGouLX===''">万人比
@@ -127,15 +127,15 @@
               </div>
               <div class="sContents flexRow">
                 <div class="info">
-                  <div class="number">{{(targetData1_1.number1||0) | numFormat}}</div>
+                  <div class="number">{{(targetData1_1.number1||0) | numFormat}}<span style="font-size:16px;">{{target1==='tiaoJieY'?'名':'家'}}</span></div>
                   <div class="others">
                     <div class="line">
                       <label v-text="target1==='tiaoJieY'?'专职调解员：':'调解委员会：'"></label>
-                      <span>{{(targetData1_1.number2||0) | numFormat}}{{target1==='tiaoJieY'?'名':'个'}}</span>
+                      <span>{{(targetData1_1.number2||0) | numFormat}}{{target1==='tiaoJieY'?'名':'家'}}</span>
                     </div>
                     <div class="line">
                       <label v-text="target1==='tiaoJieY'?'兼职或其他：':'调解工作室：'"></label>
-                      <span>{{(targetData1_1.number3||0) | numFormat}}{{target1==='tiaoJieY'?'名':'个'}}</span>
+                      <span>{{(targetData1_1.number3||0) | numFormat}}{{target1==='tiaoJieY'?'名':'家'}}</span>
                     </div>
                   </div>
                 </div>
@@ -343,6 +343,9 @@ export default {
         temp.push({name: item.name, value: item.value1, type: '案件数量'})
         temp.push({name: item.name, value: item.value2, type: '调解员数量'})
       })
+      if (temp.length > 24) {
+        temp = temp.slice(0, 24)
+      }
       return temp.reverse()
     },
     // 零受理案件数量--数据

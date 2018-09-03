@@ -17,7 +17,6 @@ export const setMapbox = (caseData, centerPoint) => {
       seriesIndex: [0]
     }],
     mapbox: {
-      // style: 'mapbox://styles/mapbox/dark-v9',
       style: {
         'version': 8,
         'glyphs': `${osmUrl}/fonts/{fontstack}/{range}.pbf`,
@@ -25,7 +24,7 @@ export const setMapbox = (caseData, centerPoint) => {
           'osm-tiles': {
             'type': 'raster',
             'tiles': [
-              `${osmUrl}/styles/positron/{z}/{x}/{y}.png`
+              `${osmUrl}/styles/customPositronStyle/{z}/{x}/{y}.png`
             ],
             'tileSize': 256
           }

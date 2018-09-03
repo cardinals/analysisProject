@@ -8,7 +8,7 @@
       <div class="left">
         <div class="title">登录统计信息
           <el-date-picker class="dateSelector" v-model="date" type="daterange" range-separator="至" start-placeholder="开始日期"
-            end-placeholder="结束日期"  :pickerOptions="pickerOptions" size="mini">
+            end-placeholder="结束日期" value-format="yyyy-MM-dd"  :pickerOptions="pickerOptions" size="mini">
           </el-date-picker>
         </div>
         <div class="contents">

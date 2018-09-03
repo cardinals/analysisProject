@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-21 13:44:57
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-29 13:29:59
+ * @Last Modified time: 2018-09-03 19:15:19
  * @Description: 镜像分面柱图
  */
 
@@ -50,7 +50,7 @@ export default {
         container: this.id,
         forceFit: true,
         height: this.height,
-        padding: [40, 20, 0, 70]
+        padding: [40, 20, 0, 140]
       })
       this.chart.source(data, {
         name: {

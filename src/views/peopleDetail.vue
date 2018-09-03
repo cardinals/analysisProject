@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-13 11:34:01
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-09-03 15:13:11
+ * @Last Modified time: 2018-09-03 18:45:44
  */
 
 <template>
@@ -73,8 +73,8 @@
             <div class="dis">案件受理数量({{clickBusinessType}})</div>
           </div>
           <div class="atMiddle">
-            <span class="number">{{(businessTypeData.yewusl||0) | numFormat}}</span>
-            <span class="danwei">件</span>
+            <span class="number">{{(businessTypeData.yewusl||0) | numFormat}}<span style="font-size:14px;">件</span></span>
+            <!-- <span class="danwei">件</span> -->
           </div>
           <div class="chart"></div>
           <div class="atBottom">案件受理量优于{{(businessTypeData.yewuslzb||0) | percentFormat}}的调解员</div>
@@ -94,8 +94,8 @@
             <div class="dis">平均调解时长({{clickBusinessType}})</div>
           </div>
           <div class="atMiddle">
-            <span class="number">{{(businessTypeData.pingjuntjzq||0) | numFormat}}</span>
-            <span class="danwei">天</span>
+            <span class="number">{{(businessTypeData.pingjuntjzq||0) | numFormat}}<span style="font-size:14px;">天</span></span>
+            <!-- <span class="danwei">天</span> -->
           </div>
           <div class="chart"></div>
           <div class="atBottom">平均调解时长优于{{(businessTypeData.tjzqzb||0) | percentFormat}}的调解员</div>
@@ -131,18 +131,18 @@
           <div class="atRight flexColumn">
             <div class="once">
               <span class="span1">调解成功（{{clickCaseType}}）</span>
-              <span class="span2">{{(caseTypeData.tiaojiecg||0) | numFormat}}</span>
-              <span class="span3">件</span>
+              <span class="span2">{{(caseTypeData.tiaojiecg||0) | numFormat}}<span style="font-size:14px;">件</span></span>
+              <!-- <span class="span3">件</span> -->
             </div>
             <div class="once">
               <span class="span1">调解终止（{{clickCaseType}}）</span>
-              <span class="span2">{{(caseTypeData.tiaojiezz||0) | numFormat}}</span>
-              <span class="span3">件</span>
+              <span class="span2">{{(caseTypeData.tiaojiezz||0) | numFormat}}<span style="font-size:14px;">件</span></span>
+              <!-- <span class="span3">件</span> -->
             </div>
             <div class="once">
               <span class="span1">未结案（{{clickCaseType}}）</span>
-              <span class="span2">{{(caseTypeData.weijiean||0) | numFormat}}</span>
-              <span class="span3">件</span>
+              <span class="span2">{{(caseTypeData.weijiean||0) | numFormat}}<span style="font-size:14px;">件</span></span>
+              <!-- <span class="span3">件</span> -->
             </div>
           </div>
         </div>

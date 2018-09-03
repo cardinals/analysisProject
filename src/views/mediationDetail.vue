@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-24 14:57:25
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-09-02 14:53:43
+ * @Last Modified time: 2018-09-03 18:24:40
  */
 
 <template>
@@ -39,7 +39,7 @@
             </div>
             <div class="sContents flexRow">
               <div class="info">
-                <div class="number">{{(data.tiaoJieDW.renYuanSL||0) | numFormat}}</div>
+                <div class="number">{{(data.tiaoJieDW.renYuanSL||0) | numFormat}}<span style="font-size:14px;">名</span></div>
                 <div class="others">
                   <div class="line">
                     <label>专职调解员：</label>
@@ -77,7 +77,7 @@
           </div>
           <div class="sContents">
             <div class="number">
-              <span class="span1">{{(data.anJianSL.zongLiang||0) | numFormat}}</span>
+              <span class="span1">{{(data.anJianSL.zongLiang||0) | numFormat}}<span style="font-size:14px;">件</span></span>
               <div class="border"></div>
               <span class="span2">人均</span>
               <span class="span3">{{(data.anJianSL.renJun||0) | numFormat}}件</span>
