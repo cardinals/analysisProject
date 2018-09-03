@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-10 11:54:28
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-28 22:18:18
+ * @Last Modified time: 2018-09-03 13:43:30
  */
 import Vue from 'vue'
 import App from './App.vue'
@@ -12,8 +12,8 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import g2components from './components/g2/index'
 import common from './components/common/index'
-import echarts from 'echarts'
-import 'echarts-gl'
+import echarts from 'echarts/lib/echarts'
+import 'echarts-gl/dist/echarts-gl.min'
 import mapboxgl from 'mapbox-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
 

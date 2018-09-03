@@ -26,7 +26,8 @@
     "element-ui": "^2.4.5",
     "less": "^3.0.4",
     "less-loader": "^4.1.0",
-    "vue-template-compiler": "^2.5.16"
+    "vue-template-compiler": "^2.5.16",
+    "compression-webpack-plugin": "^1.1.12"
   },
   "eslintConfig": {
     "root": true,

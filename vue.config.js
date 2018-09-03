@@ -1,10 +1,22 @@
+const CompressionPlugin = require('compression-webpack-plugin')
+
 module.exports = {
   baseUrl: '/',
   outputDir: 'dist',
   lintOnSave: true,
   runtimeCompiler: false,
-  chainWebpack: () => {},
-  configureWebpack: () => {},
+  productionSourceMap: false,
+  configureWebpack: {
+    plugins: [
+      new CompressionPlugin({
+        asset: '[path].gz[query]',
+        algorithm: 'gzip',
+        test: /\.js$|\.css$/,
+        threshold: 10240,
+        minRatio: 0.8
+      })
+    ]
+  },
   devServer: {
     open: process.platform === 'darwin',
     host: '0.0.0.0',
