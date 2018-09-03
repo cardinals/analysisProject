@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-13 11:33:54
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-09-02 14:53:29
+ * @Last Modified time: 2018-09-03 16:51:56
  */
 
 <template>
@@ -178,8 +178,8 @@
           <div class="sContents">
             <div class="infos">
               <span class="span1">{{(data.tiaoJieZYHCD.zhuanYeTJZB||0) | percentFormat}}</span>
-              <span class="span2">{{data.jiBenXX.jiGouLX!==''?'全区':'全市'}}</span>
-              <span class="span3">{{(data.tiaoJieZYHCD.quanShiHZBL||0) | percentFormat}}</span>
+              <span class="span2" v-if="this.$route.params.id!=='1919f623b5d140598b4eb80660715055'">{{data.jiBenXX.jiGouLX!==''?'全区':'全市'}}</span>
+              <span class="span3" v-if="this.$route.params.id!=='1919f623b5d140598b4eb80660715055'">{{(data.tiaoJieZYHCD.quanShiHZBL||0) | percentFormat}}</span>
             </div>
             <div class="chart" v-if="data.tiaoJieZYHCD.qiPaoT.length===0">
               <el-button class="nodata-button" icon="el-icon-info">暂无数据</el-button>
@@ -208,8 +208,8 @@
             <div class="sContents">
               <div class="infos">
                 <span class="span1">{{(data.tiaoJieCGL.zongHeTJCGL||0) | percentFormat}}</span>
-                <span class="span2">{{data.jiBenXX.jiGouLX!==''?'全区':'全市'}}</span>
-                <span class="span3">{{(data.tiaoJieCGL.quanShiCGL||0) | percentFormat}}</span>
+                <span class="span2" v-if="this.$route.params.id!=='1919f623b5d140598b4eb80660715055'">{{data.jiBenXX.jiGouLX!==''?'全区':'全市'}}</span>
+                <span class="span3" v-if="this.$route.params.id!=='1919f623b5d140598b4eb80660715055'">{{(data.tiaoJieCGL.quanShiCGL||0) | percentFormat}}</span>
               </div>
             </div>
           </div>
@@ -494,7 +494,7 @@ export default {
               span {
                 display: inline-block;
                 text-align: right;
-                width: 4em;
+                width: 6em;
               }
             }
           }
@@ -634,7 +634,7 @@ export default {
                     span {
                       display: inline-block;
                       text-align: right;
-                      width: 4em;
+                      width: 6em;
                     }
                   }
                 }

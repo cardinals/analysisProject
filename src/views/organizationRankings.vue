@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-13 11:34:18
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-09-03 16:24:30
+ * @Last Modified time: 2018-09-03 16:31:20
  */
 
 <template>
@@ -68,7 +68,7 @@
             <el-table-column prop="zixunrz" sortable="custom" :formatter="numFormatMethod" label="咨询管理数"></el-table-column>
             <el-table-column prop="chunjufw" sortable="custom" :formatter="numFormatMethod" label="村居服务数"></el-table-column>
             <el-table-column prop="faxuanhd" sortable="custom" :formatter="numFormatMethod" label="法宣活动数"></el-table-column>
-            <el-table-column prop="renyuansl" sortable="custom" :formatter="numFormatMethod" label="登录人次"></el-table-column>
+            <el-table-column prop="denglurc" sortable="custom" :formatter="numFormatMethod" label="登录人次"></el-table-column>
           </el-table>
         </div>
         <div class="pagination">

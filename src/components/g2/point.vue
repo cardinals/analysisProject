@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-19 22:18:59
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-29 09:15:47
+ * @Last Modified time: 2018-09-03 16:55:41
   * @Description: 基础散点图
  */
 <template>
@@ -64,7 +64,7 @@ export default {
         container: this.id,
         forceFit: true,
         height: this.height,
-        padding: [30, 100, 30, 40]
+        padding: [30, this.type === '散点图' ? 20 : 120, 50, 50]
       })
       this.chart.source(data, {
         x: {
