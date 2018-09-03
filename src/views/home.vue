@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-27 14:03:38
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-09-03 15:18:44
+ * @Last Modified time: 2018-09-03 17:00:34
  */
 
 <template>
@@ -154,6 +154,14 @@ export default {
         return list[this.target]
       },
       set: function (newValue) {}
+    },
+    // popup弹窗类型标题
+    popupBT: {
+      get: function () {
+        const list = { 'MBM_CASE': '调解案件类型', 'MMS_ALARM110INFO': '报警案件类型', 'WWS_CONSULT': '法律咨询类型', 'CDS_INVESTIGATIONFEEDBAC': '排查纠纷类型' }
+        return list[this.target]
+      },
+      set: function (newValue) {}
     }
   },
   created () {
@@ -246,6 +254,7 @@ export default {
                     <span class='popupTitle popupIconAddress' onclick='window.organizationDeatil("${data.id}", "${this.target}")'>${data.name}</span><br>
                     <span class='popupIconDocumnet'>案件数量: <span class='popupNumber'>${data.value[2]}件</span></span><br>
                     <span class='popupBorder'></span>
+                    <span class='popupType'>${this.popupBT}</span><br>
                     ${domType}
                   </div>`
       this.myPopup.setLngLat(lngLat)
