@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-27 14:03:38
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-09-04 10:21:26
+ * @Last Modified time: 2018-09-04 13:55:37
  */
 
 <template>
@@ -27,35 +27,54 @@
           <div class="block-l1" id="map"></div>
           <div class="block-l2 flexRow">
             <div class="one" :class="{active: target==='MBM_CASE'}" @click="target='MBM_CASE'">
-              <i class="icon renmintj"></i>
-              <div class="one-content">
-                <span class="one-title">人民调解</span>
-                <br>
-                <span class="one-num">{{(data.businessCount.MBM_CASE||0) | numFormat}}</span>
+              <div class="width-x2-container">
+                <div class="one-container clearfix">
+                  <i class="icon renmintj"></i>
+                  <div class="one-content">
+                    <span class="one-title">人民调解</span>
+                    <br>
+                    <span class="one-num">{{(data.businessCount.MBM_CASE||0) | numFormat}}</span>
+                  </div>
+                </div>
               </div>
+              <div class="border"></div>
             </div>
             <div class="one" :class="{active: target==='MMS_ALARM110INFO'}" @click="target='MMS_ALARM110INFO'">
-              <i class="icon baojingld"></i>
-              <div class="one-content">
-                <span class="one-title">110联动</span>
-                <br>
-                <span class="one-num">{{(data.businessCount.MMS_ALARM110INFO||0) | numFormat}}</span>
+              <div class="width-x2-container">
+                <div class="one-container clearfix">
+                  <i class="icon baojingld"></i>
+                  <div class="one-content">
+                    <span class="one-title">110联动</span>
+                    <br>
+                    <span class="one-num">{{(data.businessCount.MMS_ALARM110INFO||0) | numFormat}}</span>
+                  </div>
+                </div>
               </div>
+              <div class="border"></div>
             </div>
             <div class="one" :class="{active: target==='WWS_CONSULT'}" @click="target='WWS_CONSULT'">
-              <i class="icon jicengflfw"></i>
-              <div class="one-content">
-                <span class="one-title">基层法律服务</span>
-                <br>
-                <span class="one-num">{{(data.businessCount.WWS_CONSULT||0) | numFormat}}</span>
+              <div class="width-x2-container">
+                <div class="one-container clearfix">
+                  <i class="icon jicengflfw"></i>
+                  <div class="one-content">
+                    <span class="one-title">基层法律服务</span>
+                    <br>
+                    <span class="one-num">{{(data.businessCount.WWS_CONSULT||0) | numFormat}}</span>
+                  </div>
+                </div>
               </div>
+              <div class="border"></div>
             </div>
             <div class="one" :class="{active: target==='CDS_INVESTIGATIONFEEDBAC'}" @click="target='CDS_INVESTIGATIONFEEDBAC'">
-              <i class="icon jiufenpc"></i>
-              <div class="one-content">
-                <span class="one-title">纠纷排查</span>
-                <br>
-                <span class="one-num">{{(data.businessCount.CDS_INVESTIGATIONFEEDBAC||0) | numFormat}}</span>
+              <div class="width-x2-container">
+                <div class="one-container clearfix">
+                  <i class="icon jiufenpc"></i>
+                  <div class="one-content">
+                    <span class="one-title">纠纷排查</span>
+                    <br>
+                    <span class="one-num">{{(data.businessCount.CDS_INVESTIGATIONFEEDBAC||0) | numFormat}}</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -82,7 +101,8 @@
               <span class="span2">{{data.businessProcess.shuLiang | numFormat}}</span>
             </div>
             <div class="r2right">
-              <g2-pie :id="'pie1'" :height="120" :colorMap="['#1890FF', '#E9E9E9']" :data="data.businessProcess.zhanBi" :guide="{name: anJIanCLJGZBBT, value: data.businessProcess.zhanBi[0].value}" :showLegend="false"></g2-pie>
+              <g2-pie :id="'pie1'" :height="120" :colorMap="['#1890FF', '#E9E9E9']" :data="data.businessProcess.zhanBi"
+                :guide="{name: anJIanCLJGZBBT, value: data.businessProcess.zhanBi[0].value}" :showLegend="false"></g2-pie>
             </div>
           </div>
         </div>
@@ -90,11 +110,12 @@
           <div class="title">系统使用概况</div>
           <div class="contents flexRow">
             <div class="r3Left">
-              <span  class="span1">登录人数</span><br>
-              <span  class="span2">{{data.onlineNumber.denglurs | numFormat}}</span>
+              <span class="span1">登录人数</span><br>
+              <span class="span2">{{data.onlineNumber.denglurs | numFormat}}</span>
             </div>
             <div class="r3right">
-              <g2-pie :id="'pie2'" :height="120" :colorMap="['#1890FF', '#E9E9E9']" :data="data.onlineNumber.denglurszb" :guide="{name: '登录人数占比', value: data.onlineNumber.denglurszb[0].value}" :showLegend="false"></g2-pie>
+              <g2-pie :id="'pie2'" :height="120" :colorMap="['#1890FF', '#E9E9E9']" :data="data.onlineNumber.denglurszb"
+                :guide="{name: '登录人数占比', value: data.onlineNumber.denglurszb[0].value}" :showLegend="false"></g2-pie>
             </div>
           </div>
         </div>
@@ -286,84 +307,148 @@ export default {
 
 <style lang="less" scoped>
   @import '~@/assets/css/common.less';
+
   .home {
     background: #EDEDED;
     box-sizing: content-box;
     height: 100%;
+
     .block {
       padding-bottom: 15px;
       height: calc(100% - 39px);
+
       .left {
         flex: 847;
         background: @block;
+
         .contents {
           padding: 0;
+
           .block-l1 {
             flex: 514;
           }
+
           .block-l2 {
             flex: 60;
+            max-height: 60px;
+
             .one {
               flex: 212;
               background: RGBA(49, 49, 49, 0.7);
               color: #FFFFFF;
-              padding-left: 35px;
+              position: relative;
+
               &:hover {
                 cursor: pointer;
                 background: RGBA(24, 144, 255, 0.7);
               }
-              .icon {
-                float: left;
-                width: 44px;
-              }
-              .renmintj{
-                background: url(~@/assets/images/home/icon-renmintj.png) no-repeat center;
-              }
-              .baojingld{
-                background: url(~@/assets/images/home/icon-110ld.png) no-repeat center;
-              }
-              .jicengflfw{
-                background: url(~@/assets/images/home/icon-jicengflfw.png) no-repeat center;
-              }
-              .jiufenpc{
-                background: url(~@/assets/images/home/icon-jiufenpc.png) no-repeat center;
-              }
-              .one-content{
-                float: left;
-                margin-top: 10px;
-                .one-title{
-                  font-size: 14px;
+
+              .width-x2-container {
+                width: 200%;
+                height: 100%;
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+
+                .one-container {
+                  height: 100%;
+                  position: absolute;
+                  left: 50%;
+                  top: 50%;
+                  transform: translate(-50%, -50%);
+
+                  .icon {
+                    float: left;
+                    width: 35px;
+                    height: 100%;
+                    padding-top: 8px;
+                  }
+
+                  .renmintj {
+                    background: url(~@/assets/images/home/icon-renmintj.png) no-repeat center;
+                  }
+
+                  .baojingld {
+                    background: url(~@/assets/images/home/icon-110ld.png) no-repeat center;
+                  }
+
+                  .jicengflfw {
+                    background: url(~@/assets/images/home/icon-jicengflfw.png) no-repeat center;
+                  }
+
+                  .jiufenpc {
+                    background: url(~@/assets/images/home/icon-jiufenpc.png) no-repeat center;
+                  }
+
+                  .one-content {
+                    float: left;
+                    padding-top: 8px;
+
+                    .one-title {
+                      font-size: 14px;
+                    }
+
+                    .one-num {
+                      font-size: 24px;
+                    }
+                  }
                 }
-                .one-num{
-                  font-size: 24px;
-                }
+              }
+
+              .border {
+                float: right;
+                height: 44px;
+                border-right: RGBA(169, 166, 166, 1) solid 1px;
+                margin-top: 8px;
               }
             }
+
             .active {
+              position: relative;
               background: RGBA(24, 144, 255, 0.9);
+
+              &:after {
+                content: "";
+                position: absolute;
+                top: -12px;
+                left: calc(50% - 5px);
+                width: 0;
+                height: 0;
+                border-width: 0 10px 12px;
+                border-style: solid;
+                border-color: transparent transparent RGBA(24, 144, 255, 0.9);
+              }
             }
           }
         }
       }
+
       .right {
         margin-left: 16px;
         flex: 266;
+
         .block-r1 {
           flex: 194;
           background: @block;
+
           .ul {
             width: 100%;
             overflow: hidden;
             padding-top: 15px;
+
             &:hover {
               overflow-y: auto;
             }
+
             .li {
               height: 33px;
               display: block;
+
               &:hover {
                 cursor: pointer;
               }
+
               .sort {
                 float: left;
                 width: 19px;
@@ -376,6 +461,7 @@ export default {
                 line-height: 19px;
                 margin: 7px 10px 7px 0;
               }
+
               .name {
                 float: left;
                 height: 33px;
@@ -387,6 +473,7 @@ export default {
                 text-overflow: ellipsis;
                 white-space: nowrap;
               }
+
               .number {
                 float: right;
                 height: 33px;
@@ -395,18 +482,21 @@ export default {
                 line-height: 33px;
                 margin-right: 22px;
               }
+
               &:nth-child(1) {
                 .sort {
                   background: #314659;
                   color: white;
                 }
               }
+
               &:nth-child(2) {
                 .sort {
                   background: #314659;
                   color: white;
                 }
               }
+
               &:nth-child(3) {
                 .sort {
                   background: #314659;
@@ -416,56 +506,68 @@ export default {
             }
           }
         }
+
         .block-r2 {
           flex: 178;
           margin-top: 16px;
           background: @block;
-          .contents{
+
+          .contents {
             padding: 0;
-            .r2Left{
+
+            .r2Left {
               flex: 1;
               flex: 1;
               padding-top: 60px;
               text-align: center;
               line-height: 22px;
-              .span1{
-                color: rgba(0,0,0,0.65);
+
+              .span1 {
+                color: rgba(0, 0, 0, 0.65);
                 font-size: 14px;
               }
-              .span2{
-                color: rgba(0,0,0,0.85);
+
+              .span2 {
+                color: rgba(0, 0, 0, 0.85);
                 font-size: 18px;
                 font-weight: 600;
               }
             }
-            .r2right{
+
+            .r2right {
               flex: 1;
               padding-top: 20px;
             }
           }
         }
+
         .block-r3 {
           flex: 184;
           margin-top: 16px;
           background: @block;
-          .contents{
+
+          .contents {
             padding: 0;
-            .r3Left{
+
+            .r3Left {
               flex: 1;
               text-align: center;
               padding-top: 60px;
               line-height: 22px;
-              .span1{
-                color: rgba(0,0,0,0.65);
+
+              .span1 {
+                color: rgba(0, 0, 0, 0.65);
                 font-size: 14px;
               }
-              .span2{
-                color: rgba(0,0,0,0.85);
+
+              .span2 {
+                color: rgba(0, 0, 0, 0.85);
                 font-size: 18px;
                 font-weight: 600;
               }
             }
-            .r3right{
+
+            .r3right {
               flex: 1;
               padding-top: 20px;
             }

@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-13 11:33:54
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-09-04 10:21:55
+ * @Last Modified time: 2018-09-04 13:46:07
  */
 
 <template>
@@ -39,7 +39,7 @@
             </div>
             <div class="sContents flexRow">
               <div class="info">
-                <div class="number">{{(data.tiaoJieDW.tiaoJieJGSL.jiGouSL||0) | numFormat}}<span style="font-size:14px;">家</span></div>
+                <div class="number">{{(data.tiaoJieDW.tiaoJieJGSL.jiGouSL||0) | numFormat}}<span class='unit'>家</span></div>
                 <div class="others">
                   <div class="line">
                     <label>调解委员会：</label>
@@ -61,7 +61,7 @@
             </div>
             <div class="sContents flexRow">
               <div class="info">
-                <div class="number">{{(data.tiaoJieDW.tiaoJieYSL.renYuanSL||0) | numFormat}}<span style="font-size:14px;">名</span></div>
+                <div class="number">{{(data.tiaoJieDW.tiaoJieYSL.renYuanSL||0) | numFormat}}<span class='unit'>名</span></div>
                 <div class="others">
                   <div class="line">
                     <label>专职调解员：</label>
@@ -89,8 +89,7 @@
           </div>
           <div class="sContents">
             <div class="number">
-              <span class="span1">{{(data.tiaoJieAJSL.zongLiang||0) | numFormat}}<span style="font-size:14px;">件</span></span>
-              <div class="border"></div>
+              <span class="span1">{{(data.tiaoJieAJSL.zongLiang||0) | numFormat}}<span class='unit'>件</span></span>
               <!-- 机构类型为司法所时不显示万人比 -->
               <span class="span2" v-if="data.jiBenXX.jiGouLX===''">万人比
                 <el-tooltip content="万人比示意" placement="top-end">
@@ -129,7 +128,7 @@
               </div>
               <div class="sContents flexRow">
                 <div class="info">
-                  <div class="number">{{(targetData1_1.number1||0) | numFormat}}<span style="font-size:16px;">{{target1==='tiaoJieY'?'名':'家'}}</span></div>
+                  <div class="number">{{(targetData1_1.number1||0) | numFormat}}<span class='unit'>{{target1==='tiaoJieY'?'名':'家'}}</span></div>
                   <div class="others">
                     <div class="line">
                       <label v-text="target1==='tiaoJieY'?'专职调解员：':'调解委员会：'"></label>
@@ -243,7 +242,7 @@
             <div class="sContents">
               <div class="infos">
                 <span class="span1">{{(data.leiJiXYJE/10000||0) | numFormat}}</span>
-                <span class="span2">万元</span>
+                <span class="unit">万元</span>
               </div>
             </div>
           </div>
@@ -282,7 +281,7 @@
             <div class="sContents">
               <div class="infos">
                 <span class="span1">{{(data.pingJunTJSC||0) | numFormat}}</span>
-                <span class="span2">天</span>
+                <span class="unit">天</span>
               </div>
             </div>
           </div>
@@ -534,13 +533,6 @@ export default {
                 line-height: 88px;
                 font-size: 49px;
                 color: #000000;
-              }
-              .border {
-                position: absolute;
-                top: calc(50% - 19px);
-                right: 50%;
-                height: 38px;
-                border-left: RGBA(209, 210, 212, 1) solid 1px;
               }
               .span2 {
                 position: absolute;
@@ -840,12 +832,6 @@ export default {
               line-height: 74px;
               color: #000000;
             }
-            .span2 {
-              display: inline-block;
-              font-size: @fontMiddle;
-              color: @black;
-              padding-left: 22px;
-            }
           }
         }
         .blocks2 {
@@ -931,12 +917,6 @@ export default {
               font-size: 49px;
               line-height: 74px;
               color: #000000;
-            }
-            .span2 {
-              display: inline-block;
-              font-size: @fontMiddle;
-              color: @black;
-              padding-left: 22px;
             }
           }
         }
