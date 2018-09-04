@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-19 22:18:59
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-09-03 16:55:41
+ * @Last Modified time: 2018-09-04 14:37:03
   * @Description: 基础散点图
  */
 <template>
@@ -11,6 +11,7 @@
 
 <script>
 import G2 from '@antv/g2'
+import {percentFormat, numFormat} from '@/utils/index'
 
 export default {
   props: {
@@ -68,20 +69,31 @@ export default {
       })
       this.chart.source(data, {
         x: {
-          alias: this.axisName.x
+          alias: this.axisName.x,
+          formatter: item => {
+            return (item <= 1 && item > 0) ? percentFormat(item) : numFormat(item)
+          }
         },
         y: {
-          alias: this.axisName.y
+          alias: this.axisName.y,
+          formatter: item => {
+            return (item <= 1 && item > 0) ? percentFormat(item) : numFormat(item)
+          }
         },
         size: {
-          alias: this.axisName.size
+          alias: this.axisName.size,
+          formatter: item => {
+            return (item <= 1 && item > 0) ? percentFormat(item) : numFormat(item)
+          }
         },
         type: {
           alias: this.axisName.type
         }
       })
       this.chart.legend('size', false)
-      this.chart.tooltip({showTitle: false})
+      this.chart.tooltip({
+        showTitle: false
+      })
       const colorMap = Array.from(new Array(8), (v, i) => { return G2.Global.colors[i] })
       let point = this.chart.point().position('x*y').shape('circle')
       if (this.type === '散点图') {
