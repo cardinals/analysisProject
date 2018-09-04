@@ -42,17 +42,40 @@
   font-weight: 600;
   color:@black;
   border-bottom: 1px solid #EDEDED;
-  .buttons{
+  .btn_container{
     float: right;
     margin-right: 10px;
+    font-weight: 500;
+    .btn {
+      padding: 8px 10px;
+      border: 1px solid #D9D9D9;
+      border-left: 0;
+      font-size: @fontMiddle;
+      cursor: pointer;
+      &:nth-child(1) {
+        border-left: 1px solid #D9D9D9;
+        border-top-left-radius: 4px;
+        border-bottom-left-radius: 4px;
+      }
+      &:nth-child(3) {
+        border-top-right-radius: 4px;
+        border-bottom-right-radius: 4px;
+      }
+    }
+    .active {
+      border: 1px solid #389EFB !important;
+      color: #389EFB;
+    }
   }
   .dateSelector {
     float: right;
     margin-right: 12px;
+    font-weight: 500;
   }
   .download{
     float: right;
     margin-right: 12px;
+    font-weight: 500;
   }
 }
 // 带竖线的小标题
@@ -72,6 +95,31 @@
     font-size: @fontMiddle;
     float: left;
     padding-left: 8px;
+  }
+  .btn_container {
+    float: right;
+    margin-right: 10px;
+    font-weight: 500;
+    .btn {
+      padding: 8px 10px;
+      border: 1px solid #D9D9D9;
+      border-left: 0;
+      font-size: @fontMiddle;
+      cursor: pointer;
+      &:nth-child(1) {
+        border-left: 1px solid #D9D9D9;
+        border-top-left-radius: 4px;
+        border-bottom-left-radius: 4px;
+      }
+      &:nth-child(3) {
+        border-top-right-radius: 4px;
+        border-bottom-right-radius: 4px;
+      }
+    }
+    .active {
+      border: 1px solid #389EFB !important;
+      color: #389EFB;
+    }
   }
 }
 // 配合普通标题使用的内容区域
@@ -148,7 +196,7 @@
 
 // 无数据按钮样式
 .nodata-button{
-  margin: calc(50% - 80px) calc(50% - 60px);
+  margin: 80px calc(50% - 60px);
   color: rgba(0,0,0,0.45)
 }
 

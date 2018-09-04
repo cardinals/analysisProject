@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-13 11:33:54
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-09-03 19:15:31
+ * @Last Modified time: 2018-09-04 10:21:55
  */
 
 <template>
@@ -115,8 +115,10 @@
       <div class="right">
         <div class="title clearfix">
           案件受理情况
-          <div class="btn" :class="{active: target1==='tiaoJieY'}" @click="target1='tiaoJieY'">调解员</div>
-          <div class="btn" :class="{active: target1==='tiaoWeiH'}" @click="target1='tiaoWeiH'">调委会</div>
+          <div class="btn_container">
+            <span class="btn" :class="{active: target1==='tiaoJieY'}" @click="target1='tiaoJieY'">调解员</span>
+            <span class="btn" :class="{active: target1==='tiaoWeiH'}" @click="target1='tiaoWeiH'">调委会</span>
+          </div>
         </div>
         <div class="contents flexRow">
           <div class="atLeft">
@@ -481,23 +483,26 @@ export default {
           padding-bottom: 26px;
           .info {
             flex: 1.3;
-            padding-top: 35px;
+            margin-top: 15px;
             .number {
               height: 78px;
               font-size: 49px;
               color: #000000;
               line-height: 78px;
             }
-            .line {
-              color: @gray;
-              font-size: @fontMiddle;
-              &:nth-child(1) {
-                margin-bottom: 8px;
-              }
-              span {
-                display: inline-block;
-                text-align: right;
-                width: 6em;
+            .others{
+              margin-top: 20px;
+              .line {
+                color: @gray;
+                font-size: @fontMiddle;
+                &:nth-child(1) {
+                  margin-bottom: 8px;
+                }
+                span {
+                  display: inline-block;
+                  text-align: right;
+                  width: 6em;
+                }
               }
             }
           }
@@ -522,7 +527,7 @@ export default {
               height: 88px;
               display: block;
               position: relative;
-              margin-top: 35px;
+              margin-top: 15px;
               .span1 {
                 display: inline-block;
                 height: 88px;
@@ -570,7 +575,7 @@ export default {
               .one {
                 flex: 1;
                 text-align: center;
-                padding-top: 10px;
+                padding-top: 15px;
                 .typeName {
                   font-size: 14px;
                   color: rgba(0, 0, 0, 0.65);
@@ -597,21 +602,6 @@ export default {
         flex: 754;
         background: @block;
         margin-left: 14px;
-        .title {
-          .btn {
-            float: right;
-            font-size: @fontMiddle;
-            color: @gray;
-            padding: 3px 7px;
-            border-radius: 2px;
-            margin-left: 16px;
-            cursor: pointer;
-          }
-          .active {
-            color: #ffffff;
-            background: #1890FF;
-          }
-        }
         .contents {
           .atLeft {
             flex: 1;
@@ -621,23 +611,26 @@ export default {
                 padding-bottom: 26px;
                 .info {
                   flex: 1.3;
-                  margin-top: 35px;
+                  margin-top: 15px;
                   .number {
                     height: 78px;
                     font-size: 49px;
                     color: #000000;
                     line-height: 78px;
                   }
-                  .line {
-                    color: @gray;
-                    font-size: @fontMiddle;
-                    &:nth-child(1) {
-                      margin-bottom: 8px;
-                    }
-                    span {
-                      display: inline-block;
-                      text-align: right;
-                      width: 6em;
+                  .others{
+                    margin-top: 20px;
+                    .line {
+                      color: @gray;
+                      font-size: @fontMiddle;
+                      &:nth-child(1) {
+                        margin-bottom: 8px;
+                      }
+                      span {
+                        display: inline-block;
+                        text-align: right;
+                        width: 6em;
+                      }
                     }
                   }
                 }
@@ -830,33 +823,6 @@ export default {
         background: @block;
         flex: 1;
         margin: 0 14px;
-        .sTitle {
-          position: relative;
-          .btn_container {
-            position: absolute;
-            right: 0;
-            .btn {
-              padding: 8px 10px;
-              border: 1px solid #D9D9D9;
-              border-left: 0;
-              font-size: @fontMiddle;
-              cursor: pointer;
-              &:nth-child(1) {
-                border-left: 1px solid #D9D9D9;
-                border-top-left-radius: 4px;
-                border-bottom-left-radius: 4px;
-              }
-              &:nth-child(3) {
-                border-top-right-radius: 4px;
-                border-bottom-right-radius: 4px;
-              }
-            }
-            .active {
-              border: 1px solid #389EFB !important;
-              color: #389EFB;
-            }
-          }
-        }
         .contents {
           padding-top: 20px;
           padding-bottom: 26px;
@@ -949,33 +915,6 @@ export default {
       .right {
         background: @block;
         flex: 1;
-        .sTitle {
-          position: relative;
-          .btn_container {
-            position: absolute;
-            right: 0;
-            .btn {
-              padding: 8px 10px;
-              border: 1px solid #D9D9D9;
-              border-left: 0;
-              font-size: @fontMiddle;
-              cursor: pointer;
-              &:nth-child(1) {
-                border-left: 1px solid #D9D9D9;
-                border-top-left-radius: 4px;
-                border-bottom-left-radius: 4px;
-              }
-              &:nth-child(3) {
-                border-top-right-radius: 4px;
-                border-bottom-right-radius: 4px;
-              }
-            }
-            .active {
-              border: 1px solid #389EFB !important;
-              color: #389EFB;
-            }
-          }
-        }
         .contents {
           padding-top: 20px;
           padding-bottom: 26px;

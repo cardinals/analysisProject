@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-24 14:57:25
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-09-03 18:24:40
+ * @Last Modified time: 2018-09-04 10:24:43
  */
 
 <template>
@@ -605,33 +605,6 @@ export default {
       .left {
         background: @block;
         flex: 1;
-        .sTitle {
-          position: relative;
-          .btn_container {
-            position: absolute;
-            right: 0;
-            .btn {
-              padding: 8px 10px;
-              border: 1px solid #D9D9D9;
-              border-left: 0;
-              font-size: @fontMiddle;
-              cursor: pointer;
-              &:nth-child(1) {
-                border-left: 1px solid #D9D9D9;
-                border-top-left-radius: 4px;
-                border-bottom-left-radius: 4px;
-              }
-              &:nth-child(3) {
-                border-top-right-radius: 4px;
-                border-bottom-right-radius: 4px;
-              }
-            }
-            .active {
-              border: 1px solid #389EFB !important;
-              color: #389EFB;
-            }
-          }
-        }
         .contents {
           padding-top: 20px;
           padding-bottom: 26px;
@@ -738,33 +711,6 @@ export default {
         background: @block;
         flex: 1;
         margin: 0 14px;
-        .sTitle {
-          position: relative;
-          .btn_container {
-            position: absolute;
-            right: 0;
-            .btn {
-              padding: 8px 10px;
-              border: 1px solid #D9D9D9;
-              border-left: 0;
-              font-size: @fontMiddle;
-              cursor: pointer;
-              &:nth-child(1) {
-                border-left: 1px solid #D9D9D9;
-                border-top-left-radius: 4px;
-                border-bottom-left-radius: 4px;
-              }
-              &:nth-child(3) {
-                border-top-right-radius: 4px;
-                border-bottom-right-radius: 4px;
-              }
-            }
-            .active {
-              border: 1px solid #389EFB !important;
-              color: #389EFB;
-            }
-          }
-        }
         .contents {
           padding-top: 20px;
           padding-bottom: 26px;
@@ -857,33 +803,6 @@ export default {
       .right {
         background: @block;
         flex: 1;
-        .sTitle {
-          position: relative;
-          .btn_container {
-            position: absolute;
-            right: 0;
-            .btn {
-              padding: 8px 10px;
-              border: 1px solid #D9D9D9;
-              border-left: 0;
-              font-size: @fontMiddle;
-              cursor: pointer;
-              &:nth-child(1) {
-                border-left: 1px solid #D9D9D9;
-                border-top-left-radius: 4px;
-                border-bottom-left-radius: 4px;
-              }
-              &:nth-child(3) {
-                border-top-right-radius: 4px;
-                border-bottom-right-radius: 4px;
-              }
-            }
-            .active {
-              border: 1px solid #389EFB !important;
-              color: #389EFB;
-            }
-          }
-        }
         .contents {
           padding-top: 20px;
           padding-bottom: 26px;

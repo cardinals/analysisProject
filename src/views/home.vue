@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-27 14:03:38
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-09-04 09:23:12
+ * @Last Modified time: 2018-09-04 10:21:26
  */
 
 <template>
@@ -17,15 +17,7 @@
     <div class="block flexRow">
       <div class="left">
         <div class="title">业务数量
-          <div class="buttons">
-            <!-- <el-button size="mini" :type="date==='today'?'primary':'text'" @click="date='today'">今日</el-button>
-            <el-button size="mini" :type="date==='month'?'primary':'text'" @click="date='month'">本月</el-button>
-            <el-button size="mini" :type="date==='year'?'primary':'text'" @click="date='year'">本年</el-button> -->
-            <!-- <el-radio-group v-model="date" size="mini">
-              <el-radio-button label="today">今日</el-radio-button>
-              <el-radio-button label="month">本月</el-radio-button>
-              <el-radio-button label="year">本年</el-radio-button>
-            </el-radio-group> -->
+          <div class="btn_container">
             <span class="btn" :class="{active: date==='today'}" @click="date='today'">今日</span>
             <span class="btn" :class="{active: date==='month'}" @click="date='month'">本月</span>
             <span class="btn" :class="{active: date==='year'}" @click="date='year'">本年</span>
@@ -304,30 +296,6 @@ export default {
       .left {
         flex: 847;
         background: @block;
-        .title{
-          .buttons {
-            .btn {
-              padding: 8px 10px;
-              border: 1px solid #D9D9D9;
-              border-left: 0;
-              font-size: @fontMiddle;
-              cursor: pointer;
-              &:nth-child(1) {
-                border-left: 1px solid #D9D9D9;
-                border-top-left-radius: 4px;
-                border-bottom-left-radius: 4px;
-              }
-              &:nth-child(3) {
-                border-top-right-radius: 4px;
-                border-bottom-right-radius: 4px;
-              }
-            }
-            .active {
-              border: 1px solid #389EFB !important;
-              color: #389EFB;
-            }
-          }
-        }
         .contents {
           padding: 0;
           .block-l1 {
