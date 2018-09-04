@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-13 11:34:01
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-09-03 18:45:44
+ * @Last Modified time: 2018-09-04 18:00:22
  */
 
 <template>
@@ -67,7 +67,7 @@
       <div class="title">业务专长</div>
       <div class="contents flexRow">
         <!-- <div class="chart_round"></div> -->
-        <g2-pie class="chart_round" :id="'pie'" :height="240" :data="data.business" :guide="{name: '受理案件总数', value:data.number[0].yewusl}" @itemClick="handlePieClick"></g2-pie>
+        <g2-pie class="chart_round" :id="'pie'" :height="240" :data="business" :guide="{name: '受理案件总数', value:data.number[0].yewusl}" :legendOption="{show: true, position: 'right-center'}" @itemClick="handlePieClick"></g2-pie>
         <div class="chart_other">
           <div class="sTitle">
             <div class="dis">案件受理数量({{clickBusinessType}})</div>
@@ -186,6 +186,16 @@ export default {
     }
   },
   computed: {
+    business: function () {
+      const temp = this.data.business
+      return temp.sort((item1, item2) => {
+        if (item1.value > item2.value) {
+          return -1
+        } else {
+          return 1
+        }
+      })
+    },
     radarData: function () {
       const temp = this.data.indicator.map((item, index) => {
         return { item: item.name, a: this.data.geren[index], b: this.data.quanshi[index], c: this.data.quanqu[index], max: item.max }

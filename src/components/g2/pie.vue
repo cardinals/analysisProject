@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-19 22:10:56
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-09-04 17:46:05
+ * @Last Modified time: 2018-09-04 17:56:13
  * @Description: 基础饼图
  */
 <template>
@@ -145,14 +145,12 @@ export default {
                     </tr>`
           },
           'g2-legend': {
-            marginLeft: '-180px'
+            marginLeft: '-175px'
           },
           'g2-legend-list': {
             border: 'none'
           }
         })
-        // this.chart.translate(-100, 0)
-        console.log(this.chart)
       } else if (this.legendOption.show && this.legendOption.position !== 'right-center') {
         this.chart.legend('name', {
           position: this.legendOption.position
