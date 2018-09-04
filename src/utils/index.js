@@ -135,4 +135,4 @@ export let floatIntFormat = (value) => {
 }
 
 // 颜色组
-export const color = ['#1890FF', '#FBD437', '#EA77FF', '#FF6868']
+export const color = ['#1890FF', '#2FC25B', '#FACC14', '#223273', '#8543E0', '#13C2C2', '#3436C7', '#F04864']

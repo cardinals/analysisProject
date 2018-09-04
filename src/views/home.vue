@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-27 14:03:38
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-09-03 17:00:34
+ * @Last Modified time: 2018-09-04 09:23:12
  */
 
 <template>
@@ -18,9 +18,17 @@
       <div class="left">
         <div class="title">业务数量
           <div class="buttons">
-            <el-button size="mini" :type="date==='today'?'primary':'text'" @click="date='today'">今日</el-button>
+            <!-- <el-button size="mini" :type="date==='today'?'primary':'text'" @click="date='today'">今日</el-button>
             <el-button size="mini" :type="date==='month'?'primary':'text'" @click="date='month'">本月</el-button>
-            <el-button size="mini" :type="date==='year'?'primary':'text'" @click="date='year'">本年</el-button>
+            <el-button size="mini" :type="date==='year'?'primary':'text'" @click="date='year'">本年</el-button> -->
+            <!-- <el-radio-group v-model="date" size="mini">
+              <el-radio-button label="today">今日</el-radio-button>
+              <el-radio-button label="month">本月</el-radio-button>
+              <el-radio-button label="year">本年</el-radio-button>
+            </el-radio-group> -->
+            <span class="btn" :class="{active: date==='today'}" @click="date='today'">今日</span>
+            <span class="btn" :class="{active: date==='month'}" @click="date='month'">本月</span>
+            <span class="btn" :class="{active: date==='year'}" @click="date='year'">本年</span>
           </div>
         </div>
         <div class="contents flexColumn">
@@ -120,6 +128,7 @@ export default {
       target: 'MBM_CASE',
       data: null,
       myChart: null,
+      myNav: new window.mapboxgl.NavigationControl(),
       myPopup: new window.mapboxgl.Popup({anchor: 'left', className: 'myPopup'}),
       color: color,
       organizationId: null
@@ -127,9 +136,11 @@ export default {
   },
   watch: {
     area: function (newValue, oldValue) {
+      this.myPopup.remove()
       this.fetchHomeData()
     },
     date: function (newValue, oldValue) {
+      this.myPopup.remove()
       this.fetchHomeData()
     },
     target: function (newValue, oldValue) {
@@ -176,6 +187,7 @@ export default {
     })
   },
   methods: {
+    // 获取数据
     fetchHomeData () {
       homeData({area: this.area, date: this.date, biaoming: this.target}).then(resList => {
         if (resList[0].data.code && resList[1].data.code && resList[2].data.code && resList[3].data.code && resList[4].data.code) {
@@ -211,6 +223,7 @@ export default {
     // 绘制地图
     drawMap () {
       this.$nextTick(() => {
+        // 如果echarts实例不存在,则新建实例
         if (!this.myChart) {
           this.myChart = window.echarts.init(document.getElementById('map'))
         }
@@ -229,23 +242,28 @@ export default {
             return true
           }
         })[0]['coordinates']
+        // 绘制图表
         this.myChart.setOption(setMapbox(mapData, center))
         // 获取echarts中的mapbox实例
         let mapbox
         this.myChart._model.eachComponent('mapbox3D', function (mapboxModel) {
           mapbox = mapboxModel._mapbox
         })
-        // 监听mapbox点击事件, 保存点的经纬度
+        // 添加导航控件
+        mapbox.addControl(this.myNav, 'top-right')
+        // 监听echarts点击事件, 获取点击位置的数据信息
         this.myChart.on('click', (echartsParams) => {
-          // 监听mapbox点击事件, 保存点的经纬度
+          // 监听mapbox点击事件, 获取点击位置的经纬度信息
           mapbox.once('click', (mapboxParams) => {
+            // 绘制弹出框
             this.drawPopup(mapboxParams.lngLat, echartsParams.data, mapbox)
           })
         })
       })
     },
-    // 绘制弹框
+    // 绘制弹出框
     drawPopup (lngLat, data, map) {
+      // 生成弹出框内的dom
       let domType = ''
       data.typeList.map((item, index) => {
         domType += `<span class='popupColor' style='background: ${this.color[index]}'></span><span>${item.leiXing}: ${item.jianShu}件</span><br>`
@@ -257,9 +275,11 @@ export default {
                     <span class='popupType'>${this.popupBT}</span><br>
                     ${domType}
                   </div>`
+      // 将弹出框绘制在地图中
       this.myPopup.setLngLat(lngLat)
         .setHTML(dom)
         .addTo(map)
+      // 点击后跳转对应机构的详情页
       window.organizationDeatil = function (id, type) {
         if (type === 'MMS_ALARM110INFO') {
           window.location.hash = `#/organizationDetail/${id}`
@@ -285,8 +305,27 @@ export default {
         flex: 847;
         background: @block;
         .title{
-          .daterange{
-            float: right;
+          .buttons {
+            .btn {
+              padding: 8px 10px;
+              border: 1px solid #D9D9D9;
+              border-left: 0;
+              font-size: @fontMiddle;
+              cursor: pointer;
+              &:nth-child(1) {
+                border-left: 1px solid #D9D9D9;
+                border-top-left-radius: 4px;
+                border-bottom-left-radius: 4px;
+              }
+              &:nth-child(3) {
+                border-top-right-radius: 4px;
+                border-bottom-right-radius: 4px;
+              }
+            }
+            .active {
+              border: 1px solid #389EFB !important;
+              color: #389EFB;
+            }
           }
         }
         .contents {
