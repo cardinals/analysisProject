@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-27 14:03:38
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-09-04 13:55:37
+ * @Last Modified time: 2018-09-04 16:53:18
  */
 
 <template>
@@ -102,7 +102,7 @@
             </div>
             <div class="r2right">
               <g2-pie :id="'pie1'" :height="120" :colorMap="['#1890FF', '#E9E9E9']" :data="data.businessProcess.zhanBi"
-                :guide="{name: anJIanCLJGZBBT, value: data.businessProcess.zhanBi[0].value}" :showLegend="false"></g2-pie>
+                :guide="{name: anJIanCLJGZBBT, value: data.businessProcess.zhanBi[0].value}" :legendOption="{show: false}"></g2-pie>
             </div>
           </div>
         </div>
@@ -115,7 +115,7 @@
             </div>
             <div class="r3right">
               <g2-pie :id="'pie2'" :height="120" :colorMap="['#1890FF', '#E9E9E9']" :data="data.onlineNumber.denglurszb"
-                :guide="{name: '登录人数占比', value: data.onlineNumber.denglurszb[0].value}" :showLegend="false"></g2-pie>
+                :guide="{name: '登录人数占比', value: data.onlineNumber.denglurszb[0].value}" :legendOption="{show: false}"></g2-pie>
             </div>
           </div>
         </div>

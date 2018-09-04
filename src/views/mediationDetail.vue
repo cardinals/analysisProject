@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-24 14:57:25
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-09-04 10:24:43
+ * @Last Modified time: 2018-09-04 16:53:18
  */
 
 <template>
@@ -97,7 +97,7 @@
             <div class="dis">受理案件数量分布</div>
           </div>
           <!-- 饼图 -->
-          <g2-pie :id="'pie2'" :height="258" :data="data.anJianSL.shouLiAJLX" :guide="{name: '受理案件总数', value:data.anJianSL.zongLiang}"></g2-pie>
+          <g2-pie :id="'pie2'" :height="258" :data="shouLiAJLX" :guide="{name: '受理案件总数', value:data.anJianSL.zongLiang}" :legendOption="{show: true, position: 'right-center'}"></g2-pie>
         </div>
         <div class="right">
           <div class="sTitle">
@@ -259,23 +259,34 @@ export default {
     zhongDianSJFB: function () {
       return this.data.anJianSL.zhongDianSJFB.slice(0, 4)
     },
-    // 调解成功率分布数据
+    // 受理案件数量分布
+    shouLiAJLX: function () {
+      const temp = this.data.anJianSL.shouLiAJLX
+      return temp.sort((item1, item2) => {
+        if (item1.value > item2.value) {
+          return -1
+        } else {
+          return 1
+        }
+      })
+    },
+    // 受理案件数量排名数据
     targetData1: {
       get: function () {
         let temp = this.data.anJianSL[`${this.target1}SLAJSLPM`]
+        return temp
+      },
+      set: function (newValue) {}
+    },
+    // 调解终止率排名数据
+    targetData2: {
+      get: function () {
+        let temp = this.data.tiaoJieCGL[`${this.target2}TJZZLPM`]
         if (temp.length > 7) {
           return temp.slice(0, 7)
         } else {
           return temp
         }
-      },
-      set: function (newValue) {}
-    },
-    // 受理案件数量排名数据
-    targetData2: {
-      get: function () {
-        let temp = this.data.tiaoJieCGL[`${this.target2}TJZZLPM`]
-        return temp
       },
       set: function (newValue) {}
     },
