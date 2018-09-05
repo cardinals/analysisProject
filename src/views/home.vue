@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-27 14:03:38
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-09-04 16:53:18
+ * @Last Modified time: 2018-09-05 08:42:31
  */
 
 <template>
@@ -343,55 +343,46 @@ export default {
                 background: RGBA(24, 144, 255, 0.7);
               }
 
-              .width-x2-container {
-                width: 200%;
+              .one-container {
                 height: 100%;
                 position: absolute;
-                left: 50%;
+                left: 0;
                 top: 50%;
-                transform: translate(-50%, -50%);
+                transform: translate(50%, -50%);
 
-                .one-container {
+                .icon {
+                  float: left;
+                  width: 35px;
                   height: 100%;
-                  position: absolute;
-                  left: 50%;
-                  top: 50%;
-                  transform: translate(-50%, -50%);
+                  padding-top: 8px;
+                }
 
-                  .icon {
-                    float: left;
-                    width: 35px;
-                    height: 100%;
-                    padding-top: 8px;
+                .renmintj {
+                  background: url(~@/assets/images/home/icon-renmintj.png) no-repeat center;
+                }
+
+                .baojingld {
+                  background: url(~@/assets/images/home/icon-110ld.png) no-repeat center;
+                }
+
+                .jicengflfw {
+                  background: url(~@/assets/images/home/icon-jicengflfw.png) no-repeat center;
+                }
+
+                .jiufenpc {
+                  background: url(~@/assets/images/home/icon-jiufenpc.png) no-repeat center;
+                }
+
+                .one-content {
+                  float: left;
+                  padding-top: 8px;
+
+                  .one-title {
+                    font-size: 14px;
                   }
 
-                  .renmintj {
-                    background: url(~@/assets/images/home/icon-renmintj.png) no-repeat center;
-                  }
-
-                  .baojingld {
-                    background: url(~@/assets/images/home/icon-110ld.png) no-repeat center;
-                  }
-
-                  .jicengflfw {
-                    background: url(~@/assets/images/home/icon-jicengflfw.png) no-repeat center;
-                  }
-
-                  .jiufenpc {
-                    background: url(~@/assets/images/home/icon-jiufenpc.png) no-repeat center;
-                  }
-
-                  .one-content {
-                    float: left;
-                    padding-top: 8px;
-
-                    .one-title {
-                      font-size: 14px;
-                    }
-
-                    .one-num {
-                      font-size: 24px;
-                    }
+                  .one-num {
+                    font-size: 24px;
                   }
                 }
               }
