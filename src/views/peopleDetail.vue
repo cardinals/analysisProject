@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-13 11:34:01
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-09-04 18:00:22
+ * @Last Modified time: 2018-09-05 09:16:36
  */
 
 <template>
@@ -67,7 +67,7 @@
       <div class="title">业务专长</div>
       <div class="contents flexRow">
         <!-- <div class="chart_round"></div> -->
-        <g2-pie class="chart_round" :id="'pie'" :height="240" :data="business" :guide="{name: '受理案件总数', value:data.number[0].yewusl}" :legendOption="{show: true, position: 'right-center'}" @itemClick="handlePieClick"></g2-pie>
+        <g2-pie class="chart_round" :id="'pie'" :height="240" :data="business" :guide="{name: '受理案件总数', value:data.number[0].yewusl}" :legendOption="{show: true, position: 'bottom-center'}" @itemClick="handlePieClick"></g2-pie>
         <div class="chart_other">
           <div class="sTitle">
             <div class="dis">案件受理数量({{clickBusinessType}})</div>
@@ -154,7 +154,7 @@
 
 <script>
 import { peopleDetails } from '@/api/api'
-import { defaultYear, pickerDisabledDate } from '@/utils/index'
+import { defaultYear, pickerDisabledDate, percentFormat } from '@/utils/index'
 import { caseStatus } from '@/utils/dictionaryMapping'
 
 export default {
@@ -187,7 +187,12 @@ export default {
   },
   computed: {
     business: function () {
-      const temp = this.data.business
+      const total = this.data.business.reduce((previous, current, index, array) => {
+        return {name: '总和', value: previous.value + current.value}
+      })
+      const temp = this.data.business.map(item => {
+        return {name: `${item.name} ${percentFormat(item.value / total.value)}`, value: item.value}
+      })
       return temp.sort((item1, item2) => {
         if (item1.value > item2.value) {
           return -1

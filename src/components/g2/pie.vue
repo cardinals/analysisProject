@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-19 22:10:56
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-09-04 17:56:13
+ * @Last Modified time: 2018-09-05 09:06:31
  * @Description: 基础饼图
  */
 <template>
@@ -128,30 +128,7 @@ export default {
           value: value <= 1 ? percentFormat(value) : numFormat(value)
         }
       })
-      if (this.legendOption.show && this.legendOption.position === 'right-center') {
-        this.chart.legend('name', {
-          position: this.legendOption.position,
-          useHtml: true,
-          containerTpl: `<div class="g2-legend"><table class="g2-legend-list" style="list-style-type:none;margin:0;padding:0;width:220px;"></table></div>`,
-          itemTpl: (value, color, checked, index) => {
-            const obj = dv.rows[index]
-            checked = checked ? 'checked' : 'unChecked'
-            return `<tr class="g2-legend-list-item item-${index}  ${checked}" data-value="${value}" data-color="${color}" style="cursor: pointer;font-size: 14px;">
-                      <td width=150 style="border: none;padding:0;">
-                        <i class="g2-legend-marker" style="width:10px;height:10px;display:inline-block;margin-right:10px;background-color:${color};"></i>
-                         <span class="g2-legend-text">${value}</span>
-                      </td>
-                      <td style="text-align: right;border: none;padding:0;">${percentFormat(obj.percent)}</td>
-                    </tr>`
-          },
-          'g2-legend': {
-            marginLeft: '-175px'
-          },
-          'g2-legend-list': {
-            border: 'none'
-          }
-        })
-      } else if (this.legendOption.show && this.legendOption.position !== 'right-center') {
+      if (this.legendOption.show) {
         this.chart.legend('name', {
           position: this.legendOption.position
         })
