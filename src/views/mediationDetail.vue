@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-24 14:57:25
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-09-05 09:08:42
+ * @Last Modified time: 2018-09-06 18:07:14
  */
 
 <template>
@@ -261,19 +261,23 @@ export default {
     },
     // 受理案件数量分布
     shouLiAJLX: function () {
-      const total = this.data.anJianSL.shouLiAJLX.reduce((previous, current, index, array) => {
-        return {name: '总和', value: previous.value + current.value}
-      })
-      const temp = this.data.anJianSL.shouLiAJLX.map(item => {
-        return {name: `${item.name} ${percentFormat(item.value / total.value)}`, value: item.value}
-      })
-      return temp.sort((item1, item2) => {
-        if (item1.value > item2.value) {
-          return -1
-        } else {
-          return 1
-        }
-      })
+      if (this.data.anJianSL.shouLiAJLX.length > 0) {
+        const total = this.data.anJianSL.shouLiAJLX.reduce((previous, current, index, array) => {
+          return {name: '总和', value: previous.value + current.value}
+        })
+        const temp = this.data.anJianSL.shouLiAJLX.map(item => {
+          return {name: `${item.name} ${percentFormat(item.value / total.value)}`, value: item.value}
+        })
+        return temp.sort((item1, item2) => {
+          if (item1.value > item2.value) {
+            return -1
+          } else {
+            return 1
+          }
+        })
+      } else {
+        return []
+      }
     },
     // 受理案件数量排名数据
     targetData1: {
