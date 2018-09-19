@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-13 08:52:29
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-30 14:18:39
+ * @Last Modified time: 2018-09-19 15:11:00
  */
 
 const state = {
@@ -12,35 +12,35 @@ const state = {
   activeItem: '',
   // 侧边栏菜单数据
   asideMenuData: [
-    {
-      index: 'home',
-      label: '业务监控',
-      disable: false
-    },
-    {
-      index: 'teamAnalysis',
-      label: '调解队伍分析',
-      disable: false,
-      children: [{
-        index: 'organizationRankings',
-        label: '调解机构排名',
-        disable: false
-      }, {
-        index: 'peopleRankings',
-        label: '调解人员排名',
-        disable: false
-      }]
-    },
-    {
-      index: 'workAnalysis',
-      label: '工作质量分析',
-      disable: false,
-      children: [{
-        index: 'loginAnalysis',
-        label: '登录人次分析',
-        disable: false
-      }]
-    }
+    // {
+    //   index: 'home',
+    //   label: '业务监控',
+    //   disable: false
+    // },
+    // {
+    //   index: 'teamAnalysis',
+    //   label: '调解队伍分析',
+    //   disable: false,
+    //   children: [{
+    //     index: 'organizationRankings',
+    //     label: '调解机构排名',
+    //     disable: false
+    //   }, {
+    //     index: 'peopleRankings',
+    //     label: '调解人员排名',
+    //     disable: false
+    //   }]
+    // },
+    // {
+    //   index: 'workAnalysis',
+    //   label: '工作质量分析',
+    //   disable: false,
+    //   children: [{
+    //     index: 'loginAnalysis',
+    //     label: '登录人次分析',
+    //     disable: false
+    //   }]
+    // }
   ]
 }
 
@@ -50,10 +50,9 @@ const actions = {
   changeAsideCollapseStatus ({ commit }, obj) {
     commit('changeAsideCollapseStatus', obj.amount)
   },
-  // 异步获取侧边栏数据
-  getAsideMenuData ({ commit }) {
-    let data = []
-    commit('setAsideMenuData', data)
+  // 设置侧边栏数据
+  setAsideMenuData ({ commit }, obj) {
+    commit('setAsideMenuData', obj.amount)
   },
   // 设置侧边栏当前选中项
   setCurrentModule ({ commit }, obj) {

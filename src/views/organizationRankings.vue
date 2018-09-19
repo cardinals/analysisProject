@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-13 11:34:18
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-09-03 16:31:20
+ * @Last Modified time: 2018-09-19 15:40:34
  */
 
 <template>
@@ -18,7 +18,7 @@
       <div>
         <span>所属地区：</span>
         <el-radio-group v-model="area">
-          <el-radio v-for="(item,index) in areaList" :key="index" :label="item.value">{{item.label}}</el-radio>
+          <el-radio v-for="(item,index) in areaOptions" :key="index" :label="item.value">{{item.label}}</el-radio>
         </el-radio-group>
       </div>
       <div>
@@ -84,7 +84,7 @@
 
 <script>
 import { organizationRankings } from '@/api/api'
-import { area, coordinationType, top } from '@/utils/dictionaryMapping'
+import { coordinationType, top } from '@/utils/dictionaryMapping'
 import { pickerOptions, defaultDateRage, percentFormat, numFormat } from '@/utils/index'
 
 export default {
@@ -95,14 +95,10 @@ export default {
       search: '',
       /* ------ info区域 end ------ */
       /* ------ selector区域 begin ------ */
-      // 所属地区字段
-      area: area[0]['value'],
       // 机构类型字段
       type: 'JUSTICEBUREAU',
       // 排名筛选字段
       top: top[0]['value'],
-      // 所属地区数据
-      areaList: area,
       // 机构类型数据
       typeList: coordinationType,
       // 排名筛选数据
@@ -138,6 +134,20 @@ export default {
     date: function (newValue, oldValue) {
       this.tableInfo.currentPage = 1
       this.onLoad()
+    }
+  },
+  computed: {
+    areaOptions: {
+      get: function () {
+        return this.$store.state.app.area
+      },
+      set: function (newValue) {}
+    },
+    area: {
+      get: function () {
+        return this.$store.state.app.area[0]['value']
+      },
+      set: function (newValue) {}
     }
   },
   methods: {

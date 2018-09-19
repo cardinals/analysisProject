@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-27 14:03:38
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-09-05 08:42:31
+ * @Last Modified time: 2018-09-19 15:38:35
  */
 
 <template>
@@ -125,7 +125,6 @@
 </template>
 
 <script>
-import {area} from '@/utils/dictionaryMapping'
 import {pickerOptions, color} from '@/utils/index'
 import {homeData} from '@/api/api'
 import {setMapbox} from '@/utils/echartsOptions'
@@ -134,8 +133,6 @@ export default {
   name: 'home',
   data () {
     return {
-      areaOptions: area,
-      area: area[0]['value'],
       date: 'year',
       pickerOptions: pickerOptions,
       target: 'MBM_CASE',
@@ -163,6 +160,18 @@ export default {
 
   },
   computed: {
+    areaOptions: {
+      get: function () {
+        return this.$store.state.app.area
+      },
+      set: function (newValue) {}
+    },
+    area: {
+      get: function () {
+        return this.$store.state.app.area[0]['value']
+      },
+      set: function (newValue) {}
+    },
     // 案件处理结果数量标题
     anJIanCLJGZBBT: {
       get: function () {

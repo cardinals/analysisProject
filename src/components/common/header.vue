@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-10 16:26:00
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-27 11:18:51
+ * @Last Modified time: 2018-09-19 15:50:50
  */
 <template>
   <div class="header">
@@ -14,7 +14,7 @@
       <el-dropdown class="avatar-container" trigger="click" @command="handleCommand">
         <div class="avatar-wrapper">
           <i class="icon user-logo"></i>
-          <span class="user-name">用户名</span>
+          <span class="user-name">{{$store.state.app.userName}}</span>
           <i class="el-icon-caret-bottom"></i>
         </div>
         <el-dropdown-menu class="user-dropdown" slot="dropdown">
@@ -44,10 +44,7 @@ export default {
       if (command === 'logout') {
         logout().then(res => {
           if (res.code === 1) {
-            // 清空本地token
-            this.$store.dispatch({ type: 'app/clearToken', amount: '' })
-            // 跳转cas登录页
-            location.href = res.data
+            this.$router.push({path: '/login'})
           }
         }).catch(error => {
           console.log(error)

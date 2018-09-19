@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-14 09:28:41
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-30 19:10:50
+ * @Last Modified time: 2018-09-19 11:40:42
  */
 
 import axios from 'axios'
@@ -24,9 +24,6 @@ axios.interceptors.request.use(
   config => {
     // 打开加载遮罩
     store.dispatch({ type: 'app/changeLoadingStatus', amount: true })
-    // 在http请求的header都加上token
-    const token = store.state.app.token || window.localStorage.getItem('token')
-    config.headers.token = token
     return config
   },
   error => {
@@ -41,7 +38,7 @@ axios.interceptors.response.use(
     store.dispatch({ type: 'app/changeLoadingStatus', amount: false })
     // 未登录状态跳转登录页
     if (response.data.code === 10) {
-      window.location.href = response.data.data
+      window.location.href = `http://${window.location.host}`
     }
     return Promise.resolve(response)
   },

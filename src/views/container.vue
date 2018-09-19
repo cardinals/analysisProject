@@ -2,14 +2,14 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-10 11:54:18
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-08-27 11:23:16
+ * @Last Modified time: 2018-09-19 15:51:45
  */
 <template>
   <!-- 外层容器，当子元素中包含 <el-header> 或 <el-footer> 时，全部子元素会垂直上下排列，否则会水平左右排列。 -->
   <div class="container">
     <!-- 顶栏容器 -->
-    <header-com class="header"></header-com>
-    <div class="content">
+    <header-com class="header" v-if="$route.path!=='/login'"></header-com>
+    <div class="content" v-if="$route.path!=='/login'">
       <!-- 侧边栏容器 -->
       <aside-com class="aside"></aside-com>
       <!-- 路由区域 -->
@@ -19,20 +19,42 @@
         </transition>
       </div>
     </div>
+    <router-view class="router" v-else></router-view>
   </div>
 </template>
 
 <script>
+import { loginStatus } from '@/api/api'
+import { dataPermission, componentsPermission } from '@/utils/permission'
 export default {
   name: 'container',
   created () {
-    // 保存url search 中的token
-    const search = window.location.search
-    if (search) {
-      const token = search.split('?token=')[1]
-      if (token) {
-        this.$store.dispatch({ type: 'app/setToken', amount: token.split('/')[0] })
-      }
+    this.loginStatus()
+  },
+  methods: {
+    // 登录状态检测
+    loginStatus () {
+      let param = {}
+      loginStatus(param).then((res) => {
+        if (res.code === 1) {
+          this.$store.dispatch({ type: 'app/setUserName', amount: res.data.username })
+          this.setPermission(res.data.areacode)
+        } else if (res.code === 9) {
+          this.$message({ type: 'warning', message: res.message, duration: 5000 })
+        }
+      })
+    },
+    // 设置权限
+    setPermission (areacode) {
+      // 数据权限
+      this.$store.dispatch({ type: 'app/setArea', amount: dataPermission(areacode) })
+      // 模块权限
+      componentsPermission().then(data => {
+        this.$store.dispatch({ type: 'aside/setAsideMenuData', amount: data })
+        if (this.$route.path === '/login') {
+          this.$router.push({path: '/home'})
+        }
+      })
     }
   }
 }
