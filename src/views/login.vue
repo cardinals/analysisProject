@@ -84,7 +84,7 @@ export default {
     // 设置权限
     setPermission (areacode) {
       // 数据权限
-      dataPermission(areacode)
+      this.$store.dispatch({ type: 'app/setArea', amount: dataPermission(areacode) })
       // 模块权限
       componentsPermission().then(data => {
         this.$store.dispatch({ type: 'aside/setAsideMenuData', amount: data })
