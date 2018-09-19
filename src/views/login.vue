@@ -131,17 +131,17 @@ export default {
 .icon-logo-login {
   width: 39px;
   height: 40px;
-  background: url(~@/assets/loginImages/icon_logo.png) left top / 100% 100%;
+  background: url(~@/assets/images/login/icon_logo.png) left top / 100% 100%;
 }
 .icon-lock {
   width: 14px;
   height: 15px;
-  background: url(~@/assets/loginImages/icon_user.png) left bottom;
+  background: url(~@/assets/images/login/icon_user.png) left bottom;
 }
 .icon-user {
   width: 14px;
   height: 15px;
-  background: url(~@/assets/loginImages/icon_user.png) left top;
+  background: url(~@/assets/images/login/icon_user.png) left top;
 }
 .btn-gray-delete {
   width: 14px;
@@ -248,7 +248,7 @@ a:active {
   justify-content: center;
   align-items: center;
   height: 100%;
-  background: url(~@/assets/loginImages/bg.png) center center / 100% 100% no-repeat;
+  background: url(~@/assets/images/login/bg.png) center center / 100% 100% no-repeat;
 }
 #login > img {
   display: block;
@@ -282,7 +282,7 @@ a:active {
   padding-top: 27px;
   line-height: 40px;
   text-align: center;
-  background: url(~@/assets/loginImages/font.png) no-repeat center;
+  background: url(~@/assets/images/login/font.png) no-repeat center;
 }
 #login .m-gallery {
   position: relative;
@@ -367,7 +367,7 @@ a:active {
   height: 51px;
   margin: 0 auto;
   z-index: 1;
-  background: url(~@/assets/loginImages/point.png) left top no-repeat;
+  background: url(~@/assets/images/login/point.png) left top no-repeat;
 }
 #login .m-login .wrap-login .top {
   width: 252px;
