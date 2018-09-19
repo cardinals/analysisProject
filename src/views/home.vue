@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-27 14:03:38
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-09-19 15:38:35
+ * @Last Modified time: 2018-09-19 17:06:42
  */
 
 <template>
@@ -133,6 +133,8 @@ export default {
   name: 'home',
   data () {
     return {
+      area: this.$store.state.app.area[0]['value'],
+      areaOptions: this.$store.state.app.area,
       date: 'year',
       pickerOptions: pickerOptions,
       target: 'MBM_CASE',
@@ -160,18 +162,6 @@ export default {
 
   },
   computed: {
-    areaOptions: {
-      get: function () {
-        return this.$store.state.app.area
-      },
-      set: function (newValue) {}
-    },
-    area: {
-      get: function () {
-        return this.$store.state.app.area[0]['value']
-      },
-      set: function (newValue) {}
-    },
     // 案件处理结果数量标题
     anJIanCLJGZBBT: {
       get: function () {

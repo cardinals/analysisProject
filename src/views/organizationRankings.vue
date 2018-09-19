@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-13 11:34:18
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-09-19 15:40:34
+ * @Last Modified time: 2018-09-19 17:06:14
  */
 
 <template>
@@ -95,6 +95,8 @@ export default {
       search: '',
       /* ------ info区域 end ------ */
       /* ------ selector区域 begin ------ */
+      area: this.$store.state.app.area[0]['value'],
+      areaOptions: this.$store.state.app.area,
       // 机构类型字段
       type: 'JUSTICEBUREAU',
       // 排名筛选字段
@@ -134,20 +136,6 @@ export default {
     date: function (newValue, oldValue) {
       this.tableInfo.currentPage = 1
       this.onLoad()
-    }
-  },
-  computed: {
-    areaOptions: {
-      get: function () {
-        return this.$store.state.app.area
-      },
-      set: function (newValue) {}
-    },
-    area: {
-      get: function () {
-        return this.$store.state.app.area[0]['value']
-      },
-      set: function (newValue) {}
     }
   },
   methods: {
