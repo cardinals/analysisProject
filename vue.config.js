@@ -2,7 +2,7 @@ const CompressionPlugin = require('compression-webpack-plugin')
 
 module.exports = {
   baseUrl: '/',
-  outputDir: 'dist',
+  outputDir: './docker/dist',
   lintOnSave: true,
   runtimeCompiler: false,
   productionSourceMap: false,
@@ -26,7 +26,6 @@ module.exports = {
     proxy: {
       '/peopleMediate': {
         target: 'http://192.168.22.137:8850',
-        // target: 'http://192.168.22.209:8860',
         changeOrigin: true
       }
     },

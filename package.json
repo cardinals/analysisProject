@@ -1,10 +1,11 @@
 {
-  "name": "project4alibaba",
+  "name": "analysis-project",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "build-image": "yarn build &&  docker build -t nginx/analysis-project ./docker",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
