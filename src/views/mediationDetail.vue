@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-24 14:57:25
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-09-06 18:07:14
+ * @Last Modified time: 2018-10-09 19:48:17
  */
 
 <template>
@@ -51,7 +51,8 @@
                   </div>
                 </div>
               </div>
-              <g2-pie class="chart" :id="'pie1'" :height="124" :colorMap="['#1890FF', '#E9E9E9']" :data="[{ name: '高中及以上', value: data.tiaoJieDW.xueLiFB },{ name: '高中以下', value: 1-data.tiaoJieDW.xueLiFB }]"></g2-pie>
+              <g2-pie class="chart" :id="'pie1'" :height="124" :colorMap="['#1890FF', '#E9E9E9']" :axis-name="{name:'类型', value:'数量'}"
+               :data="[{ name: '高中及以上', value: parseInt(data.tiaoJieDW.renYuanSL * data.tiaoJieDW.xueLiFB) },{ name: '高中以下', value: parseInt(data.tiaoJieDW.renYuanSL * (1-data.tiaoJieDW.xueLiFB)) }]"></g2-pie>
             </div>
           </div>
           <div class="atRight">
@@ -59,8 +60,8 @@
               <div class="border"></div>
               <div class="dis">年龄分布</div>
             </div>
-            <g2-histogram :id="'interval'" :height="144" :data="data.tiaoJieDW.nianLingFB.map(item => { return {name: Number(item), value: Number(item)} })"
-               :axisName="{name: '年龄', value: '数量'}"></g2-histogram>
+            <g2-histogram :id="'histogram'" :height="144" :data="data.tiaoJieDW.nianLingFB.map(item => { return {x: Number(item), y: Number(item)} })"
+               :bins="0" :bin-width="10" :axisName="{x: '年龄', y: '数量'}"></g2-histogram>
           </div>
         </div>
       </div>
@@ -97,7 +98,9 @@
             <div class="dis">受理案件数量分布</div>
           </div>
           <!-- 饼图 -->
-          <g2-pie :id="'pie2'" :height="258" :data="shouLiAJLX" :guide="{name: '受理案件总数', value:data.anJianSL.zongLiang}" :legendOption="{show: true, position: 'right-center'}"></g2-pie>
+          <g2-pie :id="'pie2'" :height="258" :data="shouLiAJLX" :axis-name="{name:'类型', value:'数量'}"
+           :guide="{name: '受理案件总数', value:data.anJianSL.zongLiang}"
+           :legendOption="{show: true, position: 'right-center'}"></g2-pie>
         </div>
         <div class="right">
           <div class="sTitle">
@@ -263,10 +266,10 @@ export default {
     shouLiAJLX: function () {
       if (this.data.anJianSL.shouLiAJLX.length > 0) {
         const total = this.data.anJianSL.shouLiAJLX.reduce((previous, current, index, array) => {
-          return {name: '总和', value: previous.value + current.value}
+          return { name: '总和', value: previous.value + current.value }
         })
         const temp = this.data.anJianSL.shouLiAJLX.map(item => {
-          return {name: `${item.name} ${percentFormat(item.value / total.value)}`, value: item.value}
+          return { name: `${item.name} ${percentFormat(item.value / total.value)}`, value: item.value }
         })
         return temp.sort((item1, item2) => {
           if (item1.value > item2.value) {
@@ -342,8 +345,8 @@ export default {
           this.data = res.data
         } else {
           this.data = null
-          this.$message({type: 'error', message: '系统内部错误'})
-          this.$router.push({path: '/error/500'})
+          this.$message({ type: 'error', message: '系统内部错误' })
+          this.$router.push({ path: '/error/500' })
         }
       }).catch(err => {
         console.log(err)
@@ -351,7 +354,7 @@ export default {
     },
     handleChangeRouter (id, type) {
       if (type === 'tiaoJieY') {
-        this.$router.push({path: `/peopleDetail/${id}`})
+        this.$router.push({ path: `/peopleDetail/${id}` })
       }
     }
   }

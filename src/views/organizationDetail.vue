@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-13 11:33:54
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-09-04 13:46:07
+ * @Last Modified time: 2018-10-09 19:23:23
  */
 
 <template>
@@ -51,7 +51,10 @@
                   </div>
                 </div>
               </div>
-              <g2-pie class="chart" :id="'pie1'" :height="163" :colorMap="['#1890FF', '#E9E9E9']" :data="[{ name: '专业调解', value: data.tiaoJieDW.tiaoJieJGSL.jiGouHZB },{ name: '传统调解', value: 1-data.tiaoJieDW.tiaoJieJGSL.jiGouHZB }]"></g2-pie>
+              <g2-pie class="chart" :id="'pie1'" :height="163" :color-map="['#1890FF', '#E9E9E9']" :axis-name="{name:'类型', value:'数量'}"
+               :data="[{ name: '专业调解', value: parseInt(data.tiaoJieDW.tiaoJieJGSL.jiGouHZB * data.tiaoJieDW.tiaoJieJGSL.jiGouSL) },
+                { name: '传统调解', value: parseInt((1-data.tiaoJieDW.tiaoJieJGSL.jiGouHZB)* data.tiaoJieDW.tiaoJieJGSL.jiGouSL) }]">
+              </g2-pie>
             </div>
           </div>
           <div class="atRight">
@@ -73,7 +76,10 @@
                   </div>
                 </div>
               </div>
-              <g2-pie class="chart" :id="'pie2'" :height="163" :colorMap="['#1890FF', '#E9E9E9']" :data="[{ name: '专业调解', value: data.tiaoJieDW.tiaoJieYSL.tiaoJieYHZB },{ name: '传统调解', value: 1-data.tiaoJieDW.tiaoJieYSL.tiaoJieYHZB }]"></g2-pie>
+              <g2-pie class="chart" :id="'pie2'" :height="163" :color-map="['#1890FF', '#E9E9E9']" :axis-name="{name:'类型', value:'数量'}"
+               :data="[{ name: '专业调解', value: parseInt(data.tiaoJieDW.tiaoJieYSL.tiaoJieYHZB * data.tiaoJieDW.tiaoJieYSL.renYuanSL) },
+                { name: '传统调解', value: parseInt((1-data.tiaoJieDW.tiaoJieYSL.tiaoJieYHZB)* data.tiaoJieDW.tiaoJieYSL.renYuanSL) }]">
+              </g2-pie>
             </div>
           </div>
         </div>
@@ -140,7 +146,8 @@
                     </div>
                   </div>
                 </div>
-                <g2-pie class="chart" :id="'pie3'" :height="163" :colorMap="['#1890FF', '#E9E9E9']" :data="[{ name: '零案件受理占比', value: targetData1_1.number4 },{ name: '其他', value: 1-targetData1_1.number4 }]"></g2-pie>
+                <g2-pie class="chart" :id="'pie3'" :height="163" :colorMap="['#1890FF', '#E9E9E9']" :axis-name="{name:'类型', value:'数量'}"
+                 :data="[{ name: '零案件受理', value: targetData1_1.number1 },{ name: '其他', value: targetData1_1.number1/targetData1_1.number4 - targetData1_1.number1}]"></g2-pie>
               </div>
             </div>
           </div>
@@ -185,7 +192,10 @@
             <div class="chart" v-if="data.tiaoJieZYHCD.qiPaoT.length===0">
               <el-button class="nodata-button" icon="el-icon-info">暂无数据</el-button>
             </div>
-            <g2-point class="chart" v-if="data.tiaoJieZYHCD.qiPaoT.length>0" :id="'point1'" :height="280" :axisName="{type:'类型', size:'人均案件量', x:'案件数量', y:'人员数量'}" :data='data.tiaoJieZYHCD.qiPaoT.map(item=>{return {type: item.name, size: item.value3, x: item.value1, y: item.value2}})'></g2-point>
+            <g2-bubble class="chart" v-if="data.tiaoJieZYHCD.qiPaoT.length>0" :id="'point1'" :height="280"
+              :axisName="{type:'类型', size:'人均案件量', x:'案件数量', y:'人员数量'}"
+              :data='data.tiaoJieZYHCD.qiPaoT.map(item=>{return {type: item.name, size: item.value3, x: item.value1, y: item.value2}})'>
+            </g2-bubble>
           </div>
         </div>
       </div>
@@ -194,7 +204,8 @@
         <div class="contents" v-if="mirrorInterval.length===0">
           <el-button class="nodata-button" style="margin: calc(50% - 165px) calc(50% - 60px);" icon="el-icon-info">暂无数据</el-button>
         </div>
-        <g2-mirrorInterval class="contents" :id="'mirrorInterval'" v-if="mirrorInterval.length>0" :height="376" :data='mirrorInterval'></g2-mirrorInterval>
+        <g2-mirror-interval class="contents" :id="'mirrorInterval'" v-if="mirrorInterval.length>0" :height="376"
+          :padding="[40, 20, 0, 140]" :data='mirrorInterval'></g2-mirror-interval>
       </div>
     </div>
     <div class="block4 flexRow">
@@ -222,7 +233,10 @@
             <div class="sContents" v-if="data.tiaoJieCGL.anJianCGLFB.length===0">
               <el-button class="nodata-button" icon="el-icon-info">暂无数据</el-button>
             </div>
-            <g2-point class="sContents" v-if="data.tiaoJieCGL.anJianCGLFB.length>0" :id="'point2'" :height="240" :axisName="{type:'类型', x:'调解成功率', y:'案件数量'}" :type='"散点图"' :data='data.tiaoJieCGL.anJianCGLFB.map(item=>{return {type: item.name, size: 1, x: item.value, y: item.labelValue}})'></g2-point>
+            <g2-scatter-point class="sContents" v-if="data.tiaoJieCGL.anJianCGLFB.length>0" :id="'point2'" :height="240"
+              :axisName="{type:'类型', x:'调解成功率', y:'案件数量'}" :is-percent="{x:true,y:false}"
+              :data='data.tiaoJieCGL.anJianCGLFB.map(item=>{return {type: item.name, size: 1, x: item.value, y: item.labelValue}})'>
+            </g2-scatter-point>
           </div>
         </div>
       </div>
@@ -341,8 +355,8 @@ export default {
     mirrorInterval: function () {
       let temp = []
       this.data.tiaoJieZYPB.map(item => {
-        temp.push({name: item.name, value: item.value1, type: '案件数量'})
-        temp.push({name: item.name, value: item.value2, type: '调解员数量'})
+        temp.push({ name: item.name, value: item.value1, type: '案件数量' })
+        temp.push({ name: item.name, value: item.value2, type: '调解员数量' })
       })
       if (temp.length > 24) {
         temp = temp.slice(0, 24)
@@ -354,9 +368,9 @@ export default {
       get: function () {
         const temp = this.data.tiaoJieAJSL[`${this.target1}LSLAJQK`]
         if (this.target1 === 'tiaoJieY') {
-          return {number1: temp.lingShouLAJRYS, number2: temp.zhuanZhiTJY, number3: temp.jianZhiHQT, number4: temp.lingAnJSLZB}
+          return { number1: temp.lingShouLAJRYS, number2: temp.zhuanZhiTJY, number3: temp.jianZhiHQT, number4: temp.lingAnJSLZB }
         } else if (this.target1 === 'tiaoWeiH') {
-          return {number1: temp.lingShouLAJTWHS, number2: temp.tiaoJieWYH, number3: temp.tiaoJieGZS, number4: temp.lingAnJSLZB}
+          return { number1: temp.lingShouLAJTWHS, number2: temp.tiaoJieWYH, number3: temp.tiaoJieGZS, number4: temp.lingAnJSLZB }
         }
       },
       set: function (newValue) {}
@@ -402,8 +416,8 @@ export default {
           this.data = Object.assign(resList[0].data.data, resList[1].data.data, resList[2].data.data)
         } else {
           this.data = null
-          this.$message({type: 'error', message: '系统内部错误'})
-          this.$router.push({path: '/error/500'})
+          this.$message({ type: 'error', message: '系统内部错误' })
+          this.$router.push({ path: '/error/500' })
         }
       }).catch(err => {
         console.log(err)
@@ -411,7 +425,7 @@ export default {
     },
     handleChangeRouter (id, type) {
       if (type === 'tiaoJieY') {
-        this.$router.push({path: `/peopleDetail/${id}`})
+        this.$router.push({ path: `/peopleDetail/${id}` })
       }
     }
   }
