@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-13 11:34:01
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-10-09 18:05:31
+ * @Last Modified time: 2018-10-09 20:18:38
  */
 
 <template>
@@ -69,7 +69,7 @@
       <div class="contents flexRow">
         <!-- <div class="chart_round"></div> -->
         <g2-pie class="chart_round" :id="'pie'" :height="240" :data="business" :guide="{name: '受理案件总数', value:data.number[0].yewusl}"
-        :legend-option="{show: true, position: 'bottom-center'}" :axis-name="{name:'类型', value:'数量'}" @item-click="handlePieClick"></g2-pie>
+        :legend-option="{show: true, position: 'bottom-center'}" :axis-name="{name:'类型', value:'数量'}" @itemClick="handlePieClick"></g2-pie>
         <div class="chart_other">
           <div class="sTitle">
             <div class="dis">案件受理数量({{clickBusinessType}})</div>
