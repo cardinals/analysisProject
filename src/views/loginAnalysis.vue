@@ -76,15 +76,15 @@
         <el-date-picker class="dateSelector" v-model="date2" type="week" format="yyyy 第 WW 周" placeholder="选择周" :pickerOptions="pickerDisabledDate" size="mini">
         </el-date-picker>
       </div>
-      <g2-groupedColumn :id="'groupedColumn'" :data="groupedColumnData" :height="593"></g2-groupedColumn>
+      <g2-column :id="'column'" :type="'dodge'" :is-bar="false" :data="groupedColumnData" :height="593"></g2-column>
     </div>
     <footer-com></footer-com>
   </div>
 </template>
 
 <script>
-import {loginAnalysis} from '@/api/api'
-import {pickerOptions, pickerDisabledDate, defaultDateRage, defaultWeek, dateFormat, findWeekRangeByToday, numFormat} from '@/utils/index'
+import { loginAnalysis } from '@/api/api'
+import { pickerOptions, pickerDisabledDate, defaultDateRage, defaultWeek, dateFormat, findWeekRangeByToday, numFormat } from '@/utils/index'
 export default {
   data () {
     return {
@@ -103,8 +103,8 @@ export default {
         let list = []
         if (this.data) {
           this.data.peopleHotCount.map(item => {
-            list.push({name: item.shortname, value1: parseInt(item.login), type: '登录人次'})
-            list.push({name: item.shortname, value2: parseFloat(item.hot), type: '登录热度'})
+            list.push({ name: item.shortname, value: parseInt(item.login), type: '登录人次' })
+            list.push({ name: item.shortname, value: parseFloat(item.hot / 100), type: '登录热度' })
           })
         }
         return list
@@ -145,8 +145,8 @@ export default {
           this.data = Object.assign(resList[0].data.data, resList[1].data.data)
         } else {
           this.data = null
-          this.$message({type: 'error', message: '系统内部错误'})
-          this.$router.push({path: '/error/500'})
+          this.$message({ type: 'error', message: '系统内部错误' })
+          this.$router.push({ path: '/error/500' })
         }
       }).catch(err => {
         console.log(err)
@@ -159,7 +159,7 @@ export default {
       return cellValue.split(' ')[1]
     },
     handleRowClick (row, event, column) {
-      this.$router.push({path: `/peopleDetail/${row.id}`})
+      this.$router.push({ path: `/peopleDetail/${row.id}` })
     },
     handleCurrentChange (currentPage) {
       this.currentPage = currentPage

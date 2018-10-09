@@ -18,9 +18,9 @@ export default {
     return {
       errorCode: 500,
       list: {
-        500: {des: '抱歉，服务器出错了', img: 'error500'},
-        404: {des: '抱歉，你访问的页面不存在', img: 'error404'},
-        403: {des: '抱歉，你无权访问该页面', img: 'error403'}
+        500: { des: '抱歉，服务器出错了', img: 'error500' },
+        404: { des: '抱歉，你访问的页面不存在', img: 'error404' },
+        403: { des: '抱歉，你无权访问该页面', img: 'error403' }
       }
     }
   },
@@ -41,7 +41,7 @@ export default {
   },
   methods: {
     handleButtonClick () {
-      this.$router.push({path: '/home'})
+      this.$router.push({ path: '/home' })
     }
   },
   created () {

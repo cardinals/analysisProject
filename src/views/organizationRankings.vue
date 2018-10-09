@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-13 11:34:18
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-09-19 17:06:14
+ * @Last Modified time: 2018-10-09 16:35:20
  */
 
 <template>
@@ -177,8 +177,8 @@ export default {
             this.tableInfo.tableData = res.data.pageData
             this.tableInfo.total = res.data.pageinfo.total
           } else {
-            this.$message({type: 'error', message: '系统内部错误'})
-            this.$router.push({path: '/error/500'})
+            this.$message({ type: 'error', message: '系统内部错误' })
+            this.$router.push({ path: '/error/500' })
           }
         }
       }).catch(error => {
@@ -213,9 +213,9 @@ export default {
     },
     handleRowClick (row, event, column) {
       if (this.type === 'JUSTICEBUREAU' || this.type === 'JUSTICEOFFICE') {
-        this.$router.push({path: `/organizationDetail/${row.id}`})
+        this.$router.push({ path: `/organizationDetail/${row.id}` })
       } else {
-        this.$router.push({path: `/mediationDetail/${row.id}`})
+        this.$router.push({ path: `/mediationDetail/${row.id}` })
       }
     },
     handleCommand (command) {

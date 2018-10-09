@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-10 11:54:18
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-09-19 16:37:28
+ * @Last Modified time: 2018-10-09 16:35:36
  */
 <template>
   <!-- 外层容器，当子元素中包含 <el-header> 或 <el-footer> 时，全部子元素会垂直上下排列，否则会水平左右排列。 -->
@@ -41,7 +41,7 @@ export default {
           this.setPermission(res.data.areacode)
         } else if (res.code === 9) {
           this.$message({ type: 'warning', message: res.message, duration: 5000 })
-          this.$router.push({path: '/login'})
+          this.$router.push({ path: '/login' })
         }
       })
     },
@@ -53,7 +53,7 @@ export default {
       componentsPermission().then(data => {
         this.$store.dispatch({ type: 'aside/setAsideMenuData', amount: data })
         if (this.$route.path === '/login') {
-          this.$router.push({path: '/home'})
+          this.$router.push({ path: '/home' })
         }
       })
     }

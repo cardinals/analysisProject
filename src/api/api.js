@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-13 10:30:00
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-09-19 11:59:22
+ * @Last Modified time: 2018-10-09 19:53:00
  */
 
 //  引入httpUtil
@@ -28,9 +28,9 @@ export const organizationRankings = (params, responseType) => post(`${baseUrl}/i
 
 // 机构详情接口 (司法局和司法所)
 export const organizationDetails = (params) => all([
-  {url: `${baseUrl}/organizationDetailsBaseTeamNumber`, params: params},
-  {url: `${baseUrl}/organizationDetailsSpecializationResource`, params: params},
-  {url: `${baseUrl}/organizationDetailsSuccessAmount`, params: params}
+  { url: `${baseUrl}/organizationDetailsBaseTeamNumber`, params: params },
+  { url: `${baseUrl}/organizationDetailsSpecializationResource`, params: params },
+  { url: `${baseUrl}/organizationDetailsSuccessAmount`, params: params }
 ])
 
 // 机构详情接口 (调委会)
@@ -41,22 +41,22 @@ export const peopleRankings = (params, responseType) => post(`${baseUrl}/portray
 
 // 人员详情接口
 export const peopleDetails = (params) => all([
-  {url: `${baseUrl}/portraitDetailbaseinfo`, params: params},
-  {url: `${baseUrl}/portraitDetailbusinessinfo`, params: params},
-  {url: `${baseUrl}/portraitDetailcaseinfo`, params: params}
+  { url: `${baseUrl}/portraitDetailbaseinfo`, params: params },
+  { url: `${baseUrl}/portraitDetailbusinessinfo`, params: params },
+  { url: `${baseUrl}/portraitDetailcaseinfo`, params: params }
 ])
 
 // 首页
 export const homeData = (params) => all([
-  {url: `${baseUrl}/businessMap`, params: params},
-  {url: `${baseUrl}/businessCount`, params: params},
-  {url: `${baseUrl}/businessType`, params: params},
-  {url: `${baseUrl}/businessProcess`, params: params},
-  {url: `${baseUrl}/onlineNumber`, params: params}
+  { url: `${baseUrl}/businessMap`, params: params },
+  { url: `${baseUrl}/businessCount`, params: params },
+  { url: `${baseUrl}/businessType`, params: params },
+  { url: `${baseUrl}/businessProcess`, params: params },
+  { url: `${baseUrl}/onlineNumber`, params: params }
 ])
 
 // 工作质量分析 登录人员分析
 export const loginAnalysis = (params) => all([
-  {url: `${baseUrl}/loginUser`, params: params[0]},
-  {url: `${baseUrl}/loginCount`, params: params[1]}
+  { url: `${baseUrl}/loginUser`, params: params[0] },
+  { url: `${baseUrl}/loginCount`, params: params[1] }
 ])

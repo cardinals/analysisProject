@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-27 14:03:38
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-09-19 17:06:42
+ * @Last Modified time: 2018-10-09 17:05:18
  */
 
 <template>
@@ -101,8 +101,9 @@
               <span class="span2">{{data.businessProcess.shuLiang | numFormat}}</span>
             </div>
             <div class="r2right">
-              <g2-pie :id="'pie1'" :height="120" :colorMap="['#1890FF', '#E9E9E9']" :data="data.businessProcess.zhanBi"
-                :guide="{name: anJIanCLJGZBBT, value: data.businessProcess.zhanBi[0].value}" :legendOption="{show: false}"></g2-pie>
+              <g2-pie :id="'pie1'" :height="120" :color-map="['#1890FF', '#E9E9E9']" :data="data.businessProcess.dataList"
+                :guide="{name: anJIanCLJGZBBT, value: data.businessProcess.zhanBi}" :legend-option="{show: false}"
+                :axis-name="{name: '类型',value: '数量'}"></g2-pie>
             </div>
           </div>
         </div>
@@ -111,11 +112,12 @@
           <div class="contents flexRow">
             <div class="r3Left">
               <span class="span1">登录人数</span><br>
-              <span class="span2">{{data.onlineNumber.denglurs | numFormat}}</span>
+              <span class="span2">{{data.onlineNumber.shuLiang | numFormat}}</span>
             </div>
             <div class="r3right">
-              <g2-pie :id="'pie2'" :height="120" :colorMap="['#1890FF', '#E9E9E9']" :data="data.onlineNumber.denglurszb"
-                :guide="{name: '登录人数占比', value: data.onlineNumber.denglurszb[0].value}" :legendOption="{show: false}"></g2-pie>
+              <g2-pie :id="'pie2'" :height="120" :color-map="['#1890FF', '#E9E9E9']" :data="data.onlineNumber.dataList"
+                :guide="{name: '登录人数占比', value: data.onlineNumber.zhanBi}" :legend-option="{show: false}"
+                :axis-name="{name: '类型',value: '数量'}"></g2-pie>
             </div>
           </div>
         </div>
@@ -125,9 +127,9 @@
 </template>
 
 <script>
-import {pickerOptions, color} from '@/utils/index'
-import {homeData} from '@/api/api'
-import {setMapbox} from '@/utils/echartsOptions'
+import { pickerOptions, color, percentFormat } from '@/utils/index'
+import { homeData } from '@/api/api'
+import { setMapbox } from '@/utils/echartsOptions'
 
 export default {
   name: 'home',
@@ -141,7 +143,7 @@ export default {
       data: null,
       myChart: null,
       myNav: new window.mapboxgl.NavigationControl(),
-      myPopup: new window.mapboxgl.Popup({anchor: 'left', className: 'myPopup'}),
+      myPopup: new window.mapboxgl.Popup({ anchor: 'left', className: 'myPopup' }),
       color: color,
       organizationId: null
     }
@@ -201,32 +203,39 @@ export default {
   methods: {
     // 获取数据
     fetchHomeData () {
-      homeData({area: this.area, date: this.date, biaoming: this.target}).then(resList => {
+      homeData({ area: this.area, date: this.date, biaoming: this.target }).then(resList => {
         if (resList[0].data.code && resList[1].data.code && resList[2].data.code && resList[3].data.code && resList[4].data.code) {
           // 合并接口数据
-          const data1 = {businessMap: resList[0].data.data}
-          let data2 = {businessCount: {}}
+          const data1 = { businessMap: resList[0].data.data }
+          let data2 = { businessCount: {} }
           resList[1].data.data.map(item => {
             data2.businessCount[item.biao] = item.shuLiang
           })
-          const data3 = {businessType: resList[2].data.data.map(item => {
+          const data3 = { businessType: resList[2].data.data.map(item => {
             return { name: item.leiXing, value: item.jianShu }
-          })}
+          }) }
           const data4 = {
             businessProcess: {
-              zhanBi: resList[3].data.data.map(item => {
-                return { name: item.leiXing, value: item.zhanBi / 100 }
+              dataList: resList[3].data.data.map(item => {
+                return { name: item.leiXing, value: item.shuLiang }
               }),
+              zhanBi: percentFormat(resList[3].data.data[0].shuLiang / (resList[3].data.data[0].shuLiang + resList[3].data.data[1].shuLiang)),
               shuLiang: resList[3].data.data[0].shuLiang
             }
           }
-          const data5 = {onlineNumber: {denglurszb: [{name: '登录人数占比', value: resList[4].data.data.denglurszb}, {name: '未登录人数占比', value: 1 - resList[4].data.data.denglurszb}], denglurs: resList[4].data.data.denglurs}}
+          const data5 = {
+            onlineNumber: {
+              dataList: [{ name: '登录人数', value: resList[4].data.data.denglurs }, { name: '未登录人数', value: parseInt(resList[4].data.data.denglurs / resList[4].data.data.denglurszb - resList[4].data.data.denglurs) }],
+              zhanBi: percentFormat(resList[4].data.data.denglurszb),
+              shuLiang: resList[4].data.data.denglurs
+            }
+          }
           this.data = Object.assign(data1, data2, data3, data4, data5)
           this.drawMap()
         } else {
           this.data = null
-          this.$message({type: 'error', message: '系统内部错误'})
-          this.$router.push({path: '/error/500'})
+          this.$message({ type: 'error', message: '系统内部错误' })
+          this.$router.push({ path: '/error/500' })
         }
       }).catch(err => {
         console.log(err)

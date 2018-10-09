@@ -73,33 +73,33 @@ export const caseType = ['涉校纠纷', '医患纠纷', '交通纠纷', '知识
 export const caseStatus = ['调解成功', '调解终止', '未结案']
 
 export const coordinationType = [
-  {label: '全部调委会', value: 'allinformation'},
-  {label: '村调委会', value: '6584014fd89249a1a750e9eb16f775e2'},
-  {label: '居（社区）调委会', value: 'c0d8d4a282854854ad71826e0bea2c57'},
-  {label: '乡镇调委会', value: 'c542c1a3863c47e798144d311e4371c8'},
-  {label: '街道调委会', value: 'af970ed75443429fa302fdf5914de11a'},
-  {label: '企事业单位调委会', value: '962855d460a149c0baf2e8f86a64cdf1'},
-  {label: '行业专业调委会', value: '29652b300bb2482ea1b30be2310cf451'},
-  {label: '其它调委会', value: '14d05df3ee184a22aeb0d78a81874050'}
+  { label: '全部调委会', value: 'allinformation' },
+  { label: '村调委会', value: '6584014fd89249a1a750e9eb16f775e2' },
+  { label: '居（社区）调委会', value: 'c0d8d4a282854854ad71826e0bea2c57' },
+  { label: '乡镇调委会', value: 'c542c1a3863c47e798144d311e4371c8' },
+  { label: '街道调委会', value: 'af970ed75443429fa302fdf5914de11a' },
+  { label: '企事业单位调委会', value: '962855d460a149c0baf2e8f86a64cdf1' },
+  { label: '行业专业调委会', value: '29652b300bb2482ea1b30be2310cf451' },
+  { label: '其它调委会', value: '14d05df3ee184a22aeb0d78a81874050' }
 ]
 
 export const top = [
-  {label: '全部', value: 'allinformation'},
-  {label: '前10', value: 10},
-  {label: '前20', value: 20},
-  {label: '前50', value: 50},
-  {label: '前100', value: 100},
-  {label: '前200', value: 200},
-  {label: '零业务', value: 1},
-  {label: '零登录', value: 2}
+  { label: '全部', value: 'allinformation' },
+  { label: '前10', value: 10 },
+  { label: '前20', value: 20 },
+  { label: '前50', value: 50 },
+  { label: '前100', value: 100 },
+  { label: '前200', value: 200 },
+  { label: '零业务', value: 1 },
+  { label: '零登录', value: 2 }
 ]
 
 export const route = [
-  {label: '业务数量分析', value: 'businessNum'},
-  {label: '调解队伍分析', value: 'none'},
-  {label: '调解机构排名', value: 'organizationRankings'},
-  {label: '调解机构详情', value: 'organizationDetail'},
-  {label: '调解人员排名', value: 'peopleRankings'},
-  {label: '调解人员详情', value: 'peopleDetail'},
-  {label: '工作质量分析', value: 'workquality'}
+  { label: '业务数量分析', value: 'businessNum' },
+  { label: '调解队伍分析', value: 'none' },
+  { label: '调解机构排名', value: 'organizationRankings' },
+  { label: '调解机构详情', value: 'organizationDetail' },
+  { label: '调解人员排名', value: 'peopleRankings' },
+  { label: '调解人员详情', value: 'peopleDetail' },
+  { label: '工作质量分析', value: 'workquality' }
 ]

@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-13 11:34:06
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-09-19 17:05:35
+ * @Last Modified time: 2018-10-09 16:35:05
  */
 
 <template>
@@ -172,8 +172,8 @@ export default {
             this.tableInfo.tableData = res.data.pageData
             this.tableInfo.total = res.data.pageinfo.total
           } else {
-            this.$message({type: 'error', message: '系统内部错误'})
-            this.$router.push({path: '/error/500'})
+            this.$message({ type: 'error', message: '系统内部错误' })
+            this.$router.push({ path: '/error/500' })
           }
         }
       })
@@ -205,7 +205,7 @@ export default {
       this.onLoad()
     },
     handleRowClick (row, event, column) {
-      this.$router.push({path: `/peopleDetail/${row.id_}`})
+      this.$router.push({ path: `/peopleDetail/${row.id_}` })
     },
     handleCommand (command) {
       this.onLoad(command)

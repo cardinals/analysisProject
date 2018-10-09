@@ -2,11 +2,11 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-09-19 14:06:35
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-09-19 15:34:19
+ * @Last Modified time: 2018-10-09 16:35:52
  */
 
 import { permission } from '@/api/api'
-import {area} from '@/utils/dictionaryMapping'
+import { area } from '@/utils/dictionaryMapping'
 
 // 获取并设置当前用户的模块权限
 export const componentsPermission = () => {

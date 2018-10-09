@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-10 16:25:55
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-09-19 15:46:11
+ * @Last Modified time: 2018-10-09 16:36:25
  */
 <template>
   <el-menu :default-active="$store.state.aside.activeItem" class="asideMenu" @select="handleSelect" :collapse="isCollapse"
@@ -47,7 +47,7 @@ export default {
   },
   methods: {
     handleSelect (index, indexPath) {
-      this.$router.push({path: `/${index}`})
+      this.$router.push({ path: `/${index}` })
     }
   }
 }

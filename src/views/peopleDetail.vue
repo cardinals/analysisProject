@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-13 11:34:01
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-09-05 09:16:36
+ * @Last Modified time: 2018-10-09 20:18:38
  */
 
 <template>
@@ -59,7 +59,8 @@
             </div>
           </div>
           <!-- <div class="chart"></div> -->
-          <g2-radar class="chart" :id="'radar'" :height="219" :data="radarData" :axisName="{a: '个人',b: '全市平均',c: '全区平均'}" :max="1"></g2-radar>
+          <g2-radar class="chart" :id="'radar'" :height="219" :data="radarData" :axis-name="{a: '个人',b: '全市平均',c: '全区平均'}"
+          :max="1" :show-tooltip="false" :show-legend="true" :padding="[40,0,60,0]"></g2-radar>
         </div>
       </div>
     </div>
@@ -67,7 +68,8 @@
       <div class="title">业务专长</div>
       <div class="contents flexRow">
         <!-- <div class="chart_round"></div> -->
-        <g2-pie class="chart_round" :id="'pie'" :height="240" :data="business" :guide="{name: '受理案件总数', value:data.number[0].yewusl}" :legendOption="{show: true, position: 'bottom-center'}" @itemClick="handlePieClick"></g2-pie>
+        <g2-pie class="chart_round" :id="'pie'" :height="240" :data="business" :guide="{name: '受理案件总数', value:data.number[0].yewusl}"
+        :legend-option="{show: true, position: 'bottom-center'}" :axis-name="{name:'类型', value:'数量'}" @itemClick="handlePieClick"></g2-pie>
         <div class="chart_other">
           <div class="sTitle">
             <div class="dis">案件受理数量({{clickBusinessType}})</div>
@@ -178,7 +180,7 @@ export default {
       // 当前点击选中的案件类型（表格）
       clickCaseType: '全部',
       // 筛选项--案件状态（备选）
-      caseStatus: caseStatus.map(item => { return {text: item, value: item} }),
+      caseStatus: caseStatus.map(item => { return { text: item, value: item } }),
       // 筛选项--案件类型（已选中）
       filteredCaselabel: [],
       // 筛选项--案件状态（已选中）
@@ -188,10 +190,10 @@ export default {
   computed: {
     business: function () {
       const total = this.data.business.reduce((previous, current, index, array) => {
-        return {name: '总和', value: previous.value + current.value}
+        return { name: '总和', value: previous.value + current.value }
       })
       const temp = this.data.business.map(item => {
-        return {name: `${item.name} ${percentFormat(item.value / total.value)}`, value: item.value}
+        return { name: `${item.name} ${percentFormat(item.value / total.value)}`, value: item.value }
       })
       return temp.sort((item1, item2) => {
         if (item1.value > item2.value) {
@@ -209,7 +211,7 @@ export default {
     },
     // 生成表格筛选项--案件类型（备选）
     caseType: function () {
-      return this.data.business.map(item => { return {text: item.name, value: item.name} })
+      return this.data.business.map(item => { return { text: item.name, value: item.name } })
     },
     // 计算当前筛选条件下的表格数据
     filteredtableData: function () {
@@ -267,8 +269,8 @@ export default {
           this.data = Object.assign(resList[0].data.data, resList[1].data.data, resList[2].data.data)
         } else {
           this.data = null
-          this.$message({type: 'error', message: '系统内部错误'})
-          this.$router.push({path: '/error/500'})
+          this.$message({ type: 'error', message: '系统内部错误' })
+          this.$router.push({ path: '/error/500' })
         }
       }).catch(err => {
         console.log(err)
@@ -297,6 +299,7 @@ export default {
     },
     // 处理饼图点击
     handlePieClick (data) {
+      console.log(data)
       this.clickBusinessType = data.name
     }
   }
