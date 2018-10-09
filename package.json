@@ -9,15 +9,14 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "@antv/g2": "^3.2.7",
-    "@antv/data-set": "^0.9.1",
     "axios": "^0.18.0",
     "vue": "^2.5.16",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1",
     "mapbox-gl": "^0.47.0",
     "echarts": "4.1.0",
-    "echarts-gl": "1.1.1"
+    "echarts-gl": "1.1.1",
+    "vue-g2": "^0.1.12"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.0.1",
