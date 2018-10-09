@@ -77,7 +77,7 @@ export default {
       let param = {}
       loginStatus(param).then((res) => {
         if (res.code === 1) {
-          this.$router.push({path: '/home'})
+          this.$router.push({ path: '/home' })
         }
       })
     },
@@ -90,7 +90,7 @@ export default {
         this.$store.dispatch({ type: 'aside/setAsideMenuData', amount: data })
         if (this.$route.path === '/login') {
           this.$store.dispatch({ type: 'aside/setCurrentModule', amount: 'home' })
-          this.$router.push({path: '/home'})
+          this.$router.push({ path: '/home' })
         }
       })
     },

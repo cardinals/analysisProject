@@ -2,12 +2,12 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-14 09:28:41
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-09-19 11:40:42
+ * @Last Modified time: 2018-10-09 16:36:12
  */
 
 import axios from 'axios'
 // import QS from 'qs'
-import {Message} from 'element-ui'
+import { Message } from 'element-ui'
 import store from '@/store/index'
 
 // 设置请求头
@@ -79,7 +79,7 @@ export let get = (url, params) => {
  */
 export let post = (url, params, responseType) => {
   return new Promise((resolve, reject) => {
-    axios({method: 'post', url: url, data: params, responseType: responseType || 'json'})
+    axios({ method: 'post', url: url, data: params, responseType: responseType || 'json' })
       .then(res => {
         resolve(res.data)
       })

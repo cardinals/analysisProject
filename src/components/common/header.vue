@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-10 16:26:00
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-09-19 15:50:50
+ * @Last Modified time: 2018-10-09 16:36:28
  */
 <template>
   <div class="header">
@@ -44,7 +44,7 @@ export default {
       if (command === 'logout') {
         logout().then(res => {
           if (res.code === 1) {
-            this.$router.push({path: '/login'})
+            this.$router.push({ path: '/login' })
           }
         }).catch(error => {
           console.log(error)
