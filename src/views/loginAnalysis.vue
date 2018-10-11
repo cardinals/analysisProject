@@ -76,7 +76,9 @@
         <el-date-picker class="dateSelector" v-model="date2" type="week" format="yyyy 第 WW 周" placeholder="选择周" :pickerOptions="pickerDisabledDate" size="mini">
         </el-date-picker>
       </div>
-      <g2-column :id="'column'" :type="'dodge'" :is-bar="false" :data="groupedColumnData" :height="593"></g2-column>
+      <g2-double-axis-column :id="'doubleAxisColumn'" :is-bar="false" :data="columnData" :height="593"
+       :axis-name="{name: '司法局',value1: '登录人次',value2: '登录热度'}"
+       :padding="[30,60,80,60]"></g2-double-axis-column>
     </div>
     <footer-com></footer-com>
   </div>
@@ -98,13 +100,12 @@ export default {
     }
   },
   computed: {
-    groupedColumnData: {
+    columnData: {
       get: function () {
         let list = []
         if (this.data) {
           this.data.peopleHotCount.map(item => {
-            list.push({ name: item.shortname, value: parseInt(item.login), type: '登录人次' })
-            list.push({ name: item.shortname, value: parseFloat(item.hot / 100), type: '登录热度' })
+            list.push({ name: item.shortname, value1: parseInt(item.login), value2: parseFloat(item.hot / 100) })
           })
         }
         return list
