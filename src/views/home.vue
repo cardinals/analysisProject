@@ -272,6 +272,16 @@ export default {
         })
         // 添加导航控件
         mapbox.addControl(this.myNav, 'top-right')
+        // 遍历数据找出数据最大的机构
+        const maxData = mapData.reduce((item1, item2) => {
+          if (item1.value[2] > item2.value[2]) {
+            return item1
+          } else {
+            return item2
+          }
+        })
+        // 绘制弹出框，显示数据最大的机构
+        this.drawPopup({ lng: Number(maxData.value[0]), lat: Number(maxData.value[1]) }, maxData, mapbox)
         // 监听echarts点击事件, 获取点击位置的数据信息
         this.myChart.on('click', (echartsParams) => {
           // 监听mapbox点击事件, 获取点击位置的经纬度信息
