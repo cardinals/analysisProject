@@ -13,7 +13,7 @@
       <!-- 侧边栏容器 -->
       <aside-com class="aside"></aside-com>
       <!-- 路由区域 -->
-      <div class="main">
+      <div class="main" v-loading="$store.state.app.isShowLoading">
         <transition name="fade"  mode="out-in">
           <router-view class="router"></router-view>
         </transition>

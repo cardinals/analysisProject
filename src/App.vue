@@ -5,7 +5,7 @@
  * @Last Modified time: 2018-08-24 17:48:44
  */
 <template>
-  <div id="app" v-loading="$store.state.app.isShowLoading">
+  <div id="app">
     <container></container>
   </div>
 </template>
