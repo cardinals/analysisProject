@@ -545,6 +545,7 @@ export default {
         }
         .page{
           height: 53px;
+          text-align: center;
         }
       }
       .atRight{
