@@ -98,8 +98,9 @@
               <span class="span1">{{(data.tiaoJieAJSL.zongLiang||0) | numFormat}}<span class='unit'>件</span></span>
               <!-- 机构类型为司法所时不显示万人比 -->
               <span class="span2" v-if="data.jiBenXX.jiGouLX===''">万人比
-                <el-tooltip content="万人比示意" placement="top-end">
-                  <i>?</i>
+                <el-tooltip placement="top">
+                  <div slot="content">万人比 = 案件数 / 人数(万) , 每一万人中发生案件的数量</div>
+                  <i class="el-icon-question"></i>
                 </el-tooltip>
               </span>
               <span class="span3" v-if="data.jiBenXX.jiGouLX===''">{{(data.tiaoJieAJSL.wanRenB||0) | numFormat}}件/万人</span>
@@ -555,19 +556,6 @@ export default {
                 transform: translateY(-120%);
                 font-size: @fontMiddle;
                 color: @graymore;
-                i {
-                  display: inline-block;
-                  width: 12px;
-                  height: 12px;
-                  font-size: @fontSmall;
-                  color: @graymore;
-                  border-radius: 50%;
-                  border: 1px solid @graymore;
-                  text-align: center;
-                  line-height: 12px;
-                  margin-left: 4px;
-                  cursor: pointer;
-                }
               }
               .span3 {
                 position: absolute;
