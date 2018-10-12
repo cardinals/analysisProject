@@ -651,8 +651,10 @@ export default {
                 .li {
                   height: 33px;
                   display: block;
+                  color: @gray;
                   &:hover {
                     cursor: pointer;
+                    color: #389EFB !important;
                   }
                   .sort {
                     float: left;
@@ -670,7 +672,6 @@ export default {
                     float: left;
                     height: 33px;
                     font-size: @fontMiddle;
-                    color: @gray;
                     line-height: 33px;
                     width: 150px;
                     overflow: hidden;
@@ -848,8 +849,10 @@ export default {
           .li {
             height: 33px;
             display: block;
+            color: @gray;
             &:hover {
               cursor: pointer;
+              color: #389EFB !important;
             }
             .sort {
               float: left;
@@ -867,7 +870,6 @@ export default {
               float: left;
               height: 33px;
               font-size: @fontMiddle;
-              color: @gray;
               line-height: 33px;
               width: 250px;
               overflow: hidden;
@@ -934,8 +936,10 @@ export default {
           .li {
             height: 33px;
             display: block;
+            color: @gray;
             &:hover {
               cursor: pointer;
+              color: #389EFB !important;
             }
             .sort {
               float: left;
@@ -953,7 +957,6 @@ export default {
               float: left;
               height: 33px;
               font-size: @fontMiddle;
-              color: @gray;
               line-height: 33px;
               width: 250px;
               overflow: hidden;

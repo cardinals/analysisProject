@@ -453,9 +453,11 @@ export default {
             .li {
               height: 33px;
               display: block;
+              color: @gray;
 
               &:hover {
                 cursor: pointer;
+                color: #389EFB !important;
               }
 
               .sort {
@@ -475,7 +477,6 @@ export default {
                 float: left;
                 height: 33px;
                 font-size: @fontMiddle;
-                color: @gray;
                 line-height: 33px;
                 width: 135px;
                 overflow: hidden;
