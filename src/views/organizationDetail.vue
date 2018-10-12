@@ -427,6 +427,8 @@ export default {
     handleChangeRouter (id, type) {
       if (type === 'tiaoJieY') {
         this.$router.push({ path: `/peopleDetail/${id}` })
+      } else if (type === 'tiaoWeiH') {
+        this.$router.push({ path: `/mediationDetail/${id}` })
       }
     }
   }
