@@ -62,7 +62,7 @@ export default {
     .left {
       flex-grow: 0;
       height: 100%;
-      min-width: 62px;
+      min-width: 64px;
       box-sizing: border-box;
       background: #002140;
       .widelogo {
