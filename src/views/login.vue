@@ -12,7 +12,7 @@
           <div class="top">用户登录</div>
           <div class="login-frame">
             <div class="bar-input">
-              <i class="icon icon-user"></i>
+              <i class="icon icon-user-login"></i>
               <input type="text" id="name" class="form-control" :class='{blue: !userNameStatus}' v-model='userName' placeholder="请输入用户名" data-necessary="true" reservation="用户名" @focus='changeStatus("userName")'/>
               <a class="btn btn-gray-delete" :class='{hide: userNameStatus}' @click='clearContent("userName")'>&times;</a>
               <div class="errorBar"></div>
@@ -128,21 +128,7 @@ export default {
   min-width:1366px;
   min-height: 766px;
 }
-.icon-logo-login {
-  width: 39px;
-  height: 40px;
-  background: url(~@/assets/images/login/icon_logo.png) left top / 100% 100%;
-}
-.icon-lock {
-  width: 14px;
-  height: 15px;
-  background: url(~@/assets/images/login/icon_user.png) left bottom;
-}
-.icon-user {
-  width: 14px;
-  height: 15px;
-  background: url(~@/assets/images/login/icon_user.png) left top;
-}
+
 .btn-gray-delete {
   width: 14px;
   height: 14px;
@@ -227,17 +213,13 @@ a:active {
   cursor: pointer;
 }
 
-.btn,
-.icon {
+.btn {
   display: inline-block;
   text-align: center;
   user-select: none;
   font-size: 12px;
 }
-.icon {
-  vertical-align: middle;
-  background-repeat: no-repeat;
-}
+
 .hide {
   display: none;
 }

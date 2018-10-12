@@ -66,6 +66,8 @@ export default {
   @import '~@/assets/css/common.less';
   // 修改elementui默认样式
   @import '~@/assets/css/editElementui.less';
+  // icon
+  @import '~@/assets/css/icon.less';
   .container {
     width: 100%;
     height: 100%;

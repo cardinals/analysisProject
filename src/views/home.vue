@@ -29,7 +29,7 @@
             <div class="one" :class="{active: target==='MBM_CASE'}" @click="target='MBM_CASE'">
               <div class="width-x2-container">
                 <div class="one-container clearfix">
-                  <i class="icon renmintj"></i>
+                  <i class="icon icon-renmintj"></i>
                   <div class="one-content">
                     <span class="one-title">人民调解</span>
                     <br>
@@ -42,7 +42,7 @@
             <div class="one" :class="{active: target==='MMS_ALARM110INFO'}" @click="target='MMS_ALARM110INFO'">
               <div class="width-x2-container">
                 <div class="one-container clearfix">
-                  <i class="icon baojingld"></i>
+                  <i class="icon icon-baojingld"></i>
                   <div class="one-content">
                     <span class="one-title">110联动</span>
                     <br>
@@ -55,7 +55,7 @@
             <div class="one" :class="{active: target==='WWS_CONSULT'}" @click="target='WWS_CONSULT'">
               <div class="width-x2-container">
                 <div class="one-container clearfix">
-                  <i class="icon jicengflfw"></i>
+                  <i class="icon icon-jicengflfw"></i>
                   <div class="one-content">
                     <span class="one-title">基层法律服务</span>
                     <br>
@@ -68,7 +68,7 @@
             <div class="one" :class="{active: target==='CDS_INVESTIGATIONFEEDBAC'}" @click="target='CDS_INVESTIGATIONFEEDBAC'">
               <div class="width-x2-container">
                 <div class="one-container clearfix">
-                  <i class="icon jiufenpc"></i>
+                  <i class="icon icon-jiufenpc"></i>
                   <div class="one-content">
                     <span class="one-title">纠纷排查</span>
                     <br>
@@ -373,22 +373,6 @@ export default {
                   width: 35px;
                   height: 100%;
                   padding-top: 8px;
-                }
-
-                .renmintj {
-                  background: url(~@/assets/images/home/icon-renmintj.png) no-repeat center;
-                }
-
-                .baojingld {
-                  background: url(~@/assets/images/home/icon-110ld.png) no-repeat center;
-                }
-
-                .jicengflfw {
-                  background: url(~@/assets/images/home/icon-jicengflfw.png) no-repeat center;
-                }
-
-                .jiufenpc {
-                  background: url(~@/assets/images/home/icon-jiufenpc.png) no-repeat center;
                 }
 
                 .one-content {

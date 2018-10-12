@@ -11,7 +11,7 @@
     <div v-for="item in menuData" :key="item.index">
       <el-submenu v-if="item.children&&item.children.length>0" :disabled="item.disable" :index="item.index">
         <template slot="title">
-          <i class="el-icon-menu"></i>
+          <i class="icon" :class="`icon-${item.index}`"></i>
           <span v-if="!isCollapse">{{item.label}}</span>
         </template>
         <el-menu-item v-for="subItem in item.children" :disabled="subItem.disable" :index="subItem.index" :key="subItem.index">
@@ -19,7 +19,7 @@
         </el-menu-item>
       </el-submenu>
       <el-menu-item v-else :disabled="item.disable" :index="item.index">
-        <i class="el-icon-menu"></i>
+        <i class="icon" :class="`icon-${item.index}`"></i>
         <span slot="title">{{item.label}}</span>
       </el-menu-item>
     </div>
