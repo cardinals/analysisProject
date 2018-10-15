@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-13 11:34:01
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-10-09 20:18:38
+ * @Last Modified time: 2018-10-15 08:44:29
  */
 
 <template>
@@ -299,8 +299,7 @@ export default {
     },
     // 处理饼图点击
     handlePieClick (data) {
-      console.log(data)
-      this.clickBusinessType = data.name
+      this.clickBusinessType = data.name.split(' ')[0]
     }
   }
 }
