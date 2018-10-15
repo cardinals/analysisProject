@@ -236,6 +236,7 @@
             </div>
             <g2-scatter-point class="sContents" v-if="data.tiaoJieCGL.anJianCGLFB.length>0" :id="'point2'" :height="240"
               :axisName="{type:'类型', x:'调解成功率', y:'案件数量'}" :is-percent="{x:true,y:false}"
+              :intervalColor="['#FACC14', '#2FC25B', '#1890FF']" :intervalRange="{use: true, axis: 'x', limit: [0.25, 0.75]}"
               :data='data.tiaoJieCGL.anJianCGLFB.map(item=>{return {type: item.name, size: 1, x: item.value, y: item.labelValue}})'>
             </g2-scatter-point>
           </div>
