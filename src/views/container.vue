@@ -85,21 +85,6 @@ export default {
       .aside {
         flex-grow: 0;
         height: 100%;
-        .is-opened .el-menu-item {
-          background: #000C17 !important;
-        }
-        .is-opened .is-active,
-        .is-active {
-          color: #FFFFFF !important;
-          background: #1890FF !important;
-        }
-        .el-menu-item:hover {
-          color: #1890FF !important;
-          background: #001529 !important;
-          i {
-            color: #1890FF !important;
-          }
-        }
       }
       .main {
         flex-grow: 1;
