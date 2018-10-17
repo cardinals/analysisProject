@@ -11,7 +11,12 @@
     <header-com class="header" v-if="$route.path!=='/login'"></header-com>
     <div class="content" v-if="$route.path!=='/login'">
       <!-- 侧边栏容器 -->
-      <aside-com class="aside"></aside-com>
+      <div class="left">
+        <aside-com class="aside"></aside-com>
+        <div class="bottom" :style="{width: !$store.state.aside.isCollapseAside?'200px':'64px'}">
+          <span class="font" v-if="!$store.state.aside.isCollapseAside" @click="openPage()">前往业务系统</span>
+        </div>
+      </div>
       <!-- 路由区域 -->
       <div class="main" v-loading="$store.state.app.isShowLoading">
         <transition name="fade"  mode="out-in">
@@ -56,6 +61,9 @@ export default {
           this.$router.push({ path: '/home' })
         }
       })
+    },
+    openPage () {
+      window.open('http://rmtj.justice.gov.cn/')
     }
   }
 }
@@ -82,9 +90,23 @@ export default {
       display: flex;
       height: calc(100% - 60px);
       width: 100%;
-      .aside {
+      .left {
         flex-grow: 0;
-        height: 100%;
+        .aside {
+          height: calc(100% - 40px);
+        }
+        .bottom {
+          height: 40px;
+          background: rgb(0, 21, 41);
+          max-width: 200px;
+          color: rgba(255, 255, 255, 0.6);
+          text-align: center;
+          padding-top: 8px;
+          &:hover{
+            cursor: pointer;
+            color: rgba(24, 144, 255, 0.9);
+          }
+        }
       }
       .main {
         flex-grow: 1;
