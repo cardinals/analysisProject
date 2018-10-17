@@ -78,7 +78,11 @@
             <span class="number">{{(businessTypeData.yewusl||0) | numFormat}}<span style="font-size:14px;">件</span></span>
             <!-- <span class="danwei">件</span> -->
           </div>
-          <div class="chart"></div>
+          <!-- <div class="chart"></div> -->
+          <g2-sparkline :id="'sparkline1'" class="chart" :height="90" :color="'#965DE3'" :type="'area'"
+            :data='businessTypeData.value.map(item=>{return {name: item.month, value: item.tiaojieaj}})'
+            :axis-name="{name: '年-月', value: '案件受理数量(件)'}">
+          </g2-sparkline>
           <div class="atBottom">案件受理量优于{{(businessTypeData.yewuslzb||0) | percentFormat}}的调解员</div>
         </div>
         <div class="chart_other">
@@ -88,7 +92,12 @@
           <div class="atMiddle">
             <span class="number">{{(businessTypeData.tiaojiecgl||0) | percentFormat}}</span>
           </div>
-          <div class="chart"></div>
+          <!-- <div class="chart"></div> -->
+          <g2-progress-bar  class="chart" :style="'padding-top: 30px;'" :id="'progressbar4'" :height="45" :data="[{name:'成功', value: businessTypeData.tiaojiecgl}, {name:'失败', value: 1-businessTypeData.tiaojiecgl}]"
+           :mark-line="{use:true, name: '均值', value: businessTypeData.cglbc, lineColor: '#1890FF'}"
+           :show-guide="{name: false, value: false}"
+           :is-percent="true">
+          </g2-progress-bar>
           <div class="atBottom">调解成功率优于{{(businessTypeData.cglzb||0) | percentFormat}}的调解员</div>
         </div>
         <div class="chart_other">
@@ -99,7 +108,11 @@
             <span class="number">{{(businessTypeData.pingjuntjzq||0) | numFormat}}<span style="font-size:14px;">天</span></span>
             <!-- <span class="danwei">天</span> -->
           </div>
-          <div class="chart"></div>
+          <!-- <div class="chart"></div> -->
+          <g2-sparkline :id="'sparkline3'" class="chart" :height="90" :color="'#1890FF'" :type="'interval'"
+            :data='businessTypeData.value.map(item=>{return {name: item.month, value: item.pingjuntjzq}})'
+            :axis-name="{name: '年-月', value: '平均调解时长(天)'}">
+          </g2-sparkline>
           <div class="atBottom">平均调解时长优于{{(businessTypeData.tjzqzb||0) | percentFormat}}的调解员</div>
         </div>
       </div>
@@ -242,6 +255,7 @@ export default {
     businessTypeData: function () {
       let temp = {}
       this.data.number.map(item => { if (this.clickBusinessType === item.name) { temp = item } })
+      console.log(this.data.number)
       return temp
     }
   },
