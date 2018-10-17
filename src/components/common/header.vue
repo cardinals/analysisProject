@@ -13,7 +13,7 @@
       <i class="icon hamburger" :class="{ 'collapselogo': !$store.state.aside.isCollapseAside, 'spreadlogo': $store.state.aside.isCollapseAside }" @click="handleCollapseChange()"></i>
       <el-dropdown class="avatar-container" trigger="click" @command="handleCommand">
         <div class="avatar-wrapper">
-          <i class="icon user-logo"></i>
+          <i class="icon icon-user"></i>
           <span class="user-name">{{$store.state.app.userName}}</span>
           <i class="el-icon-caret-bottom"></i>
         </div>
@@ -62,15 +62,9 @@ export default {
     .left {
       flex-grow: 0;
       height: 100%;
-      min-width: 62px;
+      min-width: 64px;
       box-sizing: border-box;
       background: #002140;
-      .widelogo {
-        background: url(~@/assets/images/icon-system-logo-wide.png) no-repeat center;
-      }
-      .narrowlogo {
-        background: url(~@/assets/images/icon-system-logo-narrow.png) no-repeat center;
-      }
     }
     .right {
       flex-grow: 1;
@@ -78,14 +72,7 @@ export default {
       box-sizing: border-box;
       line-height: 100%;
       border-radius: 0px !important;
-      .hamburger{
-        float: left;
-        display: block;
-        width: 22px;
-        height: 18.5px;
-        background: url(~@/assets/images/icon-hamburger.png);
-        margin: 20px 15px;
-      }
+
       .collapselogo{
         background-position: 0 0;
       }
@@ -108,14 +95,6 @@ export default {
         .avatar-wrapper {
           cursor: pointer;
           position: relative;
-          .user-logo {
-            float: left;
-            margin-top: 10px;
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
-            background: url(~@/assets/images/icon-user.png) no-repeat center;
-          }
           .user-name {
             float: left;
             display: block;

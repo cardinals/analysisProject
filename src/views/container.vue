@@ -13,7 +13,7 @@
       <!-- 侧边栏容器 -->
       <aside-com class="aside"></aside-com>
       <!-- 路由区域 -->
-      <div class="main">
+      <div class="main" v-loading="$store.state.app.isShowLoading">
         <transition name="fade"  mode="out-in">
           <router-view class="router"></router-view>
         </transition>
@@ -66,6 +66,8 @@ export default {
   @import '~@/assets/css/common.less';
   // 修改elementui默认样式
   @import '~@/assets/css/editElementui.less';
+  // icon
+  @import '~@/assets/css/icon.less';
   .container {
     width: 100%;
     height: 100%;
@@ -83,21 +85,6 @@ export default {
       .aside {
         flex-grow: 0;
         height: 100%;
-        .is-opened .el-menu-item {
-          background: #000C17 !important;
-        }
-        .is-opened .is-active,
-        .is-active {
-          color: #FFFFFF !important;
-          background: #1890FF !important;
-        }
-        .el-menu-item:hover {
-          color: #1890FF !important;
-          background: #001529 !important;
-          i {
-            color: #1890FF !important;
-          }
-        }
       }
       .main {
         flex-grow: 1;

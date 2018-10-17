@@ -21,6 +21,7 @@
             <span class="btn" :class="{active: date==='today'}" @click="date='today'">今日</span>
             <span class="btn" :class="{active: date==='month'}" @click="date='month'">本月</span>
             <span class="btn" :class="{active: date==='year'}" @click="date='year'">本年</span>
+            <span class="btn" :class="{active: date==='all'}" @click="date='all'">全部</span>
           </div>
         </div>
         <div class="contents flexColumn">
@@ -29,7 +30,7 @@
             <div class="one" :class="{active: target==='MBM_CASE'}" @click="target='MBM_CASE'">
               <div class="width-x2-container">
                 <div class="one-container clearfix">
-                  <i class="icon renmintj"></i>
+                  <i class="icon icon-renmintj"></i>
                   <div class="one-content">
                     <span class="one-title">人民调解</span>
                     <br>
@@ -42,7 +43,7 @@
             <div class="one" :class="{active: target==='MMS_ALARM110INFO'}" @click="target='MMS_ALARM110INFO'">
               <div class="width-x2-container">
                 <div class="one-container clearfix">
-                  <i class="icon baojingld"></i>
+                  <i class="icon icon-baojingld"></i>
                   <div class="one-content">
                     <span class="one-title">110联动</span>
                     <br>
@@ -55,7 +56,7 @@
             <div class="one" :class="{active: target==='WWS_CONSULT'}" @click="target='WWS_CONSULT'">
               <div class="width-x2-container">
                 <div class="one-container clearfix">
-                  <i class="icon jicengflfw"></i>
+                  <i class="icon icon-jicengflfw"></i>
                   <div class="one-content">
                     <span class="one-title">基层法律服务</span>
                     <br>
@@ -68,7 +69,7 @@
             <div class="one" :class="{active: target==='CDS_INVESTIGATIONFEEDBAC'}" @click="target='CDS_INVESTIGATIONFEEDBAC'">
               <div class="width-x2-container">
                 <div class="one-container clearfix">
-                  <i class="icon jiufenpc"></i>
+                  <i class="icon icon-jiufenpc"></i>
                   <div class="one-content">
                     <span class="one-title">纠纷排查</span>
                     <br>
@@ -96,14 +97,34 @@
         <div class="block-r2">
           <div class="title">案件处理结果</div>
           <div class="contents flexRow">
-            <div class="r2Left">
+            <div class="r2Left" :style="{'padding-top':data.businessProcess.dataList2[0]?'20px':'60px'}">
               <span class="span1">{{anJIanCLJGSLBT}}</span><br>
-              <span class="span2">{{data.businessProcess.shuLiang | numFormat}}</span>
+              <span class="span2" :style="{'color':data.businessProcess.dataList2[0]?'#1890FF':'rgba(0, 0, 0, 0.85)'}">{{data.businessProcess.dataNum1 | numFormat}}</span><br>
+              <br  v-if="data.businessProcess.dataList2[0]">
+              <span class="span1" v-if="data.businessProcess.dataList2[0]">{{data.businessProcess.dataList2[0].name==='未办结率'?'未办结':'未反馈'}}</span><br>
+              <span class="span2" v-if="data.businessProcess.dataList2[0]"  :style="{'color':data.businessProcess.dataList2[0]?'#FF7C81':'rgba(0, 0, 0, 0.85)'}">
+                {{data.businessProcess.dataNum2 | numFormat}}
+              </span>
             </div>
-            <div class="r2right">
-              <g2-pie :id="'pie1'" :height="120" :color-map="['#1890FF', '#E9E9E9']" :data="data.businessProcess.dataList"
+            <div class="r2right" :style="{'padding-top':data.businessProcess.dataList2[0]?'0px':'20px'}">
+              <g2-pie v-if="!data.businessProcess.dataList2[0]" :id="'pie1'" :height="120" :color-map="['#1890FF', '#E9E9E9']" :data="data.businessProcess.dataList1"
                 :guide="{name: anJIanCLJGZBBT, value: data.businessProcess.zhanBi}" :legend-option="{show: false}"
-                :axis-name="{name: '类型',value: '数量'}"></g2-pie>
+                :axis-name="{name: '类型',value: '数量'}">
+              </g2-pie>
+              <g2-progress-bar v-if="data.businessProcess.dataList2[0]" :style="'margin-top:20px;margin-right:15px;'" :id="'progressbar1'" :height="45"
+                :data="data.businessProcess.dataList1"
+                :color="['#1890FF','#F0F2F5']"
+                :mark-line="{use:false}"
+                :show-guide="{name: true, value: true}"
+                :is-percent="true">
+              </g2-progress-bar>
+              <g2-progress-bar v-if="data.businessProcess.dataList2[0]" :style="'margin-top:15px;margin-right:15px;'" :id="'progressbar2'" :height="45"
+                :data="data.businessProcess.dataList2"
+                :color="['#FF7C81','#F0F2F5']"
+                :mark-line="{use:false}"
+                :show-guide="{name: true, value: true}"
+                :is-percent="true">
+              </g2-progress-bar>
             </div>
           </div>
         </div>
@@ -214,14 +235,31 @@ export default {
           const data3 = { businessType: resList[2].data.data.map(item => {
             return { name: item.leiXing, value: item.jianShu }
           }) }
-          const data4 = {
+          let data4 = {
             businessProcess: {
-              dataList: resList[3].data.data.map(item => {
-                return { name: item.leiXing, value: item.shuLiang }
-              }),
-              zhanBi: percentFormat(resList[3].data.data[0].shuLiang / (resList[3].data.data[0].shuLiang + resList[3].data.data[1].shuLiang)),
-              shuLiang: resList[3].data.data[0].shuLiang
+              dataNum1: '',
+              dataNum2: '',
+              dataList1: [],
+              dataList2: []
             }
+          }
+          if (resList[3].data.data.data2) {
+            data4.businessProcess.dataNum1 = resList[3].data.data.data1[0].shuLiang
+            data4.businessProcess.dataList1 = resList[3].data.data.data1.map(item => {
+              let name = item.leiXing === '调解成功' ? '成功率' : item.leiXing === '申请和转为调解' ? '申请率' : item.leiXing
+              return { name: name, value: item.zhanBi / 100 }
+            })
+            data4.businessProcess.dataNum2 = resList[3].data.data.data2[0].shuLiang
+            let name = resList[3].data.data.data2[0].leiXing === '未办结案件' ? '未办结率' : '未反馈率'
+            data4.businessProcess.dataList2 = [
+              { name: name, value: resList[3].data.data.data2[0].zhanBi / 100 },
+              { name: '其他', value: 1 - resList[3].data.data.data2[0].zhanBi / 100 }
+            ]
+          } else {
+            data4.businessProcess.dataNum1 = resList[3].data.data[0].shuLiang
+            data4.businessProcess.dataList1 = resList[3].data.data.map(item => {
+              return { name: item.leiXing, value: item.shuLiang }
+            })
           }
           const data5 = {
             onlineNumber: {
@@ -239,6 +277,9 @@ export default {
         }
       }).catch(err => {
         console.log(err)
+        this.data = null
+        this.$message({ type: 'error', message: '系统内部错误' })
+        this.$router.push({ path: '/error/500' })
       })
     },
     // 绘制地图
@@ -272,6 +313,16 @@ export default {
         })
         // 添加导航控件
         mapbox.addControl(this.myNav, 'top-right')
+        // 遍历数据找出数据最大的机构
+        const maxData = mapData.reduce((item1, item2) => {
+          if (item1.value[2] > item2.value[2]) {
+            return item1
+          } else {
+            return item2
+          }
+        })
+        // 绘制弹出框，显示数据最大的机构
+        this.drawPopup({ lng: Number(maxData.value[0]), lat: Number(maxData.value[1]) }, maxData, mapbox)
         // 监听echarts点击事件, 获取点击位置的数据信息
         this.myChart.on('click', (echartsParams) => {
           // 监听mapbox点击事件, 获取点击位置的经纬度信息
@@ -365,22 +416,6 @@ export default {
                   padding-top: 8px;
                 }
 
-                .renmintj {
-                  background: url(~@/assets/images/home/icon-renmintj.png) no-repeat center;
-                }
-
-                .baojingld {
-                  background: url(~@/assets/images/home/icon-110ld.png) no-repeat center;
-                }
-
-                .jicengflfw {
-                  background: url(~@/assets/images/home/icon-jicengflfw.png) no-repeat center;
-                }
-
-                .jiufenpc {
-                  background: url(~@/assets/images/home/icon-jiufenpc.png) no-repeat center;
-                }
-
                 .one-content {
                   float: left;
                   padding-top: 8px;
@@ -443,9 +478,11 @@ export default {
             .li {
               height: 33px;
               display: block;
+              color: @gray;
 
               &:hover {
                 cursor: pointer;
+                color: #389EFB !important;
               }
 
               .sort {
@@ -465,7 +502,6 @@ export default {
                 float: left;
                 height: 33px;
                 font-size: @fontMiddle;
-                color: @gray;
                 line-height: 33px;
                 width: 135px;
                 overflow: hidden;
@@ -515,7 +551,6 @@ export default {
             padding: 0;
 
             .r2Left {
-              flex: 1;
               flex: 1;
               padding-top: 60px;
               text-align: center;

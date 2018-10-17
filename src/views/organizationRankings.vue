@@ -57,6 +57,39 @@
         </div>
       </div>
       <div class="view-body">
+        <div class="total" :style="{'height': showTotal?'130px':'60px'}">
+          <div class="firstLine">
+            <span class="titleName">总计</span>
+            <span class="totalNumber">{{`(共${numFormat(total.total)}机构)`}}</span>
+            <i class="optionButton" :class="{'el-icon-caret-bottom': !showTotal,'el-icon-caret-top': showTotal}" @click="showTotal= !showTotal">{{showTotal?'收起':'展开'}}</i>
+          </div>
+          <div class="secondLine" v-if="showTotal">
+            <div class="contentArea">
+              <span class="totalNumber">{{numFormat(total.yewusl)}}</span><br/>
+              <span class="titleName">业务数量(件)</span>
+            </div>
+            <div class="contentArea">
+              <span class="totalNumber">{{numFormat(total.tiaojieaj)}}</span><br/>
+              <span class="titleName">调解案件数(件)</span>
+            </div>
+            <div class="contentArea">
+              <span class="totalNumber">{{numFormat(total.shangbaosl)}}</span><br/>
+              <span class="titleName">案件上报数(件)</span>
+            </div>
+            <div class="contentArea">
+              <span class="totalNumber">{{numFormat(total.paichafk)}}</span><br/>
+              <span class="titleName">排查反馈数(件)</span>
+            </div>
+            <div class="contentArea">
+              <span class="totalNumber">{{numFormat(total.faxuanhd)}}</span><br/>
+              <span class="titleName">法宣活动数(次)</span>
+            </div>
+            <div class="contentArea">
+              <span class="totalNumber">{{numFormat(total.denglurc)}}</span><br/>
+              <span class="titleName">登录人次(次)</span>
+            </div>
+          </div>
+        </div>
         <div class="table">
           <el-table :data="tableInfo.tableData" stripe :default-sort="{prop: tableInfo.orderBy, order: tableInfo.orderRule}" @sort-change="handleSortChange" @row-click="handleRowClick">
             <el-table-column type="index" :index="indexMethod"  label="排名" width="60"></el-table-column>
@@ -116,7 +149,17 @@ export default {
         total: 0,
         orderBy: 'yewusl',
         orderRule: 'DESC'
-      }
+      },
+      total: {
+        chengjiaoje: 0,
+        faxuanhd: 0,
+        paichafk: 0,
+        shangbaosl: 0,
+        tiaojieaj: 0,
+        total: 0,
+        yewusl: 0
+      },
+      showTotal: true
       /* ------ selector区域 end ------ */
     }
   },
@@ -176,6 +219,7 @@ export default {
           if (res.code) {
             this.tableInfo.tableData = res.data.pageData
             this.tableInfo.total = res.data.pageinfo.total
+            this.total = res.data.zongji
           } else {
             this.$message({ type: 'error', message: '系统内部错误' })
             this.$router.push({ path: '/error/500' })
@@ -193,6 +237,9 @@ export default {
     },
     numFormatMethod (row, column, cellValue, index) {
       return numFormat(cellValue)
+    },
+    numFormat (data) {
+      return numFormat(data)
     },
     handleSearch () {
       this.tableInfo.currentPage = 1
@@ -263,11 +310,55 @@ export default {
         display: flex;
         flex-direction: column;
         width: 100%;
-        padding: 0 15px;
         box-sizing: border-box;
-        .table {
+        .total{
           width: 100%;
-          margin-top: 15px;
+          min-height: 60px;
+          max-height: 130px;
+          background: rgba(198,228,255,0.2);
+          box-sizing: border-box;
+          padding: 15px;
+          .firstLine{
+            font-size: @fontBig;
+            .titleName{
+              color: @black;
+            }
+            .totalNumber{
+              color: rgba(24,144,255,0.85);
+            }
+            .optionButton{
+              float: right;
+              cursor: pointer;
+              color: #616161;
+              user-select: none;
+              font-size: @fontSmall;
+            }
+          }
+          .secondLine{
+            margin-top: 10px;
+            .contentArea{
+              float: left;
+              width: 165px;
+              text-align: center;
+              border-left: solid #e5ebf1 1px;
+              &:first-of-type{
+                border-left: 0;
+              }
+              .totalNumber{
+                font-size: 20px;
+                color: rgba(24,144,255,0.85);
+                line-height: 42px;
+              }
+              .titleName{
+                font-size: 14px;
+                color: @gray;
+              }
+            }
+          }
+        }
+        .table {
+          width: calc(100%-30px);
+          margin: 0 15px;
         }
         .pagination {
           width: 100%;

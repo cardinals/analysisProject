@@ -6,12 +6,12 @@
  */
 <template>
   <el-menu :default-active="$store.state.aside.activeItem" class="asideMenu" @select="handleSelect" :collapse="isCollapse"
-    background-color="#001529" text-color="#FFFFFF" active-text-color="#409EFF" :style="{'min-width':isCollapse?'60px':'200px'}">
+    background-color="#001529" text-color="rgba(255,255,255,0.6)" active-text-color="rgba(255,255,255,1)" :style="{'min-width':isCollapse?'60px':'200px'}">
     <!-- 构建侧边栏菜单内容 -->
     <div v-for="item in menuData" :key="item.index">
       <el-submenu v-if="item.children&&item.children.length>0" :disabled="item.disable" :index="item.index">
         <template slot="title">
-          <i class="el-icon-menu"></i>
+          <i class="icon" :class="`icon-${item.index}`"></i>
           <span v-if="!isCollapse">{{item.label}}</span>
         </template>
         <el-menu-item v-for="subItem in item.children" :disabled="subItem.disable" :index="subItem.index" :key="subItem.index">
@@ -19,7 +19,7 @@
         </el-menu-item>
       </el-submenu>
       <el-menu-item v-else :disabled="item.disable" :index="item.index">
-        <i class="el-icon-menu"></i>
+        <i class="icon" :class="`icon-${item.index}`"></i>
         <span slot="title">{{item.label}}</span>
       </el-menu-item>
     </div>
@@ -53,8 +53,38 @@ export default {
 }
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
   .asideMenu {
     height: 100%;
+
+    i {
+      margin-right: 8px;
+    }
+
+    .is-opened .el-menu-item {
+      background: #000C17 !important;
+    }
+
+    .is-opened .is-active,
+    .is-active {
+      color: #ffffff !important;
+      background: #1890FF !important;
+    }
+
+    .el-menu-item:hover {
+      color: #ffffff !important;
+
+      .icon-home {
+        background: url(~@/assets/images/asideIcon/icon-home-hover.png) center center;
+      }
+
+      .icon-teamAnalysis {
+        background: url(~@/assets/images/asideIcon/icon-people-hover.png) center center;
+      }
+
+      .icon-workAnalysis {
+        background: url(~@/assets/images/asideIcon/icon-work-quality-hover.png) center center;
+      }
+    }
   }
 </style>

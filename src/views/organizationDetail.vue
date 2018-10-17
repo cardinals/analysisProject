@@ -98,8 +98,9 @@
               <span class="span1">{{(data.tiaoJieAJSL.zongLiang||0) | numFormat}}<span class='unit'>件</span></span>
               <!-- 机构类型为司法所时不显示万人比 -->
               <span class="span2" v-if="data.jiBenXX.jiGouLX===''">万人比
-                <el-tooltip content="万人比示意" placement="top-end">
-                  <i>?</i>
+                <el-tooltip placement="top">
+                  <div slot="content">万人比 = 案件数 / 人数(万) , 每一万人中发生案件的数量</div>
+                  <i class="el-icon-question"></i>
                 </el-tooltip>
               </span>
               <span class="span3" v-if="data.jiBenXX.jiGouLX===''">{{(data.tiaoJieAJSL.wanRenB||0) | numFormat}}件/万人</span>
@@ -235,6 +236,7 @@
             </div>
             <g2-scatter-point class="sContents" v-if="data.tiaoJieCGL.anJianCGLFB.length>0" :id="'point2'" :height="240"
               :axisName="{type:'类型', x:'调解成功率', y:'案件数量'}" :is-percent="{x:true,y:false}"
+              :intervalColor="['#FACC14', '#2FC25B', '#1890FF']" :intervalRange="{use: true, axis: 'x', limit: [0.25, 0.75]}"
               :data='data.tiaoJieCGL.anJianCGLFB.map(item=>{return {type: item.name, size: 1, x: item.value, y: item.labelValue}})'>
             </g2-scatter-point>
           </div>
@@ -426,6 +428,8 @@ export default {
     handleChangeRouter (id, type) {
       if (type === 'tiaoJieY') {
         this.$router.push({ path: `/peopleDetail/${id}` })
+      } else if (type === 'tiaoWeiH') {
+        this.$router.push({ path: `/mediationDetail/${id}` })
       }
     }
   }
@@ -555,19 +559,6 @@ export default {
                 transform: translateY(-120%);
                 font-size: @fontMiddle;
                 color: @graymore;
-                i {
-                  display: inline-block;
-                  width: 12px;
-                  height: 12px;
-                  font-size: @fontSmall;
-                  color: @graymore;
-                  border-radius: 50%;
-                  border: 1px solid @graymore;
-                  text-align: center;
-                  line-height: 12px;
-                  margin-left: 4px;
-                  cursor: pointer;
-                }
               }
               .span3 {
                 position: absolute;
@@ -661,8 +652,10 @@ export default {
                 .li {
                   height: 33px;
                   display: block;
+                  color: @gray;
                   &:hover {
                     cursor: pointer;
+                    color: #389EFB !important;
                   }
                   .sort {
                     float: left;
@@ -680,7 +673,6 @@ export default {
                     float: left;
                     height: 33px;
                     font-size: @fontMiddle;
-                    color: @gray;
                     line-height: 33px;
                     width: 150px;
                     overflow: hidden;
@@ -858,8 +850,10 @@ export default {
           .li {
             height: 33px;
             display: block;
+            color: @gray;
             &:hover {
               cursor: pointer;
+              color: #389EFB !important;
             }
             .sort {
               float: left;
@@ -877,7 +871,6 @@ export default {
               float: left;
               height: 33px;
               font-size: @fontMiddle;
-              color: @gray;
               line-height: 33px;
               width: 250px;
               overflow: hidden;
@@ -944,8 +937,10 @@ export default {
           .li {
             height: 33px;
             display: block;
+            color: @gray;
             &:hover {
               cursor: pointer;
+              color: #389EFB !important;
             }
             .sort {
               float: left;
@@ -963,7 +958,6 @@ export default {
               float: left;
               height: 33px;
               font-size: @fontMiddle;
-              color: @gray;
               line-height: 33px;
               width: 250px;
               overflow: hidden;

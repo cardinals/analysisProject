@@ -8593,10 +8593,10 @@ vue-eslint-parser@^2.0.3:
     esquery "^1.0.0"
     lodash "^4.17.4"
 
-vue-g2@^0.1.16:
-  version "0.1.16"
-  resolved "http://registry.npm.taobao.org/vue-g2/download/vue-g2-0.1.16.tgz#4d8a7d609bdef15fb6d6546497f4f6507bd38c23"
-  integrity sha1-TYp9YJve8V+21lRkl/T2UHvTjCM=
+vue-g2@^0.1.21:
+  version "0.1.21"
+  resolved "http://registry.npm.taobao.org/vue-g2/download/vue-g2-0.1.21.tgz#f69276497c07a0eddceb82e4c87420d005a92b6a"
+  integrity sha1-9pJ2SXwHoO3c64LkyHQg0AWpK2o=
   dependencies:
     "@antv/data-set" "^0.9.6"
     "@antv/g2" "^3.2.8"
