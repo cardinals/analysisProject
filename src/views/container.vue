@@ -101,7 +101,8 @@ export default {
           max-width: 200px;
           color: rgba(255, 255, 255, 0.6);
           text-align: center;
-          padding-top: 8px;
+          box-sizing: border-box;
+          padding-top: 5px;
           &:hover{
             cursor: pointer;
             color: rgba(24, 144, 255, 0.9);

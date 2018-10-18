@@ -70,7 +70,7 @@
             </div>
             <div class="contentArea">
               <span class="totalNumber">{{numFormat(total.tiaojieaj)}}</span><br/>
-              <span class="titleName">调解案件数(件)</span>
+              <span class="titleName">受理案件数(件)</span>
             </div>
             <div class="contentArea">
               <span class="totalNumber">{{numFormat(total.shangbaosl)}}</span><br/>
@@ -95,7 +95,7 @@
             <el-table-column type="index" :index="indexMethod"  label="排名" width="60"></el-table-column>
             <el-table-column prop="name" sortable="custom" label="机构名称" show-overflow-tooltip></el-table-column>
             <el-table-column prop="yewusl" sortable="custom" :formatter="numFormatMethod" label="业务数量"></el-table-column>
-            <el-table-column prop="tiaojieaj" sortable="custom" :formatter="numFormatMethod" label="调解案件数"></el-table-column>
+            <el-table-column prop="tiaojieaj" sortable="custom" :formatter="numFormatMethod" label="受理案件数"></el-table-column>
             <el-table-column prop="shangbaosl" sortable="custom" :formatter="numFormatMethod" label="案例上报数"></el-table-column>
             <el-table-column prop="paichafk" sortable="custom" :formatter="numFormatMethod" label="排查反馈数"></el-table-column>
             <el-table-column prop="zixunrz" sortable="custom" :formatter="numFormatMethod" label="咨询管理数"></el-table-column>

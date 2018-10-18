@@ -64,7 +64,7 @@
           <div class="secondLine" v-if="showTotal">
             <div class="contentArea">
               <span class="totalNumber">{{numFormat(total.yewusl)}}</span><br/>
-              <span class="titleName">调解案件数(件)</span>
+              <span class="titleName">受理案件数(件)</span>
             </div>
             <div class="contentArea">
               <span class="totalNumber">{{numFormat(total.chengjiaoje)}}</span><br/>
@@ -81,7 +81,7 @@
             <el-table-column type="index" :index="indexMethod"  label="排名" width="60"></el-table-column>
             <el-table-column prop="name" sortable="custom" label="姓名" width="100"></el-table-column>
             <el-table-column prop="shortname" sortable="custom" label="所属单位" show-overflow-tooltip></el-table-column>
-            <el-table-column prop="yewusl" sortable="custom" :formatter="numFormatMethod" label="调解案例数"></el-table-column>
+            <el-table-column prop="yewusl" sortable="custom" :formatter="numFormatMethod" label="受理案件数"></el-table-column>
             <el-table-column prop="tiaojiecgl" sortable="custom" :formatter="percentFormatMethod" label="成功率"></el-table-column>
             <el-table-column prop="chengjiaoje" sortable="custom" :formatter="numFormatMethod" label="调解金额"></el-table-column>
             <el-table-column prop="pingjuntjzq" sortable="custom" :formatter="numFormatMethod" label="平均调解时长(天)"></el-table-column>
