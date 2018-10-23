@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-13 11:34:06
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-10-09 16:35:05
+ * @Last Modified time: 2018-10-23 16:38:16
  */
 
 <template>
@@ -103,6 +103,7 @@
 import { peopleRankings } from '@/api/api'
 import { coordinationType, top } from '@/utils/dictionaryMapping'
 import { pickerOptions, defaultDateRage, percentFormat, numFormat } from '@/utils/index'
+import { dataPermission } from '@/utils/permission'
 
 export default {
   name: 'peopleRankings',
@@ -112,8 +113,8 @@ export default {
       search: '',
       /* ------ info区域 end ------ */
       /* ------ selector区域 begin ------ */
-      area: this.$store.state.app.area[0]['value'],
-      areaOptions: this.$store.state.app.area,
+      area: localStorage.getItem('area'),
+      areaOptions: dataPermission(localStorage.getItem('area')),
       // 机构类型字段
       type: coordinationType[0]['value'],
       // 排名筛选字段

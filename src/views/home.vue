@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-27 14:03:38
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-10-09 17:05:18
+ * @Last Modified time: 2018-10-23 16:26:46
  */
 
 <template>
@@ -149,6 +149,7 @@
 
 <script>
 import { pickerOptions, color, percentFormat } from '@/utils/index'
+import { dataPermission } from '@/utils/permission'
 import { homeData } from '@/api/api'
 import { setMapbox } from '@/utils/echartsOptions'
 
@@ -156,8 +157,8 @@ export default {
   name: 'home',
   data () {
     return {
-      area: this.$store.state.app.area[0]['value'],
-      areaOptions: this.$store.state.app.area,
+      area: localStorage.getItem('area'),
+      areaOptions: dataPermission(localStorage.getItem('area')),
       date: 'year',
       pickerOptions: pickerOptions,
       target: 'MBM_CASE',

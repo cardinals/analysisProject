@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-10 11:54:18
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-10-09 16:35:36
+ * @Last Modified time: 2018-10-23 16:36:49
  */
 <template>
   <!-- 外层容器，当子元素中包含 <el-header> 或 <el-footer> 时，全部子元素会垂直上下排列，否则会水平左右排列。 -->
@@ -54,6 +54,8 @@ export default {
     setPermission (areacode) {
       // 数据权限
       this.$store.dispatch({ type: 'app/setArea', amount: dataPermission(areacode) })
+      // 将数据权限本地存储
+      localStorage.setItem('area', areacode)
       // 模块权限
       componentsPermission().then(data => {
         this.$store.dispatch({ type: 'aside/setAsideMenuData', amount: data })
