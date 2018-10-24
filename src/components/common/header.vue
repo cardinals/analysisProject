@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-10 16:26:00
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-10-09 16:36:28
+ * @Last Modified time: 2018-10-24 08:45:54
  */
 <template>
   <div class="header">
@@ -44,6 +44,8 @@ export default {
       if (command === 'logout') {
         logout().then(res => {
           if (res.code === 1) {
+            // 清空本地存储
+            localStorage.removeItem('area')
             this.$router.push({ path: '/login' })
           }
         }).catch(error => {

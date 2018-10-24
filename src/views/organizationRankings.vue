@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-13 11:34:18
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-10-09 16:35:20
+ * @Last Modified time: 2018-10-24 08:47:03
  */
 
 <template>
@@ -119,6 +119,7 @@
 import { organizationRankings } from '@/api/api'
 import { coordinationType, top } from '@/utils/dictionaryMapping'
 import { pickerOptions, defaultDateRage, percentFormat, numFormat } from '@/utils/index'
+import { dataPermission } from '@/utils/permission'
 
 export default {
   name: 'organizationRankings',
@@ -128,8 +129,8 @@ export default {
       search: '',
       /* ------ info区域 end ------ */
       /* ------ selector区域 begin ------ */
-      area: this.$store.state.app.area[0]['value'],
-      areaOptions: this.$store.state.app.area,
+      area: localStorage.getItem('area'),
+      areaOptions: dataPermission(localStorage.getItem('area')),
       // 机构类型字段
       type: 'JUSTICEBUREAU',
       // 排名筛选字段
