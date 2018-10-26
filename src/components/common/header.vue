@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-10 16:26:00
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-10-23 16:32:38
+ * @Last Modified time: 2018-10-26 14:36:45
  */
 <template>
   <div class="header">
@@ -17,11 +17,11 @@
           <span class="user-name">{{$store.state.app.userName}}</span>
           <i class="el-icon-caret-bottom"></i>
         </div>
-        <el-dropdown-menu class="user-dropdown" slot="dropdown">
+        <!-- <el-dropdown-menu class="user-dropdown" slot="dropdown">
           <el-dropdown-item command="logout">
             <span style="display:block;">退出</span>
           </el-dropdown-item>
-        </el-dropdown-menu>
+        </el-dropdown-menu> -->
       </el-dropdown>
     </div>
   </div>

@@ -136,3 +136,12 @@ export let floatIntFormat = (value) => {
 
 // 颜色组
 export const color = ['#1890FF', '#2FC25B', '#FACC14', '#223273', '#8543E0', '#13C2C2', '#3436C7', '#F04864']
+
+export const getQueryString = (name) => {
+  var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i')
+  var r = window.location.search.substr(1).match(reg)
+  if (r != null) {
+    return unescape(r[2]).split('/')[0]
+  }
+  return null
+}

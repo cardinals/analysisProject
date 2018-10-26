@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-10 11:54:33
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-10-09 16:34:34
+ * @Last Modified time: 2018-10-26 14:09:45
  */
 import Vue from 'vue'
 import Router from 'vue-router'
@@ -14,13 +14,7 @@ export default new Router({
     {
       path: '/',
       // 重定向根路径对应的模块
-      redirect: '/login'
-    },
-    {
-      path: '/login',
-      name: '登录页',
-      // 登录页
-      component: () => import('./views/login.vue')
+      redirect: '/home'
     },
     {
       path: '/organizationRankings',

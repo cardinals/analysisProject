@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-10 11:54:18
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-10-23 16:36:49
+ * @Last Modified time: 2018-10-26 14:34:29
  */
 <template>
   <!-- 外层容器，当子元素中包含 <el-header> 或 <el-footer> 时，全部子元素会垂直上下排列，否则会水平左右排列。 -->
@@ -29,8 +29,9 @@
 </template>
 
 <script>
-import { loginStatus } from '@/api/api'
-import { dataPermission, componentsPermission } from '@/utils/permission'
+import { dataPermission } from '@/utils/permission'
+import { getQueryString } from '@/utils/index'
+
 export default {
   name: 'container',
   created () {
@@ -39,16 +40,18 @@ export default {
   methods: {
     // 登录状态检测
     loginStatus () {
-      let param = {}
-      loginStatus(param).then((res) => {
-        if (res.code === 1) {
-          this.$store.dispatch({ type: 'app/setUserName', amount: res.data.username })
-          this.setPermission(res.data.areacode)
-        } else if (res.code === 9) {
-          this.$message({ type: 'warning', message: res.message, duration: 5000 })
-          this.$router.push({ path: '/login' })
-        }
-      })
+      const tokenList = {
+        'h9vKvopXLDgeP1jOAp79MjKmxVfvIGsWQzk=': { userName: 'xhsf', areaCode: 'SHJCK01005' }
+      }
+      const token = getQueryString('token')
+      if (tokenList[token]) {
+        this.$store.dispatch({ type: 'app/setUserName', amount: tokenList[token].userName })
+        this.setPermission(tokenList[token].areaCode)
+      } else {
+        this.$message({ type: 'warning', message: '未找到有效的token信息，暂无系统访问权限', duration: 5000 })
+        this.$store.dispatch({ type: 'aside/setAsideMenuData', amount: [] })
+        this.$router.push({ path: '/error/403' })
+      }
     },
     // 设置权限
     setPermission (areacode) {
@@ -57,12 +60,7 @@ export default {
       // 将数据权限本地存储
       localStorage.setItem('area', areacode)
       // 模块权限
-      componentsPermission().then(data => {
-        this.$store.dispatch({ type: 'aside/setAsideMenuData', amount: data })
-        if (this.$route.path === '/login') {
-          this.$router.push({ path: '/home' })
-        }
-      })
+      this.$store.dispatch({ type: 'aside/setAsideMenuData', amount: [{ 'index': 'home', 'label': '业务监控', 'moduleid': 'A1', 'parentid': null, 'disable': false }, { 'index': 'teamAnalysis', 'label': '调解队伍分析', 'moduleid': 'A3', 'parentid': null, 'children': [{ 'index': 'organizationRankings', 'label': '调解机构排名', 'moduleid': 'B31', 'parentid': 'A3', 'disable': false }, { 'index': 'peopleRankings', 'label': '调解人员排名', 'moduleid': 'B32', 'parentid': 'A3', 'disable': false }], 'disable': false }, { 'index': 'workAnalysis', 'label': '工作质量分析', 'moduleid': 'A4', 'parentid': null, 'children': [{ 'index': 'loginAnalysis', 'label': '登录人次分析', 'moduleid': 'B41', 'parentid': 'A4', 'disable': false }], 'disable': false }] })
     },
     openPage () {
       window.open('http://rmtj.justice.gov.cn/')

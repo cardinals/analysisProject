@@ -6,7 +6,7 @@
     <div class="right">
       <h1>{{errorCode}}</h1>
       <div class="desc">{{des}}</div>
-      <el-button @click="handleButtonClick()">返回首页</el-button>
+      <!-- <el-button @click="handleButtonClick()">返回首页</el-button> -->
     </div>
   </div>
 </template>
