@@ -13,8 +13,9 @@
       <!-- 侧边栏容器 -->
       <div class="left">
         <aside-com class="aside"></aside-com>
-        <div class="bottom" :style="{width: !$store.state.aside.isCollapseAside?'200px':'64px'}">
-          <span class="font" v-if="!$store.state.aside.isCollapseAside" @click="openPage()">前往业务系统</span>
+        <div class="bottom"  v-if="!$store.state.aside.isCollapseAside">
+          <span @click="openPage()">前往业务系统</span>
+          <i class="icon icon-arrow-right" style="margin-left:5px;"></i>
         </div>
       </div>
       <!-- 路由区域 -->
@@ -93,19 +94,26 @@ export default {
       .left {
         flex-grow: 0;
         .aside {
-          height: calc(100% - 40px);
+          height: 100%;
         }
         .bottom {
+          position: absolute;
+          left: 0;
+          bottom: 25px;
           height: 40px;
-          background: rgb(0, 21, 41);
-          max-width: 200px;
-          color: rgba(255, 255, 255, 0.6);
-          text-align: center;
+          width: 140px;
           box-sizing: border-box;
-          padding-top: 5px;
+          padding: 8px 0;
+          margin: 0 30px;
+          border-radius: 15px;
+          background: #042544;
+          font-size: 16px;
+          color: rgba(255, 255, 255, 0.8);
+          text-align: center;
           &:hover{
             cursor: pointer;
-            color: rgba(24, 144, 255, 0.9);
+            color: rgba(255, 255, 255, 1);
+            background: #208df1;
           }
         }
       }
