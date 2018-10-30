@@ -13,8 +13,8 @@
       <!-- 侧边栏容器 -->
       <div class="left">
         <aside-com class="aside"></aside-com>
-        <div class="bottom"  v-if="!$store.state.aside.isCollapseAside">
-          <span @click="openPage()">前往业务系统</span>
+        <div class="bottom" @click="openPage()" v-if="!$store.state.aside.isCollapseAside">
+          <span>前往业务系统</span>
           <i class="icon icon-arrow-right" style="margin-left:5px;"></i>
         </div>
       </div>
