@@ -77,6 +77,8 @@ export default {
       let param = {}
       loginStatus(param).then((res) => {
         if (res.code === 1) {
+          this.$store.dispatch({ type: 'app/setUserName', amount: res.data.username })
+          this.setPermission(res.data.areacode)
           this.$router.push({ path: '/home' })
         }
       })
@@ -85,11 +87,12 @@ export default {
     setPermission (areacode) {
       // 数据权限
       this.$store.dispatch({ type: 'app/setArea', amount: dataPermission(areacode) })
+      // 将数据权限本地存储
+      localStorage.setItem('area', areacode)
       // 模块权限
       componentsPermission().then(data => {
         this.$store.dispatch({ type: 'aside/setAsideMenuData', amount: data })
         if (this.$route.path === '/login') {
-          this.$store.dispatch({ type: 'aside/setCurrentModule', amount: 'home' })
           this.$router.push({ path: '/home' })
         }
       })

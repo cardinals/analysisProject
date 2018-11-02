@@ -25,7 +25,7 @@ module.exports = {
     hotOnly: false,
     proxy: {
       '/peopleMediate': {
-        target: 'http://192.168.22.137:8850',
+        target: 'http://192.168.22.137:8851',
         changeOrigin: true
       }
     },
