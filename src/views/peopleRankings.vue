@@ -12,7 +12,7 @@
         <el-breadcrumb-item>调解队伍分析</el-breadcrumb-item>
         <el-breadcrumb-item>{{$route.name}}</el-breadcrumb-item>
       </el-breadcrumb>
-      <el-input class="search-input" placeholder="请输入搜索内容, 回车执行搜索" suffix-icon="el-icon-search"  size="mini" v-model="search" @keyup.enter.native="handleSearch()"></el-input>
+      <el-input class="search-input" placeholder="请输入人员姓名, 回车执行搜索" suffix-icon="el-icon-search"  size="mini" v-model="search" @keyup.enter.native="handleSearch()"></el-input>
     </div>
     <div class="view-selector">
       <div>

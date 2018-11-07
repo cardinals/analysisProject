@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-13 11:34:18
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-10-23 16:37:48
+ * @Last Modified time: 2018-10-24 08:47:03
  */
 
 <template>
@@ -12,7 +12,7 @@
         <el-breadcrumb-item>调解队伍分析</el-breadcrumb-item>
         <el-breadcrumb-item>{{$route.name}}</el-breadcrumb-item>
       </el-breadcrumb>
-      <el-input class="search-input" placeholder="请输入搜索内容, 回车执行搜索" suffix-icon="el-icon-search"  size="mini" v-model="search" @keyup.enter.native="handleSearch()"></el-input>
+      <el-input class="search-input" placeholder="请输入机构名称, 回车执行搜索" suffix-icon="el-icon-search"  size="mini" v-model="search" @keyup.enter.native="handleSearch()"></el-input>
     </div>
     <div class="view-selector">
       <div>
