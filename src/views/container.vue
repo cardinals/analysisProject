@@ -42,6 +42,7 @@ export default {
     // 登录状态检测
     loginStatus () {
       const tokenList = {
+        'jNvmu89KKigQewSRToOlY3GyxWnlZXwVVDtz3rDac6noIvDVZKrAd5jSrUXiUusyd2s=': { name: '陈春兰', userName: 'sh_chenchunlan00', areaCode: 'SHJCK01000' },
         'jNvmq89OKiwCZgWTSJz8MjKmnQarfnEkRDtn3rvBdfa2dLOPKLfPJsaE9xemDPE+bWaEq2SzU8E2nw==': { name: '商忠强', userName: 'sh_shangzhongqiang00', areaCode: 'SHJCK01000' },
         'jNvmtMZGPCIZYBmYQd2lfi+p8lrnZGESVj111bKLLajqIO+VIbjGcZ7UrAn5Eu01': { name: '赖咸森', userName: 'sh_laixiansen00', areaCode: 'SHJCK01000' },
         'jNvmu89KKi8XYA3NH8DmOwOixVPoaXYVUGM2ge6IMOqwcqyBIbjBO4TYsU4': { name: '陈东', userName: 'sh_chendong00', areaCode: 'SHJCK01000' },
