@@ -1,4 +1,4 @@
-import { area } from './dictionaryMapping'
+import { area, coordinationType, top } from './dictionaryMapping'
 
 // 时间格式化
 export let dateFormat = (dateTime, valueFormat) => {
@@ -89,14 +89,34 @@ export let defaultWeek = () => {
   return date.setTime(date.getTime() - 1000 * 60 * 60 * 24 * 7)
 }
 
-// 通过地区名称查找地区编码
+// 通过编码查找地区名称
 export const findAreaNameByValue = (value) => {
   let result = area.filter(item => {
     if (item.value === value) {
       return true
     }
   })
-  return result[0] ? result[0].label : '未知区域'
+  return result.length === 1 ? result[0].label : '未知区域'
+}
+
+// 通过编码查找地区机构类别
+export const findCoordinationTypeByValue = (value) => {
+  let result = coordinationType.filter(item => {
+    if (item.value === value) {
+      return true
+    }
+  })
+  return result.length === 1 ? result[0].label : '未知类别'
+}
+
+// 通过编码查找排名类别
+export const findTopLabelByValue = (value) => {
+  let result = top.filter(item => {
+    if (item.value === value) {
+      return true
+    }
+  })
+  return result.length === 1 ? result[0].label : '未知'
 }
 
 // 找到指定日期所在周星期几的日期

@@ -73,6 +73,8 @@ export const caseType = ['涉校纠纷', '医患纠纷', '交通纠纷', '知识
 export const caseStatus = ['调解成功', '调解终止', '未结案']
 
 export const coordinationType = [
+  { label: '司法局', value: 'JUSTICEBUREAU' },
+  { label: '司法所', value: 'JUSTICEOFFICE' },
   { label: '全部调委会', value: 'allinformation' },
   { label: '村调委会', value: '6584014fd89249a1a750e9eb16f775e2' },
   { label: '居（社区）调委会', value: 'c0d8d4a282854854ad71826e0bea2c57' },
