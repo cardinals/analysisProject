@@ -1,4 +1,4 @@
-import { area } from './dictionaryMapping'
+import { area, coordinationType, top } from './dictionaryMapping'
 
 // 时间格式化
 export let dateFormat = (dateTime, valueFormat) => {
@@ -89,14 +89,34 @@ export let defaultWeek = () => {
   return date.setTime(date.getTime() - 1000 * 60 * 60 * 24 * 7)
 }
 
-// 通过地区名称查找地区编码
+// 通过编码查找地区名称
 export const findAreaNameByValue = (value) => {
   let result = area.filter(item => {
     if (item.value === value) {
       return true
     }
   })
-  return result[0] ? result[0].label : '未知区域'
+  return result.length === 1 ? result[0].label : '未知区域'
+}
+
+// 通过编码查找地区机构类别
+export const findCoordinationTypeByValue = (value) => {
+  let result = coordinationType.filter(item => {
+    if (item.value === value) {
+      return true
+    }
+  })
+  return result.length === 1 ? result[0].label : '未知类别'
+}
+
+// 通过编码查找排名类别
+export const findTopLabelByValue = (value) => {
+  let result = top.filter(item => {
+    if (item.value === value) {
+      return true
+    }
+  })
+  return result.length === 1 ? result[0].label : '未知'
 }
 
 // 找到指定日期所在周星期几的日期
@@ -136,3 +156,12 @@ export let floatIntFormat = (value) => {
 
 // 颜色组
 export const color = ['#1890FF', '#2FC25B', '#FACC14', '#223273', '#8543E0', '#13C2C2', '#3436C7', '#F04864']
+
+export const getQueryString = (name) => {
+  var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i')
+  var r = window.location.search.substr(1).match(reg)
+  if (r != null) {
+    return unescape(r[2]).split('/')[0]
+  }
+  return null
+}

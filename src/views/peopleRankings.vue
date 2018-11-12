@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-13 11:34:06
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-10-24 08:47:18
+ * @Last Modified time: 2018-11-12 15:39:40
  */
 
 <template>
@@ -102,7 +102,7 @@
 <script>
 import { peopleRankings } from '@/api/api'
 import { coordinationType, top } from '@/utils/dictionaryMapping'
-import { pickerOptions, defaultDateRage, percentFormat, numFormat } from '@/utils/index'
+import { pickerOptions, defaultDateRage, percentFormat, numFormat, findAreaNameByValue, findCoordinationTypeByValue, findTopLabelByValue } from '@/utils/index'
 import { dataPermission } from '@/utils/permission'
 
 export default {
@@ -167,6 +167,7 @@ export default {
     // 获取数据
     onLoad (type) {
       // 调用api接口，并且提供了两个参数
+      const _this = this
       peopleRankings({
         location: this.area,
         mediationtype: this.type,
@@ -187,9 +188,9 @@ export default {
           a.href = URL.createObjectURL(blob) // response is a blob
           // 文件名称
           if (type === 'csv') {
-            a.download = '调解员排名CSV.csv'
+            a.download = `${_this.fileRename()}.csv`
           } else if (type === 'excl') {
-            a.download = '调解员排名EXCEL.xls'
+            a.download = `${_this.fileRename()}.xls`
           }
           a.style.display = 'none'
           document.body.appendChild(a)
@@ -207,6 +208,9 @@ export default {
           }
         }
       })
+    },
+    fileRename () {
+      return `${this.date[0]}至${this.date[1]} ${findAreaNameByValue(this.area)}${findCoordinationTypeByValue(this.type)}${findTopLabelByValue(this.top)}统计数据`
     },
     indexMethod (index) {
       return (this.tableInfo.currentPage - 1) * this.tableInfo.pageSize + index + 1
