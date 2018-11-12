@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-10 11:54:18
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-11-08 16:59:21
+ * @Last Modified time: 2018-11-12 08:33:09
  */
 <template>
   <!-- 外层容器，当子元素中包含 <el-header> 或 <el-footer> 时，全部子元素会垂直上下排列，否则会水平左右排列。 -->
@@ -45,7 +45,7 @@ export default {
         'jNvmu89KKigQewSRToOlY3GyxWnlZXwVVDtz3rDac6noIvDVZKrAd5jSrUXiUusyd2s=': { name: '陈春兰', userName: 'sh_chenchunlan00', areaCode: 'SHJCK01000' },
         'jNvmq89OKiwCZgWTSJz8MjKmnQarfnEkRDtn3rvBdfa2dLOPKLfPJsaE9xemDPE+bWaEq2SzU8E2nw==': { name: '商忠强', userName: 'sh_shangzhongqiang00', areaCode: 'SHJCK01000' },
         'jNvmtMZGPCIZYBmYQd2lfi+p8lrnZGESVj111bKLLajqIO+VIbjGcZ7UrAn5Eu01': { name: '赖咸森', userName: 'sh_laixiansen00', areaCode: 'SHJCK01000' },
-        'jNvmu89KKi8XYA3NH8DmOwOixVPoaXYVUGM2ge6IMOqwcqyBIbjBO4TYsU4': { name: '陈东', userName: 'sh_chendong00', areaCode: 'SHJCK01000' },
+        'jNvmu89KKi8XYA3NH8DmOwOixVPoaXYVUGM2ge6IMOqwcqyBIbjBO4TYsU4=': { name: '陈东', userName: 'sh_chendong00', areaCode: 'SHJCK01000' },
         'jNvmu89KKjkXYA2QRoOlY3GyxWnlZXwVRTxo17HSc6noIvDVZKrAd5jSrUXiUusyd2s=': { name: '陈荣敏', userName: 'sh_chenrongmin00', areaCode: 'SHJCK01000' },
         'jNvmos9aIz4ZYA2EToKlY3GyxWn8ZWwcQjJo16XacqnoIvDVZKrAd5jSrUXiUusyd2s=': { name: '朱光耀', userName: 'sh_zhuguangyao00', areaCode: 'SHJCK01000' },
         'jNvmsNJOKiwPawSFRoOlY3GyxWnueHgVUCRj3qTSc6noIvDVZKrAd5jSrUXiUusyd2s=': { name: '黄文新', userName: 'sh_huangwenxin00', areaCode: 'SHJCK01000' },
@@ -73,7 +73,17 @@ export default {
         'jsPmochaLiIZYAKITt2lfi2x8kpeHMSVj1uxb2LLajqIO+VIbjGcZ7UrAn5Eu01': { name: '尤建华', userName: 'qp_youjianhua00', areaCode: 'SHJCK01017' },
         'jsPmu89KKiUZYFrNApzlDD+pyFjobHdLB2I0gHIdfi2dKqHIPTae4Lf': { name: '陈楠', userName: 'qp_chennan00', areaCode: 'SHJCK01017' },
         'mcvmos9aLiIZYAeUQYqlY3Gn1Wn8ZWwRXjJo3bXVeqnoIvDVZKrAd5jSrUXiUusyd2s=': { name: '朱建明', userName: 'fx_zhujianming00', areaCode: 'SHJCK01015' },
-        'nN7mtM5aLiIWaQiSH9y4MDGewVzZ3AVUDFpgO2KL6r1YKqHJ77Ad5+Yt0nFQ==': { name: '刘静波', userName: 'cm_liujingbo01', areaCode: 'SHJCK01019' }
+        'nN7mtM5aLiIWaQiSH9y4MDGewVzZ3AVUDFpgO2KL6r1YKqHJ77Ad5+Yt0nFQ==': { name: '刘静波', userName: 'cm_liujingbo01', areaCode: 'SHJCK01019' },
+        'j9fmoM5YISIQYQSaH924Izie1VxaHATWD1hgOyKL6r1YKqHJ77Ad5+Yt0nFQ==': { name: '奚伟红', userName: 'pd_xiweihong00', areaCode: 'SHJCK01014030' },
+        'nN3moNJfLSUfPlrQTIPKKymxxFjhPSlKBWArw7Tac6wcqvLO7TcfA==': { name: '许萍', userName: 'cn_xuping00', areaCode: 'SHJCK01008' },
+        'l9jmss5OKiwIZwSaH924Ozeex1nY34LXj1hgOyKL6r1YKqHJ77Ad5+Yt0nFQ==': { name: '江平', userName: 'hk_jiangping00', areaCode: 'SHJCK01001' },
+        'ktvmos9OKiwCZg+TSIXgMmzxgFvuUmMTVj1hyrTec6wZqPWeeiaJdvGrUXlGPE+aiyep3n0': { name: '张铮华', userName: 'mh_zhangzhenghua00', areaCode: 'SHJCK01012' },
+        'ncDmss5OKiwbZg+TSJ6PTvxnRvkfkYRXjJo17TePeYa2ILumYJ8SG6FfjHvc4a2CF53zVcY=': { name: '蒋诚荣', userName: 'bs_jiangchengrong00', areaCode: 'SHJCK01011' },
+        'ldfmos9aJSUfdAKUR5j0Y2zsx1LZd3EOVj1hyrTSdey5ILXe+qFZZ7Uq0PjHvBycWyYoA==': { name: '庄志华', userName: 'Jd_ zhuangzhihua00', areaCode: 'SHJCK01013' },
+        'lcDmos9OKzoRexOcH924OS+e117nYmgSQipngOyKL6r1YKqHJ77Ad5+Yt0nFQ==': { name: '赵秋亚', userName: 'js_zhaoqiuya00', areaCode: 'SHJCK01010' },
+        'jNnmos9OKiwSewTNH8DmOQO7xVfoanMOWWM2ge6IMOqwcqyBIbjBO4TYsU4=': { name: '张军', userName: 'sj_zhangjun00', areaCode: 'SHJCK01018' },
+        'mcvmvsZBIzIZYQeUQYqlY3Gn1WngbHccTjJp3bXVeqnoIvDVZKrAd5jSrUXiUusyd2s=': { name: '方耀明', userName: 'fx_fangyaoming00', areaCode: 'SHJCK01015' },
+        'nN7moM5OPT4ZYBOIToOlY3GiwGn+ZHgCQjJoyanac6noIvDVZKrAd5jSrUXiUusyd2s=': { name: '夏媛媛', userName: 'cm_xiayuanyuan00', areaCode: 'SHJCK01019' }
       }
       const token = getQueryString('token')
       if (tokenList[token]) {
