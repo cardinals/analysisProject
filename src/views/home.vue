@@ -2,143 +2,174 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-27 14:03:38
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-10-24 08:46:37
+ * @Last Modified time: 2018-11-12 17:02:04
  */
 
 <template>
-  <div class="home" v-if="data">
-    <div class="nav">
-      <span class="span1">业务监控</span>
-      <el-select v-model="area" placeholder="请选择区域" size="mini" class="areaSelector">
-        <el-option v-for="(item,index) in areaOptions" :key="index" :label="item.label" :value="item.value">
-        </el-option>
-      </el-select>
-    </div>
-    <div class="block flexRow">
-      <div class="left">
-        <div class="title">业务数量
-          <div class="btn_container">
-            <span class="btn" :class="{active: date==='today'}" @click="date='today'">今日</span>
-            <span class="btn" :class="{active: date==='month'}" @click="date='month'">本月</span>
-            <span class="btn" :class="{active: date==='year'}" @click="date='year'">本年</span>
-            <span class="btn" :class="{active: date==='all'}" @click="date='all'">全部</span>
+  <div class="home">
+    <div class="home_content" v-if="!data" v-loading="!data">
+      <div class="nav">
+        <span class="span1">业务监控</span>
+        <el-select v-model="area" placeholder="请选择区域" size="mini" class="areaSelector">
+          <el-option v-for="(item,index) in areaOptions" :key="index" :label="item.label" :value="item.value">
+          </el-option>
+        </el-select>
+      </div>
+      <div class="block flexRow">
+        <div class="left">
+          <div class="title">业务数量
+          </div>
+          <div class="contents flexColumn">
+            <div class="block-l1 bg-left-map" id="map"></div>
           </div>
         </div>
-        <div class="contents flexColumn">
-          <div class="block-l1" id="map"></div>
-          <div class="block-l2 flexRow">
-            <div class="one" :class="{active: target==='MBM_CASE'}" @click="target='MBM_CASE'">
-              <div class="width-x2-container">
-                <div class="one-container clearfix">
-                  <i class="icon icon-renmintj"></i>
-                  <div class="one-content">
-                    <span class="one-title">人民调解</span>
-                    <br>
-                    <span class="one-num">{{(data.businessCount.MBM_CASE||0) | numFormat}}</span>
-                  </div>
-                </div>
-              </div>
-              <div class="border"></div>
+        <div class="right flexColumn">
+          <div class="block-r1">
+            <div class="title">纠纷类型排名</div>
+            <div class="contents ul bg-right-top">
             </div>
-            <div class="one" :class="{active: target==='MMS_ALARM110INFO'}" @click="target='MMS_ALARM110INFO'">
-              <div class="width-x2-container">
-                <div class="one-container clearfix">
-                  <i class="icon icon-baojingld"></i>
-                  <div class="one-content">
-                    <span class="one-title">110联动</span>
-                    <br>
-                    <span class="one-num">{{(data.businessCount.MMS_ALARM110INFO||0) | numFormat}}</span>
-                  </div>
-                </div>
-              </div>
-              <div class="border"></div>
+          </div>
+          <div class="block-r2">
+            <div class="title">案件处理结果</div>
+            <div class="contents flexRow bg-right-center">
             </div>
-            <div class="one" :class="{active: target==='WWS_CONSULT'}" @click="target='WWS_CONSULT'">
-              <div class="width-x2-container">
-                <div class="one-container clearfix">
-                  <i class="icon icon-jicengflfw"></i>
-                  <div class="one-content">
-                    <span class="one-title">基层法律服务</span>
-                    <br>
-                    <span class="one-num">{{(data.businessCount.WWS_CONSULT||0) | numFormat}}</span>
-                  </div>
-                </div>
-              </div>
-              <div class="border"></div>
-            </div>
-            <div class="one" :class="{active: target==='CDS_INVESTIGATIONFEEDBAC'}" @click="target='CDS_INVESTIGATIONFEEDBAC'">
-              <div class="width-x2-container">
-                <div class="one-container clearfix">
-                  <i class="icon icon-jiufenpc"></i>
-                  <div class="one-content">
-                    <span class="one-title">纠纷排查</span>
-                    <br>
-                    <span class="one-num">{{(data.businessCount.CDS_INVESTIGATIONFEEDBAC||0) | numFormat}}</span>
-                  </div>
-                </div>
-              </div>
+          </div>
+          <div class="block-r3">
+            <div class="title">系统使用概况</div>
+            <div class="contents flexRow bg-right-bottom">
             </div>
           </div>
         </div>
       </div>
-      <div class="right flexColumn">
-        <div class="block-r1">
-          <div class="title">纠纷类型排名</div>
-          <div class="contents ul">
-            <div class="li" v-for="(item,index) in data.businessType" :key="index">
-              <span class="sort">{{index+1}}</span>
-              <!-- <el-tooltip :content="item.name" placement="top" effect="light"> -->
-              <span class="name">{{item.name}}</span>
-              <!-- </el-tooltip> -->
-              <span class="number">{{item.value | numFormat}}</span>
+    </div>
+    <div class="home_content" v-if="data" v-loading='loading'>
+      <div class="nav">
+        <span class="span1">业务监控</span>
+        <el-select v-model="area" placeholder="请选择区域" size="mini" class="areaSelector">
+          <el-option v-for="(item,index) in areaOptions" :key="index" :label="item.label" :value="item.value">
+          </el-option>
+        </el-select>
+      </div>
+      <div class="block flexRow">
+        <div class="left">
+          <div class="title">业务数量
+            <div class="btn_container">
+              <span class="btn" :class="{active: date==='today'}" @click="date='today'">今日</span>
+              <span class="btn" :class="{active: date==='month'}" @click="date='month'">本月</span>
+              <span class="btn" :class="{active: date==='year'}" @click="date='year'">本年</span>
+              <span class="btn" :class="{active: date==='all'}" @click="date='all'">全部</span>
+            </div>
+          </div>
+          <div class="contents flexColumn">
+            <div class="block-l1" id="map"></div>
+            <div class="block-l2 flexRow">
+              <div class="one" :class="{active: target==='MBM_CASE'}" @click="target='MBM_CASE'">
+                <div class="width-x2-container">
+                  <div class="one-container clearfix">
+                    <i class="icon icon-renmintj"></i>
+                    <div class="one-content">
+                      <span class="one-title">人民调解</span>
+                      <br>
+                      <span class="one-num">{{(data.businessCount.MBM_CASE||0) | numFormat}}</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="border"></div>
+              </div>
+              <div class="one" :class="{active: target==='MMS_ALARM110INFO'}" @click="target='MMS_ALARM110INFO'">
+                <div class="width-x2-container">
+                  <div class="one-container clearfix">
+                    <i class="icon icon-baojingld"></i>
+                    <div class="one-content">
+                      <span class="one-title">110联动</span>
+                      <br>
+                      <span class="one-num">{{(data.businessCount.MMS_ALARM110INFO||0) | numFormat}}</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="border"></div>
+              </div>
+              <div class="one" :class="{active: target==='WWS_CONSULT'}" @click="target='WWS_CONSULT'">
+                <div class="width-x2-container">
+                  <div class="one-container clearfix">
+                    <i class="icon icon-jicengflfw"></i>
+                    <div class="one-content">
+                      <span class="one-title">基层法律服务</span>
+                      <br>
+                      <span class="one-num">{{(data.businessCount.WWS_CONSULT||0) | numFormat}}</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="border"></div>
+              </div>
+              <div class="one" :class="{active: target==='CDS_INVESTIGATIONFEEDBAC'}" @click="target='CDS_INVESTIGATIONFEEDBAC'">
+                <div class="width-x2-container">
+                  <div class="one-container clearfix">
+                    <i class="icon icon-jiufenpc"></i>
+                    <div class="one-content">
+                      <span class="one-title">纠纷排查</span>
+                      <br>
+                      <span class="one-num">{{(data.businessCount.CDS_INVESTIGATIONFEEDBAC||0) | numFormat}}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        <div class="block-r2">
-          <div class="title">案件处理结果</div>
-          <div class="contents flexRow">
-            <div class="r2Left" :style="{'padding-top':data.businessProcess.dataList2[0]?'20px':'60px'}">
-              <span class="span1">{{anJIanCLJGSLBT}}</span><br>
-              <span class="span2" :style="{'color':data.businessProcess.dataList2[0]?'#1890FF':'rgba(0, 0, 0, 0.85)'}">{{data.businessProcess.dataNum1 | numFormat}}</span><br>
-              <br  v-if="data.businessProcess.dataList2[0]">
-              <span class="span1" v-if="data.businessProcess.dataList2[0]">{{data.businessProcess.dataList2[0].name==='未办结率'?'未办结':'未反馈'}}</span><br>
-              <span class="span2" v-if="data.businessProcess.dataList2[0]"  :style="{'color':data.businessProcess.dataList2[0]?'#FF7C81':'rgba(0, 0, 0, 0.85)'}">
-                {{data.businessProcess.dataNum2 | numFormat}}
-              </span>
-            </div>
-            <div class="r2right" :style="{'padding-top':data.businessProcess.dataList2[0]?'0px':'20px'}">
-              <g2-pie v-if="!data.businessProcess.dataList2[0]" :id="'pie1'" :height="120" :color-map="['#1890FF', '#E9E9E9']" :data="data.businessProcess.dataList1"
-                :guide="{name: anJIanCLJGZBBT, value: data.businessProcess.zhanBi}" :legend-option="{show: false}"
-                :axis-name="{name: '类型',value: '数量'}">
-              </g2-pie>
-              <g2-progress-bar v-if="data.businessProcess.dataList2[0]" :style="'margin-top:20px;margin-right:15px;'" :id="'progressbar1'" :height="45"
-                :data="data.businessProcess.dataList1"
-                :color="['#1890FF','#F0F2F5']"
-                :mark-line="{use:false}"
-                :show-guide="{name: true, value: true}"
-                :is-percent="true">
-              </g2-progress-bar>
-              <g2-progress-bar v-if="data.businessProcess.dataList2[0]" :style="'margin-top:15px;margin-right:15px;'" :id="'progressbar2'" :height="45"
-                :data="data.businessProcess.dataList2"
-                :color="['#FF7C81','#F0F2F5']"
-                :mark-line="{use:false}"
-                :show-guide="{name: true, value: true}"
-                :is-percent="true">
-              </g2-progress-bar>
+        <div class="right flexColumn">
+          <div class="block-r1">
+            <div class="title">纠纷类型排名</div>
+            <div class="contents ul">
+              <div class="li" v-for="(item,index) in data.businessType" :key="index">
+                <span class="sort">{{index+1}}</span>
+                <!-- <el-tooltip :content="item.name" placement="top" effect="light"> -->
+                <span class="name">{{item.name}}</span>
+                <!-- </el-tooltip> -->
+                <span class="number">{{item.value | numFormat}}</span>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="block-r3">
-          <div class="title">系统使用概况</div>
-          <div class="contents flexRow">
-            <div class="r3Left">
-              <span class="span1">登录人数</span><br>
-              <span class="span2">{{data.onlineNumber.shuLiang | numFormat}}</span>
+          <div class="block-r2">
+            <div class="title">案件处理结果</div>
+            <div class="contents flexRow">
+              <div class="r2Left" :style="{'padding-top':data.businessProcess.dataList2[0]?'20px':'60px'}">
+                <span class="span1">{{anJIanCLJGSLBT}}</span><br>
+                <span class="span2" :style="{'color':data.businessProcess.dataList2[0]?'#1890FF':'rgba(0, 0, 0, 0.85)'}">{{data.businessProcess.dataNum1
+                  | numFormat}}</span><br>
+                <br v-if="data.businessProcess.dataList2[0]">
+                <span class="span1" v-if="data.businessProcess.dataList2[0]">{{data.businessProcess.dataList2[0].name==='未办结率'?'未办结':'未反馈'}}</span><br>
+                <span class="span2" v-if="data.businessProcess.dataList2[0]" :style="{'color':data.businessProcess.dataList2[0]?'#FF7C81':'rgba(0, 0, 0, 0.85)'}">
+                  {{data.businessProcess.dataNum2 | numFormat}}
+                </span>
+              </div>
+              <div class="r2right" :style="{'padding-top':data.businessProcess.dataList2[0]?'0px':'20px'}">
+                <g2-pie v-if="!data.businessProcess.dataList2[0]" :id="'pie1'" :height="120" :color-map="['#1890FF', '#E9E9E9']"
+                  :data="data.businessProcess.dataList1" :guide="{name: anJIanCLJGZBBT, value: data.businessProcess.zhanBi}"
+                  :legend-option="{show: false}" :axis-name="{name: '类型',value: '数量'}">
+                </g2-pie>
+                <g2-progress-bar v-if="data.businessProcess.dataList2[0]" :style="'margin-top:20px;margin-right:15px;'"
+                  :id="'progressbar1'" :height="45" :data="data.businessProcess.dataList1" :color="['#1890FF','#F0F2F5']"
+                  :mark-line="{use:false}" :show-guide="{name: true, value: true}" :is-percent="true">
+                </g2-progress-bar>
+                <g2-progress-bar v-if="data.businessProcess.dataList2[0]" :style="'margin-top:15px;margin-right:15px;'"
+                  :id="'progressbar2'" :height="45" :data="data.businessProcess.dataList2" :color="['#FF7C81','#F0F2F5']"
+                  :mark-line="{use:false}" :show-guide="{name: true, value: true}" :is-percent="true">
+                </g2-progress-bar>
+              </div>
             </div>
-            <div class="r3right">
-              <g2-pie :id="'pie2'" :height="120" :color-map="['#1890FF', '#E9E9E9']" :data="data.onlineNumber.dataList"
-                :guide="{name: '登录人数占比', value: data.onlineNumber.zhanBi}" :legend-option="{show: false}"
-                :axis-name="{name: '类型',value: '数量'}"></g2-pie>
+          </div>
+          <div class="block-r3">
+            <div class="title">系统使用概况</div>
+            <div class="contents flexRow">
+              <div class="r3Left">
+                <span class="span1">登录人数</span><br>
+                <span class="span2">{{data.onlineNumber.shuLiang | numFormat}}</span>
+              </div>
+              <div class="r3right">
+                <g2-pie :id="'pie2'" :height="120" :color-map="['#1890FF', '#E9E9E9']" :data="data.onlineNumber.dataList"
+                  :guide="{name: '登录人数占比', value: data.onlineNumber.zhanBi}" :legend-option="{show: false}" :axis-name="{name: '类型',value: '数量'}"></g2-pie>
+              </div>
             </div>
           </div>
         </div>
@@ -167,7 +198,8 @@ export default {
       myNav: new window.mapboxgl.NavigationControl(),
       myPopup: new window.mapboxgl.Popup({ anchor: 'left', className: 'myPopup' }),
       color: color,
-      organizationId: null
+      organizationId: null,
+      loading: true
     }
   },
   watch: {
@@ -225,6 +257,7 @@ export default {
   methods: {
     // 获取数据
     fetchHomeData () {
+      this.loading = true
       homeData({ area: this.area, date: this.date, biaoming: this.target }).then(resList => {
         if (resList[0].data.code && resList[1].data.code && resList[2].data.code && resList[3].data.code && resList[4].data.code) {
           // 合并接口数据
@@ -270,6 +303,7 @@ export default {
             }
           }
           this.data = Object.assign(data1, data2, data3, data4, data5)
+          this.loading = false
           this.drawMap()
         } else {
           this.data = null
@@ -372,7 +406,9 @@ export default {
     background: #EDEDED;
     box-sizing: content-box;
     height: 100%;
-
+    .home_content{
+    box-sizing: content-box;
+    height: 100%;
     .block {
       padding-bottom: 15px;
       height: calc(100% - 39px);
@@ -610,5 +646,6 @@ export default {
         }
       }
     }
+  }
   }
 </style>
