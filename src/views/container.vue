@@ -2,11 +2,11 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-10 11:54:18
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-11-12 08:33:09
+ * @Last Modified time: 2018-11-12 18:09:27
  */
 <template>
   <!-- 外层容器，当子元素中包含 <el-header> 或 <el-footer> 时，全部子元素会垂直上下排列，否则会水平左右排列。 -->
-  <div class="container">
+  <div class="container" >
     <!-- 顶栏容器 -->
     <header-com class="header" v-if="$route.path!=='/login'"></header-com>
     <div class="content" v-if="$route.path!=='/login'">
@@ -19,7 +19,7 @@
         </div>
       </div>
       <!-- 路由区域 -->
-      <div class="main" v-loading="$store.state.app.isShowLoading">
+      <div class="main"  v-loading="$store.state.app.isShowLoading">
         <transition name="fade"  mode="out-in">
           <router-view class="router"></router-view>
         </transition>
