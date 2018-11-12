@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-13 11:34:06
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-11-12 15:39:40
+ * @Last Modified time: 2018-11-12 18:35:19
  */
 
 <template>
@@ -24,7 +24,7 @@
       <div>
         <span>机构类型：</span>
         <el-radio-group v-model="type">
-          <el-radio v-for="(item,index) in typeList" :key="index" :label="item.value">{{item.label}}</el-radio>
+          <el-radio v-for="(item,index) in typeList" :key="index" :label="item.value" v-if="index>=2">{{item.label}}</el-radio>
         </el-radio-group>
       </div>
       <div>
@@ -116,7 +116,7 @@ export default {
       area: localStorage.getItem('area'),
       areaOptions: dataPermission(localStorage.getItem('area')),
       // 机构类型字段
-      type: coordinationType[0]['value'],
+      type: coordinationType[2]['value'],
       // 排名筛选字段
       top: top[0]['value'],
       // 机构类型数据
