@@ -60,7 +60,7 @@
               <div class="border"></div>
               <div class="dis">年龄分布</div>
             </div>
-            <g2-histogram :id="'histogram'" :height="144" :data="data.tiaoJieDW.nianLingFB.map(item => { return {x: Number(item), y: Number(item)} })"
+            <g2-histogram :id="'histogram'" :height="144" :data="data.tiaoJieDW.nianLingFB"
                :bins="0" :bin-width="10" :axisName="{x: '年龄', y: '数量'}"></g2-histogram>
           </div>
         </div>
