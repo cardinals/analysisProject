@@ -1,5 +1,5 @@
 
-export const setMapbox = (caseData, centerPoint) => {
+export const setMapbox = (caseData, centerPoint, zoom) => {
   const osmUrl = 'http://139.224.131.57:8700'
   const option = {
     visualMap: [{
@@ -41,7 +41,7 @@ export const setMapbox = (caseData, centerPoint) => {
       // center: [121.5193, 31.163070],
       center: centerPoint,
       // 地图的缩放等级
-      zoom: 9,
+      zoom: zoom,
       // 视角俯视的倾斜角度
       pitch: 50,
       // 地图的旋转角度
