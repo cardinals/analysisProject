@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-27 14:03:38
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-11-12 17:02:04
+ * @Last Modified time: 2018-11-14 11:47:44
  */
 
 <template>
@@ -339,8 +339,10 @@ export default {
             return true
           }
         })[0]['coordinates']
+        // 计算缩放等级
+        const zoom = this.area === 'SHJCK01000' ? 9 : 11
         // 绘制图表
-        this.myChart.setOption(setMapbox(mapData, center))
+        this.myChart.setOption(setMapbox(mapData, center, zoom))
         // 获取echarts中的mapbox实例
         let mapbox
         this.myChart._model.eachComponent('mapbox3D', function (mapboxModel) {
