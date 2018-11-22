@@ -2,12 +2,12 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-27 14:03:38
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-11-14 11:38:03
+ * @Last Modified time: 2018-11-22 08:56:05
  */
 
 <template>
   <div class="home">
-    <div class="home_content" v-if="!data" v-loading="!data">
+    <div class="home_content" v-if="loading" v-loading="!data">
       <div class="nav">
         <span class="span1">业务监控</span>
         <el-select v-model="area" placeholder="请选择区域" size="mini" class="areaSelector">
@@ -26,23 +26,45 @@
         <div class="right flexColumn">
           <div class="block-r1">
             <div class="title">纠纷类型排名</div>
-            <div class="contents ul bg-right-top">
+            <div class="contents">
+              <content-loader :height="157" :width="317" :speed="2" primaryColor="#f3f3f3" secondaryColor="#ecebeb">
+                <circle cx="30" cy="20" r="10" />
+                <circle cx="30" cy="50" r="10" />
+                <circle cx="30" cy="80" r="10" />
+                <circle cx="30" cy="110" r="10" />
+                <circle cx="30" cy="140" r="10" />
+                <rect x="65" y="10" rx="0" ry="0" width="230" height="20" />
+                <rect x="65" y="40" rx="0" ry="0" width="230" height="20" />
+                <rect x="65" y="70" rx="0" ry="0" width="230" height="20" />
+                <rect x="65" y="100" rx="0" ry="0" width="230" height="20" />
+                <rect x="65" y="130" rx="0" ry="0" width="230" height="20" />
+              </content-loader>
             </div>
           </div>
           <div class="block-r2">
             <div class="title">案件处理结果</div>
-            <div class="contents flexRow bg-right-center">
+            <div class="contents">
+              <content-loader :height="141" :width="317" :speed="2" primaryColor="#f3f3f3" secondaryColor="#ecebeb">
+                <rect x="25" y="25" rx="0" ry="0" width="50" height="40" />
+                <rect x="25" y="80" rx="0" ry="0" width="50" height="40" />
+                <rect x="100" y="25" rx="0" ry="0" width="190" height="40" />
+                <rect x="100" y="80" rx="0" ry="0" width="190" height="40" />
+              </content-loader>
             </div>
           </div>
           <div class="block-r3">
             <div class="title">系统使用概况</div>
-            <div class="contents flexRow bg-right-bottom">
+            <div class="contents">
+              <content-loader :height="146" :width="317" :speed="2" primaryColor="#f3f3f3" secondaryColor="#ecebeb">
+                <rect x="25" y="65" rx="0" ry="0" width="50" height="40" />
+                <circle cx="220" cy="80" r="50" />
+              </content-loader>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="home_content" v-if="data" v-loading='loading'>
+    <div class="home_content" v-if="!loading" v-loading="!data">
       <div class="nav">
         <span class="span1">业务监控</span>
         <el-select v-model="area" placeholder="请选择区域" size="mini" class="areaSelector">
@@ -183,9 +205,13 @@ import { pickerOptions, color, percentFormat } from '@/utils/index'
 import { dataPermission } from '@/utils/permission'
 import { homeData } from '@/api/api'
 import { setMapbox } from '@/utils/echartsOptions'
+import { ContentLoader } from 'vue-content-loader'
 
 export default {
   name: 'home',
+  components: {
+    ContentLoader
+  },
   data () {
     return {
       area: localStorage.getItem('area'),
