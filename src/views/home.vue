@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-27 14:03:38
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-11-22 08:56:05
+ * @Last Modified time: 2018-11-28 16:48:00
  */
 
 <template>
@@ -119,14 +119,18 @@
             </content-loader>
           </div>
           <div class="contents flexRow" v-if="!loading">
-            <div class="r2Left" :style="{'padding-top':data.businessProcess.dataList2[0]?'20px':'60px'}">
+            <div class="r2Left" :style="{'padding-top':data.businessProcess.dataList2[0]?'5px':'40px'}">
               <span class="span1">{{anJIanCLJGSLBT}}</span><br>
-              <span class="span2" :style="{'color':data.businessProcess.dataList2[0]?'#1890FF':'rgba(0, 0, 0, 0.85)'}">{{data.businessProcess.dataNum1
-                | numFormat}}</span><br>
-              <br v-if="data.businessProcess.dataList2[0]">
+              <span class="span2" :style="{'color':data.businessProcess.dataList2[0]?'#1890FF':'rgba(0, 0, 0, 0.85)'}">{{data.businessProcess.dataNum1 | numFormat}}</span>
+              <br><br>
               <span class="span1" v-if="data.businessProcess.dataList2[0]">{{data.businessProcess.dataList2[0].name==='未办结率'?'未办结':'未反馈'}}</span><br>
               <span class="span2" v-if="data.businessProcess.dataList2[0]" :style="{'color':data.businessProcess.dataList2[0]?'#FF7C81':'rgba(0, 0, 0, 0.85)'}">
                 {{data.businessProcess.dataNum2 | numFormat}}
+              </span>
+              <br><br>
+              <span class="span1" v-if="data.businessProcess.dataList3[0]">{{'司法确认'}}</span><br>
+              <span class="span2" v-if="data.businessProcess.dataList3[0]" :style="{'color':data.businessProcess.dataList3[0]?'#FFAB2B':'rgba(0, 0, 0, 0.85)'}">
+                {{data.businessProcess.dataNum3 | numFormat}}
               </span>
             </div>
             <div class="r2right" :style="{'padding-top':data.businessProcess.dataList2[0]?'0px':'20px'}">
@@ -134,12 +138,16 @@
                 :data="data.businessProcess.dataList1" :guide="{name: anJIanCLJGZBBT, value: data.businessProcess.zhanBi}"
                 :legend-option="{show: false}" :axis-name="{name: '类型',value: '数量'}">
               </g2-pie>
-              <g2-progress-bar v-if="data.businessProcess.dataList2[0]" :style="'margin-top:20px;margin-right:15px;'"
+              <g2-progress-bar v-if="data.businessProcess.dataList2[0]" :style="'margin-top:10px;margin-right:15px;'"
                 :id="'progressbar1'" :height="45" :data="data.businessProcess.dataList1" :color="['#1890FF','#F0F2F5']"
                 :mark-line="{use:false}" :show-guide="{name: true, value: true}" :is-percent="true">
               </g2-progress-bar>
               <g2-progress-bar v-if="data.businessProcess.dataList2[0]" :style="'margin-top:15px;margin-right:15px;'"
                 :id="'progressbar2'" :height="45" :data="data.businessProcess.dataList2" :color="['#FF7C81','#F0F2F5']"
+                :mark-line="{use:false}" :show-guide="{name: true, value: true}" :is-percent="true">
+              </g2-progress-bar>
+              <g2-progress-bar v-if="data.businessProcess.dataList3[0]" :style="'margin-top:15px;margin-right:15px;'"
+                :id="'progressbar3'" :height="45" :data="data.businessProcess.dataList3" :color="['#FFAB2B','#F0F2F5']"
                 :mark-line="{use:false}" :show-guide="{name: true, value: true}" :is-percent="true">
               </g2-progress-bar>
             </div>
@@ -268,8 +276,10 @@ export default {
             businessProcess: {
               dataNum1: '',
               dataNum2: '',
+              dataNum3: '',
               dataList1: [],
-              dataList2: []
+              dataList2: [],
+              dataList3: []
             }
           }
           if (resList[3].data.data.data2) {
@@ -284,6 +294,13 @@ export default {
               { name: name, value: resList[3].data.data.data2[0].zhanBi / 100 },
               { name: '其他', value: 1 - resList[3].data.data.data2[0].zhanBi / 100 }
             ]
+            if (resList[3].data.data.data3) {
+              data4.businessProcess.dataNum3 = resList[3].data.data.data3[0].shuLiang
+              data4.businessProcess.dataList3 = [
+                { name: '司法确认率', value: resList[3].data.data.data3[0].zhanBi / 100 },
+                { name: '其他', value: 1 - resList[3].data.data.data3[0].zhanBi / 100 }
+              ]
+            }
           } else {
             data4.businessProcess.dataNum1 = resList[3].data.data[0].shuLiang
             data4.businessProcess.dataList1 = resList[3].data.data.map(item => {
@@ -584,7 +601,7 @@ export default {
 
             .r2Left {
               flex: 1;
-              padding-top: 60px;
+              padding-top: 50px;
               text-align: center;
               line-height: 22px;
 
