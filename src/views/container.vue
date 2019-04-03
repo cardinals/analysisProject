@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-10 11:54:18
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2018-10-24 08:46:15
+ * @Last Modified time: 2019-04-03 11:17:12
  */
 <template>
   <!-- 外层容器，当子元素中包含 <el-header> 或 <el-footer> 时，全部子元素会垂直上下排列，否则会水平左右排列。 -->
@@ -83,7 +83,8 @@ export default {
         'lcDmos9OKzoRexOcH924OS+e117nYmgSQipngOyKL6r1YKqHJ77Ad5+Yt0nFQ==': { name: '赵秋亚', userName: 'js_zhaoqiuya00', areaCode: 'SHJCK01010' },
         'jNnmos9OKiwSewTNH8DmOQO7xVfoanMOWWM2ge6IMOqwcqyBIbjBO4TYsU4=': { name: '张军', userName: 'sj_zhangjun00', areaCode: 'SHJCK01018' },
         'mcvmvsZBIzIZYQeUQYqlY3Gn1WngbHccTjJp3bXVeqnoIvDVZKrAd5jSrUXiUusyd2s=': { name: '方耀明', userName: 'fx_fangyaoming00', areaCode: 'SHJCK01015' },
-        'nN7moM5OPT4ZYBOIToOlY3GiwGn+ZHgCQjJoyanac6noIvDVZKrAd5jSrUXiUusyd2s=': { name: '夏媛媛', userName: 'cm_xiayuanyuan00', areaCode: 'SHJCK01019' }
+        'nN7moM5OPT4ZYBOIToOlY3GiwGn+ZHgCQjJoyanac6noIvDVZKrAd5jSrUXiUusyd2s=': { name: '夏媛媛', userName: 'cm_xiayuanyuan00', areaCode: 'SHJCK01019' },
+        'jd7NsvhfMBQQaxiSQYrJjLxnQ==': { name: '何榕军', userName: 'pt_herongjun00', areaCode: 'SHJCK01006' }
       }
       const token = getQueryString('token')
       if (tokenList[token]) {
