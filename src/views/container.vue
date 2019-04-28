@@ -2,7 +2,7 @@
  * @Author: wupeiwen javapeiwen2010@gmail.com
  * @Date: 2018-08-10 11:54:18
  * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2019-04-03 11:17:12
+ * @Last Modified time: 2019-04-28 11:52:21
  */
 <template>
   <!-- 外层容器，当子元素中包含 <el-header> 或 <el-footer> 时，全部子元素会垂直上下排列，否则会水平左右排列。 -->
@@ -106,7 +106,7 @@ export default {
       this.$store.dispatch({ type: 'aside/setAsideMenuData', amount: [{ 'index': 'home', 'label': '业务监控', 'moduleid': 'A1', 'parentid': null, 'disable': false }, { 'index': 'teamAnalysis', 'label': '调解队伍分析', 'moduleid': 'A3', 'parentid': null, 'children': [{ 'index': 'organizationRankings', 'label': '调解机构排名', 'moduleid': 'B31', 'parentid': 'A3', 'disable': false }, { 'index': 'peopleRankings', 'label': '调解人员排名', 'moduleid': 'B32', 'parentid': 'A3', 'disable': false }], 'disable': false }, { 'index': 'workAnalysis', 'label': '工作质量分析', 'moduleid': 'A4', 'parentid': null, 'children': [{ 'index': 'loginAnalysis', 'label': '登录人次分析', 'moduleid': 'B41', 'parentid': 'A4', 'disable': false }], 'disable': false }] })
     },
     openPage () {
-      window.open(`http://rmtj.justice.gov.cn/loginYJ.jsp?token=${getQueryString('token')}`)
+      window.open(`http://rmtj.sfj.sh.gov.cn/loginYJ.jsp?token=${getQueryString('token')}`)
     }
   }
 }
