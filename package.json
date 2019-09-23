@@ -1,11 +1,11 @@
 {
-  "name": "analysis-project",
+  "name": "analysis-project-sh",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "build-image": "yarn build &&  docker build -t nginx/analysis-project ./docker",
+    "build-image": "yarn build &&  docker build -t 192.168.93.172/oa-bpsc-sh/analysis-project-sh:latest ./docker",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
