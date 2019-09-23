@@ -1,6 +1,6 @@
 
 export const setMapbox = (caseData, centerPoint, zoom) => {
-  const osmUrl = 'http://139.224.131.57:8700'
+  const osmUrl = 'http://183.194.242.89:8810'
   const option = {
     visualMap: [{
       type: 'continuous',
