@@ -1,21 +1,35 @@
-# project4alibaba
+# oa-bpsc-sh/analysis-project-sh 分析系统
 
-## Project setup
+## 开发环境
+### 安装依赖
 ```
-yarn install
+yarn
 ```
+### 运行开发环境
+```
+yarn serve
+```
+注：如果无法访问到有效数据，需要检查数据接口的状态。
 
-### Compiles and hot-reloads for development
+## 构建
+### Docker镜像
+#### 安装依赖
 ```
-yarn run serve
+yarn
 ```
-
-### Compiles and minifies for production
+#### 构建镜像
 ```
-yarn run build
+yarn build-image
 ```
-
-### Lints and fixes files
+#### 修改镜像tag
 ```
-yarn run lint
+docker tag 192.168.93.172/oa-bpsc-sh/analysis-project-web:latest 192.168.93.172/oa-bpsc-sh/analysis-project-web:<版本号>
+```
+#### 将镜像启动为容器
+```
+docker run --name=analysis-project-web --restart=always -d -p <前端Port>:80 -e LOCATION='\/peopleMediate' -e PROXY_PASS='http:\/\/<接口IP>:<接口Port>' 192.168.93.172/oa-bpsc-sh/analysis-project-web:<版本号>
+```
+注：目前部署环境的启动命令
+```
+docker run --name=analysis-project-web --restart=always -d -p 9002:80 -e LOCATION='\/peopleMediate' -e PROXY_PASS='http:\/\/192.168.93.70:8851' 192.168.93.172/oa-bpsc-sh/analysis-project-sh:latest
 ```
